@@ -1151,6 +1151,7 @@ PODS:
 DEPENDENCIES:
   - FirebaseAnalytics
   - FirebaseAuth
+  - FirebaseCore
   - FirebaseFirestore
 
 SPEC REPOS:
@@ -1200,6 +1201,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: 37a1417ab1691a70b68f1f53d2804063a40b73b6
+PODFILE CHECKSUM: 6868fd955b7bb43be708ce79c6e6575ec4c27bff
 
 COCOAPODS: 1.15.0

@@ -8,6 +8,7 @@ target 'walkbook' do
   # Pods for walkbook
 
   # Add the Firebase
+  pod 'FirebaseCore'
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
