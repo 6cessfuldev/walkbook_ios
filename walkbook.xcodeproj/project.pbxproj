@@ -97,11 +97,126 @@
 			path = walkbookUITests;
 			sourceTree = "<group>";
 		};
+		9D20C5742C420583008AB5EE /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9D20C57C2C4206B2008AB5EE /* Entities */,
+				9D20C57B2C4206A7008AB5EE /* UseCases */,
+				9D20C57D2C4206BA008AB5EE /* Repositories */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9D20C5752C4205AB008AB5EE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9D20C5822C4207CD008AB5EE /* Repositories */,
+				9D20C5812C4207C4008AB5EE /* Models */,
+				9D20C5802C4207AB008AB5EE /* Network */,
+				9D20C57F2C420798008AB5EE /* Persistence */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9D20C5762C4205B6008AB5EE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9D20C5772C4205D4008AB5EE /* ViewControllers */,
+				9D20C5792C420669008AB5EE /* View */,
+				9D20C57A2C420672008AB5EE /* Resources */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9D20C5772C4205D4008AB5EE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D35C5BA2C3ECB0B004586C2 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D20C5792C420669008AB5EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9D20C57A2C420672008AB5EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D20C57E2C420703008AB5EE /* Storyboards */,
+				9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		9D20C57C2C4206B2008AB5EE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		9D20C57D2C4206BA008AB5EE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		9D20C57E2C420703008AB5EE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9D35C5BF2C3ECB17004586C2 /* Assets.xcassets */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		9D20C57F2C420798008AB5EE /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		9D20C5802C4207AB008AB5EE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9D20C5812C4207C4008AB5EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9D20C5822C4207CD008AB5EE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		9D35C5AA2C3ECB0B004586C2 = {
 			isa = PBXGroup;
 			children = (
 				9D35C5CE2C3FCE62004586C2 /* .gitignore */,
 				9D35C5B52C3ECB0B004586C2 /* walkbook */,
+				9D20C5762C4205B6008AB5EE /* Presentation */,
+				9D20C5752C4205AB008AB5EE /* Data */,
+				9D20C5742C420583008AB5EE /* Domain */,
 				9D20C5572C40CFE6008AB5EE /* walkbookTests */,
 				9D20C5642C40CFEF008AB5EE /* walkbookUITests */,
 				9D35C5B42C3ECB0B004586C2 /* Products */,
@@ -125,9 +240,6 @@
 			children = (
 				9D35C5B62C3ECB0B004586C2 /* AppDelegate.swift */,
 				9D35C5B82C3ECB0B004586C2 /* SceneDelegate.swift */,
-				9D35C5BA2C3ECB0B004586C2 /* ViewController.swift */,
-				9D35C5BF2C3ECB17004586C2 /* Assets.xcassets */,
-				9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */,
 				9D35C5C42C3ECB17004586C2 /* Info.plist */,
 				9D024B9D2C3FCEF100749CA1 /* GoogleService-Info.plist */,
 			);
