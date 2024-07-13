@@ -11,14 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var appCoordinator: AppFlowCoordinator?
-    let container = AppDIContainer().container
+    let container = AppDIContainer()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
             
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let navController = UINavigationController()
-        appCoordinator = AppFlowCoordinator(navigationController: navController, container: container)
+        appCoordinator = AppFlowCoordinator(navigationController: navController, appDIContainer: container)
         appCoordinator?.start()
         
         let window = UIWindow(windowScene: windowScene)

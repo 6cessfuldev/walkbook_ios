@@ -18,19 +18,18 @@ protocol Coordinator {
 final class AppFlowCoordinator: Coordinator{
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    private let container: Container
+    private let appDIContainer: AppDIContainer
     
     init(
         navigationController: UINavigationController,
-        container: Container
+        appDIContainer: AppDIContainer
     ) {
         self.navigationController = navigationController
-        self.container = container
+        self.appDIContainer = appDIContainer
     }
 
     func start() {
-        let vc = container.resolve(ViewController.self)!
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        let flow = appDIContainer.makeAuthenticationFlowCoordinator(navigationController: navigationController)
+        flow.start()
     }
 }

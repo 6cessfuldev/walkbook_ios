@@ -15,8 +15,20 @@ class AppDIContainer {
         container = Container()
         
         // Register ViewControllers
-        container.register(ViewController.self) { r in
-            return ViewController()
+        container.register(AuthenticationViewController.self) { r in
+            return AuthenticationViewController()
         }
+    }
+}
+
+//MARK: - AuthenticationFlowCoordinator
+
+extension AppDIContainer: AuthenticationFlowCoordinatorDependencies {
+    func makeAuthenticationFlowCoordinator(navigationController: UINavigationController) -> AuthenticationFlowCoordinator {
+        AuthenticationFlowCoordinator(navigationController: navigationController, dependencies: self)
+    }
+    
+    func makeAuthenticationViewController() -> AuthenticationViewController {
+        container.resolve(AuthenticationViewController.self)!
     }
 }
