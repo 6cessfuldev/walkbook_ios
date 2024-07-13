@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var appCoordinator: AppFlowCoordinator?
     let container = AppDIContainer().container
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,9 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let navController = UINavigationController()
-        
-        let firstVC = container.resolve(ViewController.self)!
-        navController.setViewControllers([firstVC], animated: false)
+        appCoordinator = AppFlowCoordinator(navigationController: navController, container: container)
+        appCoordinator?.start()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navController

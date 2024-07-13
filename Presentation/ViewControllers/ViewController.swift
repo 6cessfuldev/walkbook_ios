@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    weak var coordinator: AppFlowCoordinator?
     
     private let testLabel: UILabel = {
         let label = UILabel()

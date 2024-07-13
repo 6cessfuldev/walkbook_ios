@@ -12,6 +12,7 @@
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5712C40D866008AB5EE /* ViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5702C40D866008AB5EE /* ViewControllerUITests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
+		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
 		9D35C5B72C3ECB0B004586C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D35C5B62C3ECB0B004586C2 /* AppDelegate.swift */; };
 		9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D35C5B82C3ECB0B004586C2 /* SceneDelegate.swift */; };
 		9D35C5BB2C3ECB0B004586C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D35C5BA2C3ECB0B004586C2 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9D20C5702C40D866008AB5EE /* ViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUITests.swift; sourceTree = "<group>"; };
 		9D20C5842C424F64008AB5EE /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		9D35C5B32C3ECB0B004586C2 /* walkbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = walkbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D35C5B62C3ECB0B004586C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D35C5B82C3ECB0B004586C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		9D20C5832C424F29008AB5EE /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */,
 				9D20C5842C424F64008AB5EE /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
@@ -468,6 +471,7 @@
 			files = (
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
 				9D35C5BB2C3ECB0B004586C2 /* ViewController.swift in Sources */,
+				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9D35C5B72C3ECB0B004586C2 /* AppDelegate.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
 			);
