@@ -11,5 +11,7 @@ target 'walkbook' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+  
+  pod 'Swinject'
 
 end
