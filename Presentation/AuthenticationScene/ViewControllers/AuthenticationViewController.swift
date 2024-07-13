@@ -8,24 +8,17 @@
 import UIKit
 
 class AuthenticationViewController: UIViewController {
-
-    private let testLabel: UILabel = {
-        let label = UILabel()
-        label.text = "AuthenticationVC"
-        label.textColor = .black
-        
-        return label
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(testLabel)
-        testLabel.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    testLabel.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
-                ])
-
-        view.backgroundColor = .white
+        setBackground()
+    }
+    
+    private func setBackground() {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "login_background")
+        backgroundImage.contentMode = .scaleAspectFill
+        
+        self.view.insertSubview(backgroundImage, at: 0)
     }
 }

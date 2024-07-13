@@ -152,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				9D20C57E2C420703008AB5EE /* Storyboards */,
+				9D35C5BF2C3ECB17004586C2 /* Assets.xcassets */,
 				9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -181,7 +182,6 @@
 		9D20C57E2C420703008AB5EE /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				9D35C5BF2C3ECB17004586C2 /* Assets.xcassets */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
