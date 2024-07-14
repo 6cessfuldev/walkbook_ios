@@ -21,6 +21,7 @@
 		9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5CE2C3FCE62004586C2 /* .gitignore */; };
 		9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */; };
 		9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */; };
+		9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		9D35C5CE2C3FCE62004586C2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLoginView.swift; sourceTree = "<group>"; };
 		9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVCUITest.swift; sourceTree = "<group>"; };
+		9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneUITest.swift; sourceTree = "<group>"; };
 		FA67F48C1D973DFFF30ACA7F /* Pods-walkbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbook.debug.xcconfig"; path = "Target Support Files/Pods-walkbook/Pods-walkbook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 		9D20C5642C40CFEF008AB5EE /* walkbookUITests */ = {
 			isa = PBXGroup;
 			children = (
+				9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */,
 				9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */,
 				9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */,
 			);
@@ -483,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */,
+				9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */,
 				9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

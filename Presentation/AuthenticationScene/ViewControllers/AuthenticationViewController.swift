@@ -18,6 +18,7 @@ class AuthenticationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "authenticationVC"
         setBackground()
         setupUI()
     }
