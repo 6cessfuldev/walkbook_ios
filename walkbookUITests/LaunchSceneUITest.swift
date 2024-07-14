@@ -21,12 +21,13 @@ final class LaunchSceneUITest: XCTestCase {
         app = nil
     }
 
-    func testLaunchScreenDuration() throws {
+    func test_런치화면_지속시간_테스트() throws {
         let authenticationVC = app.otherElements["authenticationVC"]
         
         let waiter = XCTWaiter()
         let startTime = Date()
-        let result = waiter.wait(for: [XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == 1"), object: authenticationVC)], timeout: 10)
+        let timeout = 10.0
+        let result = waiter.wait(for: [XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == 1"), object: authenticationVC)], timeout: timeout)
         switch result {
         case .completed:
             let endTime = Date()
@@ -36,7 +37,7 @@ final class LaunchSceneUITest: XCTestCase {
             XCTAssertGreaterThan(launchScreenDuration, 1.0, "런치화면 노출 시간은 1초 이하입니다.")
             XCTAssertLessThan(launchScreenDuration, 3.0, "런치화면 노출 시간은 3초 이상입니다.")
         default:
-            XCTFail("Element did not appear within the timeout")
+            XCTFail("\(timeout)초 동안 다음 화면으로 전환되지 않습니다.")
             break
         }
     }
