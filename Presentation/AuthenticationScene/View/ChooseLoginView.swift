@@ -32,7 +32,6 @@ class ChooseLoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        setupActions()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,18 +54,5 @@ class ChooseLoginView: UIView {
             signUpButton.topAnchor.constraint(equalTo: topAnchor, constant: 120),
             signUpButton.heightAnchor.constraint(equalToConstant: 60),
         ])
-    }
-    
-    private func setupActions() {
-        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func signInButtonTapped() {
-        self.isHidden = true
-    }
-    
-    @objc private func signUpButtonTapped() {
-        self.isHidden = true
     }
 }

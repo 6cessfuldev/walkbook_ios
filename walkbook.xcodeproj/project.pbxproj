@@ -22,6 +22,15 @@
 		9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */; };
 		9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */; };
 		9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */; };
+		9D9DBC1A2C440C0D00127B06 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC192C440C0D00127B06 /* SignInView.swift */; };
+		9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC1B2C44121E00127B06 /* SignUpView.swift */; };
+		9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC202C44170900127B06 /* GoogleSignInButton.swift */; };
+		9D9DBC242C44232600127B06 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D9DBC232C44232600127B06 /* Roboto-Medium.ttf */; };
+		9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC252C442C3400127B06 /* KakaoSignInButton.swift */; };
+		9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC282C442CE600127B06 /* UIImage+Resize.swift */; };
+		9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */; };
+		9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */; };
+		9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +71,15 @@
 		9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLoginView.swift; sourceTree = "<group>"; };
 		9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVCUITest.swift; sourceTree = "<group>"; };
 		9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneUITest.swift; sourceTree = "<group>"; };
+		9D9DBC192C440C0D00127B06 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		9D9DBC1B2C44121E00127B06 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		9D9DBC202C44170900127B06 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
+		9D9DBC232C44232600127B06 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		9D9DBC252C442C3400127B06 /* KakaoSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignInButton.swift; sourceTree = "<group>"; };
+		9D9DBC282C442CE600127B06 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
+		9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInButton.swift; sourceTree = "<group>"; };
+		9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		FA67F48C1D973DFFF30ACA7F /* Pods-walkbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbook.debug.xcconfig"; path = "Target Support Files/Pods-walkbook/Pods-walkbook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +150,7 @@
 		9D20C5762C4205B6008AB5EE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9D9DBC2A2C442D4400127B06 /* Utils */,
 				9D20C58C2C426922008AB5EE /* AuthenticationScene */,
 				9D20C57A2C420672008AB5EE /* Resources */,
 			);
@@ -149,7 +168,10 @@
 		9D20C5792C420669008AB5EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9D9DBC1D2C44168000127B06 /* SocialLoginButton */,
+				9D9DBC192C440C0D00127B06 /* SignInView.swift */,
 				9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */,
+				9D9DBC1B2C44121E00127B06 /* SignUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,9 +179,9 @@
 		9D20C57A2C420672008AB5EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9D9DBC222C4422F000127B06 /* Font */,
 				9D20C57E2C420703008AB5EE /* Storyboards */,
 				9D35C5BF2C3ECB17004586C2 /* Assets.xcassets */,
-				9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -188,6 +210,7 @@
 		9D20C57E2C420703008AB5EE /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -283,6 +306,42 @@
 				9D024B9D2C3FCEF100749CA1 /* GoogleService-Info.plist */,
 			);
 			path = walkbook;
+			sourceTree = "<group>";
+		};
+		9D9DBC1D2C44168000127B06 /* SocialLoginButton */ = {
+			isa = PBXGroup;
+			children = (
+				9D9DBC202C44170900127B06 /* GoogleSignInButton.swift */,
+				9D9DBC252C442C3400127B06 /* KakaoSignInButton.swift */,
+				9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */,
+				9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */,
+			);
+			path = SocialLoginButton;
+			sourceTree = "<group>";
+		};
+		9D9DBC222C4422F000127B06 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				9D9DBC232C44232600127B06 /* Roboto-Medium.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		9D9DBC2A2C442D4400127B06 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9D9DBC2B2C442D4A00127B06 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9D9DBC2B2C442D4A00127B06 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9D9DBC282C442CE600127B06 /* UIImage+Resize.swift */,
+				9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C450ABFB42FDC8747E989E71 /* Frameworks */ = {
@@ -422,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D9DBC242C44232600127B06 /* Roboto-Medium.ttf in Resources */,
 				9D35C5C32C3ECB17004586C2 /* LaunchScreen.storyboard in Resources */,
 				9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */,
 				9D35C5C02C3ECB17004586C2 /* Assets.xcassets in Resources */,
@@ -496,12 +556,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
+				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
+				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
+				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
+				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9D35C5B72C3ECB0B004586C2 /* AppDelegate.swift in Sources */,
+				9D9DBC1A2C440C0D00127B06 /* SignInView.swift in Sources */,
+				9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */,
+				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
+				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
