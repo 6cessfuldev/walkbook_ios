@@ -13,5 +13,13 @@ target 'walkbook' do
   pod 'FirebaseFirestore'
   
   pod 'Swinject'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  
+  target 'walkbookTests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'Firebase/Auth'
+  end
 
 end
