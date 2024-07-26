@@ -34,7 +34,7 @@ class AppDIContainer {
         
         // Register Repositories
         container.register(AuthenticationRepository.self) { _ in
-            return FirebaseAuthenticationRepository()
+            return FirebaseAuthenticationRepositoryImpl()
         }
     }
 }
