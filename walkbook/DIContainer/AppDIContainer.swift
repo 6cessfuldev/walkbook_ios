@@ -14,9 +14,27 @@ class AppDIContainer {
     init() {
         container = Container()
         
+        // Register ViewModel
+        container.register(AuthenticationViewModel.self) { r in
+            let appleSignInuseCase = r.resolve(AppleSignInUseCase.self)!
+            return AuthenticationViewModel(appleSignInUseCase: appleSignInuseCase)
+        }
+        
         // Register ViewControllers
         container.register(AuthenticationViewController.self) { r in
-            return AuthenticationViewController()
+            let viewModel = r.resolve(AuthenticationViewModel.self)!
+            return AuthenticationViewController(viewModel: viewModel)
+        }
+        
+        // Register UseCases
+        container.register(AppleSignInUseCase.self) { r in
+            let repository = r.resolve(AuthenticationRepository.self)!
+            return DefaultAppleSignInUseCase(repository: repository)
+        }
+        
+        // Register Repositories
+        container.register(AuthenticationRepository.self) { _ in
+            return FirebaseAuthenticationRepository()
         }
     }
 }
