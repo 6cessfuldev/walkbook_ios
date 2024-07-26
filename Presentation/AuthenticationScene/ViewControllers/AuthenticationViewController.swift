@@ -6,14 +6,12 @@
 //
 
 import UIKit
-
-enum AuthenticationState {
-    case chooseLogin
-    case signIn
-    case signUp
-}
+import RxSwift
+import RxCocoa
 
 class AuthenticationViewController: UIViewController {
+    fileprivate var viewModel: AuthenticationViewModel!
+    private let disposeBag = DisposeBag()
     
     private let chooseLoginView: ChooseLoginView = {
         let view = ChooseLoginView()
@@ -38,18 +36,21 @@ class AuthenticationViewController: UIViewController {
         return view
     }()
     
-    private var currentState: AuthenticationState = .chooseLogin {
-        didSet {
-            updateViewState()
-        }
+    init(viewModel: AuthenticationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.accessibilityIdentifier = "authenticationVC"
         setBackground()
         setupUI()
-        setupActions()
+        setupBindings()
     }
     
     private func setBackground() {
@@ -83,25 +84,50 @@ class AuthenticationViewController: UIViewController {
         ])
     }
     
-    private func setupActions() {
-        chooseLoginView.signInButton.addTarget(self, action: #selector(showSignInView), for: .touchUpInside)
-        chooseLoginView.signUpButton.addTarget(self, action: #selector(showSignUpView), for: .touchUpInside)
-    }
-
-    @objc private func showSignInView() {
-        currentState = .signIn
-    }
-
-    @objc private func showSignUpView() {
-        currentState = .signUp
+    private func setupBindings() {
+        chooseLoginView.signInButton.rx.tap
+            .bind(to: viewModel.signInTapped)
+            .disposed(by: disposeBag)
+        
+        chooseLoginView.signUpButton.rx.tap
+            .bind(to: viewModel.signUpTapped)
+            .disposed(by: disposeBag)
+        
+        signInView.appleSignInButton.rx.tap
+            .bind(to: viewModel.appleSignInTapped)
+            .disposed(by: disposeBag)
+        
+        viewModel.currentState
+            .subscribe(onNext: { [weak self] state in
+                self?.updateViewState(state)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.userEmail
+            .subscribe(onNext: { email in
+                if let email = email {
+                    // Handle successful sign-in
+                    print("User Email: \(String(describing: email))")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.error
+            .subscribe(onNext: { error in
+                if let error = error {
+                    // Handle error
+                    print("Error: \(error.localizedDescription)")
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func updateViewState() {
+    private func updateViewState(_ state: AuthenticationState) {
         chooseLoginView.isHidden = true
         signInView.isHidden = true
         signUpView.isHidden = true
         
-        switch currentState {
+        switch state {
         case .chooseLogin:
             chooseLoginView.isHidden = false
         case .signIn:
@@ -111,7 +137,3 @@ class AuthenticationViewController: UIViewController {
         }
     }
 }
-
-//extension ChooseLoginViewDelegate {
-//    func
-//}
