@@ -93,16 +93,20 @@ class AuthenticationViewController: UIViewController {
             .bind(to: viewModel.signUpTapped)
             .disposed(by: disposeBag)
         
-        signInView.appleSignInButton.rx.tap
-            .bind(to: viewModel.appleSignInTapped)
-            .disposed(by: disposeBag)
-        
         signInView.googleSignInButton.rx.tap
             .map { [weak self] in
                 self
             }
             .compactMap { $0 }
             .bind(to: viewModel.googleSignInTapped)
+            .disposed(by: disposeBag)
+        
+        signInView.kakaoSignInButton.rx.tap
+            .bind(to: viewModel.kakaoSignInTapped)
+            .disposed(by: disposeBag)
+        
+        signInView.appleSignInButton.rx.tap
+            .bind(to: viewModel.appleSignInTapped)
             .disposed(by: disposeBag)
         
         viewModel.currentState

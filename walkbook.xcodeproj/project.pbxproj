@@ -43,6 +43,7 @@
 		9DE498772C53C5B5004F1A20 /* AuthenticationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498762C53C5B5004F1A20 /* AuthenticationViewModelTests.swift */; };
 		9DE4987B2C53C695004F1A20 /* MockAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */; };
 		9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */; };
+		9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		9DE4988E2C551114004F1A20 /* CustomReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomReleaseConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498982C5514D6004F1A20 /* CustomDebugConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomDebugConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498992C551C08004F1A20 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignInUseCase.swift; sourceTree = "<group>"; };
 		EC13EAB5D44FDEBAFC79E44B /* Pods_walkbookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walkbookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA67F48C1D973DFFF30ACA7F /* Pods-walkbook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbook.debug.xcconfig"; path = "Target Support Files/Pods-walkbook/Pods-walkbook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +230,7 @@
 				9DE4985C2C514562004F1A20 /* Protocol */,
 				9DE498512C513875004F1A20 /* DefaultAppleSignInUseCase.swift */,
 				9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */,
+				9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */,
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
+				9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */,
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,

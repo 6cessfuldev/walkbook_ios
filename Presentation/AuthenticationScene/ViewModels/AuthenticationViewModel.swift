@@ -12,12 +12,14 @@ enum AuthenticationState {
 
 class AuthenticationViewModel {
     private let googleSignInUseCase: GoogleSignInUseCaseProtocol
+    private let kakaoSignInUseCase: KakaoSignInUseCaseProtocol
     private let appleSignInUseCase: AppleSignInUseCase
     
     // Inputs
     let signInTapped = PublishSubject<Void>()
     let signUpTapped = PublishSubject<Void>()
     let googleSignInTapped = PublishSubject<UIViewController>()
+    let kakaoSignInTapped = PublishSubject<Void>()
     let appleSignInTapped = PublishSubject<Void>()
     
     // Outputs
@@ -28,8 +30,13 @@ class AuthenticationViewModel {
     private let disposeBag = DisposeBag()
     private var currentNonce: String?
     
-    init(googleSignInUseCase: GoogleSignInUseCaseProtocol, appleSignInUseCase: AppleSignInUseCase) {
+    init(
+        googleSignInUseCase: GoogleSignInUseCaseProtocol,
+        kakaoSignInUseCase: KakaoSignInUseCaseProtocol,
+        appleSignInUseCase: AppleSignInUseCase)
+    {
         self.googleSignInUseCase = googleSignInUseCase
+        self.kakaoSignInUseCase = kakaoSignInUseCase
         self.appleSignInUseCase = appleSignInUseCase
         setupBindings()
     }
@@ -53,6 +60,12 @@ class AuthenticationViewModel {
             })
             .disposed(by: disposeBag)
         
+        kakaoSignInTapped
+            .subscribe(onNext: { [weak self] in
+                self?.signInWithKakaoFlow()
+            })
+            .disposed(by: disposeBag)
+        
         appleSignInTapped
             .subscribe(onNext: { [weak self] in
                 self?.startSignInWithAppleFlow()
@@ -65,6 +78,18 @@ class AuthenticationViewModel {
         let nonce = NonceUtils.randomNonceString()
         currentNonce = nonce
         appleSignInUseCase.execute(nonce: nonce) { [weak self] result in
+            switch result {
+            case .success(let email):
+                print("Successfully signed in: \(email)")
+                self?.userEmail.onNext(email)
+            case .failure(let error):
+                self?.error.onNext(error)
+            }
+        }
+    }
+    
+    private func signInWithKakaoFlow() {
+        kakaoSignInUseCase.execute { [weak self] result in
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")
