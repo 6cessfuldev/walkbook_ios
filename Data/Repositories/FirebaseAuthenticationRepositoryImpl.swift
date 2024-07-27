@@ -1,15 +1,20 @@
 import Foundation
+import RxSwift
 import AuthenticationServices
 import FirebaseAuth
 import FirebaseCore
 import CryptoKit
 import GoogleSignIn
+import RxKakaoSDKAuth
+import RxKakaoSDKUser
+import KakaoSDKUser
 
 class FirebaseAuthenticationRepositoryImpl: NSObject, AuthenticationRepository {
     
     private var completion: ((Result<String, Error>) -> Void)?
     private var currentNonce: String?
     private var authDelegate: ASAuthorizationControllerDelegate?
+    private let disposeBag = DisposeBag()
     
     func signInWithApple(nonce: String, completion: @escaping (Result<String, Error>) -> Void) {
         self.completion = completion
@@ -85,7 +90,17 @@ class FirebaseAuthenticationRepositoryImpl: NSObject, AuthenticationRepository {
         }
     }
     
-    
+    func signInWithKakao(completion: @escaping (Result<String, Error>) -> Void) {
+        UserApi.shared.rx.loginWithKakaoAccount()
+            .subscribe(onNext:{ (oauthToken) in
+                print("loginWithKakaoAccount() success.")
+
+                self.completion?(.success(oauthToken.accessToken))
+            }, onError: {error in
+                print(error)
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: - Apple
