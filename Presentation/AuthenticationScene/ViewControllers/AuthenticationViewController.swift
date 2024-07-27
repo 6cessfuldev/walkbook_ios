@@ -97,6 +97,14 @@ class AuthenticationViewController: UIViewController {
             .bind(to: viewModel.appleSignInTapped)
             .disposed(by: disposeBag)
         
+        signInView.googleSignInButton.rx.tap
+            .map { [weak self] in
+                self
+            }
+            .compactMap { $0 }
+            .bind(to: viewModel.googleSignInTapped)
+            .disposed(by: disposeBag)
+        
         viewModel.currentState
             .subscribe(onNext: { [weak self] state in
                 self?.updateViewState(state)

@@ -11,11 +11,13 @@ enum AuthenticationState {
 }
 
 class AuthenticationViewModel {
+    private let googleSignInUseCase: GoogleSignInUseCaseProtocol
     private let appleSignInUseCase: AppleSignInUseCase
     
     // Inputs
     let signInTapped = PublishSubject<Void>()
     let signUpTapped = PublishSubject<Void>()
+    let googleSignInTapped = PublishSubject<UIViewController>()
     let appleSignInTapped = PublishSubject<Void>()
     
     // Outputs
@@ -26,7 +28,8 @@ class AuthenticationViewModel {
     private let disposeBag = DisposeBag()
     private var currentNonce: String?
     
-    init(appleSignInUseCase: AppleSignInUseCase) {
+    init(googleSignInUseCase: GoogleSignInUseCaseProtocol, appleSignInUseCase: AppleSignInUseCase) {
+        self.googleSignInUseCase = googleSignInUseCase
         self.appleSignInUseCase = appleSignInUseCase
         setupBindings()
     }
@@ -44,11 +47,18 @@ class AuthenticationViewModel {
             })
             .disposed(by: disposeBag)
         
+        googleSignInTapped
+            .subscribe(onNext: { [weak self] viewController in
+                self?.signInWithGoogleFlow(presenting: viewController)
+            })
+            .disposed(by: disposeBag)
+        
         appleSignInTapped
             .subscribe(onNext: { [weak self] in
                 self?.startSignInWithAppleFlow()
             })
             .disposed(by: disposeBag)
+        
     }
     
     private func startSignInWithAppleFlow() {
@@ -65,4 +75,15 @@ class AuthenticationViewModel {
         }
     }
     
+    private func signInWithGoogleFlow(presenting viewController: UIViewController) {
+        googleSignInUseCase.execute(presenting: viewController) { [weak self] result in
+            switch result {
+            case .success(let email):
+                print("Successfully signed in: \(email)")
+                self?.userEmail.onNext(email)
+            case .failure(let error):
+                self?.error.onNext(error)
+            }
+        }
+    }
 }
