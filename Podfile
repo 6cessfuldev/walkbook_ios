@@ -12,6 +12,8 @@ target 'walkbook' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   
+  pod 'GoogleSignIn'
+  
   pod 'Swinject'
   pod 'RxSwift'
   pod 'RxCocoa'
