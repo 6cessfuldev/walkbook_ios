@@ -13,6 +13,9 @@ target 'walkbook' do
   pod 'FirebaseFirestore'
   
   pod 'GoogleSignIn'
+
+  pod 'RxKakaoSDKCommon'
+  pod 'RxKakaoSDKAuth'
   
   pod 'Swinject'
   pod 'RxSwift'
