@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode,swiftpackagemanager,firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,cocoapods,xcode,swiftpackagemanager,firebase
 
+# Secrets key
+Secrets.xcconfig
+
 # Ignore GoogleService-Info.plist
 GoogleService-Info.plist
 
