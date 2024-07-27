@@ -16,6 +16,7 @@ target 'walkbook' do
 
   pod 'RxKakaoSDKCommon'
   pod 'RxKakaoSDKAuth'
+  pod 'RxKakaoSDKUser'
   
   pod 'Swinject'
   pod 'RxSwift'
