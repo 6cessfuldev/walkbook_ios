@@ -81,20 +81,11 @@ class FirebaseAuthenticationRepositoryImpl: NSObject, AuthenticationRepository {
                     print("Email Verified: \(emailVerified)")
                     self.completion?(.success(email ?? ""))
                 }
-                    
-//                if let error = error {
-//                    completion(.failure(error))
-//                    return
-//                }
-//                
-//                if let authResult = authResult {
-//                    completion(.success(authResult))
-//                } else {
-//                    completion(.failure(NSError(domain: "GoogleLoginError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])))
-//                }
             }
         }
     }
+    
+    
 }
 
 // MARK: - Apple
