@@ -17,9 +17,11 @@ class AppDIContainer {
         // Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
+            let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
             let appleSignInuseCase = r.resolve(AppleSignInUseCase.self)!
             return AuthenticationViewModel(
                 googleSignInUseCase: googleSignInUseCase,
+                kakaoSignInUseCase: kakaoSignInUsecase,
                 appleSignInUseCase: appleSignInuseCase
             )
         }
@@ -34,6 +36,11 @@ class AppDIContainer {
         container.register(GoogleSignInUseCaseProtocol.self) { r in
             let repository = r.resolve(AuthenticationRepository.self)!
             return GoogleSignInUseCase(repository: repository)
+        }
+        
+        container.register(KakaoSignInUseCaseProtocol.self) { r in
+            let repository = r.resolve(AuthenticationRepository.self)!
+            return KakaoSignInUseCase(repository: repository)
         }
         
         container.register(AppleSignInUseCase.self) { r in
