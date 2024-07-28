@@ -53,11 +53,13 @@ class AppDIContainer {
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
             let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
             let appleDataSource = r.resolve(AppleSignRemoteDataSource.self)!
+            let firebaseAuthDataSource = r.resolve(FirebaseAuthRemoteDataSource.self)!
             
             return FirebaseAuthenticationRepositoryImpl(
                 googleSignRemoteDataSource: googleDataSource,
                 kakaoSignRemoteDataSource: kakaoDataSource,
-                appleSignRemoteDataSource: appleDataSource
+                appleSignRemoteDataSource: appleDataSource,
+                firebaseAuthRemoteDataSource: firebaseAuthDataSource
             )
         }
         
@@ -65,6 +67,7 @@ class AppDIContainer {
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
         container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
+        container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
     }
 }
 
