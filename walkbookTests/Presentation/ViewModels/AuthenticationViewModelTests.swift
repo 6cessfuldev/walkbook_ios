@@ -9,6 +9,7 @@ class AuthenticationViewModelTests: XCTestCase {
     var viewModel: AuthenticationViewModel!
     var mockGoogleSignInUseCase: MockGoogleSignInUseCase!
     var mockKakaoSignInUseCase: MockKakaoSignInUseCase!
+    var mockNaverSignInUseCase: MockNaverSignInUseCase!
     var mockAppleSignInUseCase: MockAppleSignInUseCase!
     
     var disposeBag: DisposeBag!
@@ -17,9 +18,13 @@ class AuthenticationViewModelTests: XCTestCase {
         super.setUp()
         mockGoogleSignInUseCase = MockGoogleSignInUseCase()
         mockKakaoSignInUseCase = MockKakaoSignInUseCase()
+        mockNaverSignInUseCase = MockNaverSignInUseCase()
         mockAppleSignInUseCase = MockAppleSignInUseCase()
         viewModel = AuthenticationViewModel(
-            googleSignInUseCase: mockGoogleSignInUseCase, kakaoSignInUseCase: mockKakaoSignInUseCase, appleSignInUseCase: mockAppleSignInUseCase)
+            googleSignInUseCase: mockGoogleSignInUseCase, 
+            kakaoSignInUseCase: mockKakaoSignInUseCase,
+            naverSignInUseCase: mockNaverSignInUseCase,
+            appleSignInUseCase: mockAppleSignInUseCase)
         disposeBag = DisposeBag()
     }
     
@@ -27,6 +32,7 @@ class AuthenticationViewModelTests: XCTestCase {
         viewModel = nil
         mockGoogleSignInUseCase = nil
         mockKakaoSignInUseCase = nil
+        mockNaverSignInUseCase = nil
         mockAppleSignInUseCase = nil
         disposeBag = nil
         super.tearDown()
@@ -136,6 +142,42 @@ class AuthenticationViewModelTests: XCTestCase {
             .disposed(by: disposeBag)
         
         viewModel.kakaoSignInTapped.onNext(())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_NaverSignIn_성공_시_email_값_전달받음() {
+        let expectation = self.expectation(description: "email 값 전달받음")
+        
+        viewModel.userEmail
+            .subscribe(onNext: { email in
+                XCTAssertEqual(email, self.mockNaverSignInUseCase.mockEmail)
+                expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.naverSignInTapped.onNext(())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_NaverSignIn_실패_시_Error_전달받음() {
+        let expectation = self.expectation(description: "Error 전달받음")
+        mockNaverSignInUseCase.shouldReturnError = true
+        
+        viewModel.error
+            .subscribe(onNext: { error in
+                XCTAssertNotNil(error)
+                if let nsError = error as NSError? {
+                    XCTAssertEqual(nsError.domain, "TestError")
+                    expectation.fulfill()
+                } else {
+                    XCTFail("Expected an NSError but got \(String(describing: error))")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.naverSignInTapped.onNext(())
         
         waitForExpectations(timeout: 1, handler: nil)
     }

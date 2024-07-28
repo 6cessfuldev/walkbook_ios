@@ -1,11 +1,12 @@
-import Foundation
+import UIKit
 @testable import walkbook
 
-class MockAppleSignInUseCase: AppleSignInUseCaseProtocol {
+class MockNaverSignInUseCase: NaverSignInUseCaseProtocol {
+    
     var shouldReturnError = false
     var mockEmail = "test@example.com"
     
-    func execute(nonce: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func execute(completion: @escaping (Result<String, Error>) -> Void) {
         if shouldReturnError {
             completion(.failure(NSError(domain: "TestError", code: 1, userInfo: nil)))
         } else {
