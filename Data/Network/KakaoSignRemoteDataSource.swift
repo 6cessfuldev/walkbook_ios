@@ -13,12 +13,20 @@ class KakaoSignRemoteDataSourceImpl: KakaoSignRemoteDataSource {
     
     func signInWithKakao(completion: @escaping (Result<String, Error>) -> Void) {
         UserApi.shared.rx.loginWithKakaoAccount()
-            .subscribe(onNext:{ (oauthToken) in
+            .flatMap { oauthToken -> Single<KakaoSDKUser.User> in
                 print("loginWithKakaoAccount() success.")
-
-                self.completion?(.success(oauthToken.accessToken))
-            }, onError: {error in
-                print(error)
+                return UserApi.shared.rx.me()
+            }
+            .subscribe(onNext: { user in
+                guard let kakaoId = user.id else {
+                    completion(.failure(NSError(domain: "KakaoSignRemoteDataSource", code: -1, userInfo: [NSLocalizedDescriptionKey: "User ID not found"])))
+                    return
+                }
+                print("Kakao User ID: \(kakaoId)")
+                completion(.success(String(kakaoId)))
+            }, onError: { error in
+                print("Error: \(error)")
+                completion(.failure(error))
             })
             .disposed(by: disposeBag)
     }
