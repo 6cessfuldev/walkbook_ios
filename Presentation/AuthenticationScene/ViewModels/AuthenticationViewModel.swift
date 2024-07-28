@@ -13,6 +13,7 @@ enum AuthenticationState {
 class AuthenticationViewModel {
     private let googleSignInUseCase: GoogleSignInUseCaseProtocol
     private let kakaoSignInUseCase: KakaoSignInUseCaseProtocol
+    private let naverSignInUseCase: NaverSignInUseCaseProtocol
     private let appleSignInUseCase: AppleSignInUseCase
     
     // Inputs
@@ -20,6 +21,7 @@ class AuthenticationViewModel {
     let signUpTapped = PublishSubject<Void>()
     let googleSignInTapped = PublishSubject<UIViewController>()
     let kakaoSignInTapped = PublishSubject<Void>()
+    let naverSignInTapped = PublishSubject<Void>()
     let appleSignInTapped = PublishSubject<Void>()
     
     // Outputs
@@ -33,10 +35,12 @@ class AuthenticationViewModel {
     init(
         googleSignInUseCase: GoogleSignInUseCaseProtocol,
         kakaoSignInUseCase: KakaoSignInUseCaseProtocol,
+        naverSignInUseCase: NaverSignInUseCaseProtocol,
         appleSignInUseCase: AppleSignInUseCase)
     {
         self.googleSignInUseCase = googleSignInUseCase
         self.kakaoSignInUseCase = kakaoSignInUseCase
+        self.naverSignInUseCase = naverSignInUseCase
         self.appleSignInUseCase = appleSignInUseCase
         setupBindings()
     }
@@ -63,6 +67,12 @@ class AuthenticationViewModel {
         kakaoSignInTapped
             .subscribe(onNext: { [weak self] in
                 self?.signInWithKakaoFlow()
+            })
+            .disposed(by: disposeBag)
+        
+        naverSignInTapped
+            .subscribe(onNext: { [weak self] in
+                self?.signInWithNaverFlow()
             })
             .disposed(by: disposeBag)
         
@@ -102,6 +112,18 @@ class AuthenticationViewModel {
     
     private func signInWithGoogleFlow(presenting viewController: UIViewController) {
         googleSignInUseCase.execute(presenting: viewController) { [weak self] result in
+            switch result {
+            case .success(let email):
+                print("Successfully signed in: \(email)")
+                self?.userEmail.onNext(email)
+            case .failure(let error):
+                self?.error.onNext(error)
+            }
+        }
+    }
+    
+    private func signInWithNaverFlow() {
+        naverSignInUseCase.execute { [weak self] result in
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")

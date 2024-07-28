@@ -18,10 +18,12 @@ class AppDIContainer {
         container.register(AuthenticationViewModel.self) { r in
             let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
             let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
+            let naverSignInUsecase = r.resolve(NaverSignInUseCaseProtocol.self)!
             let appleSignInuseCase = r.resolve(AppleSignInUseCase.self)!
             return AuthenticationViewModel(
                 googleSignInUseCase: googleSignInUseCase,
                 kakaoSignInUseCase: kakaoSignInUsecase,
+                naverSignInUseCase: naverSignInUsecase,
                 appleSignInUseCase: appleSignInuseCase
             )
         }
@@ -43,6 +45,11 @@ class AppDIContainer {
             return KakaoSignInUseCase(repository: repository)
         }
         
+        container.register(NaverSignInUseCaseProtocol.self) { r in
+            let repository = r.resolve(AuthenticationRepository.self)!
+            return NaverSignInUseCase(repository: repository)
+        }
+        
         container.register(AppleSignInUseCase.self) { r in
             let repository = r.resolve(AuthenticationRepository.self)!
             return DefaultAppleSignInUseCase(repository: repository)
@@ -52,12 +59,14 @@ class AppDIContainer {
         container.register(AuthenticationRepository.self) { r in
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
             let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
+            let naverDataSource = r.resolve(NaverSignRemoteDataSource.self)!
             let appleDataSource = r.resolve(AppleSignRemoteDataSource.self)!
             let firebaseAuthDataSource = r.resolve(FirebaseAuthRemoteDataSource.self)!
             
             return FirebaseAuthenticationRepositoryImpl(
                 googleSignRemoteDataSource: googleDataSource,
                 kakaoSignRemoteDataSource: kakaoDataSource,
+                naverSignRemoteDataSource: naverDataSource,
                 appleSignRemoteDataSource: appleDataSource,
                 firebaseAuthRemoteDataSource: firebaseAuthDataSource
             )
@@ -67,6 +76,7 @@ class AppDIContainer {
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
         container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
+        container.register(NaverSignRemoteDataSource.self) { _ in NaverSignRemoteDataSourceImpl() }
         container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
     }
 }

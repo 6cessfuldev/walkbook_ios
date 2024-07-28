@@ -105,6 +105,10 @@ class AuthenticationViewController: UIViewController {
             .bind(to: viewModel.kakaoSignInTapped)
             .disposed(by: disposeBag)
         
+        signInView.naverSignInButton.rx.tap
+            .bind(to: viewModel.naverSignInTapped)
+            .disposed(by: disposeBag)
+        
         signInView.appleSignInButton.rx.tap
             .bind(to: viewModel.appleSignInTapped)
             .disposed(by: disposeBag)
