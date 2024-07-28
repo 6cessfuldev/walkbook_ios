@@ -49,9 +49,22 @@ class AppDIContainer {
         }
         
         // Register Repositories
-        container.register(AuthenticationRepository.self) { _ in
-            return FirebaseAuthenticationRepositoryImpl()
+        container.register(AuthenticationRepository.self) { r in
+            let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
+            let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
+            let appleDataSource = r.resolve(AppleSignRemoteDataSource.self)!
+            
+            return FirebaseAuthenticationRepositoryImpl(
+                googleSignRemoteDataSource: googleDataSource,
+                kakaoSignRemoteDataSource: kakaoDataSource,
+                appleSignRemoteDataSource: appleDataSource
+            )
         }
+        
+        // Register Data Sources
+        container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
+        container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
+        container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
     }
 }
 
