@@ -1,3 +1,4 @@
+import UIKit
 import XCTest
 import RxSwift
 import RxCocoa
@@ -6,19 +7,27 @@ import RxCocoa
 class AuthenticationViewModelTests: XCTestCase {
     
     var viewModel: AuthenticationViewModel!
-    var mockUseCase: MockAppleSignInUseCase!
+    var mockGoogleSignInUseCase: MockGoogleSignInUseCase!
+    var mockKakaoSignInUseCase: MockKakaoSignInUseCase!
+    var mockAppleSignInUseCase: MockAppleSignInUseCase!
+    
     var disposeBag: DisposeBag!
     
     override func setUp() {
         super.setUp()
-        mockUseCase = MockAppleSignInUseCase()
-        viewModel = AuthenticationViewModel(appleSignInUseCase: mockUseCase)
+        mockGoogleSignInUseCase = MockGoogleSignInUseCase()
+        mockKakaoSignInUseCase = MockKakaoSignInUseCase()
+        mockAppleSignInUseCase = MockAppleSignInUseCase()
+        viewModel = AuthenticationViewModel(
+            googleSignInUseCase: mockGoogleSignInUseCase, kakaoSignInUseCase: mockKakaoSignInUseCase, appleSignInUseCase: mockAppleSignInUseCase)
         disposeBag = DisposeBag()
     }
     
     override func tearDown() {
         viewModel = nil
-        mockUseCase = nil
+        mockGoogleSignInUseCase = nil
+        mockKakaoSignInUseCase = nil
+        mockAppleSignInUseCase = nil
         disposeBag = nil
         super.tearDown()
     }
@@ -59,12 +68,84 @@ class AuthenticationViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
+    func test_GoogleSignIn_성공_시_email_값_전달받음() {
+        let expectation = self.expectation(description: "email 값 전달받음")
+        
+        viewModel.userEmail
+            .subscribe(onNext: { email in
+                XCTAssertEqual(email, self.mockGoogleSignInUseCase.mockEmail)
+                expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.googleSignInTapped.onNext(UIViewController())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_GoogleSignIn_실패_시_Error_전달받음() {
+        let expectation = self.expectation(description: "Error 전달받음")
+        mockGoogleSignInUseCase.shouldReturnError = true
+        
+        viewModel.error
+            .subscribe(onNext: { error in
+                XCTAssertNotNil(error)
+                if let nsError = error as NSError? {
+                    XCTAssertEqual(nsError.domain, "TestError")
+                    expectation.fulfill()
+                } else {
+                    XCTFail("Expected an NSError but got \(String(describing: error))")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.googleSignInTapped.onNext(UIViewController())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_KakaoSignIn_성공_시_email_값_전달받음() {
+        let expectation = self.expectation(description: "email 값 전달받음")
+        
+        viewModel.userEmail
+            .subscribe(onNext: { email in
+                XCTAssertEqual(email, self.mockKakaoSignInUseCase.mockEmail)
+                expectation.fulfill()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.kakaoSignInTapped.onNext(())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func test_KakaoSignIn_실패_시_Error_전달받음() {
+        let expectation = self.expectation(description: "Error 전달받음")
+        mockKakaoSignInUseCase.shouldReturnError = true
+        
+        viewModel.error
+            .subscribe(onNext: { error in
+                XCTAssertNotNil(error)
+                if let nsError = error as NSError? {
+                    XCTAssertEqual(nsError.domain, "TestError")
+                    expectation.fulfill()
+                } else {
+                    XCTFail("Expected an NSError but got \(String(describing: error))")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.kakaoSignInTapped.onNext(())
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     func test_AppleSignIn_성공_시_email_값_전달받음() {
         let expectation = self.expectation(description: "email 값 전달받음")
         
         viewModel.userEmail
             .subscribe(onNext: { email in
-                XCTAssertEqual(email, self.mockUseCase.mockEmail)
+                XCTAssertEqual(email, self.mockAppleSignInUseCase.mockEmail)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -76,7 +157,7 @@ class AuthenticationViewModelTests: XCTestCase {
     
     func test_AppleSignIn_실패_시_Error_전달받음() {
         let expectation = self.expectation(description: "Error 전달받음")
-        mockUseCase.shouldReturnError = true
+        mockAppleSignInUseCase.shouldReturnError = true
         
         viewModel.error
             .subscribe(onNext: { error in
