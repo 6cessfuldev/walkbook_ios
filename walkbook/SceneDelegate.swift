@@ -8,6 +8,7 @@
 import UIKit
 import RxKakaoSDKAuth
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -35,6 +36,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 _ = AuthController.rx.handleOpenUrl(url: url)
             }
         }
+        
+        NaverThirdPartyLoginConnection.getSharedInstance().receiveAccessToken(URLContexts.first?.url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

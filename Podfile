@@ -18,6 +18,8 @@ target 'walkbook' do
   pod 'RxKakaoSDKCommon'
   pod 'RxKakaoSDKAuth'
   pod 'RxKakaoSDKUser'
+
+  pod 'naveridlogin-sdk-ios'
   
   pod 'Swinject'
   pod 'RxSwift'

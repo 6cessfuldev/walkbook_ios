@@ -1185,6 +1185,7 @@ PODS:
     - nanopb/encode (= 2.30910.0)
   - nanopb/decode (2.30910.0)
   - nanopb/encode (2.30910.0)
+  - naveridlogin-sdk-ios (4.2.1)
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
   - RxAlamofire (6.1.1):
@@ -1224,6 +1225,7 @@ DEPENDENCIES:
   - FirebaseFirestore
   - FirebaseFunctions
   - GoogleSignIn
+  - naveridlogin-sdk-ios
   - RxCocoa
   - RxKakaoSDKAuth
   - RxKakaoSDKCommon
@@ -1263,6 +1265,7 @@ SPEC REPOS:
     - KakaoSDKUser
     - leveldb-library
     - nanopb
+    - naveridlogin-sdk-ios
     - PromisesObjC
     - RecaptchaInterop
     - RxAlamofire
@@ -1305,6 +1308,7 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 79e9f3911b26fcfa3bcfc940d460e129e02b7a08
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  naveridlogin-sdk-ios: d5f9d92905a7e964976ebfdd665bee5fb75845c5
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
@@ -1316,6 +1320,6 @@ SPEC CHECKSUMS:
   RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
   Swinject: a827d508c6270da03ec74e558e728917a888fa9b
 
-PODFILE CHECKSUM: f610eb4b0a211f8724387d41bed7c75891af473c
+PODFILE CHECKSUM: 5c321111e9c5683cceb8b32d6b8d9ef94093b6b7
 
 COCOAPODS: 1.15.0

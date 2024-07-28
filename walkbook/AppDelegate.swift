@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import GoogleSignIn
 import RxKakaoSDKCommon
+import NaverThirdPartyLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let kakaoNativeAppKey = Bundle.main.object(forInfoDictionaryKey: "KakaoNativeAppKey") as? String {
             RxKakaoSDK.initSDK(appKey: kakaoNativeAppKey)
-            print(kakaoNativeAppKey)
+        }
+        
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        instance?.isNaverAppOauthEnable = true
+        instance?.isInAppOauthEnable = true
+        instance?.isOnlyPortraitSupportedInIphone()
+        
+        if let naverServiceAppUrlScheme = Bundle.main.object(forInfoDictionaryKey: "NaverServiceAppUrlScheme") as? String,
+           let naverConsumerKey = Bundle.main.object(forInfoDictionaryKey: "NaverConsumerKey") as? String,
+           let naverConsumerSecret = Bundle.main.object(forInfoDictionaryKey: "NaverConsumerSecret") as? String,
+           let naverServiceAppName = Bundle.main.object(forInfoDictionaryKey: "NaverServiceAppName") as? String {
+            instance?.serviceUrlScheme = naverServiceAppUrlScheme
+            instance?.consumerKey = naverConsumerKey
+            instance?.consumerSecret = naverConsumerSecret
+            instance?.appName = naverServiceAppName
         }
         
         FirebaseApp.configure()
@@ -28,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
+    
+        NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
     // MARK: UISceneSession Lifecycle
