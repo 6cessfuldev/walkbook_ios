@@ -14,7 +14,7 @@ class AuthenticationViewModel {
     private let googleSignInUseCase: GoogleSignInUseCaseProtocol
     private let kakaoSignInUseCase: KakaoSignInUseCaseProtocol
     private let naverSignInUseCase: NaverSignInUseCaseProtocol
-    private let appleSignInUseCase: AppleSignInUseCase
+    private let appleSignInUseCase: AppleSignInUseCaseProtocol
     
     // Inputs
     let signInTapped = PublishSubject<Void>()
@@ -36,7 +36,7 @@ class AuthenticationViewModel {
         googleSignInUseCase: GoogleSignInUseCaseProtocol,
         kakaoSignInUseCase: KakaoSignInUseCaseProtocol,
         naverSignInUseCase: NaverSignInUseCaseProtocol,
-        appleSignInUseCase: AppleSignInUseCase)
+        appleSignInUseCase: AppleSignInUseCaseProtocol)
     {
         self.googleSignInUseCase = googleSignInUseCase
         self.kakaoSignInUseCase = kakaoSignInUseCase

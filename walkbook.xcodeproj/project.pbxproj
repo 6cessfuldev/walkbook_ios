@@ -35,7 +35,7 @@
 		9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */; };
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
 		9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */; };
-		9DE498522C513875004F1A20 /* DefaultAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498512C513875004F1A20 /* DefaultAppleSignInUseCase.swift */; };
+		9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */; };
 		9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */; };
 		9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */; };
 		9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4985D2C5145A6004F1A20 /* UseCase.swift */; };
@@ -108,7 +108,7 @@
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
 		9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498502C4FEF91004F1A20 /* walkbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = walkbook.entitlements; sourceTree = "<group>"; };
-		9DE498512C513875004F1A20 /* DefaultAppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppleSignInUseCase.swift; sourceTree = "<group>"; };
+		9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticationRepositoryImpl.swift; sourceTree = "<group>"; };
 		9DE4985D2C5145A6004F1A20 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE4985C2C514562004F1A20 /* Protocol */,
-				9DE498512C513875004F1A20 /* DefaultAppleSignInUseCase.swift */,
+				9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */,
 				9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */,
 				9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */,
 				9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */,
@@ -847,7 +847,7 @@
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,
-				9DE498522C513875004F1A20 /* DefaultAppleSignInUseCase.swift in Sources */,
+				9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

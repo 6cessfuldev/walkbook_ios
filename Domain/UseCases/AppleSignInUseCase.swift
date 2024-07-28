@@ -1,13 +1,13 @@
 import Foundation
 
-protocol AppleSignInUseCase {
+protocol AppleSignInUseCaseProtocol {
     func execute(
         nonce: String,
         completion: @escaping (Result<String, Error>) -> Void
     )
 }
 
-class DefaultAppleSignInUseCase: AppleSignInUseCase {
+class AppleSignInUseCase: AppleSignInUseCaseProtocol {
     
     private let repository: AuthenticationRepository
     
