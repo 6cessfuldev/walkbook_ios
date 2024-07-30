@@ -26,7 +26,7 @@ class AppDIContainer {
                 naverSignInUseCase: naverSignInUsecase,
                 appleSignInUseCase: appleSignInUseCase
             )
-        }
+        }.inObjectScope(.container)
         
         // Register ViewControllers
         container.register(AuthenticationViewController.self) { r in
@@ -35,7 +35,8 @@ class AppDIContainer {
         }
         
         container.register(MainViewController.self) { r in
-            return MainViewController()
+            let viewModel = r.resolve(AuthenticationViewModel.self)!
+            return MainViewController(viewModel: viewModel)
         }
         
         

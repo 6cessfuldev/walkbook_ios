@@ -26,7 +26,7 @@ class AuthenticationViewModel {
     
     // Outputs
     let currentState = BehaviorRelay<AuthenticationState>(value: .chooseLogin)
-    let userEmail = PublishSubject<String?>()
+    let userEmail = BehaviorRelay<String?>(value: nil)
     let error = PublishSubject<Error?>()
     
     private let disposeBag = DisposeBag()
@@ -91,7 +91,7 @@ class AuthenticationViewModel {
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")
-                self?.userEmail.onNext(email)
+                self?.userEmail.accept(email)
             case .failure(let error):
                 self?.error.onNext(error)
             }
@@ -103,7 +103,7 @@ class AuthenticationViewModel {
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")
-                self?.userEmail.onNext(email)
+                self?.userEmail.accept(email)
             case .failure(let error):
                 self?.error.onNext(error)
             }
@@ -115,7 +115,7 @@ class AuthenticationViewModel {
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")
-                self?.userEmail.onNext(email)
+                self?.userEmail.accept(email)
             case .failure(let error):
                 self?.error.onNext(error)
             }
@@ -127,7 +127,7 @@ class AuthenticationViewModel {
             switch result {
             case .success(let email):
                 print("Successfully signed in: \(email)")
-                self?.userEmail.onNext(email)
+                self?.userEmail.accept(email)
             case .failure(let error):
                 self?.error.onNext(error)
             }
