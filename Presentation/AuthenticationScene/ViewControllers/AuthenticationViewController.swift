@@ -13,6 +13,8 @@ class AuthenticationViewController: UIViewController {
     fileprivate var viewModel: AuthenticationViewModel!
     private let disposeBag = DisposeBag()
     
+    var coordinator: Coordinator!
+    
     private let chooseLoginView: ChooseLoginView = {
         let view = ChooseLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
