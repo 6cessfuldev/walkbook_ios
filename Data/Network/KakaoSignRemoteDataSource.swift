@@ -12,6 +12,7 @@ class KakaoSignRemoteDataSourceImpl: KakaoSignRemoteDataSource {
     private let disposeBag = DisposeBag()
     
     func signInWithKakao(completion: @escaping (Result<String, Error>) -> Void) {
+        self.completion = completion
         UserApi.shared.rx.loginWithKakaoAccount()
             .flatMap { oauthToken -> Single<KakaoSDKUser.User> in
                 print("loginWithKakaoAccount() success.")

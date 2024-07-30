@@ -11,6 +11,7 @@ class GoogleSignRemoteDataSourceImpl: GoogleSignRemoteDataSource {
     private var completion: ((Result<String, Error>) -> Void)?
     
     func signInWithGoogle(presenting viewController: UIViewController, completion: @escaping (Result<String, Error>) -> Void) {
+        self.completion = completion
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             completion(.failure(NSError(domain: "GoogleLoginError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing client ID"])))
             return
