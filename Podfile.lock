@@ -1216,6 +1216,8 @@ PODS:
   - RxRelay (6.7.1):
     - RxSwift (= 6.7.1)
   - RxSwift (6.7.1)
+  - RxTest (6.7.1):
+    - RxSwift (= 6.7.1)
   - Swinject (2.9.1)
 
 DEPENDENCIES:
@@ -1231,6 +1233,7 @@ DEPENDENCIES:
   - RxKakaoSDKCommon
   - RxKakaoSDKUser
   - RxSwift
+  - RxTest
   - Swinject
 
 SPEC REPOS:
@@ -1275,6 +1278,7 @@ SPEC REPOS:
     - RxKakaoSDKUser
     - RxRelay
     - RxSwift
+    - RxTest
     - Swinject
 
 SPEC CHECKSUMS:
@@ -1318,8 +1322,9 @@ SPEC CHECKSUMS:
   RxKakaoSDKUser: f2fb5c510834c9b01452df5b2a6a66d446e4d0df
   RxRelay: 4151ba01152436b08271e08410135e099880eae5
   RxSwift: b9a93a26031785159e11abd40d1a55bcb8057e52
+  RxTest: eec2bff159d799cdc02da2b40ef47e43dc17e688
   Swinject: a827d508c6270da03ec74e558e728917a888fa9b
 
-PODFILE CHECKSUM: 5c321111e9c5683cceb8b32d6b8d9ef94093b6b7
+PODFILE CHECKSUM: 8200e8de8d69b6dbf04d76b25bbd45dc9f900d2d
 
 COCOAPODS: 1.15.0

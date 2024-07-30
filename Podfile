@@ -29,6 +29,17 @@ target 'walkbook' do
     inherit! :search_paths
     # Pods for testing
     pod 'Firebase/Auth'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxTest'
+  end
+
+  target 'walkbookUITests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxTest'
   end
 
 end
