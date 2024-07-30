@@ -36,6 +36,9 @@
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
 		9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */; };
 		9DCBE4F62C5691B700BDB378 /* MockNaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */; };
+		9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */; };
+		9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */; };
+		9DCBE5022C590CFF00BDB378 /* AuthenticationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */; };
 		9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */; };
 		9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */; };
 		9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */; };
@@ -54,6 +57,7 @@
 		9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A42C561338004F1A20 /* GoogleSignRemoteDataSource.swift */; };
 		9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A62C561498004F1A20 /* KakaoSignRemoteDataSource.swift */; };
 		9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A82C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift */; };
+		DDD8787B2F066203FCE558C6 /* Pods_walkbookUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B166228550259F5FF5B81 /* Pods_walkbookUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +78,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09CD95B4A2B151796835B850 /* Pods-walkbookUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbookUITests.debug.xcconfig"; path = "Target Support Files/Pods-walkbookUITests/Pods-walkbookUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2ACFC85029E0C000DE9E94A5 /* Pods-walkbookUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbookUITests.release.xcconfig"; path = "Target Support Files/Pods-walkbookUITests/Pods-walkbookUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3D072BD26E8EA27B5E28F784 /* Pods_walkbook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walkbook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		749B166228550259F5FF5B81 /* Pods_walkbookUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walkbookUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AAAB7FC85049709FD55CFD /* Pods-walkbookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbookTests.debug.xcconfig"; path = "Target Support Files/Pods-walkbookTests/Pods-walkbookTests.debug.xcconfig"; sourceTree = "<group>"; };
 		883E12B9C3A92197266FC4E0 /* Pods-walkbookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbookTests.release.xcconfig"; path = "Target Support Files/Pods-walkbookTests/Pods-walkbookTests.release.xcconfig"; sourceTree = "<group>"; };
 		88E4A347E43433574A73C5A2 /* Pods-walkbook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walkbook.release.xcconfig"; path = "Target Support Files/Pods-walkbook/Pods-walkbook.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +116,9 @@
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
 		9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInUseCase.swift; sourceTree = "<group>"; };
 		9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNaverSignInUseCase.swift; sourceTree = "<group>"; };
+		9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
+		9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewControllerTests.swift; sourceTree = "<group>"; };
 		9DE498502C4FEF91004F1A20 /* walkbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = walkbook.entitlements; sourceTree = "<group>"; };
 		9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD8787B2F066203FCE558C6 /* Pods_walkbookUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,8 +219,9 @@
 		9D20C5762C4205B6008AB5EE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9D9DBC2A2C442D4400127B06 /* Utils */,
+				9DCBE4F72C58E8B900BDB378 /* MainScene */,
 				9D20C58C2C426922008AB5EE /* AuthenticationScene */,
+				9D9DBC2A2C442D4400127B06 /* Utils */,
 				9D20C57A2C420672008AB5EE /* Resources */,
 			);
 			path = Presentation;
@@ -223,7 +235,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		9D20C5792C420669008AB5EE /* View */ = {
+		9D20C5792C420669008AB5EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				9D9DBC1D2C44168000127B06 /* SocialLoginButton */,
@@ -231,7 +243,7 @@
 				9D9DBC1B2C44121E00127B06 /* SignUpView.swift */,
 				9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		9D20C57A2C420672008AB5EE /* Resources */ = {
@@ -327,7 +339,7 @@
 			children = (
 				9D20C58F2C426BAB008AB5EE /* Flow */,
 				9D20C5772C4205D4008AB5EE /* ViewControllers */,
-				9D20C5792C420669008AB5EE /* View */,
+				9D20C5792C420669008AB5EE /* Views */,
 				9DE498712C536BD5004F1A20 /* ViewModels */,
 			);
 			path = AuthenticationScene;
@@ -417,6 +429,55 @@
 				9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9DCBE4F72C58E8B900BDB378 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				9DCBE4FB2C58E8F800BDB378 /* ViewModels */,
+				9DCBE4FA2C58E8EF00BDB378 /* Views */,
+				9DCBE4F92C58E8E900BDB378 /* ViewControllers */,
+				9DCBE4F82C58E8E400BDB378 /* Flow */,
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		9DCBE4F82C58E8E400BDB378 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		9DCBE4F92C58E8E900BDB378 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9DCBE4FA2C58E8EF00BDB378 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9DCBE4FB2C58E8F800BDB378 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9DCBE5002C590CEC00BDB378 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		9DE498552C5139EB004F1A20 /* Domain */ = {
@@ -517,6 +578,7 @@
 		9DE498742C53C552004F1A20 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9DCBE5002C590CEC00BDB378 /* Views */,
 				9DE498752C53C561004F1A20 /* ViewModels */,
 			);
 			path = Presentation;
@@ -564,6 +626,7 @@
 			children = (
 				3D072BD26E8EA27B5E28F784 /* Pods_walkbook.framework */,
 				EC13EAB5D44FDEBAFC79E44B /* Pods_walkbookTests.framework */,
+				749B166228550259F5FF5B81 /* Pods_walkbookUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -575,6 +638,8 @@
 				88E4A347E43433574A73C5A2 /* Pods-walkbook.release.xcconfig */,
 				84AAAB7FC85049709FD55CFD /* Pods-walkbookTests.debug.xcconfig */,
 				883E12B9C3A92197266FC4E0 /* Pods-walkbookTests.release.xcconfig */,
+				09CD95B4A2B151796835B850 /* Pods-walkbookUITests.debug.xcconfig */,
+				2ACFC85029E0C000DE9E94A5 /* Pods-walkbookUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -606,9 +671,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D20C56B2C40CFEF008AB5EE /* Build configuration list for PBXNativeTarget "walkbookUITests" */;
 			buildPhases = (
+				20A7B24B5F152B4C37FA775B /* [CP] Check Pods Manifest.lock */,
 				9D20C55F2C40CFEF008AB5EE /* Sources */,
 				9D20C5602C40CFEF008AB5EE /* Frameworks */,
 				9D20C5612C40CFEF008AB5EE /* Resources */,
+				E90B4E1695D5C19AEA181E02 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -713,6 +780,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		20A7B24B5F152B4C37FA775B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-walkbookUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		75FE49090B3D026981E372A1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -791,6 +880,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E90B4E1695D5C19AEA181E02 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-walkbookUITests/Pods-walkbookUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-walkbookUITests/Pods-walkbookUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-walkbookUITests/Pods-walkbookUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -804,6 +910,7 @@
 				9DE498772C53C5B5004F1A20 /* AuthenticationViewModelTests.swift in Sources */,
 				9DE4987B2C53C695004F1A20 /* MockAppleSignInUseCase.swift in Sources */,
 				9DE498682C527A4A004F1A20 /* NonceUtilsTests.swift in Sources */,
+				9DCBE5022C590CFF00BDB378 /* AuthenticationViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +944,7 @@
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
+				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
 				9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */,
@@ -844,6 +952,7 @@
 				9D35C5B72C3ECB0B004586C2 /* AppDelegate.swift in Sources */,
 				9D9DBC1A2C440C0D00127B06 /* SignInView.swift in Sources */,
 				9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */,
+				9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */,
 				9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */,
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
@@ -935,11 +1044,12 @@
 		};
 		9D20C56C2C40CFEF008AB5EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09CD95B4A2B151796835B850 /* Pods-walkbookUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6H3TKX72M;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosyuk.walkbookUITests;
@@ -953,11 +1063,12 @@
 		};
 		9D20C56D2C40CFEF008AB5EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ACFC85029E0C000DE9E94A5 /* Pods-walkbookUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D6H3TKX72M;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosyuk.walkbookUITests;

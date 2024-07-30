@@ -34,6 +34,11 @@ class AppDIContainer {
             return AuthenticationViewController(viewModel: viewModel)
         }
         
+        container.register(MainViewController.self) { r in
+            return MainViewController()
+        }
+        
+        
         // Register UseCases
         container.register(GoogleSignInUseCaseProtocol.self) { r in
             let repository = r.resolve(AuthenticationRepository.self)!
@@ -83,12 +88,28 @@ class AppDIContainer {
 
 //MARK: - AuthenticationFlowCoordinator
 
-extension AppDIContainer: AuthenticationFlowCoordinatorDependencies {
+extension AppDIContainer {
     func makeAuthenticationFlowCoordinator(navigationController: UINavigationController) -> AuthenticationFlowCoordinator {
-        AuthenticationFlowCoordinator(navigationController: navigationController, dependencies: self)
+        return AuthenticationFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
-    
+}
+
+extension AppDIContainer: AuthenticationFlowCoordinatorDependencies {
     func makeAuthenticationViewController() -> AuthenticationViewController {
         container.resolve(AuthenticationViewController.self)!
+    }
+}
+
+//MARK: - MainFlowCoordinator
+
+extension AppDIContainer {
+    func makeMainFlowCoordinator(navigationController: UINavigationController) -> MainFlowCoordinator {
+        return MainFlowCoordinator(navigationController: navigationController, dependencies: self)
+    }
+}
+
+extension AppDIContainer: MainFlowCoordinatorDependencies {
+    func makeMainViewController() -> MainViewController {
+        container.resolve(MainViewController.self)!
     }
 }

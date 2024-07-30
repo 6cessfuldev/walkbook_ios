@@ -13,7 +13,7 @@ class AuthenticationViewController: UIViewController {
     fileprivate var viewModel: AuthenticationViewModel!
     private let disposeBag = DisposeBag()
     
-    var coordinator: Coordinator!
+    var coordinator: AuthenticationFlowCoordinator!
     
     private let chooseLoginView: ChooseLoginView = {
         let view = ChooseLoginView()
@@ -124,8 +124,8 @@ class AuthenticationViewController: UIViewController {
         viewModel.userEmail
             .subscribe(onNext: { email in
                 if let email = email {
-                    // Handle successful sign-in
                     print("User Email: \(String(describing: email))")
+                    self.coordinator.didFinishAuthentication()
                 }
             })
             .disposed(by: disposeBag)
