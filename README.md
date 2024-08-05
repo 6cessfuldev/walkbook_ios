@@ -5,5 +5,5 @@
 - 위치 정보를 활용한 미션을 통해 다음 이야기로 진행할 수 있는 인터렉션
 
 ## 기획 및 UI/UX
-[와이어프레임 링크](https://www.figma.com/board/owL3vyUXaDY1LCT8PkbwNz/Walkbook-Wireframe?node-id=80-198&t=tFZoHwgqZoySTNvn-0)  
+[와이어프레임](https://www.figma.com/board/owL3vyUXaDY1LCT8PkbwNz/Walkbook-Wireframe?node-id=80-198&t=tFZoHwgqZoySTNvn-0)  
 [화면별 요구사항](https://www.figma.com/design/2kEBbk1O2MdAxcd1MmiZ7k/Untitled?node-id=13-17&t=Vns6GeQwFvFdBFkX-0)
