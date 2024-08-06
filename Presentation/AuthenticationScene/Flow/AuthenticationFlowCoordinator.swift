@@ -28,7 +28,7 @@ class AuthenticationFlowCoordinator: Coordinator {
     func start() {
         let vc = dependencies.makeAuthenticationViewController()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.setViewControllers([vc], animated: false)
     }
     
     func didFinishAuthentication() {

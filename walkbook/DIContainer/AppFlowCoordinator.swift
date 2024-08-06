@@ -35,13 +35,8 @@ final class AppFlowCoordinator: Coordinator {
         authCoordinator.start()
     }
     
-    func didFinishAuthentication() {
-        let mainCoordinator = appDIContainer.makeMainFlowCoordinator(navigationController: navigationController)
-        childCoordinators.append(mainCoordinator)
-        mainCoordinator.start()
-    }
-    
     private func childDidFinish(_ coordinator: Coordinator?) {
+        print(childCoordinators.count)
         for (index, childCoordinator) in childCoordinators.enumerated() {
             if childCoordinator === coordinator {
                 childCoordinators.remove(at: index)
@@ -55,7 +50,17 @@ extension AppFlowCoordinator: AuthenticationFlowCoordinatorDelegate {
     func didFinishAuthentication(coordinator: AuthenticationFlowCoordinator) {
         childDidFinish(coordinator)
         let mainCoordinator = appDIContainer.makeMainFlowCoordinator(navigationController: navigationController)
+        mainCoordinator.delegate = self
         childCoordinators.append(mainCoordinator)
         mainCoordinator.start()
     }
+}
+
+extension AppFlowCoordinator: MainFlowCoordinatorDelegate {
+    func didLogout(coordinator: MainFlowCoordinator) {
+        childDidFinish(coordinator)
+        self.start()
+    }
+    
+    
 }

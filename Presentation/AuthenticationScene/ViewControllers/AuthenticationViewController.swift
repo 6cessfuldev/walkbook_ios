@@ -13,7 +13,7 @@ class AuthenticationViewController: UIViewController {
     fileprivate var viewModel: AuthenticationViewModel!
     private let disposeBag = DisposeBag()
     
-    var coordinator: AuthenticationFlowCoordinator!
+    weak var coordinator: AuthenticationFlowCoordinator!
     
     private let chooseLoginView: ChooseLoginView = {
         let view = ChooseLoginView()
@@ -45,6 +45,10 @@ class AuthenticationViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("AuthenticationViewController deinitialized: \(self)")
     }
 
     override func viewDidLoad() {
@@ -122,10 +126,10 @@ class AuthenticationViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.userEmail
-            .subscribe(onNext: { email in
+            .subscribe(onNext: { [weak self] email in
                 if let email = email {
                     print("User Email: \(String(describing: email))")
-                    self.coordinator.didFinishAuthentication()
+                    self?.coordinator.didFinishAuthentication()
                 }
             })
             .disposed(by: disposeBag)
