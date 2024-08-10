@@ -21,6 +21,7 @@ target 'walkbook' do
 
   pod 'naveridlogin-sdk-ios'
   
+  pod 'GoogleMaps'
   pod 'Swinject'
   pod 'RxSwift'
   pod 'RxCocoa'
