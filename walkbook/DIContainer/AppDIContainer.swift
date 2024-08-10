@@ -85,6 +85,15 @@ class AppDIContainer {
         container.register(NaverSignRemoteDataSource.self) { _ in NaverSignRemoteDataSourceImpl() }
         container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
     }
+    
+    // MARK: - DIContainers of scenes
+    
+    func makeExploreSceneDIContainer() -> ExploreSceneDIContainer {
+        let authenticationViewModel = container.resolve(AuthenticationViewModel.self)!
+        let dependencies = ExploreSceneDIContainer.Dependencies(
+            authenticationViewModel: authenticationViewModel)
+        return ExploreSceneDIContainer(dependencies: dependencies)
+    }
 }
 
 //MARK: - AuthenticationFlowCoordinator
@@ -109,8 +118,20 @@ extension AppDIContainer {
     }
 }
 
+//MARK: - ExploreFlowCoordinator
+
 extension AppDIContainer: MainFlowCoordinatorDependencies {
+    func makeExploreViewController() -> ExploreViewController {
+        let authenticationViewModel = container.resolve(AuthenticationViewModel.self)!
+        let vc = ExploreViewController(viewModel: authenticationViewModel)
+        return vc
+    }
+    
     func makeMainViewController() -> MainViewController {
         container.resolve(MainViewController.self)!
+    }
+    
+    func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator {
+        return ExploreFlowCoordinator(navigationController: navigationController, dependencies: self.makeExploreSceneDIContainer())
     }
 }

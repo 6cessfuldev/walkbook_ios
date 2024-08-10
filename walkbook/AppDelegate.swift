@@ -10,6 +10,7 @@ import FirebaseCore
 import GoogleSignIn
 import RxKakaoSDKCommon
 import NaverThirdPartyLogin
+import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +38,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FirebaseApp.configure()
+        
+        if let gcpApiKey = Bundle.main.object(forInfoDictionaryKey: "GCPApiKey") as? String {
+            GMSServices.provideAPIKey(gcpApiKey)
+        }
+        
+        if #available(iOS 15, *) {
+            let appearance = UITabBarAppearance()
+            let tabBar = UITabBar()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.background
+            tabBar.standardAppearance = appearance;
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
         return true
     }
     
