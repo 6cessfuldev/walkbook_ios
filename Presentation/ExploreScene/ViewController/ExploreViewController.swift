@@ -13,6 +13,13 @@ class ExploreViewController: UIViewController {
         return label
     }()
     
+    let contentButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("content", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let logoutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Logout", for: .normal)
@@ -36,21 +43,31 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .blue
+        
         view.addSubview(idLabel)
+        view.addSubview(contentButton)
         view.addSubview(logoutButton)
         
         NSLayoutConstraint.activate([
             idLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             idLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            contentButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentButton.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20),
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoutButton.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 20)
+            logoutButton.topAnchor.constraint(equalTo: contentButton.bottomAnchor, constant: 20)
         ])
         
         viewModel.userEmail
             .asObservable()
             .map { $0 ?? "No email" }
             .bind(to: idLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        contentButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator.showContentInfo()
+            })
             .disposed(by: disposeBag)
         
         logoutButton.rx.tap

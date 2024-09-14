@@ -2,6 +2,8 @@ import UIKit
 
 protocol ExploreFlowCoordinatorDependencies {
     func makeExploreViewController() -> ExploreViewController
+    func makeContentInfoViewController() -> ContentInfoViewController
+    func makeContentMainViewController() -> ContentMainViewController
 }
 
 protocol ExploreFlowCoordinatorDelegate {
@@ -25,7 +27,20 @@ class ExploreFlowCoordinator: Coordinator {
         navigationController.setViewControllers([ExploreVC], animated: true)
     }
     
+    func showContentInfo() {
+        let contentInfoVC = dependencies.makeContentInfoViewController()
+        contentInfoVC.coordinator = self
+        navigationController.pushViewController(contentInfoVC, animated: true)
+    }
+    
+    func showContentMain() {
+        let contentMainVC = dependencies.makeContentMainViewController()
+        navigationController.pushViewController(contentMainVC, animated: true)
+    }
+    
     func didLogout() {
         self.delegate.didLogout()
     }
+    
+    
 }

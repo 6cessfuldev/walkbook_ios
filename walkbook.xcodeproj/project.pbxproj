@@ -24,6 +24,11 @@
 		9D35C5C32C3ECB17004586C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */; };
 		9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5CE2C3FCE62004586C2 /* .gitignore */; };
 		9D4714502C4FE99C00129134 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D47144F2C4FE99C00129134 /* GoogleService-Info.plist */; };
+		9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteViewController.swift */; };
+		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
+		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
+		9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */; };
+		9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */; };
 		9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */; };
 		9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */; };
 		9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */; };
@@ -108,6 +113,11 @@
 		9D35C5C42C3ECB17004586C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D35C5CE2C3FCE62004586C2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9D47144F2C4FE99C00129134 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D7EB4262C7E1CCA0060B56B /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
+		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
+		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInfoViewController.swift; sourceTree = "<group>"; };
+		9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMainViewController.swift; sourceTree = "<group>"; };
 		9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLoginView.swift; sourceTree = "<group>"; };
 		9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVCUITest.swift; sourceTree = "<group>"; };
 		9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneUITest.swift; sourceTree = "<group>"; };
@@ -268,6 +278,10 @@
 		9D20C5762C4205B6008AB5EE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9D7EB4302C7E93710060B56B /* ContentScene */,
+				9D7EB42C2C7E1E930060B56B /* ProfileScene */,
+				9D7EB4282C7E1DD20060B56B /* SubscribeScene */,
+				9D7EB4242C7E1C9A0060B56B /* WriteScene */,
 				9D0085AD2C626FCD00EE241B /* ExploreScene */,
 				9D0085A92C626EA600EE241B /* MainMapScene */,
 				9DCBE4F72C58E8B900BDB378 /* MainScene */,
@@ -444,6 +458,71 @@
 				9D47144F2C4FE99C00129134 /* GoogleService-Info.plist */,
 			);
 			path = walkbook;
+			sourceTree = "<group>";
+		};
+		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB4252C7E1CA80060B56B /* ViewControllers */,
+			);
+			path = WriteScene;
+			sourceTree = "<group>";
+		};
+		9D7EB4252C7E1CA80060B56B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB4262C7E1CCA0060B56B /* WriteViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D7EB4282C7E1DD20060B56B /* SubscribeScene */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB4292C7E1DFC0060B56B /* ViewControllers */,
+			);
+			path = SubscribeScene;
+			sourceTree = "<group>";
+		};
+		9D7EB4292C7E1DFC0060B56B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D7EB42C2C7E1E930060B56B /* ProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB42D2C7E1EDE0060B56B /* ViewControllers */,
+			);
+			path = ProfileScene;
+			sourceTree = "<group>";
+		};
+		9D7EB42D2C7E1EDE0060B56B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D7EB4302C7E93710060B56B /* ContentScene */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB4312C7E93960060B56B /* ViewControllers */,
+			);
+			path = ContentScene;
+			sourceTree = "<group>";
+		};
+		9D7EB4312C7E93960060B56B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */,
+				9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		9D9DBC1D2C44168000127B06 /* SocialLoginButton */ = {
@@ -1007,6 +1086,7 @@
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
+				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
 				9D0085AC2C626ED900EE241B /* MainMapViewController.swift in Sources */,
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
@@ -1018,8 +1098,11 @@
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
+				9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */,
+				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
+				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
 				9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */,
 				9DE498A22C5612AA004F1A20 /* AppleSignRemoteDataSource.swift in Sources */,
@@ -1031,6 +1114,7 @@
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
 				9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */,
+				9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */,
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,

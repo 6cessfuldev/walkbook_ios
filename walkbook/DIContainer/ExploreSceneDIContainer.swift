@@ -21,4 +21,12 @@ class ExploreSceneDIContainer: ExploreFlowCoordinatorDependencies {
     func makeExploreViewController() -> ExploreViewController {
         ExploreViewController(viewModel: dependencies.authenticationViewModel)
     }
+    
+    func makeContentInfoViewController() -> ContentInfoViewController {
+        ContentInfoViewController()
+    }
+    
+    func makeContentMainViewController() -> ContentMainViewController {
+        ContentMainViewController()
+    }
 }
