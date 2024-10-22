@@ -58,6 +58,8 @@ class ExploreViewController: UIViewController {
             logoutButton.topAnchor.constraint(equalTo: contentButton.bottomAnchor, constant: 20)
         ])
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         viewModel.userEmail
             .asObservable()
             .map { $0 ?? "No email" }
