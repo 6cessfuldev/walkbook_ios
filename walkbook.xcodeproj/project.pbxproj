@@ -41,6 +41,7 @@
 		9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */; };
 		9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */; };
 		9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */; };
+		9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */; };
 		9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */; };
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
 		9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */; };
@@ -130,6 +131,7 @@
 		9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInButton.swift; sourceTree = "<group>"; };
 		9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
+		9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ColorInit.swift"; sourceTree = "<group>"; };
 		9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
 		9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInUseCase.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				9D9DBC282C442CE600127B06 /* UIImage+Resize.swift */,
 				9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */,
 				9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */,
+				9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1096,6 +1099,7 @@
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
+				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */,
