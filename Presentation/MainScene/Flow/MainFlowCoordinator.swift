@@ -10,7 +10,7 @@ protocol MainFlowCoordinatorDelegate {
     func didLogout(coordinator: MainFlowCoordinator)
 }
 
-class MainFlowCoordinator: Coordinator, ExploreFlowCoordinatorDelegate {
+class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate, UITabBarControllerDelegate {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var delegate: MainFlowCoordinatorDelegate!
@@ -31,13 +31,16 @@ class MainFlowCoordinator: Coordinator, ExploreFlowCoordinatorDelegate {
         let exploreCoordinator = makeExploreFlowCoordinator(navigationController: secondNav)
         exploreVC.coordinator = exploreCoordinator
         exploreCoordinator.delegate = self
-//        exploreCoordinator.start()ci
+        
         secondNav.viewControllers = [exploreVC]
         secondNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
-        let thirdNav = UINavigationController()
-        thirdNav.viewControllers = [WriteViewController()]
-        thirdNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
+//        let thirdNav = UINavigationController()
+//        thirdNav.viewControllers = [WriteViewController()]
+//        thirdNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
+        
+        let placeholderVC = UIViewController()
+        placeholderVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
         
         let forthNav = UINavigationController()
         forthNav.viewControllers = [SubscribeViewController()]
@@ -48,7 +51,8 @@ class MainFlowCoordinator: Coordinator, ExploreFlowCoordinatorDelegate {
         fifthNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 4)
         
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([firstNav, secondNav, thirdNav, forthNav, fifthNav], animated: true)
+        tabBarController.setViewControllers([firstNav, secondNav, placeholderVC, forthNav, fifthNav], animated: true)
+        tabBarController.delegate = self
         
         childCoordinators.append(exploreCoordinator)
         navigationController.setViewControllers([tabBarController], animated: true)
@@ -64,5 +68,29 @@ class MainFlowCoordinator: Coordinator, ExploreFlowCoordinatorDelegate {
     
     func didLogout() {
         delegate.didLogout(coordinator: self)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = tabBarController.viewControllers?.firstIndex(of: viewController)
+        
+        if index == 2 {
+            showBottomModal()
+            return false
+        }
+        
+        return true
+    }
+    
+    private func showBottomModal() {
+        let writeViewController = WriteViewController()
+        writeViewController.modalPresentationStyle = .pageSheet
+        if let sheet = writeViewController.sheetPresentationController {
+            sheet.detents = [
+                        .custom(identifier: .init("smallHeight")) { context in
+                            return 200
+                        }
+                    ]
+        }
+        navigationController.present(writeViewController, animated: true, completion: nil)
     }
 }
