@@ -42,6 +42,8 @@
 		9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */; };
 		9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */; };
 		9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */; };
+		9D9F83712CC7D4C7003E3A2C /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F83702CC7D4C7003E3A2C /* CarouselFlowLayout.swift */; };
+		9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F83742CC7D536003E3A2C /* Carousell.swift */; };
 		9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */; };
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
 		9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */; };
@@ -132,6 +134,8 @@
 		9D9DBC2E2C4BE88100127B06 /* NaverSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInButton.swift; sourceTree = "<group>"; };
 		9D9DBC302C4BEB8C00127B06 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ColorInit.swift"; sourceTree = "<group>"; };
+		9D9F83702CC7D4C7003E3A2C /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
+		9D9F83742CC7D536003E3A2C /* Carousell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousell.swift; sourceTree = "<group>"; };
 		9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
 		9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInUseCase.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 		9D0085AD2C626FCD00EE241B /* ExploreScene */ = {
 			isa = PBXGroup;
 			children = (
+				9D9F836F2CC7D4AB003E3A2C /* View */,
 				9D0085B22C62710200EE241B /* Flow */,
 				9D0085AE2C62701800EE241B /* ViewController */,
 			);
@@ -563,6 +568,15 @@
 				9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9D9F836F2CC7D4AB003E3A2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D9F83702CC7D4C7003E3A2C /* CarouselFlowLayout.swift */,
+				9D9F83742CC7D536003E3A2C /* Carousell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9DCBE4F72C58E8B900BDB378 /* MainScene */ = {
@@ -1105,6 +1119,7 @@
 				9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
+				9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */,
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
 				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
@@ -1115,6 +1130,7 @@
 				9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */,
 				9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */,
 				9D9DBC2F2C4BE88100127B06 /* NaverSignInButton.swift in Sources */,
+				9D9F83712CC7D4C7003E3A2C /* CarouselFlowLayout.swift in Sources */,
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
 				9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */,
