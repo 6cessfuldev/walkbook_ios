@@ -13,6 +13,8 @@
 		9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B02C62703B00EE241B /* ExploreViewController.swift */; };
 		9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B32C62712300EE241B /* ExploreFlowCoordinator.swift */; };
 		9D0085B62C627C7B00EE241B /* ExploreSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B52C627C7B00EE241B /* ExploreSceneDIContainer.swift */; };
+		9D04A9282CF695460046AB88 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A9272CF695460046AB88 /* CardView.swift */; };
+		9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A92A2CF697230046AB88 /* CardCell.swift */; };
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
 		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
@@ -101,6 +103,8 @@
 		9D0085B02C62703B00EE241B /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		9D0085B32C62712300EE241B /* ExploreFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreFlowCoordinator.swift; sourceTree = "<group>"; };
 		9D0085B52C627C7B00EE241B /* ExploreSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSceneDIContainer.swift; sourceTree = "<group>"; };
+		9D04A9272CF695460046AB88 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		9D04A92A2CF697230046AB88 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		9D20C5562C40CFE6008AB5EE /* walkbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5632C40CFEF008AB5EE /* walkbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -239,6 +243,22 @@
 			path = Flow;
 			sourceTree = "<group>";
 		};
+		9D04A9262CF6952F0046AB88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D04A9272CF695460046AB88 /* CardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9D04A9292CF6970F0046AB88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D04A92A2CF697230046AB88 /* CardCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9D20C5572C40CFE6008AB5EE /* walkbookTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +305,7 @@
 		9D20C5762C4205B6008AB5EE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9D04A9262CF6952F0046AB88 /* Views */,
 				9D7EB4302C7E93710060B56B /* ContentScene */,
 				9D7EB42C2C7E1E930060B56B /* ProfileScene */,
 				9D7EB4282C7E1DD20060B56B /* SubscribeScene */,
@@ -486,6 +507,7 @@
 		9D7EB4282C7E1DD20060B56B /* SubscribeScene */ = {
 			isa = PBXGroup;
 			children = (
+				9D04A9292CF6970F0046AB88 /* Views */,
 				9D7EB4292C7E1DFC0060B56B /* ViewControllers */,
 			);
 			path = SubscribeScene;
@@ -1112,9 +1134,11 @@
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,
+				9D04A9282CF695460046AB88 /* CardView.swift in Sources */,
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
+				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
