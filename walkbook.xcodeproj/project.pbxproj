@@ -16,6 +16,7 @@
 		9D04A9282CF695460046AB88 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A9272CF695460046AB88 /* CardView.swift */; };
 		9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A92A2CF697230046AB88 /* CardCell.swift */; };
 		9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A92C2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift */; };
+		9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A9312CFA45500046AB88 /* ProfileCardView.swift */; };
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
 		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
@@ -107,6 +108,7 @@
 		9D04A9272CF695460046AB88 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9D04A92A2CF697230046AB88 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		9D04A92C2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+configureNavigationBar.swift"; sourceTree = "<group>"; };
+		9D04A9312CFA45500046AB88 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		9D20C5562C40CFE6008AB5EE /* walkbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5632C40CFEF008AB5EE /* walkbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -257,6 +259,14 @@
 			isa = PBXGroup;
 			children = (
 				9D04A92A2CF697230046AB88 /* CardCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9D04A92E2CFA42FA0046AB88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D04A9312CFA45500046AB88 /* ProfileCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -527,6 +537,7 @@
 		9D7EB42C2C7E1E930060B56B /* ProfileScene */ = {
 			isa = PBXGroup;
 			children = (
+				9D04A92E2CFA42FA0046AB88 /* Views */,
 				9D7EB42D2C7E1EDE0060B56B /* ViewControllers */,
 			);
 			path = ProfileScene;
@@ -1149,6 +1160,7 @@
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
 				9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */,
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
+				9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */,
 				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
 				9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */,

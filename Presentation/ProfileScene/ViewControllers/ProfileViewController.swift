@@ -1,31 +1,31 @@
-//
-//  ProfileViewController.swift
-//  walkbook
-//
-//  Created by 육성민 on 8/27/24.
-//
-
 import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let pageLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Profile Page"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    let profileView = ProfileCardView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-        view.addSubview(pageLabel)
+        view.backgroundColor = .background
+        configureCustomNavigationBar()
+        
+        setupProfileView()
+        
+    }
+    
+    private func setupProfileView() {
+        profileView.configure(image: UIImage(named: "sample1"), name: "유저 이름")
+        view.addSubview(profileView)
+        profileView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            pageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+                    profileView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                    profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                    profileView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10),
+                    profileView.heightAnchor.constraint(equalToConstant: 200)
+                ])
+        
     }
 
 }
