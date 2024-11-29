@@ -29,6 +29,8 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
 
         view.backgroundColor = .background
         
+        configureCustomNavigationBar()
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
