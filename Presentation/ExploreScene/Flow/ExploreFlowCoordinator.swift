@@ -6,7 +6,7 @@ protocol ExploreFlowCoordinatorDependencies {
     func makeContentMainViewController() -> ContentMainViewController
 }
 
-protocol ExploreFlowCoordinatorDelegate {
+protocol ExploreFlowCoordinatorDelegate: AnyObject {
     func didLogout()
 }
 
@@ -14,7 +14,7 @@ class ExploreFlowCoordinator: ContentConsumableCoordinator {
     var childCoordinators: [Coordinator] = []
     weak var mainAppFlowCoordinator: MainFlowCoordinator?
     var navigationController: UINavigationController
-    weak var delegate: ExploreFlowCoordinatorDelegate!
+    weak var delegate: ExploreFlowCoordinatorDelegate?
     private let dependencies: ExploreFlowCoordinatorDependencies
     
     init(navigationController: UINavigationController,dependencies: ExploreFlowCoordinatorDependencies) {
@@ -39,6 +39,6 @@ class ExploreFlowCoordinator: ContentConsumableCoordinator {
     }
     
     func didLogout() {
-        self.delegate.didLogout()
+        delegate?.didLogout()
     }
 }

@@ -7,14 +7,14 @@ protocol MainFlowCoordinatorDependencies {
     func makeContentMainViewController() -> ContentMainViewController
 }
 
-protocol MainFlowCoordinatorDelegate {
+protocol MainFlowCoordinatorDelegate: AnyObject {
     func didLogout(coordinator: MainFlowCoordinator)
 }
 
 class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate, UITabBarControllerDelegate {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-    var delegate: MainFlowCoordinatorDelegate!
+    weak var delegate: MainFlowCoordinatorDelegate?
     private let dependencies: MainFlowCoordinatorDependencies
     
     init(navigationController: UINavigationController,dependencies: MainFlowCoordinatorDependencies) {
@@ -70,7 +70,7 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
     }
     
     func didLogout() {
-        delegate.didLogout(coordinator: self)
+        delegate?.didLogout(coordinator: self)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
