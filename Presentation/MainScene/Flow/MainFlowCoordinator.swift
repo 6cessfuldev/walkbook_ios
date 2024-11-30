@@ -100,7 +100,16 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
     func showContentMain() {
         let contentMainVC = dependencies.makeContentMainViewController()
         navigationController.navigationBar.isHidden = false
+        navigationController.setNavigationBarHidden(false, animated: false)
         navigationController.pushViewController(contentMainVC, animated: true)
+        navigationController.delegate = self
     }
-    
+}
+
+extension MainFlowCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        if !(navigationController.viewControllers.contains { $0 is ContentMainViewController }) {
+            navigationController.setNavigationBarHidden(true, animated: false)
+        }
+    }
 }
