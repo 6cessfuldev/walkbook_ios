@@ -2,6 +2,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    weak var coordinator: ProfileFowCoordinator!
+    
     let profileView = ProfileCardView()
     
     private let sectionTitleLabel: UILabel = {

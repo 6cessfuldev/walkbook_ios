@@ -15,6 +15,10 @@ protocol Coordinator: AnyObject {
     func start ()
 }
 
+protocol ContentConsumableCoordinator: Coordinator {
+    func showContentMain ()
+}
+
 final class AppFlowCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController

@@ -10,7 +10,7 @@ import RxSwift
 
 class ContentInfoViewController: UIViewController {
     
-    weak var coordinator: ExploreFlowCoordinator!
+    weak var coordinator: ContentConsumableCoordinator!
     let disposeBag = DisposeBag()
     
     let pageLabel: UILabel = {

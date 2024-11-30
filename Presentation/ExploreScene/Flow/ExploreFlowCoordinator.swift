@@ -10,10 +10,11 @@ protocol ExploreFlowCoordinatorDelegate {
     func didLogout()
 }
 
-class ExploreFlowCoordinator: Coordinator {
+class ExploreFlowCoordinator: ContentConsumableCoordinator {
     var childCoordinators: [Coordinator] = []
+    weak var mainAppFlowCoordinator: MainFlowCoordinator?
     var navigationController: UINavigationController
-    var delegate: ExploreFlowCoordinatorDelegate!
+    weak var delegate: ExploreFlowCoordinatorDelegate!
     private let dependencies: ExploreFlowCoordinatorDependencies
     
     init(navigationController: UINavigationController,dependencies: ExploreFlowCoordinatorDependencies) {
@@ -34,13 +35,10 @@ class ExploreFlowCoordinator: Coordinator {
     }
     
     func showContentMain() {
-        let contentMainVC = dependencies.makeContentMainViewController()
-        navigationController.pushViewController(contentMainVC, animated: true)
+        mainAppFlowCoordinator?.showContentMain()
     }
     
     func didLogout() {
         self.delegate.didLogout()
     }
-    
-    
 }

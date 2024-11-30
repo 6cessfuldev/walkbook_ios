@@ -4,6 +4,7 @@ protocol MainFlowCoordinatorDependencies {
     func makeMainViewController() -> MainViewController
     func makeExploreViewController() -> ExploreViewController
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator
+    func makeContentMainViewController() -> ContentMainViewController
 }
 
 protocol MainFlowCoordinatorDelegate {
@@ -29,8 +30,10 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
         let secondNav = UINavigationController()
         let exploreVC = makeExploreViewController()
         let exploreCoordinator = makeExploreFlowCoordinator(navigationController: secondNav)
-        exploreVC.coordinator = exploreCoordinator
         exploreCoordinator.delegate = self
+        exploreCoordinator.mainAppFlowCoordinator = self
+        exploreVC.coordinator = exploreCoordinator
+        
         
         secondNav.viewControllers = [exploreVC]
         secondNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "magnifyingglass"), tag: 1)
@@ -93,4 +96,11 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
         }
         navigationController.present(writeViewController, animated: true, completion: nil)
     }
+    
+    func showContentMain() {
+        let contentMainVC = dependencies.makeContentMainViewController()
+        navigationController.navigationBar.isHidden = false
+        navigationController.pushViewController(contentMainVC, animated: true)
+    }
+    
 }
