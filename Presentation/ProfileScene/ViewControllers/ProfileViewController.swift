@@ -4,6 +4,16 @@ class ProfileViewController: UIViewController {
     
     let profileView = ProfileCardView()
     
+    private let sectionTitleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "기록"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -28,6 +38,8 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .background
         configureCustomNavigationBar()
         
+        view.addSubview(sectionTitleLabel)
+        
         setupProfileView()
         setupCollectionView()
         
@@ -51,7 +63,11 @@ class ProfileViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 16),
+            sectionTitleLabel.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 16),
+            sectionTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            sectionTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            sectionTitleLabel.heightAnchor.constraint(equalToConstant: 20),
+            collectionView.topAnchor.constraint(equalTo: sectionTitleLabel.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionView.heightAnchor.constraint(equalToConstant: 200)
