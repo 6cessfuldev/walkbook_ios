@@ -20,12 +20,12 @@ class ProfileViewController: UIViewController {
         profileView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-                    profileView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                    profileView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10),
-                    profileView.heightAnchor.constraint(equalToConstant: 200)
-                ])
-        
+            profileView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10),
+            profileView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+    
     }
 
 }
