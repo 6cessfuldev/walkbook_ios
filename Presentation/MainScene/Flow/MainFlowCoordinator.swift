@@ -98,17 +98,7 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     func showContentMain() {
         let contentMainVC = dependencies.makeContentMainViewController()
         self.navigationController.navigationBar.isHidden = false
-        self.navigationController.setNavigationBarHidden(false, animated: false)
         self.navigationController.pushViewController(contentMainVC, animated: true)
-        self.navigationController.delegate = self
-    }
-}
-
-extension MainFlowCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        if !(navigationController.viewControllers.contains { $0 is ContentMainViewController }) {
-            self.navigationController.setNavigationBarHidden(true, animated: false)
-        }
     }
 }
 
