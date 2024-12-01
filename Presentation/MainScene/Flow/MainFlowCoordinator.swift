@@ -3,8 +3,9 @@ import UIKit
 protocol MainFlowCoordinatorDependencies {
     func makeMainViewController() -> MainViewController
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator
-    func makeContentMainViewController() -> ContentMainViewController
+    func makeSubscribeFlowCoordinator(navigationController: UINavigationController) -> SubscribeFlowCoordinator
     func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator
+    func makeContentMainViewController() -> ContentMainViewController
 }
 
 protocol MainFlowCoordinatorDelegate: AnyObject {
@@ -41,8 +42,13 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         placeholderVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
         
         let forthNav = UINavigationController()
-        forthNav.viewControllers = [SubscribeViewController()]
+        let subscribeCoordinator = self.dependencies.makeSubscribeFlowCoordinator(navigationController: forthNav)
+        subscribeCoordinator.delegate = self
+        subscribeCoordinator.mainAppFlowCoordinator = self
+        subscribeCoordinator.start()
         forthNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "archivebox"), tag: 3)
+        
+        self.childCoordinators.append(subscribeCoordinator)
         
         let fifthNav = UINavigationController()
         let profileCoordinator = self.dependencies.makeProfileFlowCoordinator(navigationController: fifthNav)
@@ -110,5 +116,9 @@ extension MainFlowCoordinator: ExploreFlowCoordinatorDelegate {
 }
 
 extension MainFlowCoordinator: ProfileFlowCoordinatorDelegate {
+    
+}
+
+extension MainFlowCoordinator: SubscribeFlowCoordinatorDelegate {
     
 }

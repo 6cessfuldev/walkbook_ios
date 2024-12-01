@@ -53,6 +53,10 @@ class AppDIContainer {
             return ExploreViewController(viewModel: authenticationViewModel)
         }
         
+        container.register(SubscribeViewController.self) { r in
+            return SubscribeViewController()
+        }
+        
         container.register(ProfileViewController.self) { r in
             return ProfileViewController()
         }
@@ -134,16 +138,16 @@ extension AppDIContainer {
 //MARK: - MainFlowCoordinatorDependencies
 
 extension AppDIContainer: MainFlowCoordinatorDependencies {
-    func makeExploreViewController() -> ExploreViewController {
-        return container.resolve(ExploreViewController.self)!
-    }
-    
     func makeMainViewController() -> MainViewController {
         return container.resolve(MainViewController.self)!
     }
     
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator {
         return ExploreFlowCoordinator(navigationController: navigationController, dependencies: self)
+    }
+    
+    func makeSubscribeFlowCoordinator(navigationController: UINavigationController) -> SubscribeFlowCoordinator {
+        return SubscribeFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
     
     func makeProfileViewController() -> ProfileViewController {
@@ -167,6 +171,10 @@ extension AppDIContainer: ExploreFlowCoordinatorDependencies {
     func makeContentInfoViewController() -> ContentInfoViewController {
         return container.resolve(ContentInfoViewController.self)!
     }
+    
+    func makeExploreViewController() -> ExploreViewController {
+        return container.resolve(ExploreViewController.self)!
+    }
 }
 
 //MARK: - ProfileFlowCoordinatorDependencies
@@ -175,3 +183,12 @@ extension AppDIContainer: ProfileFlowCoordinatorDependencies {
     
 }
 
+//MARK: - SubscribeFlowCoordinatorDependencies
+
+extension AppDIContainer: SubscribeFlowCoordinatorDependencies {
+    func makeSubscribeViewController() -> SubscribeViewController {
+        return container.resolve(SubscribeViewController.self)!
+    }
+    
+    
+}

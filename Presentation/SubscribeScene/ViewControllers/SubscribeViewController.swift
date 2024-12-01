@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SubscribeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    weak var coordinator: SubscribeFlowCoordinator!
+    let disposeBag = DisposeBag()
     
     private let tableView = UITableView()
     
@@ -31,22 +36,8 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
         
         configureCustomNavigationBar()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .background
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 400
-        
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        setupTableView()
+        bindCollectionView()
     }
     
     // MARK: - UITableViewDataSource
@@ -66,6 +57,37 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
+    }
+    
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .background
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 400
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func bindCollectionView() {
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                let selectedItem = self.cardData[indexPath.row]
+                print("Selected item: \(selectedItem.1)") // Debug log
+                
+                self.coordinator.showContentMain()
+            })
+            .disposed(by: self.disposeBag)
     }
 
 }

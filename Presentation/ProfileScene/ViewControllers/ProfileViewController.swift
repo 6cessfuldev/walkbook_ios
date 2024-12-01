@@ -48,6 +48,8 @@ class ProfileViewController: UIViewController {
         setupProfileView()
         setupCollectionView()
         
+        bindCollectionView()
+        
     }
     
     private func setupProfileView() {
