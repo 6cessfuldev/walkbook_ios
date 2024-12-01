@@ -3,7 +3,6 @@ import UIKit
 protocol ExploreFlowCoordinatorDependencies {
     func makeExploreViewController() -> ExploreViewController
     func makeContentInfoViewController() -> ContentInfoViewController
-    func makeContentMainViewController() -> ContentMainViewController
 }
 
 protocol ExploreFlowCoordinatorDelegate: AnyObject {

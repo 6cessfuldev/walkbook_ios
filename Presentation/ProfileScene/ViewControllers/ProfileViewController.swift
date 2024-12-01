@@ -1,8 +1,11 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfileViewController: UIViewController {
     
-    weak var coordinator: ProfileFowCoordinator!
+    weak var coordinator: ProfileFlowCoordinator!
+    let disposeBag = DisposeBag()
     
     let profileView = ProfileCardView()
     
@@ -78,6 +81,18 @@ class ProfileViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ThumbnailCardCell.self, forCellWithReuseIdentifier: ThumbnailCardCell.identifier)
+    }
+    
+    private func bindCollectionView() {
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                let selectedItem = self.data[indexPath.row]
+                print("Selected item: \(selectedItem.1)") // Debug log
+                
+                self.coordinator.showContentMain()
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 

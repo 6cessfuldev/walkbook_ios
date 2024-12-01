@@ -2,15 +2,15 @@ import UIKit
 
 protocol ProfileFlowCoordinatorDependencies {
     func makeProfileViewController() -> ProfileViewController
-    func makeContentInfoViewController() -> ContentInfoViewController
 }
 
 protocol ProfileFlowCoordinatorDelegate {
     func didLogout()
 }
 
-class ProfileFowCoordinator: ContentConsumableCoordinator {
+class ProfileFlowCoordinator: ContentConsumableCoordinator {
     var childCoordinators: [Coordinator] = []
+    weak var mainAppFlowCoordinator: MainFlowCoordinator?
     var navigationController: UINavigationController
     var delegate: ProfileFlowCoordinatorDelegate!
     private let dependencies: ProfileFlowCoordinatorDependencies
@@ -23,16 +23,11 @@ class ProfileFowCoordinator: ContentConsumableCoordinator {
     func start() {
         let profileVC = dependencies.makeProfileViewController()
         profileVC.coordinator = self
-        navigationController.setViewControllers([profileVC], animated: true)
-    }
-    
-    func showContentInfo() {
-        let contentInfoVC = dependencies.makeContentInfoViewController()
-        contentInfoVC.coordinator = self
-        navigationController.pushViewController(contentInfoVC, animated: true)
+        self.navigationController.setViewControllers([profileVC], animated: true)
     }
     
     func showContentMain() {
+        self.mainAppFlowCoordinator?.showContentMain()
     }
     
     func didLogout() {

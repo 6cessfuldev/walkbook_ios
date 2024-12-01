@@ -12,14 +12,12 @@
 		9D0085AC2C626ED900EE241B /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085AB2C626ED900EE241B /* MainMapViewController.swift */; };
 		9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B02C62703B00EE241B /* ExploreViewController.swift */; };
 		9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B32C62712300EE241B /* ExploreFlowCoordinator.swift */; };
-		9D0085B62C627C7B00EE241B /* ExploreSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0085B52C627C7B00EE241B /* ExploreSceneDIContainer.swift */; };
 		9D04A9282CF695460046AB88 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A9272CF695460046AB88 /* CardView.swift */; };
 		9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A92A2CF697230046AB88 /* CardCell.swift */; };
 		9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A92C2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift */; };
 		9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D04A9312CFA45500046AB88 /* ProfileCardView.swift */; };
 		9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D473B2CFB1A420040BA81 /* ThumbnailCardCell.swift */; };
 		9D0D47452CFB3DA30040BA81 /* ProfileFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47442CFB3DA30040BA81 /* ProfileFlowCoordinator.swift */; };
-		9D0D47472CFB47A90040BA81 /* ProfileSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47462CFB47A90040BA81 /* ProfileSceneDIContainer.swift */; };
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
 		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
@@ -107,14 +105,12 @@
 		9D0085AB2C626ED900EE241B /* MainMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
 		9D0085B02C62703B00EE241B /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		9D0085B32C62712300EE241B /* ExploreFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreFlowCoordinator.swift; sourceTree = "<group>"; };
-		9D0085B52C627C7B00EE241B /* ExploreSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSceneDIContainer.swift; sourceTree = "<group>"; };
 		9D04A9272CF695460046AB88 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		9D04A92A2CF697230046AB88 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		9D04A92C2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+configureNavigationBar.swift"; sourceTree = "<group>"; };
 		9D04A9312CFA45500046AB88 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		9D0D473B2CFB1A420040BA81 /* ThumbnailCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCardCell.swift; sourceTree = "<group>"; };
 		9D0D47442CFB3DA30040BA81 /* ProfileFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFlowCoordinator.swift; sourceTree = "<group>"; };
-		9D0D47462CFB47A90040BA81 /* ProfileSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneDIContainer.swift; sourceTree = "<group>"; };
 		9D20C5562C40CFE6008AB5EE /* walkbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5632C40CFEF008AB5EE /* walkbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -451,8 +447,6 @@
 			children = (
 				9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */,
 				9D20C5842C424F64008AB5EE /* AppDIContainer.swift */,
-				9D0085B52C627C7B00EE241B /* ExploreSceneDIContainer.swift */,
-				9D0D47462CFB47A90040BA81 /* ProfileSceneDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1152,7 +1146,6 @@
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
-				9D0085B62C627C7B00EE241B /* ExploreSceneDIContainer.swift in Sources */,
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
@@ -1170,7 +1163,6 @@
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
-				9D0D47472CFB47A90040BA81 /* ProfileSceneDIContainer.swift in Sources */,
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,

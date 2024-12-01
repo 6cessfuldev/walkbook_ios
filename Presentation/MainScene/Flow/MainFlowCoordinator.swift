@@ -2,16 +2,16 @@ import UIKit
 
 protocol MainFlowCoordinatorDependencies {
     func makeMainViewController() -> MainViewController
-    func makeExploreViewController() -> ExploreViewController
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator
     func makeContentMainViewController() -> ContentMainViewController
+    func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator
 }
 
 protocol MainFlowCoordinatorDelegate: AnyObject {
     func didLogout(coordinator: MainFlowCoordinator)
 }
 
-class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate, UITabBarControllerDelegate {
+class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     weak var delegate: MainFlowCoordinatorDelegate?
@@ -27,20 +27,15 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
         firstNav.viewControllers = [MainMapViewController()]
         firstNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "map.fill"), tag: 0)
         
+        // SecondTab
         let secondNav = UINavigationController()
-        let exploreVC = makeExploreViewController()
-        let exploreCoordinator = makeExploreFlowCoordinator(navigationController: secondNav)
+        let exploreCoordinator = self.dependencies.makeExploreFlowCoordinator(navigationController: secondNav)
         exploreCoordinator.delegate = self
         exploreCoordinator.mainAppFlowCoordinator = self
-        exploreVC.coordinator = exploreCoordinator
-        
-        
-        secondNav.viewControllers = [exploreVC]
+        exploreCoordinator.start()
         secondNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
-//        let thirdNav = UINavigationController()
-//        thirdNav.viewControllers = [WriteViewController()]
-//        thirdNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
+        self.childCoordinators.append(exploreCoordinator)
         
         let placeholderVC = UIViewController()
         placeholderVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.app"), tag: 2)
@@ -50,27 +45,24 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
         forthNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "archivebox"), tag: 3)
         
         let fifthNav = UINavigationController()
-        fifthNav.viewControllers = [ProfileViewController()]
+        let profileCoordinator = self.dependencies.makeProfileFlowCoordinator(navigationController: fifthNav)
+        profileCoordinator.delegate = self
+        profileCoordinator.mainAppFlowCoordinator = self
+        profileCoordinator.start()
         fifthNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 4)
+                
+        self.childCoordinators.append(profileCoordinator)
         
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([firstNav, secondNav, placeholderVC, forthNav, fifthNav], animated: true)
         tabBarController.delegate = self
         
-        childCoordinators.append(exploreCoordinator)
-        navigationController.setViewControllers([tabBarController], animated: true)
-    }
-    
-    func makeExploreViewController() -> ExploreViewController {
-        dependencies.makeExploreViewController()
-    }
-    
-    func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator {
-        dependencies.makeExploreFlowCoordinator(navigationController: navigationController)
+        
+        self.navigationController.setViewControllers([tabBarController], animated: true)
     }
     
     func didLogout() {
-        delegate?.didLogout(coordinator: self)
+        self.delegate?.didLogout(coordinator: self)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
@@ -94,22 +86,29 @@ class MainFlowCoordinator: NSObject, Coordinator, ExploreFlowCoordinatorDelegate
                         }
                     ]
         }
-        navigationController.present(writeViewController, animated: true, completion: nil)
+        self.navigationController.present(writeViewController, animated: true, completion: nil)
     }
     
     func showContentMain() {
         let contentMainVC = dependencies.makeContentMainViewController()
-        navigationController.navigationBar.isHidden = false
-        navigationController.setNavigationBarHidden(false, animated: false)
-        navigationController.pushViewController(contentMainVC, animated: true)
-        navigationController.delegate = self
+        self.navigationController.navigationBar.isHidden = false
+        self.navigationController.setNavigationBarHidden(false, animated: false)
+        self.navigationController.pushViewController(contentMainVC, animated: true)
+        self.navigationController.delegate = self
     }
 }
 
 extension MainFlowCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if !(navigationController.viewControllers.contains { $0 is ContentMainViewController }) {
-            navigationController.setNavigationBarHidden(true, animated: false)
+            self.navigationController.setNavigationBarHidden(true, animated: false)
         }
     }
+}
+
+extension MainFlowCoordinator: ExploreFlowCoordinatorDelegate {
+}
+
+extension MainFlowCoordinator: ProfileFlowCoordinatorDelegate {
+    
 }

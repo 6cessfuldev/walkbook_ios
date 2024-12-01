@@ -9,6 +9,7 @@ import Foundation
 import Swinject
 
 class AppDIContainer {
+    
     let container: Container
 
     init() {
@@ -39,8 +40,16 @@ class AppDIContainer {
             return MainViewController(viewModel: viewModel)
         }
         
+        container.register(ContentInfoViewController.self) { r in
+            return ContentInfoViewController()
+        }
+        
         container.register(ContentMainViewController.self) { r in
             return ContentMainViewController()
+        }
+        
+        container.register(ProfileViewController.self) { r in
+            return ProfileViewController()
         }
         
         
@@ -89,15 +98,6 @@ class AppDIContainer {
         container.register(NaverSignRemoteDataSource.self) { _ in NaverSignRemoteDataSourceImpl() }
         container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
     }
-    
-    // MARK: - DIContainers of scenes
-    
-    func makeExploreSceneDIContainer() -> ExploreSceneDIContainer {
-        let authenticationViewModel = container.resolve(AuthenticationViewModel.self)!
-        let dependencies = ExploreSceneDIContainer.Dependencies(
-            authenticationViewModel: authenticationViewModel)
-        return ExploreSceneDIContainer(dependencies: dependencies)
-    }
 }
 
 //MARK: - AuthenticationFlowCoordinator
@@ -126,7 +126,7 @@ extension AppDIContainer {
     }
 }
 
-//MARK: - ExploreFlowCoordinator
+//MARK: - MainFlowCoordinatorDependencies
 
 extension AppDIContainer: MainFlowCoordinatorDependencies {
     func makeExploreViewController() -> ExploreViewController {
@@ -136,10 +136,39 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     }
     
     func makeMainViewController() -> MainViewController {
-        container.resolve(MainViewController.self)!
+        return container.resolve(MainViewController.self)!
     }
     
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator {
-        return ExploreFlowCoordinator(navigationController: navigationController, dependencies: self.makeExploreSceneDIContainer())
+        return ExploreFlowCoordinator(navigationController: navigationController, dependencies: self)
+    }
+    
+    func makeProfileViewController() -> ProfileViewController {
+        return self.container.resolve(ProfileViewController.self)!
+    }
+    
+    func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator {
+        return ProfileFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
 }
+
+//MARK: - ChildCoordinator's dependencies
+
+extension AppDIContainer {
+    
+}
+
+//MARK: - ExploreFlowCoordinatorDependencies
+
+extension AppDIContainer: ExploreFlowCoordinatorDependencies {
+    func makeContentInfoViewController() -> ContentInfoViewController {
+        return container.resolve(ContentInfoViewController.self)!
+    }
+}
+
+//MARK: - ProfileFlowCoordinatorDependencies
+
+extension AppDIContainer: ProfileFlowCoordinatorDependencies {
+    
+}
+
