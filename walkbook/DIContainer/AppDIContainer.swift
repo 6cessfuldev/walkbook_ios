@@ -48,6 +48,11 @@ class AppDIContainer {
             return ContentMainViewController()
         }
         
+        container.register(ExploreViewController.self) { r in
+            let authenticationViewModel = r.resolve(AuthenticationViewModel.self)!
+            return ExploreViewController(viewModel: authenticationViewModel)
+        }
+        
         container.register(ProfileViewController.self) { r in
             return ProfileViewController()
         }
@@ -130,9 +135,7 @@ extension AppDIContainer {
 
 extension AppDIContainer: MainFlowCoordinatorDependencies {
     func makeExploreViewController() -> ExploreViewController {
-        let authenticationViewModel = container.resolve(AuthenticationViewModel.self)!
-        let vc = ExploreViewController(viewModel: authenticationViewModel)
-        return vc
+        return container.resolve(ExploreViewController.self)!
     }
     
     func makeMainViewController() -> MainViewController {
