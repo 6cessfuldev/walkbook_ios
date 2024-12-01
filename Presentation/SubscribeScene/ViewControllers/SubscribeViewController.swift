@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SubscribeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SubscribeViewController: UIViewController {
     
     weak var coordinator: SubscribeFlowCoordinator!
     let disposeBag = DisposeBag()
@@ -40,28 +40,7 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
         bindCollectionView()
     }
     
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.identifier, for: indexPath) as? CardCell else {
-            return UITableViewCell()
-        }
-        let data = cardData[indexPath.row]
-        cell.configure(image: UIImage(named: data.imageName), title: data.title)
-        return cell
-    }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
     func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
         tableView.separatorStyle = .none
         tableView.backgroundColor = .background
@@ -79,6 +58,14 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     private func bindCollectionView() {
+        
+        Observable.just(cardData)
+            .bind(to: tableView.rx.items(cellIdentifier: CardCell.identifier, cellType: CardCell.self)) { _, item, cell in
+                
+                cell.configure(image: UIImage(named: item.imageName), title: item.title)
+            }
+            .disposed(by: disposeBag)
+        
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
@@ -88,6 +75,14 @@ class SubscribeViewController: UIViewController, UITableViewDataSource, UITableV
                 self.coordinator.showContentMain()
             })
             .disposed(by: self.disposeBag)
+        
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
+}
+
+extension SubscribeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200 
+    }
 }
