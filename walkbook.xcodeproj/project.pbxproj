@@ -20,6 +20,7 @@
 		9D0D47452CFB3DA30040BA81 /* ProfileFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47442CFB3DA30040BA81 /* ProfileFlowCoordinator.swift */; };
 		9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47492CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift */; };
 		9D0D474D2CFE1CDE0040BA81 /* ContentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D474C2CFE1CDE0040BA81 /* ContentInfoView.swift */; };
+		9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D474E2D009C3D0040BA81 /* Story.swift */; };
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
 		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
@@ -115,6 +116,7 @@
 		9D0D47442CFB3DA30040BA81 /* ProfileFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFlowCoordinator.swift; sourceTree = "<group>"; };
 		9D0D47492CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFlowCoordinator.swift; sourceTree = "<group>"; };
 		9D0D474C2CFE1CDE0040BA81 /* ContentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInfoView.swift; sourceTree = "<group>"; };
+		9D0D474E2D009C3D0040BA81 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		9D20C5562C40CFE6008AB5EE /* walkbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5632C40CFEF008AB5EE /* walkbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 		9D20C57C2C4206B2008AB5EE /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D474E2D009C3D0040BA81 /* Story.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 			files = (
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
+				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
