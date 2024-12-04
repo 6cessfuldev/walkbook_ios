@@ -1,6 +1,6 @@
 import Foundation
 
-struct Book: Codable {
+struct Story: Codable {
     var title: String
     var author: String
     var imageUrl: String
