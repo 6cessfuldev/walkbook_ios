@@ -21,6 +21,13 @@
 		9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47492CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift */; };
 		9D0D474D2CFE1CDE0040BA81 /* ContentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D474C2CFE1CDE0040BA81 /* ContentInfoView.swift */; };
 		9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D474E2D009C3D0040BA81 /* Story.swift */; };
+		9D0D47532D009FF80040BA81 /* StoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47522D009FF80040BA81 /* StoryUseCase.swift */; };
+		9D0D47552D00A6FA0040BA81 /* StoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */; };
+		9D0D47572D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */; };
+		9D0D475B2D00AC1C0040BA81 /* StoryRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */; };
+		9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D475C2D00AE660040BA81 /* StoryModel.swift */; };
+		9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47612D00B80F0040BA81 /* StoryMapper.swift */; };
+		9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0D47642D00BCA90040BA81 /* Failures.swift */; };
 		9D20C5682C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */; };
 		9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5842C424F64008AB5EE /* AppDIContainer.swift */; };
 		9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D20C5862C425270008AB5EE /* AppFlowCoordinator.swift */; };
@@ -117,6 +124,13 @@
 		9D0D47492CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeFlowCoordinator.swift; sourceTree = "<group>"; };
 		9D0D474C2CFE1CDE0040BA81 /* ContentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInfoView.swift; sourceTree = "<group>"; };
 		9D0D474E2D009C3D0040BA81 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		9D0D47522D009FF80040BA81 /* StoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryUseCase.swift; sourceTree = "<group>"; };
+		9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryRepository.swift; sourceTree = "<group>"; };
+		9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStoryRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryRemoteDataSource.swift; sourceTree = "<group>"; };
+		9D0D475C2D00AE660040BA81 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		9D0D47612D00B80F0040BA81 /* StoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryMapper.swift; sourceTree = "<group>"; };
+		9D0D47642D00BCA90040BA81 /* Failures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Failures.swift; sourceTree = "<group>"; };
 		9D20C5562C40CFE6008AB5EE /* walkbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5632C40CFEF008AB5EE /* walkbookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walkbookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D20C5672C40CFEF008AB5EE /* walkbookUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walkbookUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -304,6 +318,53 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9D0D47502D009F650040BA81 /* SocialSignIn */ = {
+			isa = PBXGroup;
+			children = (
+				9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */,
+				9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */,
+				9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */,
+				9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */,
+			);
+			path = SocialSignIn;
+			sourceTree = "<group>";
+		};
+		9D0D47512D009F9E0040BA81 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				9D0D47522D009FF80040BA81 /* StoryUseCase.swift */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
+		9D0D47582D00AAAC0040BA81 /* SocialSignIn */ = {
+			isa = PBXGroup;
+			children = (
+				9DE498A42C561338004F1A20 /* GoogleSignRemoteDataSource.swift */,
+				9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */,
+				9DE498A62C561498004F1A20 /* KakaoSignRemoteDataSource.swift */,
+				9DE498A82C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift */,
+				9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */,
+			);
+			path = SocialSignIn;
+			sourceTree = "<group>";
+		};
+		9D0D47602D00B8060040BA81 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				9D0D47612D00B80F0040BA81 /* StoryMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		9D0D47632D00BC8A0040BA81 /* Failures */ = {
+			isa = PBXGroup;
+			children = (
+				9D0D47642D00BCA90040BA81 /* Failures.swift */,
+			);
+			path = Failures;
+			sourceTree = "<group>";
+		};
 		9D20C5572C40CFE6008AB5EE /* walkbookTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +400,7 @@
 		9D20C5752C4205AB008AB5EE /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D47602D00B8060040BA81 /* Mappers */,
 				9D20C5822C4207CD008AB5EE /* Repositories */,
 				9D20C5812C4207C4008AB5EE /* Models */,
 				9D20C5802C4207AB008AB5EE /* Network */,
@@ -398,11 +460,9 @@
 		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D47512D009F9E0040BA81 /* Story */,
+				9D0D47502D009F650040BA81 /* SocialSignIn */,
 				9DE4985C2C514562004F1A20 /* Protocol */,
-				9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */,
-				9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */,
-				9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */,
-				9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -441,11 +501,8 @@
 		9D20C5802C4207AB008AB5EE /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9DE498A42C561338004F1A20 /* GoogleSignRemoteDataSource.swift */,
-				9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */,
-				9DE498A62C561498004F1A20 /* KakaoSignRemoteDataSource.swift */,
-				9DE498A82C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift */,
-				9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */,
+				9D0D47582D00AAAC0040BA81 /* SocialSignIn */,
+				9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -453,6 +510,7 @@
 		9D20C5812C4207C4008AB5EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D475C2D00AE660040BA81 /* StoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -461,6 +519,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */,
+				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -719,6 +778,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */,
+				9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -734,6 +794,7 @@
 		9DE4985F2C51484E004F1A20 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9D0D47632D00BC8A0040BA81 /* Failures */,
 				9DE498622C5278F2004F1A20 /* Utils */,
 				9DE498602C51485C004F1A20 /* Cancellable.swift */,
 			);
@@ -1166,11 +1227,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D0D47572D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift in Sources */,
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
+				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
+				9D0D475B2D00AC1C0040BA81 /* StoryRemoteDataSource.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
+				9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
@@ -1189,8 +1254,10 @@
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
+				9D0D47532D009FF80040BA81 /* StoryUseCase.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
+				9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */,
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteViewController.swift in Sources */,
@@ -1218,6 +1285,7 @@
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,
+				9D0D47552D00A6FA0040BA81 /* StoryRepository.swift in Sources */,
 				9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

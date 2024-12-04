@@ -83,6 +83,11 @@ class AppDIContainer {
             return AppleSignInUseCase(repository: repository)
         }
         
+        container.register(StoryUseCaseProtocol.self) { r in
+            let repository = r.resolve(StoryRepository.self)!
+            return DefaultStoryUseCase(repository: repository)
+        }
+        
         // Register Repositories
         container.register(AuthenticationRepository.self) { r in
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
@@ -100,12 +105,20 @@ class AppDIContainer {
             )
         }
         
+        container.register(StoryRepository.self) { r in
+            let storyRemoteDataSource = r.resolve(StoryRemoteDataSource.self)!
+            
+            return DefaultStoryRepositoryImpl(storyRemoteDataSource: storyRemoteDataSource)
+        }
+        
         // Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
         container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
         container.register(NaverSignRemoteDataSource.self) { _ in NaverSignRemoteDataSourceImpl() }
         container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
+        
+        container.register(StoryRemoteDataSource.self) { _ in FirestoreStoryRemoteDataSourceImpl()}
     }
 }
 
