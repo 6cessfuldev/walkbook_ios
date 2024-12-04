@@ -1,13 +1,6 @@
-//
-//  WriteViewController.swift
-//  walkbook
-//
-//  Created by 육성민 on 8/27/24.
-//
-
 import UIKit
 
-class WriteViewController: UIViewController {
+class WriteBottomMenuViewController: UIViewController {
     
     let writeNewBtn: UIButton = {
         let button = UIButton()

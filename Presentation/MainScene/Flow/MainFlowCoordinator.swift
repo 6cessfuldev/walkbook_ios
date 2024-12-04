@@ -83,16 +83,16 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     }
     
     private func showBottomModal() {
-        let writeViewController = WriteViewController()
-        writeViewController.modalPresentationStyle = .pageSheet
-        if let sheet = writeViewController.sheetPresentationController {
+        let writeBottomMenuViewController = WriteBottomMenuViewController()
+        writeBottomMenuViewController.modalPresentationStyle = .pageSheet
+        if let sheet = writeBottomMenuViewController.sheetPresentationController {
             sheet.detents = [
                         .custom(identifier: .init("smallHeight")) { context in
                             return 200
                         }
                     ]
         }
-        self.navigationController.present(writeViewController, animated: true, completion: nil)
+        self.navigationController.present(writeBottomMenuViewController, animated: true, completion: nil)
     }
     
     func showContentMain() {
