@@ -12,27 +12,16 @@ enum FirestoreCollections {
 }
 
 class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
-//    private let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     
     func add(story: StoryModel, completion: @escaping (Result<Void, Error>) -> Void) {
         do {
-            let settings = FirestoreSettings()
-            settings.isPersistenceEnabled = false
-            Firestore.firestore().settings = settings
-            
-//            var data = try story.toDictionary()
-            let data: [String: Any] = [
-                "title": "Test Story",
-                "author": "John Doe",
-                "imageUrl": "https://example.com/image.jpg",
-                "description": "Sample description"
-            ]
-            let db = Firestore.firestore()
-            db.collection("story").addDocument(data: data) { error in
+            let data = try story.toDictionary()
+            db.collection("stories").addDocument(data: data) { error in
                 if let error = error {
-                    print("Error: \(error.localizedDescription)")
+                    completion(.failure(error))
                 } else {
-                    print("Write successful!")
+                    completion(.success(()))
                 }
             }
         } catch {
@@ -41,11 +30,6 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
     }
 
     func fetchAll(completion: @escaping (Result<[StoryModel], Error>) -> Void) {
-        let settings = FirestoreSettings()
-        settings.isPersistenceEnabled = false
-        Firestore.firestore().settings = settings
-        let db = Firestore.firestore()
-        
         db.collection("stories").getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
