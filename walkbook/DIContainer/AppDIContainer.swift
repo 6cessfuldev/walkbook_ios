@@ -29,6 +29,11 @@ class AppDIContainer {
             )
         }.inObjectScope(.container)
         
+        container.register(WriteNewStoryViewModel.self) { r in
+            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
+            return WriteNewStoryViewModel(useCase: storyUseCase)
+        }.inObjectScope(.container)
+        
         // Register ViewControllers
         container.register(AuthenticationViewController.self) { r in
             let viewModel = r.resolve(AuthenticationViewModel.self)!
@@ -59,6 +64,11 @@ class AppDIContainer {
         
         container.register(ProfileViewController.self) { r in
             return ProfileViewController()
+        }
+        
+        container.register(WriteNewStoryViewController.self) { r in
+            let writeNewStoryViewModel = r.resolve(WriteNewStoryViewModel.self)!
+            return WriteNewStoryViewController(viewModel: writeNewStoryViewModel)
         }
         
         
@@ -169,6 +179,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     
     func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator {
         return ProfileFlowCoordinator(navigationController: navigationController, dependencies: self)
+    }
+    
+    func makeWriteNewStoryViewController() -> WriteNewStoryViewController {
+        return self.container.resolve(WriteNewStoryViewController.self)!
     }
 }
 

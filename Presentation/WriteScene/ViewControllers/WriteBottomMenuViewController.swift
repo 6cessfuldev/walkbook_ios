@@ -1,6 +1,11 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class WriteBottomMenuViewController: UIViewController {
+    
+    weak var coordinator: MainFlowCoordinator!
+    private let disposeBag = DisposeBag()
     
     let writeNewBtn: UIButton = {
         let button = UIButton()
@@ -49,6 +54,15 @@ class WriteBottomMenuViewController: UIViewController {
             continueBtn.widthAnchor.constraint(equalToConstant: 80),
             continueBtn.heightAnchor.constraint(equalToConstant: 80)
         ])
+        
+        bindViewModel()
     }
-
+    
+    private func bindViewModel() {
+        writeNewBtn.rx.tap
+            .bind { [weak self] in
+                self?.coordinator.showWriteNewStoryVC()
+            }
+            .disposed(by: disposeBag)
+    }
 }

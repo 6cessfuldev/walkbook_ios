@@ -6,6 +6,7 @@ protocol MainFlowCoordinatorDependencies {
     func makeSubscribeFlowCoordinator(navigationController: UINavigationController) -> SubscribeFlowCoordinator
     func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator
     func makeContentMainViewController() -> ContentMainViewController
+    func makeWriteNewStoryViewController() -> WriteNewStoryViewController
 }
 
 protocol MainFlowCoordinatorDelegate: AnyObject {
@@ -84,6 +85,7 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     
     private func showBottomModal() {
         let writeBottomMenuViewController = WriteBottomMenuViewController()
+        writeBottomMenuViewController.coordinator = self
         writeBottomMenuViewController.modalPresentationStyle = .pageSheet
         if let sheet = writeBottomMenuViewController.sheetPresentationController {
             sheet.detents = [
@@ -99,6 +101,13 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         let contentMainVC = dependencies.makeContentMainViewController()
         self.navigationController.navigationBar.isHidden = false
         self.navigationController.pushViewController(contentMainVC, animated: true)
+    }
+    
+    func showWriteNewStoryVC() {
+        let writeNewStoryVC = dependencies.makeWriteNewStoryViewController()
+        self.navigationController.navigationBar.isHidden = false
+        self.navigationController.pushViewController(writeNewStoryVC, animated: true)
+        
     }
 }
 

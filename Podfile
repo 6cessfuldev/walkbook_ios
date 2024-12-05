@@ -25,6 +25,8 @@ target 'walkbook' do
   pod 'Swinject'
   pod 'RxSwift'
   pod 'RxCocoa'
+
+  pod 'GoogleUtilities'
   
   target 'walkbookTests' do
     inherit! :search_paths
@@ -33,6 +35,7 @@ target 'walkbook' do
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxTest'
+    pod 'GoogleUtilities'
   end
 
   target 'walkbookUITests' do
@@ -41,6 +44,7 @@ target 'walkbook' do
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxTest'
+    pod 'GoogleUtilities'
   end
 
 end

@@ -12,17 +12,27 @@ enum FirestoreCollections {
 }
 
 class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
-    private let db = Firestore.firestore()
+//    private let db = Firestore.firestore()
     
     func add(story: StoryModel, completion: @escaping (Result<Void, Error>) -> Void) {
         do {
-            var data = try story.toDictionary()
-            data["id"] = nil
-            db.collection(FirestoreCollections.stories).addDocument(data: data) { error in
+            let settings = FirestoreSettings()
+            settings.isPersistenceEnabled = false
+            Firestore.firestore().settings = settings
+            
+//            var data = try story.toDictionary()
+            let data: [String: Any] = [
+                "title": "Test Story",
+                "author": "John Doe",
+                "imageUrl": "https://example.com/image.jpg",
+                "description": "Sample description"
+            ]
+            let db = Firestore.firestore()
+            db.collection("story").addDocument(data: data) { error in
                 if let error = error {
-                    completion(.failure(error))
+                    print("Error: \(error.localizedDescription)")
                 } else {
-                    completion(.success(()))
+                    print("Write successful!")
                 }
             }
         } catch {
@@ -31,7 +41,12 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
     }
 
     func fetchAll(completion: @escaping (Result<[StoryModel], Error>) -> Void) {
-        db.collection(FirestoreCollections.stories).getDocuments { snapshot, error in
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        Firestore.firestore().settings = settings
+        let db = Firestore.firestore()
+        
+        db.collection("stories").getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -47,6 +62,7 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
 
     func update(story: StoryModel, with id: String, completion: @escaping (Result<Void, Error>) -> Void) {
         do {
+            let db = Firestore.firestore()
             let data = try story.toDictionary()
             db.collection(FirestoreCollections.stories).document(id).setData(data) { error in
                 if let error = error {
@@ -61,6 +77,7 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
     }
 
     func delete(by id: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let db = Firestore.firestore()
         db.collection(FirestoreCollections.stories).document(id).delete { error in
             if let error = error {
                 completion(.failure(error))
