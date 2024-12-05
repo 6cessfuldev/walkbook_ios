@@ -97,6 +97,10 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         self.navigationController.present(writeBottomMenuViewController, animated: true, completion: nil)
     }
     
+    func dismissBottomModal() {
+        self.navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     func showContentMain() {
         let contentMainVC = dependencies.makeContentMainViewController()
         self.navigationController.navigationBar.isHidden = false

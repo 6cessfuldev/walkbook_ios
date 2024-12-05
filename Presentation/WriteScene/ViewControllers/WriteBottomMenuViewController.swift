@@ -61,7 +61,9 @@ class WriteBottomMenuViewController: UIViewController {
     private func bindViewModel() {
         writeNewBtn.rx.tap
             .bind { [weak self] in
+                self?.coordinator.dismissBottomModal()
                 self?.coordinator.showWriteNewStoryVC()
+                
             }
             .disposed(by: disposeBag)
     }
