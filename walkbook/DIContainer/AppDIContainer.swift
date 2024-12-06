@@ -14,26 +14,7 @@ class AppDIContainer {
 
     init() {
         container = Container()
-        
-        // Register ViewModel
-        container.register(AuthenticationViewModel.self) { r in
-            let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
-            let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
-            let naverSignInUsecase = r.resolve(NaverSignInUseCaseProtocol.self)!
-            let appleSignInUseCase = r.resolve(AppleSignInUseCaseProtocol.self)!
-            return AuthenticationViewModel(
-                googleSignInUseCase: googleSignInUseCase,
-                kakaoSignInUseCase: kakaoSignInUsecase,
-                naverSignInUseCase: naverSignInUsecase,
-                appleSignInUseCase: appleSignInUseCase
-            )
-        }.inObjectScope(.container)
-        
-        container.register(WriteNewStoryViewModel.self) { r in
-            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
-            return WriteNewStoryViewModel(useCase: storyUseCase)
-        }.inObjectScope(.container)
-        
+
         // Register ViewControllers
         container.register(AuthenticationViewController.self) { r in
             let viewModel = r.resolve(AuthenticationViewModel.self)!
@@ -71,6 +52,26 @@ class AppDIContainer {
             return WriteNewStoryViewController(viewModel: writeNewStoryViewModel)
         }
         
+        // Register ViewModel
+        container.register(AuthenticationViewModel.self) { r in
+            let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
+            let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
+            let naverSignInUsecase = r.resolve(NaverSignInUseCaseProtocol.self)!
+            let appleSignInUseCase = r.resolve(AppleSignInUseCaseProtocol.self)!
+            return AuthenticationViewModel(
+                googleSignInUseCase: googleSignInUseCase,
+                kakaoSignInUseCase: kakaoSignInUsecase,
+                naverSignInUseCase: naverSignInUsecase,
+                appleSignInUseCase: appleSignInUseCase
+            )
+        }.inObjectScope(.container)
+        
+        container.register(WriteNewStoryViewModel.self) { r in
+            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
+            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            return WriteNewStoryViewModel(storyUseCase: storyUseCase, imageUseCase: imageUseCase)
+        }.inObjectScope(.container)
+        
         
         // Register UseCases
         container.register(GoogleSignInUseCaseProtocol.self) { r in
@@ -98,6 +99,11 @@ class AppDIContainer {
             return DefaultStoryUseCase(repository: repository)
         }
         
+        container.register(ImageUseCaseProtocol.self) { r in
+            let repository = r.resolve(ImageRepository.self)!
+            return DefaultImageUseCase(repository: repository)
+        }
+        
         // Register Repositories
         container.register(AuthenticationRepository.self) { r in
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
@@ -121,14 +127,23 @@ class AppDIContainer {
             return DefaultStoryRepositoryImpl(storyRemoteDataSource: storyRemoteDataSource)
         }
         
+        container.register(ImageRepository.self) { r in
+            let imgRemoteDataSource = r.resolve(ImageRemoteDataSource.self)!
+            return DefaultStorageImageRepositoryImpl(imageRemoteDataSource: imgRemoteDataSource)
+        }
+        
         // Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
         container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
         container.register(NaverSignRemoteDataSource.self) { _ in NaverSignRemoteDataSourceImpl() }
         container.register(FirebaseAuthRemoteDataSource.self) { _ in FirebaseAuthRemoteDataSourceImpl() }
-        
+
         container.register(StoryRemoteDataSource.self) { _ in FirestoreStoryRemoteDataSourceImpl()}
+        
+        container.register(ImageRemoteDataSource.self) { _ in
+            FirebaseStorageImageRemoteDataSourceImpl()
+        }
     }
 }
 

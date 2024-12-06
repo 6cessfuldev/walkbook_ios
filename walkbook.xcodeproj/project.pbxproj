@@ -42,6 +42,11 @@
 		9D35C5C32C3ECB17004586C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */; };
 		9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5CE2C3FCE62004586C2 /* .gitignore */; };
 		9D37600C2D0328020032957F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D37600B2D0328020032957F /* GoogleService-Info.plist */; };
+		9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37600E2D0338360032957F /* ImageUseCase.swift */; };
+		9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760102D033E5C0032957F /* ImageRepository.swift */; };
+		9D3760132D0345400032957F /* UIImage+toData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760122D0345400032957F /* UIImage+toData.swift */; };
+		9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */; };
+		9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -152,6 +157,11 @@
 		9D35C5C42C3ECB17004586C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D35C5CE2C3FCE62004586C2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9D37600B2D0328020032957F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D37600E2D0338360032957F /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
+		9D3760102D033E5C0032957F /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		9D3760122D0345400032957F /* UIImage+toData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+toData.swift"; sourceTree = "<group>"; };
+		9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRemoteDataSource.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -482,6 +492,7 @@
 		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D37600D2D03367D0032957F /* Image */,
 				9D0D47512D009F9E0040BA81 /* Story */,
 				9D0D47502D009F650040BA81 /* SocialSignIn */,
 				9DE4985C2C514562004F1A20 /* Protocol */,
@@ -525,6 +536,7 @@
 			children = (
 				9D0D47582D00AAAC0040BA81 /* SocialSignIn */,
 				9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */,
+				9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -542,6 +554,7 @@
 			children = (
 				9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */,
 				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
+				9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -613,6 +626,14 @@
 				9D37600B2D0328020032957F /* GoogleService-Info.plist */,
 			);
 			path = walkbook;
+			sourceTree = "<group>";
+		};
+		9D37600D2D03367D0032957F /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				9D37600E2D0338360032957F /* ImageUseCase.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
@@ -722,6 +743,7 @@
 				9D9DBC2C2C4434F300127B06 /* UIColor+hex.swift */,
 				9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */,
 				9D9F836D2CC7D34E003E3A2C /* UIImage+ColorInit.swift */,
+				9D3760122D0345400032957F /* UIImage+toData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -804,6 +826,7 @@
 			children = (
 				9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */,
 				9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */,
+				9D3760102D033E5C0032957F /* ImageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1256,9 +1279,12 @@
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
 				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
+				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
 				9D0D475B2D00AC1C0040BA81 /* StoryRemoteDataSource.swift in Sources */,
+				9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */,
+				9D3760132D0345400032957F /* UIImage+toData.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
 				9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
@@ -1273,6 +1299,7 @@
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
+				9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
 				9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
@@ -1287,6 +1314,7 @@
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */,
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
+				9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,

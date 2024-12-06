@@ -16,11 +16,13 @@ class WriteNewStoryViewModel {
     let isSubmitting: Driver<Bool>
     let submissionResult: Driver<Result<Void, Error>>
     
-    private let useCase: StoryUseCaseProtocol
+    private let storyUseCase: StoryUseCaseProtocol
+    private let imageUseCase: ImageUseCaseProtocol
     private let disposeBag = DisposeBag()
     
-    init(useCase: StoryUseCaseProtocol) {
-        self.useCase = useCase
+    init(storyUseCase: StoryUseCaseProtocol, imageUseCase: ImageUseCaseProtocol) {
+        self.storyUseCase = storyUseCase
+        self.imageUseCase = imageUseCase
         
         let _isSubmitting = BehaviorRelay<Bool>(value: false)
         let _submissionResult = PublishRelay<Result<Void, Error>>()
@@ -41,11 +43,37 @@ class WriteNewStoryViewModel {
             .do(onNext: { _ in _isSubmitting.accept(false) })
             .bind(to: _submissionResult)
             .disposed(by: disposeBag)
+        
+        selectedImage
+            .compactMap { $0 }
+            .flatMapLatest { [weak self] image -> Observable<String?> in
+                guard let self = self, let data = image.toData() else { return Observable.just(nil) }
+                return Observable.create { observer in
+                    self.imageUseCase.uploadImage(data) { result in
+                        switch result {
+                        case .success(let url):
+                            observer.onNext(url)
+                            observer.onCompleted()
+                        case .failure(let error):
+                            print("Image upload failed: \(error)")
+                            observer.onNext(nil)
+                            observer.onCompleted()
+                        }
+                    }
+                    return Disposables.create()
+                }
+            }
+            .subscribe(onNext: { [weak self] url in
+                if let url = url {
+                    self?.imageUrl.accept(url) // imageUrl 업데이트
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func createStoryObservable(_ story: Story) -> Observable<Result<Void, Error>> {
         return Observable.create { [weak self] observer in
-            self?.useCase.createStory(story) { result in
+            self?.storyUseCase.createStory(story) { result in
                 observer.onNext(result)
                 observer.onCompleted()
             }
