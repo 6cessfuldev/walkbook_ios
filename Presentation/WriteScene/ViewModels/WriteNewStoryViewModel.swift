@@ -10,6 +10,8 @@ class WriteNewStoryViewModel {
     let description = BehaviorRelay<String>(value: "")
     let submitTapped = PublishRelay<Void>()
     
+    let selectedImage = BehaviorRelay<UIImage?>(value: nil)
+    
     // Outputs
     let isSubmitting: Driver<Bool>
     let submissionResult: Driver<Result<Void, Error>>

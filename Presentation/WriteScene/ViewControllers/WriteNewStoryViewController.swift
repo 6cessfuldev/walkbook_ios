@@ -7,9 +7,13 @@ class WriteNewStoryViewController: UIViewController {
     private let viewModel: WriteNewStoryViewModel
     private let disposeBag = DisposeBag()
     
+    private var isItemSelected = false
+        
+    private let actionImageView = UIImageView()
+    private let plusIconImageView = UIImageView()
+    
     private let titleTextField = UITextField()
     private let authorTextField = UITextField()
-    private let imageUrlTextField = UITextField()
     private let descriptionTextField = UITextField()
     private let submitButton = UIButton(type: .system)
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
@@ -31,16 +35,24 @@ class WriteNewStoryViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .background
         
-        [titleTextField, authorTextField, imageUrlTextField, descriptionTextField].forEach {
+        actionImageView.contentMode = .scaleAspectFit
+        actionImageView.isUserInteractionEnabled = true
+        actionImageView.backgroundColor = .black
+        actionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        plusIconImageView.image = UIImage(systemName: "plus.circle")
+        plusIconImageView.contentMode = .scaleAspectFit
+        plusIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [titleTextField, authorTextField, descriptionTextField].forEach {
             $0.borderStyle = .roundedRect
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         titleTextField.placeholder = "Title"
         authorTextField.placeholder = "Author"
-        imageUrlTextField.placeholder = "Image URL"
         descriptionTextField.placeholder = "Description"
         
         submitButton.setTitle("Submit", for: .normal)
@@ -53,9 +65,10 @@ class WriteNewStoryViewController: UIViewController {
         statusLabel.textColor = .gray
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(actionImageView)
+        actionImageView.addSubview(plusIconImageView)
         view.addSubview(titleTextField)
         view.addSubview(authorTextField)
-        view.addSubview(imageUrlTextField)
         view.addSubview(descriptionTextField)
         view.addSubview(submitButton)
         view.addSubview(loadingIndicator)
@@ -70,15 +83,21 @@ class WriteNewStoryViewController: UIViewController {
             authorTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
             authorTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
             
-            imageUrlTextField.topAnchor.constraint(equalTo: authorTextField.bottomAnchor, constant: 10),
-            imageUrlTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            imageUrlTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
-            
-            descriptionTextField.topAnchor.constraint(equalTo: imageUrlTextField.bottomAnchor, constant: 10),
+            descriptionTextField.topAnchor.constraint(equalTo: authorTextField.bottomAnchor, constant: 10),
             descriptionTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
             descriptionTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
             
-            submitButton.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 20),
+            actionImageView.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 20),
+            actionImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            actionImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            actionImageView.heightAnchor.constraint(equalToConstant: 300),
+            
+            plusIconImageView.centerXAnchor.constraint(equalTo: actionImageView.centerXAnchor),
+            plusIconImageView.centerYAnchor.constraint(equalTo: actionImageView.centerYAnchor),
+            plusIconImageView.widthAnchor.constraint(equalToConstant: 50),
+            plusIconImageView.heightAnchor.constraint(equalToConstant: 50),
+            
+            submitButton.topAnchor.constraint(equalTo: actionImageView.bottomAnchor, constant: 20),
             submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             loadingIndicator.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 20),
@@ -99,16 +118,33 @@ class WriteNewStoryViewController: UIViewController {
             .bind(to: viewModel.author)
             .disposed(by: disposeBag)
         
-        imageUrlTextField.rx.text.orEmpty
-            .bind(to: viewModel.imageUrl)
-            .disposed(by: disposeBag)
-        
         descriptionTextField.rx.text.orEmpty
             .bind(to: viewModel.description)
             .disposed(by: disposeBag)
         
         submitButton.rx.tap
             .bind(to: viewModel.submitTapped)
+            .disposed(by: disposeBag)
+        
+        let tapGesture = UITapGestureRecognizer()
+        actionImageView.addGestureRecognizer(tapGesture)
+        
+        tapGesture.rx.event
+            .bind { [weak self] _ in
+                self?.presentImagePicker()
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedImage
+            .asDriver(onErrorJustReturn: nil)
+            .filter { $0 != nil }
+            .drive(onNext: { [weak self] image in
+                self?.actionImageView.image = image
+                if(self?.isItemSelected == false) {
+                    self?.isItemSelected = true
+                    self?.plusIconImageView.isHidden = true
+                }
+            })
             .disposed(by: disposeBag)
         
         viewModel.isSubmitting
@@ -127,5 +163,21 @@ class WriteNewStoryViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func presentImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension WriteNewStoryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            viewModel.selectedImage.accept(image)
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
