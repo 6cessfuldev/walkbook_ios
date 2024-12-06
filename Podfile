@@ -12,6 +12,7 @@ target 'walkbook' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseFunctions'
+  pod 'FirebaseStorage'
   
   pod 'GoogleSignIn'
 
