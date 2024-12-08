@@ -47,6 +47,8 @@
 		9D3760132D0345400032957F /* UIImage+toData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760122D0345400032957F /* UIImage+toData.swift */; };
 		9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */; };
 		9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */; };
+		9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760192D05C2310032957F /* MyStoryViewController.swift */; };
+		9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -162,6 +164,8 @@
 		9D3760122D0345400032957F /* UIImage+toData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+toData.swift"; sourceTree = "<group>"; };
 		9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageRepositoryImpl.swift; sourceTree = "<group>"; };
 		9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRemoteDataSource.swift; sourceTree = "<group>"; };
+		9D3760192D05C2310032957F /* MyStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewController.swift; sourceTree = "<group>"; };
+		9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewModel.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0D476C2D0134B20040BA81 /* WriteNewStoryViewModel.swift */,
+				9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 			children = (
 				9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */,
 				9D0D47662D00C02B0040BA81 /* WriteNewStoryViewController.swift */,
+				9D3760192D05C2310032957F /* MyStoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1287,6 +1293,7 @@
 				9D3760132D0345400032957F /* UIImage+toData.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
 				9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */,
+				9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
 				9D0D476D2D0134B20040BA81 /* WriteNewStoryViewModel.swift in Sources */,
@@ -1298,6 +1305,7 @@
 				9D0085AC2C626ED900EE241B /* MainMapViewController.swift in Sources */,
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
+				9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
 				9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,

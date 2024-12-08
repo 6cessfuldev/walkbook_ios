@@ -52,6 +52,11 @@ class AppDIContainer {
             return WriteNewStoryViewController(viewModel: writeNewStoryViewModel)
         }
         
+        container.register(MyStoryViewController.self) { r in
+            let myStoryViewModel = r.resolve(MyStoryViewModel.self)!
+            return MyStoryViewController(viewModel: myStoryViewModel)
+        }
+        
         // Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
@@ -70,6 +75,11 @@ class AppDIContainer {
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
             return WriteNewStoryViewModel(storyUseCase: storyUseCase, imageUseCase: imageUseCase)
+        }.inObjectScope(.container)
+        
+        container.register(MyStoryViewModel.self) { r in
+            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
+            return MyStoryViewModel(storyUseCase: storyUseCase)
         }.inObjectScope(.container)
         
         

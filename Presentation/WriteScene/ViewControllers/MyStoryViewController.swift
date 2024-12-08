@@ -2,35 +2,34 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SubscribeViewController: UIViewController {
+class MyStoryViewController: UIViewController {
     
-    weak var coordinator: SubscribeFlowCoordinator!
+    weak var coordinator: MainFlowCoordinator!
+    
+    private let viewModel: MyStoryViewModel
     let disposeBag = DisposeBag()
     
     private let tableView = UITableView()
     
-    private let cardData: [(title: String, imageName: String)] = [
-        (title: "Card 1", imageName: "sample1"),
-        (title: "Card 2", imageName: "sample1"),
-        (title: "Card 3", imageName: "sample1")
-    ]
+    init(viewModel: MyStoryViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    let card: CardView = {
-        let card = CardView()
-        card.configure(image: UIImage(named: "sample1")!, title: "컨텐츠 제목")
-        card.translatesAutoresizingMaskIntoConstraints = false
-        return card
-    }()
-
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .background
-        
+        setupUI()
         configureCustomNavigationBar()
-        
         setupTableView()
         bindCollectionView()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .background
     }
     
     func setupTableView() {
@@ -52,30 +51,33 @@ class SubscribeViewController: UIViewController {
     
     private func bindCollectionView() {
         
-        Observable.just(cardData)
+        viewModel.storyData
             .bind(to: tableView.rx.items(cellIdentifier: CardCell.identifier, cellType: CardCell.self)) { _, item, cell in
                 
-                cell.configure(image: UIImage(named: item.imageName), title: item.title)
+                cell.configure(image: UIImage(named: item.imageUrl), title: item.title)
             }
             .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                let selectedItem = self.cardData[indexPath.row]
-                print("Selected item: \(selectedItem.1)") // Debug log
-                
-                self.coordinator.showContentMain()
-            })
-            .disposed(by: self.disposeBag)
+        Observable.combineLatest(
+            tableView.rx.itemSelected,
+            viewModel.storyData
+        )
+        .subscribe(onNext: { [weak self] indexPath, stories in
+            guard let self = self else { return }
+            let storyCount = stories.count
+            print("Number of stories: \(storyCount)")
+            
+            self.coordinator.showContentMain()
+        })
+        .disposed(by: disposeBag)
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
 }
 
-extension SubscribeViewController: UITableViewDelegate {
+extension MyStoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200 
+        return 200
     }
 }
