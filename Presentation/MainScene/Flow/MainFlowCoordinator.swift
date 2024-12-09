@@ -23,6 +23,8 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     init(navigationController: UINavigationController,dependencies: MainFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+        super.init()
+        self.navigationController.delegate = self
     }
     
     func start() {
@@ -128,4 +130,22 @@ extension MainFlowCoordinator: ProfileFlowCoordinatorDelegate {
 
 extension MainFlowCoordinator: SubscribeFlowCoordinatorDelegate {
     
+}
+
+extension MainFlowCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if navigationController.viewControllers.first === viewController {
+            navigationController.navigationBar.isHidden = true
+        } else {
+            navigationController.navigationBar.isHidden = false
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        if navigationController.viewControllers.first === viewController {
+            navigationController.navigationBar.isHidden = true
+        } else {
+            navigationController.navigationBar.isHidden = false
+        }
+    }
 }

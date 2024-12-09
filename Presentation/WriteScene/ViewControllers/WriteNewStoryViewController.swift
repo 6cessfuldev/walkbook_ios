@@ -34,11 +34,6 @@ class WriteNewStoryViewController: UIViewController {
         bindViewModel()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     private func setupUI() {
         view.backgroundColor = .background
         
