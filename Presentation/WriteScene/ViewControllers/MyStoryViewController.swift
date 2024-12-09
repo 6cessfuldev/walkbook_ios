@@ -20,10 +20,18 @@ class MyStoryViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.navigationController?.navigationBar.isHidden = true
+        } else {
+            self.navigationController?.navigationBar.isHidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        configureCustomNavigationBar()
         setupTableView()
         bindCollectionView()
     }

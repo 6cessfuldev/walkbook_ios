@@ -209,6 +209,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     func makeWriteNewStoryViewController() -> WriteNewStoryViewController {
         return self.container.resolve(WriteNewStoryViewController.self)!
     }
+    
+    func makeMyStoryViewController() -> MyStoryViewController {
+        return self.container.resolve(MyStoryViewController.self)!
+    }
 }
 
 //MARK: - ChildCoordinator's dependencies

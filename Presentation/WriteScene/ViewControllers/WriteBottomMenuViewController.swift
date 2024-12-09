@@ -66,5 +66,12 @@ class WriteBottomMenuViewController: UIViewController {
                 
             }
             .disposed(by: disposeBag)
+        continueBtn.rx.tap
+            .bind { [weak self] in
+                self?.coordinator.dismissBottomModal()
+                self?.coordinator.showMyStoryVC()
+                
+            }
+            .disposed(by: disposeBag)
     }
 }
