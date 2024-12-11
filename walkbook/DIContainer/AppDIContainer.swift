@@ -75,12 +75,12 @@ class AppDIContainer {
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
             return WriteNewStoryViewModel(storyUseCase: storyUseCase, imageUseCase: imageUseCase)
-        }.inObjectScope(.container)
+        }.inObjectScope(.transient)
         
         container.register(MyStoryViewModel.self) { r in
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
             return MyStoryViewModel(storyUseCase: storyUseCase)
-        }.inObjectScope(.container)
+        }.inObjectScope(.transient)
         
         
         // Register UseCases
