@@ -59,6 +59,7 @@ class WriteNewStoryViewController: UIViewController {
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.color = .white
         loadingIndicator.hidesWhenStopped = true
         
         statusLabel.textAlignment = .center
