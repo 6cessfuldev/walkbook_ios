@@ -49,6 +49,7 @@
 		9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */; };
 		9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760192D05C2310032957F /* MyStoryViewController.swift */; };
 		9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */; };
+		9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355512D0A021900785888 /* PaddedTextField.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -166,6 +167,7 @@
 		9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRemoteDataSource.swift; sourceTree = "<group>"; };
 		9D3760192D05C2310032957F /* MyStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewController.swift; sourceTree = "<group>"; };
 		9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewModel.swift; sourceTree = "<group>"; };
+		9D5355512D0A021900785888 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			children = (
 				9D04A9272CF695460046AB88 /* CardView.swift */,
 				9D0D473B2CFB1A420040BA81 /* ThumbnailCardCell.swift */,
+				9D5355512D0A021900785888 /* PaddedTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1326,6 +1329,7 @@
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
+				9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
 				9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */,
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,

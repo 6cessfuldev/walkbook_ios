@@ -12,8 +12,20 @@ class WriteNewStoryViewController: UIViewController {
     private let actionImageView = UIImageView()
     private let plusIconImageView = UIImageView()
     
-    private let titleTextField = UITextField()
-    private let descriptionTextField = UITextField()
+    private let titleTextField = PaddedTextField()
+    private let separatorLine = UIView()
+    private let descriptionTextView = UITextView()
+    
+    private let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Description"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    
     private let submitButton = UIBarButtonItem(
         image: UIImage(systemName: "paperplane.fill"),
         style: .done,
@@ -35,6 +47,8 @@ class WriteNewStoryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
+        
+        descriptionTextView.delegate = self
     }
     
     private func setupUI() {
@@ -51,13 +65,19 @@ class WriteNewStoryViewController: UIViewController {
         plusIconImageView.contentMode = .scaleAspectFit
         plusIconImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        [titleTextField, descriptionTextField].forEach {
-            $0.borderStyle = .roundedRect
+        [titleTextField, descriptionTextView].forEach {
+            $0.backgroundColor = .white
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         titleTextField.placeholder = "Title"
-        descriptionTextField.placeholder = "Description"
+        
+        descriptionTextView.font = UIFont.systemFont(ofSize: 16)
+        descriptionTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        descriptionTextView.textContainer.lineFragmentPadding = 0
+        
+        separatorLine.backgroundColor = .lightGray
+        separatorLine.translatesAutoresizingMaskIntoConstraints = false
         
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.color = .white
@@ -67,7 +87,9 @@ class WriteNewStoryViewController: UIViewController {
         actionImageView.addSubview(plusIconImageView)
         actionImageView.addSubview(loadingIndicator)
         view.addSubview(titleTextField)
-        view.addSubview(descriptionTextField)
+        view.addSubview(separatorLine)
+        view.addSubview(descriptionTextView)
+        descriptionTextView.addSubview(placeholderLabel)
         view.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
@@ -84,13 +106,24 @@ class WriteNewStoryViewController: UIViewController {
             loadingIndicator.centerYAnchor.constraint(equalTo: plusIconImageView.centerYAnchor),
             loadingIndicator.centerXAnchor.constraint(equalTo: plusIconImageView.centerXAnchor),
             
-            titleTextField.topAnchor.constraint(equalTo: actionImageView.bottomAnchor, constant: 20),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            titleTextField.topAnchor.constraint(equalTo: actionImageView.bottomAnchor),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            titleTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            descriptionTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
-            descriptionTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            descriptionTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
+            separatorLine.topAnchor.constraint(equalTo: titleTextField.bottomAnchor),
+            separatorLine.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
+            separatorLine.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: 1),
+            
+            descriptionTextView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            descriptionTextView.heightAnchor.constraint(equalToConstant: 200),
+            
+            placeholderLabel.topAnchor.constraint(equalTo: descriptionTextView.topAnchor, constant: 8),
+            placeholderLabel.leadingAnchor.constraint(equalTo: descriptionTextView.leadingAnchor, constant: 8),
+            placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: descriptionTextView.trailingAnchor, constant: -8)
         ])
     }
     
@@ -99,7 +132,7 @@ class WriteNewStoryViewController: UIViewController {
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
         
-        descriptionTextField.rx.text.orEmpty
+        descriptionTextView.rx.text.orEmpty
             .bind(to: viewModel.description)
             .disposed(by: disposeBag)
         
@@ -167,5 +200,11 @@ extension WriteNewStoryViewController: UIImagePickerControllerDelegate, UINaviga
             viewModel.selectedImage.accept(image)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension WriteNewStoryViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }
