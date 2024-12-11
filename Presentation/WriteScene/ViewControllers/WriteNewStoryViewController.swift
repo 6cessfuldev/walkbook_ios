@@ -13,11 +13,14 @@ class WriteNewStoryViewController: UIViewController {
     private let plusIconImageView = UIImageView()
     
     private let titleTextField = UITextField()
-    private let authorTextField = UITextField()
     private let descriptionTextField = UITextField()
-    private let submitButton = UIButton(type: .system)
-    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
-    private let statusLabel = UILabel()
+    private let submitButton = UIBarButtonItem(
+        image: UIImage(systemName: "paperplane.fill"),
+        style: .done,
+        target: nil,
+        action: nil
+    )
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     init(viewModel: WriteNewStoryViewModel) {
         self.viewModel = viewModel
@@ -37,58 +40,38 @@ class WriteNewStoryViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .background
         
+        navigationItem.rightBarButtonItem = submitButton
+        
         actionImageView.contentMode = .scaleAspectFit
         actionImageView.isUserInteractionEnabled = true
-        actionImageView.backgroundColor = .black
+        actionImageView.backgroundColor = .backgroundSecondary
         actionImageView.translatesAutoresizingMaskIntoConstraints = false
         
         plusIconImageView.image = UIImage(systemName: "plus.circle")
         plusIconImageView.contentMode = .scaleAspectFit
         plusIconImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        [titleTextField, authorTextField, descriptionTextField].forEach {
+        [titleTextField, descriptionTextField].forEach {
             $0.borderStyle = .roundedRect
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         titleTextField.placeholder = "Title"
-        authorTextField.placeholder = "Author"
         descriptionTextField.placeholder = "Description"
-        
-        submitButton.setTitle("Submit", for: .normal)
-        submitButton.translatesAutoresizingMaskIntoConstraints = false
         
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         loadingIndicator.color = .white
         loadingIndicator.hidesWhenStopped = true
         
-        statusLabel.textAlignment = .center
-        statusLabel.textColor = .gray
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(actionImageView)
         actionImageView.addSubview(plusIconImageView)
+        actionImageView.addSubview(loadingIndicator)
         view.addSubview(titleTextField)
-        view.addSubview(authorTextField)
         view.addSubview(descriptionTextField)
-        view.addSubview(submitButton)
         view.addSubview(loadingIndicator)
-        view.addSubview(statusLabel)
         
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            authorTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
-            authorTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            authorTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
-            
-            descriptionTextField.topAnchor.constraint(equalTo: authorTextField.bottomAnchor, constant: 10),
-            descriptionTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            descriptionTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
-            
-            actionImageView.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 20),
+            actionImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             actionImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             actionImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             actionImageView.heightAnchor.constraint(equalToConstant: 300),
@@ -98,25 +81,22 @@ class WriteNewStoryViewController: UIViewController {
             plusIconImageView.widthAnchor.constraint(equalToConstant: 50),
             plusIconImageView.heightAnchor.constraint(equalToConstant: 50),
             
-            submitButton.topAnchor.constraint(equalTo: actionImageView.bottomAnchor, constant: 20),
-            submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: plusIconImageView.centerYAnchor),
+            loadingIndicator.centerXAnchor.constraint(equalTo: plusIconImageView.centerXAnchor),
             
-            loadingIndicator.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 20),
-            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleTextField.topAnchor.constraint(equalTo: actionImageView.bottomAnchor, constant: 20),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            statusLabel.topAnchor.constraint(equalTo: loadingIndicator.bottomAnchor, constant: 20),
-            statusLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            statusLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            descriptionTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
+            descriptionTextField.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
+            descriptionTextField.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
         ])
     }
     
     private func bindViewModel() {
         titleTextField.rx.text.orEmpty
             .bind(to: viewModel.title)
-            .disposed(by: disposeBag)
-        
-        authorTextField.rx.text.orEmpty
-            .bind(to: viewModel.author)
             .disposed(by: disposeBag)
         
         descriptionTextField.rx.text.orEmpty
@@ -149,18 +129,25 @@ class WriteNewStoryViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.isSubmitting
-            .drive(loadingIndicator.rx.isAnimating)
-            .disposed(by: disposeBag)
+                .drive(onNext: { [weak self] isSubmitting in
+                    guard let self = self else { return }
+                    if isSubmitting {
+                        self.loadingIndicator.startAnimating()
+                        self.plusIconImageView.isHidden = true
+                    } else {
+                        self.loadingIndicator.stopAnimating()
+                        self.plusIconImageView.isHidden = false
+                    }
+                })
+                .disposed(by: disposeBag)
         
         viewModel.submissionResult
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .success:
-                    self?.statusLabel.text = "Story submitted successfully!"
-                    self?.statusLabel.textColor = .green
+                    print("good")
                 case .failure(let error):
-                    self?.statusLabel.text = "Failed to submit story: \(error.localizedDescription)"
-                    self?.statusLabel.textColor = .red
+                    print("fail")
                 }
             })
             .disposed(by: disposeBag)

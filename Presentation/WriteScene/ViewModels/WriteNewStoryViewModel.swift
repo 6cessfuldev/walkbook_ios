@@ -5,7 +5,6 @@ class WriteNewStoryViewModel {
     
     // Inputs
     let title = BehaviorRelay<String>(value: "")
-    let author = BehaviorRelay<String>(value: "")
     let imageUrl = BehaviorRelay<String>(value: "")
     let description = BehaviorRelay<String>(value: "")
     let submitTapped = PublishRelay<Void>()
@@ -33,16 +32,16 @@ class WriteNewStoryViewModel {
         submitTapped
             .filter { 
                 !_isSubmitting.value }
-            .withLatestFrom(Observable.combineLatest(title, author, imageUrl, description))
-            .filter { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty && !$0.3.isEmpty }
+            .withLatestFrom(Observable.combineLatest(title, imageUrl, description))
+            .filter { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty }
             .do(onNext: { _ in
                 _isSubmitting.accept(true)
             })
-            .flatMapLatest { [weak self] title, author, imageUrl, description -> Observable<Result<Void, Error>> in
+            .flatMapLatest { [weak self] title, imageUrl, description -> Observable<Result<Void, Error>> in
                 guard let self = self else {
                     return Observable.just(.failure(NSError(domain: "ViewModelError", code: -1, userInfo: nil)))
                 }
-                let story = Story(id: nil, title: title, author: author, imageUrl: imageUrl, description: description)
+                let story = Story(id: nil, title: title, author: "", imageUrl: imageUrl, description: description)
                 print("submitting story \(story)")
                 return self.createStoryObservable(story)
                     .catch { error in
