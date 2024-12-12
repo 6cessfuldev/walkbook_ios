@@ -4,6 +4,8 @@ import RxCocoa
 
 class ProfileViewController: UIViewController {
     
+    private let viewModel: UserProfileViewModel
+    
     weak var coordinator: ProfileFlowCoordinator!
     let disposeBag = DisposeBag()
     
@@ -36,6 +38,15 @@ class ProfileViewController: UIViewController {
         (UIImage(named: "sample3"), "Title 3", "Author 3"),
         (UIImage(named: "sample1"), "Title 4", "Author 4")
     ]
+    
+    init(viewModel: UserProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +106,17 @@ class ProfileViewController: UIViewController {
                 self.coordinator.showContentMain()
             })
             .disposed(by: self.disposeBag)
+        
+        viewModel.currentUser
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] userProfile in
+                guard let self = self else { return }
+                self.profileView.configure(
+                    image: userProfile?.imageUrl != nil ? UIImage(named: userProfile!.imageUrl!) : UIImage(systemName: "person.crop.circle.fill"),
+                    name: userProfile?.name ?? "Unknown User"
+                )
+            })
+            .disposed(by: disposeBag)
     }
 }
 

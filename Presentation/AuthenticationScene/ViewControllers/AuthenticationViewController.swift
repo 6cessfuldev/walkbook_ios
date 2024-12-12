@@ -125,10 +125,10 @@ class AuthenticationViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.userEmail
-            .subscribe(onNext: { [weak self] email in
-                if let email = email {
-                    print("User Email: \(String(describing: email))")
+        viewModel.userProfile
+            .subscribe(onNext: { [weak self] userProfile in
+                if let userProfile = userProfile {
+                    print("User id: \(String(describing: userProfile.id))")
                     self?.coordinator.didFinishAuthentication()
                 }
             })

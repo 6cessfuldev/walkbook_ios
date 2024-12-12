@@ -2,7 +2,7 @@ import UIKit
 
 protocol KakaoSignInUseCaseProtocol {
     func execute(
-        completion: @escaping (Result<String, Error>) -> Void
+        completion: @escaping (Result<UserProfile, Error>) -> Void
     )
 }
 
@@ -14,7 +14,7 @@ class KakaoSignInUseCase: KakaoSignInUseCaseProtocol {
         self.repository = repository
     }
     
-    func execute(completion: @escaping (Result<String, Error>) -> Void) {
+    func execute(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         return repository.signInWithKakao(completion: completion)
     }
 }

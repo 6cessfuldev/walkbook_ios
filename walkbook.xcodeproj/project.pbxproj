@@ -50,6 +50,14 @@
 		9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760192D05C2310032957F /* MyStoryViewController.swift */; };
 		9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */; };
 		9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355512D0A021900785888 /* PaddedTextField.swift */; };
+		9D5355542D0A9E3300785888 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355532D0A9E3300785888 /* UserProfile.swift */; };
+		9D5355572D0A9EB700785888 /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355562D0A9EB700785888 /* UserProfileUseCase.swift */; };
+		9D5355592D0A9FC300785888 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355582D0A9FC300785888 /* UserProfileRepository.swift */; };
+		9D53555B2D0AA07600785888 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555A2D0AA07600785888 /* UserProfileModel.swift */; };
+		9D53555D2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */; };
+		9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */; };
+		9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355612D0AA5C400785888 /* UserProfileMapper.swift */; };
+		9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -168,6 +176,14 @@
 		9D3760192D05C2310032957F /* MyStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewController.swift; sourceTree = "<group>"; };
 		9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewModel.swift; sourceTree = "<group>"; };
 		9D5355512D0A021900785888 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		9D5355532D0A9E3300785888 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		9D5355562D0A9EB700785888 /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
+		9D5355582D0A9FC300785888 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		9D53555A2D0AA07600785888 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileREmoteDataSource.swift; sourceTree = "<group>"; };
+		9D5355612D0AA5C400785888 /* UserProfileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMapper.swift; sourceTree = "<group>"; };
+		9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -376,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0D47612D00B80F0040BA81 /* StoryMapper.swift */,
+				9D5355612D0AA5C400785888 /* UserProfileMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -500,6 +517,7 @@
 		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355552D0A9EA600785888 /* User */,
 				9D37600D2D03367D0032957F /* Image */,
 				9D0D47512D009F9E0040BA81 /* Story */,
 				9D0D47502D009F650040BA81 /* SocialSignIn */,
@@ -512,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0D474E2D009C3D0040BA81 /* Story.swift */,
+				9D5355532D0A9E3300785888 /* UserProfile.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -545,6 +564,7 @@
 				9D0D47582D00AAAC0040BA81 /* SocialSignIn */,
 				9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */,
 				9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */,
+				9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -553,6 +573,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0D475C2D00AE660040BA81 /* StoryModel.swift */,
+				9D53555A2D0AA07600785888 /* UserProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -563,6 +584,7 @@
 				9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */,
 				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
 				9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */,
+				9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -642,6 +664,14 @@
 				9D37600E2D0338360032957F /* ImageUseCase.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		9D5355552D0A9EA600785888 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9D5355562D0A9EB700785888 /* UserProfileUseCase.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
@@ -803,6 +833,7 @@
 		9DCBE4FB2C58E8F800BDB378 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -836,6 +867,7 @@
 				9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */,
 				9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */,
 				9D3760102D033E5C0032957F /* ImageRepository.swift */,
+				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1288,6 +1320,7 @@
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
 				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
+				9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */,
 				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
@@ -1295,6 +1328,7 @@
 				9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */,
 				9D3760132D0345400032957F /* UIImage+toData.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
+				9D5355592D0A9FC300785888 /* UserProfileRepository.swift in Sources */,
 				9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */,
 				9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
@@ -1305,6 +1339,7 @@
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
 				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
+				9D5355572D0A9EB700785888 /* UserProfileUseCase.swift in Sources */,
 				9D0085AC2C626ED900EE241B /* MainMapViewController.swift in Sources */,
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
@@ -1316,11 +1351,14 @@
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,
 				9D04A9282CF695460046AB88 /* CardView.swift in Sources */,
+				9D53555B2D0AA07600785888 /* UserProfileModel.swift in Sources */,
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */,
 				9D0D47672D00C02B0040BA81 /* WriteNewStoryViewController.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
 				9D0D47532D009FF80040BA81 /* StoryUseCase.swift in Sources */,
+				9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */,
+				9D53555D2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */,
@@ -1328,6 +1366,7 @@
 				9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
+				9D5355542D0A9E3300785888 /* UserProfile.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
 				9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
@@ -1353,6 +1392,7 @@
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,
+				9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */,
 				9D0D47552D00A6FA0040BA81 /* StoryRepository.swift in Sources */,
 				9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */,
 			);

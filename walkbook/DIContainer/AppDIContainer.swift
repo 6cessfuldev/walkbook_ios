@@ -44,7 +44,8 @@ class AppDIContainer {
         }
         
         container.register(ProfileViewController.self) { r in
-            return ProfileViewController()
+            let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
+            return ProfileViewController(viewModel: userProfileViewModel)
         }
         
         container.register(WriteNewStoryViewController.self) { r in
@@ -59,11 +60,13 @@ class AppDIContainer {
         
         // Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
+            let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
             let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
             let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
             let naverSignInUsecase = r.resolve(NaverSignInUseCaseProtocol.self)!
             let appleSignInUseCase = r.resolve(AppleSignInUseCaseProtocol.self)!
             return AuthenticationViewModel(
+                userProfileViewModel: userProfileViewModel,
                 googleSignInUseCase: googleSignInUseCase,
                 kakaoSignInUseCase: kakaoSignInUsecase,
                 naverSignInUseCase: naverSignInUsecase,
@@ -82,6 +85,9 @@ class AppDIContainer {
             return MyStoryViewModel(storyUseCase: storyUseCase)
         }.inObjectScope(.transient)
         
+        container.register(UserProfileViewModel.self) { r in
+            return UserProfileViewModel()
+        }.inObjectScope(.container)
         
         // Register UseCases
         container.register(GoogleSignInUseCaseProtocol.self) { r in
@@ -114,6 +120,11 @@ class AppDIContainer {
             return DefaultImageUseCase(repository: repository)
         }
         
+        container.register(UserProfileUseCaseProtocol.self) { r in
+            let repository = r.resolve(UserProfileRepository.self)!
+            return DefaultUserProfileUseCase(repository: repository)
+        }
+        
         // Register Repositories
         container.register(AuthenticationRepository.self) { r in
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
@@ -121,13 +132,15 @@ class AppDIContainer {
             let naverDataSource = r.resolve(NaverSignRemoteDataSource.self)!
             let appleDataSource = r.resolve(AppleSignRemoteDataSource.self)!
             let firebaseAuthDataSource = r.resolve(FirebaseAuthRemoteDataSource.self)!
+            let userProfileDataSource = r.resolve(UserProfileRemoteDataSource.self)!
             
             return FirebaseAuthenticationRepositoryImpl(
                 googleSignRemoteDataSource: googleDataSource,
                 kakaoSignRemoteDataSource: kakaoDataSource,
                 naverSignRemoteDataSource: naverDataSource,
                 appleSignRemoteDataSource: appleDataSource,
-                firebaseAuthRemoteDataSource: firebaseAuthDataSource
+                firebaseAuthRemoteDataSource: firebaseAuthDataSource,
+                userProfileRemoteDataSource: userProfileDataSource
             )
         }
         
@@ -142,6 +155,11 @@ class AppDIContainer {
             return DefaultStorageImageRepositoryImpl(imageRemoteDataSource: imgRemoteDataSource)
         }
         
+        container.register(UserProfileRepository.self) { r in
+            let userProfileDataSource = r.resolve(UserProfileRemoteDataSource.self)!
+            return DefaultUserProfileRepositoryImpl(userProfileDataSource: userProfileDataSource)
+        }
+        
         // Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
@@ -153,6 +171,10 @@ class AppDIContainer {
         
         container.register(ImageRemoteDataSource.self) { _ in
             FirebaseStorageImageRemoteDataSourceImpl()
+        }
+        
+        container.register(UserProfileRemoteDataSource.self) { _ in
+            FirestoreUserProfileRemoteDataSourceImpl()
         }
     }
 }

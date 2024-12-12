@@ -3,7 +3,7 @@ import Foundation
 protocol AppleSignInUseCaseProtocol {
     func execute(
         nonce: String,
-        completion: @escaping (Result<String, Error>) -> Void
+        completion: @escaping (Result<UserProfile, Error>) -> Void
     )
 }
 
@@ -15,7 +15,7 @@ class AppleSignInUseCase: AppleSignInUseCaseProtocol {
         self.repository = repository
     }
     
-    func execute(nonce: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func execute(nonce: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
         return repository.signInWithApple(nonce: nonce, completion: completion)
     }
 }

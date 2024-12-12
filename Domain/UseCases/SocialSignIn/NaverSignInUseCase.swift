@@ -2,7 +2,7 @@ import Foundation
 
 protocol NaverSignInUseCaseProtocol {
     func execute(
-        completion: @escaping (Result<String, Error>) -> Void
+        completion: @escaping (Result<UserProfile, Error>) -> Void
     )
 }
 
@@ -13,7 +13,7 @@ class NaverSignInUseCase: NaverSignInUseCaseProtocol {
         self.repository = repository
     }
     
-    func execute(completion: @escaping (Result<String, Error>) -> Void) {
+    func execute(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         return repository.signInWithNaver(completion: completion)
     }
 }

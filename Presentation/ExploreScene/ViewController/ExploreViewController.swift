@@ -77,9 +77,9 @@ class ExploreViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         setupCollectionView()
         
-        viewModel.userEmail
+        viewModel.userProfile
             .asObservable()
-            .map { $0 ?? "No email" }
+            .map { $0?.id }
             .bind(to: idLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -91,7 +91,7 @@ class ExploreViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         logoutButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.userEmail.accept(nil)
+                self?.viewModel.userProfile.accept(nil)
                 self?.coordinator.didLogout()
             })
             .disposed(by: disposeBag)
