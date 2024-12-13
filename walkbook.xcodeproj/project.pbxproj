@@ -58,6 +58,14 @@
 		9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */; };
 		9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355612D0AA5C400785888 /* UserProfileMapper.swift */; };
 		9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */; };
+		9D5355662D0AFDA900785888 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355652D0AFDA900785888 /* Chapter.swift */; };
+		9D5355682D0B060D00785888 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355672D0B060D00785888 /* Condition.swift */; };
+		9D53556A2D0B07E200785888 /* GeoPointMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355692D0B07E200785888 /* GeoPointMapper.swift */; };
+		9D53556C2D0B0C0300785888 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53556B2D0B0C0300785888 /* Step.swift */; };
+		9D53556E2D0B23F100785888 /* EditChapterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53556D2D0B23F100785888 /* EditChapterListViewController.swift */; };
+		9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53556F2D0B26D000785888 /* ChapterUserState.swift */; };
+		9D5355722D0B286E00785888 /* StepUserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355712D0B286E00785888 /* StepUserState.swift */; };
+		9D5355772D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -184,6 +192,14 @@
 		9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileREmoteDataSource.swift; sourceTree = "<group>"; };
 		9D5355612D0AA5C400785888 /* UserProfileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMapper.swift; sourceTree = "<group>"; };
 		9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		9D5355652D0AFDA900785888 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		9D5355672D0B060D00785888 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		9D5355692D0B07E200785888 /* GeoPointMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPointMapper.swift; sourceTree = "<group>"; };
+		9D53556B2D0B0C0300785888 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		9D53556D2D0B23F100785888 /* EditChapterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChapterListViewController.swift; sourceTree = "<group>"; };
+		9D53556F2D0B26D000785888 /* ChapterUserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterUserState.swift; sourceTree = "<group>"; };
+		9D5355712D0B286E00785888 /* StepUserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUserState.swift; sourceTree = "<group>"; };
+		9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -393,6 +409,7 @@
 			children = (
 				9D0D47612D00B80F0040BA81 /* StoryMapper.swift */,
 				9D5355612D0AA5C400785888 /* UserProfileMapper.swift */,
+				9D5355692D0B07E200785888 /* GeoPointMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -418,6 +435,7 @@
 			children = (
 				9D0D476C2D0134B20040BA81 /* WriteNewStoryViewModel.swift */,
 				9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */,
+				9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -531,6 +549,11 @@
 			children = (
 				9D0D474E2D009C3D0040BA81 /* Story.swift */,
 				9D5355532D0A9E3300785888 /* UserProfile.swift */,
+				9D5355652D0AFDA900785888 /* Chapter.swift */,
+				9D5355672D0B060D00785888 /* Condition.swift */,
+				9D53556B2D0B0C0300785888 /* Step.swift */,
+				9D53556F2D0B26D000785888 /* ChapterUserState.swift */,
+				9D5355712D0B286E00785888 /* StepUserState.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -674,9 +697,17 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		9D5355732D0BDA8C00785888 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355732D0BDA8C00785888 /* Views */,
 				9D0D476B2D01349E0040BA81 /* ViewModels */,
 				9D0D47682D00C0AD0040BA81 /* Flows */,
 				9D7EB4252C7E1CA80060B56B /* ViewControllers */,
@@ -690,6 +721,7 @@
 				9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */,
 				9D0D47662D00C02B0040BA81 /* WriteNewStoryViewController.swift */,
 				9D3760192D05C2310032957F /* MyStoryViewController.swift */,
+				9D53556D2D0B23F100785888 /* EditChapterListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1323,6 +1355,7 @@
 				9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */,
 				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
+				9D53556A2D0B07E200785888 /* GeoPointMapper.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
 				9D0D475B2D00AC1C0040BA81 /* StoryRemoteDataSource.swift in Sources */,
 				9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */,
@@ -1335,10 +1368,12 @@
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
 				9D0D476D2D0134B20040BA81 /* WriteNewStoryViewModel.swift in Sources */,
 				9D0D476A2D00C0DB0040BA81 /* WriteNewFlowCoordinator.swift in Sources */,
+				9D5355682D0B060D00785888 /* Condition.swift in Sources */,
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
 				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
+				9D53556C2D0B0C0300785888 /* Step.swift in Sources */,
 				9D5355572D0A9EB700785888 /* UserProfileUseCase.swift in Sources */,
 				9D0085AC2C626ED900EE241B /* MainMapViewController.swift in Sources */,
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
@@ -1346,7 +1381,9 @@
 				9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
 				9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */,
+				9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
+				9D5355662D0AFDA900785888 /* Chapter.swift in Sources */,
 				9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,
@@ -1367,6 +1404,7 @@
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
 				9D5355542D0A9E3300785888 /* UserProfile.swift in Sources */,
+				9D5355722D0B286E00785888 /* StepUserState.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
 				9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
@@ -1374,9 +1412,11 @@
 				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
 				9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */,
 				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
+				9D53556E2D0B23F100785888 /* EditChapterListViewController.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
 				9D0D474D2CFE1CDE0040BA81 /* ContentInfoView.swift in Sources */,
 				9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */,
+				9D5355772D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift in Sources */,
 				9DE498A22C5612AA004F1A20 /* AppleSignRemoteDataSource.swift in Sources */,
 				9D35C5B72C3ECB0B004586C2 /* AppDelegate.swift in Sources */,
 				9D9DBC1A2C440C0D00127B06 /* SignInView.swift in Sources */,

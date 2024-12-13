@@ -5,7 +5,7 @@ class StoryMapper {
             title: model.title,
             author: model.author,
             imageUrl: model.imageUrl,
-            description: model.description
+            description: model.description, rootChapterId: model.rootChapterId
         )
     }
 
@@ -15,7 +15,8 @@ class StoryMapper {
             title: entity.title,
             author: entity.author,
             imageUrl: entity.imageUrl,
-            description: entity.description
+            description: entity.description,
+            rootChapterId: entity.rootChapterId
         )
     }
 }

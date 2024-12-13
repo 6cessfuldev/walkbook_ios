@@ -41,7 +41,7 @@ class WriteNewStoryViewModel {
                 guard let self = self else {
                     return Observable.just(.failure(NSError(domain: "ViewModelError", code: -1, userInfo: nil)))
                 }
-                let story = Story(id: nil, title: title, author: "", imageUrl: imageUrl, description: description)
+                let story = Story(id: nil, title: title, author: "", imageUrl: imageUrl, description: description, rootChapterId: nil)
                 print("submitting story \(story)")
                 return self.createStoryObservable(story)
                     .catch { error in

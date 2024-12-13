@@ -178,9 +178,9 @@ class WriteNewStoryViewController: UIViewController {
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .success:
-                    print("good")
+                    self?.navigationController?.pushViewController(EditChapterListViewController(), animated: false)
                 case .failure(let error):
-                    print("fail")
+                    print("fail: \(error)")
                 }
             })
             .disposed(by: disposeBag)
