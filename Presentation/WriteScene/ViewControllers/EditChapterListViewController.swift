@@ -115,6 +115,32 @@ class EditChapterListViewController: UIViewController {
 
         buildLevels(level: level)
     }
+    
+    private func addOtherChapter(level: Int) {
+        let addChapterVC = AddChapterViewController()
+        addChapterVC.modalPresentationStyle = .overFullScreen
+        
+        addChapterVC.onSave = { [weak self] title in
+            guard let self = self else { return }
+            
+            guard level >= 0, level < self.chapterLevels.count else { return }
+            
+            let chaptersInSameLevel = self.chapterLevels[level]
+            
+            // 새로운 Chapter 생성
+            let newChapter = Chapter(id: nil, title: title, steps: [], childChapter: [])
+            
+            self.chapterLevels[level-1][self.selectedChapterLevels[level-1]].childChapter.append(newChapter)
+            self.chapterLevels[level].append(newChapter)
+            
+            
+            // ChapterLevels 및 TableView 업데이트
+            self.updateChapterLevels(from: level, selectedIndex: chaptersInSameLevel.count)
+            self.tableView.reloadData()
+        }
+        
+        present(addChapterVC, animated: true, completion: nil)
+    }
 }
 
 extension EditChapterListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -209,30 +235,5 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
         tableView.deleteSections(indexSet, with: .automatic)
 
         tableView.endUpdates()
-    }
-    
-    private func addOtherChapter(level: Int) {
-        let addChapterVC = AddChapterViewController()
-        addChapterVC.modalPresentationStyle = .overFullScreen
-        
-        addChapterVC.onSave = { [weak self] title in
-            guard let self = self else { return }
-            
-            guard level >= 0, level < self.chapterLevels.count else { return }
-            
-            let chaptersInSameLevel = self.chapterLevels[level]
-            
-            // 새로운 Chapter 생성
-            let newChapter = Chapter(id: nil, title: title, steps: [], childChapter: [])
-            
-            self.chapterLevels[level-1][self.selectedChapterLevels[level-1]].childChapter.append(newChapter)
-            self.chapterLevels[level].append(newChapter)
-            
-            // ChapterLevels 및 TableView 업데이트
-            self.updateChapterLevels(from: level, selectedIndex: chaptersInSameLevel.count)
-            self.tableView.reloadData()
-        }
-        
-        present(addChapterVC, animated: true, completion: nil)
     }
 }
