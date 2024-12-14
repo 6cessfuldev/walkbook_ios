@@ -10,6 +10,6 @@ struct Chapter {
     var location: CLLocationCoordinate2D?
     var radius: Double?
     var steps: [Step]
-    let childChapter: [Chapter]
+    var childChapter: [Chapter]
     var nextChapterID: String?
 }

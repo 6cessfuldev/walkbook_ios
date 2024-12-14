@@ -38,11 +38,13 @@ class EditChapterListViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .background
         
+        tableView.backgroundColor = .background
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(ChapterCollectionViewTableViewCell.self, forCellReuseIdentifier: "ChapterCollectionViewTableViewCell")
+        tableView.register(AddChapterTableViewCell.self, forCellReuseIdentifier: "AddChapterTableViewCell")
         tableView.frame = view.bounds
         view.addSubview(tableView)
     }
@@ -117,7 +119,7 @@ class EditChapterListViewController: UIViewController {
 
 extension EditChapterListViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return chapterLevels.count
+        return chapterLevels.count+1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,11 +129,19 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("cellForRowAt called for section: \(indexPath.section), row: \(indexPath.row)")
         
+        if(chapterLevels.count <= indexPath.section) {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddChapterTableViewCell", for: indexPath) as? AddChapterTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChapterCollectionViewTableViewCell", for: indexPath) as? ChapterCollectionViewTableViewCell else {
             return UITableViewCell()
         }
         let chapters = chapterLevels[indexPath.section]
-        cell.configure(with: chapters, currentIndex: self.selectedChapterLevels[indexPath.section])
+        cell.configure(with: chapters, currentIndex: self.selectedChapterLevels[indexPath.section], level: indexPath.section)
         
         cell.displayedChapter
             .subscribe(onNext: { [weak self] index in
@@ -169,11 +179,21 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
             })
             .disposed(by: cell.disposeBag)
         
+        cell.addButtonAction
+            .subscribe(onNext: { [weak self] in
+                self?.addOtherChapter(level: indexPath.section)
+            })
+            .disposed(by: cell.disposeBag)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        if(chapterLevels.count <= indexPath.section) {
+            return 50
+        } else {
+            return 80
+        }
     }
     
     private func deleteSections(at indexes: [Int]) {
@@ -189,5 +209,30 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
         tableView.deleteSections(indexSet, with: .automatic)
 
         tableView.endUpdates()
+    }
+    
+    private func addOtherChapter(level: Int) {
+        let addChapterVC = AddChapterViewController()
+        addChapterVC.modalPresentationStyle = .overFullScreen
+        
+        addChapterVC.onSave = { [weak self] title in
+            guard let self = self else { return }
+            
+            guard level >= 0, level < self.chapterLevels.count else { return }
+            
+            let chaptersInSameLevel = self.chapterLevels[level]
+            
+            // 새로운 Chapter 생성
+            let newChapter = Chapter(id: nil, title: title, steps: [], childChapter: [])
+            
+            self.chapterLevels[level-1][self.selectedChapterLevels[level-1]].childChapter.append(newChapter)
+            self.chapterLevels[level].append(newChapter)
+            
+            // ChapterLevels 및 TableView 업데이트
+            self.updateChapterLevels(from: level, selectedIndex: chaptersInSameLevel.count)
+            self.tableView.reloadData()
+        }
+        
+        present(addChapterVC, animated: true, completion: nil)
     }
 }

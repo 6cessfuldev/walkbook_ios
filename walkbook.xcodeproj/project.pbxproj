@@ -66,6 +66,8 @@
 		9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53556F2D0B26D000785888 /* ChapterUserState.swift */; };
 		9D5355722D0B286E00785888 /* StepUserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355712D0B286E00785888 /* StepUserState.swift */; };
 		9D5355772D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */; };
+		9D5355792D0D7DBC00785888 /* AddChapterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355782D0D7DBC00785888 /* AddChapterTableViewCell.swift */; };
+		9D53557B2D0D993700785888 /* AddChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53557A2D0D993700785888 /* AddChapterViewController.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -200,6 +202,8 @@
 		9D53556F2D0B26D000785888 /* ChapterUserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterUserState.swift; sourceTree = "<group>"; };
 		9D5355712D0B286E00785888 /* StepUserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUserState.swift; sourceTree = "<group>"; };
 		9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewTableViewCell.swift; sourceTree = "<group>"; };
+		9D5355782D0D7DBC00785888 /* AddChapterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChapterTableViewCell.swift; sourceTree = "<group>"; };
+		9D53557A2D0D993700785888 /* AddChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChapterViewController.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -435,7 +439,6 @@
 			children = (
 				9D0D476C2D0134B20040BA81 /* WriteNewStoryViewModel.swift */,
 				9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */,
-				9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -700,6 +703,8 @@
 		9D5355732D0BDA8C00785888 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355762D0BDDA300785888 /* ChapterCollectionViewTableViewCell.swift */,
+				9D5355782D0D7DBC00785888 /* AddChapterTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				9D0D47662D00C02B0040BA81 /* WriteNewStoryViewController.swift */,
 				9D3760192D05C2310032957F /* MyStoryViewController.swift */,
 				9D53556D2D0B23F100785888 /* EditChapterListViewController.swift */,
+				9D53557A2D0D993700785888 /* AddChapterViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1351,6 +1357,7 @@
 				9D0D47572D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift in Sources */,
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
+				9D5355792D0D7DBC00785888 /* AddChapterTableViewCell.swift in Sources */,
 				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
 				9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */,
 				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
@@ -1402,6 +1409,7 @@
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
 				9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
+				9D53557B2D0D993700785888 /* AddChapterViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
 				9D5355542D0A9E3300785888 /* UserProfile.swift in Sources */,
 				9D5355722D0B286E00785888 /* StepUserState.swift in Sources */,
