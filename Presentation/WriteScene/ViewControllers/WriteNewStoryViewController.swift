@@ -5,6 +5,8 @@ import RxCocoa
 class WriteNewStoryViewController: UIViewController {
     
     private let viewModel: WriteNewStoryViewModel
+    weak var coordinator: MainFlowCoordinator!
+    
     private let disposeBag = DisposeBag()
     
     private var isItemSelected = false
@@ -178,7 +180,7 @@ class WriteNewStoryViewController: UIViewController {
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .success:
-                    self?.navigationController?.pushViewController(EditChapterListViewController(), animated: false)
+                    self?.coordinator.showEditChapterListVC()
                 case .failure(let error):
                     print("fail: \(error)")
                 }

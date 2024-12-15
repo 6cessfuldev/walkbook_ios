@@ -58,6 +58,11 @@ class AppDIContainer {
             return MyStoryViewController(viewModel: myStoryViewModel)
         }
         
+        container.register(EditChapterListViewController.self) { r in
+            let editChapterListViewModel = r.resolve(EditChapterListViewModel.self)!
+            return EditChapterListViewController(viewModel: editChapterListViewModel)
+        }
+        
         // Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
@@ -88,6 +93,10 @@ class AppDIContainer {
         container.register(UserProfileViewModel.self) { r in
             return UserProfileViewModel()
         }.inObjectScope(.container)
+        
+        container.register(EditChapterListViewModel.self) { r in
+            return EditChapterListViewModel()
+        }.inObjectScope(.transient)
         
         // Register UseCases
         container.register(GoogleSignInUseCaseProtocol.self) { r in
@@ -234,6 +243,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     
     func makeMyStoryViewController() -> MyStoryViewController {
         return self.container.resolve(MyStoryViewController.self)!
+    }
+    
+    func makeEditChapterListViewController() -> EditChapterListViewController {
+        return self.container.resolve(EditChapterListViewController.self)!
     }
 }
 
