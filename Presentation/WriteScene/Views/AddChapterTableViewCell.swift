@@ -2,11 +2,13 @@ import UIKit
 
 class AddChapterTableViewCell: UITableViewCell {
     
-    private let addButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("다음 챕터 추가하기 +", for: .normal)
-        button.setTitleColor(.yellow, for: .normal)
-        return button
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "다음 챕터 추가하기 +"
+        label.textColor = .yellow
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -20,14 +22,14 @@ class AddChapterTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        contentView.addSubview(addButton)
+        contentView.addSubview(label)
         contentView.backgroundColor = .accent
         
-        addButton.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            addButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
 }

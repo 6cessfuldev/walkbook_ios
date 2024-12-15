@@ -2,7 +2,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class WriteNewStoryViewController: UIViewController {
+class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
     
     private let viewModel: WriteNewStoryViewModel
     weak var coordinator: MainFlowCoordinator!
@@ -50,7 +50,10 @@ class WriteNewStoryViewController: UIViewController {
         setupUI()
         bindViewModel()
         
+        titleTextField.delegate = self
         descriptionTextView.delegate = self
+        descriptionTextView.autocorrectionType = .no
+        descriptionTextView.spellCheckingType = .no
     }
     
     private func setupUI() {

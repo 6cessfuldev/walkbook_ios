@@ -33,7 +33,7 @@ class WriteNewStoryViewModel {
             .filter { 
                 !_isSubmitting.value }
             .withLatestFrom(Observable.combineLatest(title, imageUrl, description))
-            .filter { !$0.0.isEmpty && !$0.1.isEmpty && !$0.2.isEmpty }
+            .filter { !$0.0.isEmpty && !$0.2.isEmpty }
             .do(onNext: { _ in
                 _isSubmitting.accept(true)
             })

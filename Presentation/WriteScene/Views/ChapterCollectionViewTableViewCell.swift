@@ -9,6 +9,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
     
     let displayedChapter = PublishSubject<Int>()
     let addButtonAction = PublishSubject<Void>()
+    let selectButtonAction = PublishSubject<Void>()
     var disposeBag = DisposeBag()
     
     private var addButtonWidthConstraint: NSLayoutConstraint?
@@ -50,6 +51,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupUI()
+        setupBindings()
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +60,9 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposeBag = DisposeBag()
+        disposeBag = DisposeBag() // 기존 바인딩 해제
+            // 바인딩 재설정 필요
+        setupBindings()
     }
 
     
@@ -106,9 +110,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
             addButtonWidthConstraint!
         ])
         
-        leftButton.addTarget(self, action: #selector(showPreviousItem), for: .touchUpInside)
-        rightButton.addTarget(self, action: #selector(showNextItem), for: .touchUpInside)
-        addButton.addTarget(self, action: #selector(addOtherChapter), for: .touchUpInside)
+        
     }
     
     func configure(with chapters: [Chapter], currentIndex: Int = 0, level: Int) {
@@ -120,6 +122,43 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         collectionView.reloadData()
         collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
         updateButtonVisibility()
+    }
+    
+    private func setupBindings() {
+        leftButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.showPreviousItem()
+            })
+            .disposed(by: disposeBag)
+        rightButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.showNextItem()
+            })
+            .disposed(by: disposeBag)
+        addButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.addOtherChapter()
+            })
+            .disposed(by: disposeBag)
+        
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.cancelsTouchesInView = false // 버튼 등의 터치를 방해하지 않도록 설정
+        collectionView.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event
+            .filter { [weak self] gesture in
+                guard let self = self else { return false }
+                let location = gesture.location(in: self.collectionView)
+                let touchedView = self.collectionView.hitTest(location, with: nil)
+                
+                // 버튼 같은 상호작용 가능한 뷰를 필터링
+                return !(touchedView is UIControl)
+            }
+            .bind { [weak self] _ in
+                self?.selectAction()
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     private func updateButtonVisibility() {
@@ -138,7 +177,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         }
     }
     
-    @objc private func showPreviousItem() {
+    private func showPreviousItem() {
         guard currentIndex > 0 else { return }
         currentIndex -= 1
         collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
@@ -146,7 +185,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         emitDisplayedChapter()
     }
     
-    @objc private func showNextItem() {
+    private func showNextItem() {
         guard currentIndex < chapters.count - 1 else { return }
         currentIndex += 1
         collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
@@ -154,8 +193,12 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         emitDisplayedChapter()
     }
     
-    @objc private func addOtherChapter() {
+    private func addOtherChapter() {
         addButtonAction.onNext(())
+    }
+    
+    private func selectAction() {
+        selectButtonAction.onNext(())
     }
     
     private func emitDisplayedChapter() {
@@ -182,7 +225,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         print("Configuring cell for chapter: \(chapter.title) at index \(indexPath.item)")
         
         let label = UILabel()
-        label.text = chapter.title
+        label.text = chapter.title.isEmpty ? "제목을 지어주세요." : chapter.title
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         

@@ -5,7 +5,7 @@ import RxCocoa
 class EditChapterListViewController: UIViewController {
 
     private let viewModel: EditChapterListViewModel
-    weak var coordinator: Coordinator!
+    weak var coordinator: MainFlowCoordinator!
     
     private let disposeBag = DisposeBag()
     
@@ -84,8 +84,22 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
                 self?.addChapter(at: indexPath.section)
             })
             .disposed(by: cell.disposeBag)
+        
+        cell.selectButtonAction
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let selectedChapter = self.viewModel.getSelectedChapter(level: indexPath.section)
+                self.coordinator.showEditChapterVC(chapter: selectedChapter)
+            })
+            .disposed(by: cell.disposeBag)
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if viewModel.chapterLevelsRelay.value.count <= indexPath.section {
+            addChapter(at: indexPath.section)
+        }
     }
 
     private func addChapter(at level: Int) {

@@ -7,29 +7,14 @@ class EditChapterListViewModel {
     let chapterLevelsRelay = BehaviorRelay<[[Chapter]]>(value: [])
     let selectedChapterLevelsRelay = BehaviorRelay<[Int]>(value: [])
 
-    private let rootChapter: Chapter = {
-        // Level 3
-        let chapter1_2_1_1 = Chapter(id: "1_2_1_1", title: "chapter1_2_1_1", steps: [], childChapter: [])
-        let chapter1_2_2_1 = Chapter(id: "1_2_2_1", title: "chapter1_2_2_1", steps: [], childChapter: [])
-        let chapter1_3_1_1 = Chapter(id: "1_3_1_1", title: "chapter1_3_1_1", steps: [], childChapter: [])
-        
-        // Level 2
-        let chapter1_2_1 = Chapter(id: "1_2_1", title: "chapter1_2_1", steps: [], childChapter: [chapter1_2_1_1])
-        let chapter1_2_2 = Chapter(id: "1_2_2", title: "chapter1_2_2", steps: [], childChapter: [chapter1_2_2_1])
-        let chapter1_3_1 = Chapter(id: "1_3_1", title: "chapter1_3_1", steps: [], childChapter: [chapter1_3_1_1])
-        
-        // Level 1
-        let chapter1_1 = Chapter(id: "1_1", title: "chapter1_1", steps: [], childChapter: [])
-        let chapter1_2 = Chapter(id: "1_2", title: "chapter1_2", steps: [], childChapter: [chapter1_2_1, chapter1_2_2])
-        let chapter1_3 = Chapter(id: "1_3", title: "chapter1_3", steps: [], childChapter: [chapter1_3_1])
-        let chapter1_4 = Chapter(id: "1_4", title: "chapter1_4", steps: [], childChapter: [])
-        
-        // Level 0 (Root)
-        return Chapter(id: "1", title: "chapter1", steps: [], childChapter: [chapter1_1, chapter1_2, chapter1_3, chapter1_4])
-    }()
+    private let rootChapter: Chapter = Chapter(title: "")
     
     init() {
         prepareChapterLevels()
+    }
+    
+    func getSelectedChapter(level: Int) -> Chapter {
+        return chapterLevelsRelay.value[level][selectedChapterLevelsRelay.value[level]]
     }
 
     private func prepareChapterLevels() {
@@ -108,12 +93,17 @@ class EditChapterListViewModel {
 
     func addOtherChapter(level: Int, title: String) {
         var chapterLevels = chapterLevelsRelay.value
-        let selectedChapterLevels = selectedChapterLevelsRelay.value
+        var selectedChapterLevels = selectedChapterLevelsRelay.value
 
-        guard level > 0, level < chapterLevels.count else { return }
-
+        guard level > 0, level < chapterLevels.count + 1 else { return }
+        
         let newChapter = Chapter(id: nil, title: title, steps: [], childChapter: [])
         chapterLevels[level - 1][selectedChapterLevels[level - 1]].childChapter.append(newChapter)
+        
+        if(level == chapterLevels.count) {
+            chapterLevels.append([])
+            selectedChapterLevels.append(0)
+        }
         chapterLevels[level].append(newChapter)
 
         chapterLevelsRelay.accept(chapterLevels)

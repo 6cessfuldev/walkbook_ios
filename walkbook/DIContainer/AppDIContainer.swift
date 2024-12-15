@@ -63,6 +63,12 @@ class AppDIContainer {
             return EditChapterListViewController(viewModel: editChapterListViewModel)
         }
         
+        container.register(EditChapterViewController.self) { (resolver, chapter: Chapter) in
+            let viewModel = resolver.resolve(EditChapterViewModel.self, argument: chapter)!
+            return EditChapterViewController(viewModel: viewModel)
+        }
+
+        
         // Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
@@ -96,6 +102,11 @@ class AppDIContainer {
         
         container.register(EditChapterListViewModel.self) { r in
             return EditChapterListViewModel()
+        }.inObjectScope(.transient)
+        
+        container.register(EditChapterViewModel.self) { (r, chapter: Chapter) in
+            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)
         
         // Register UseCases
@@ -247,6 +258,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     
     func makeEditChapterListViewController() -> EditChapterListViewController {
         return self.container.resolve(EditChapterListViewController.self)!
+    }
+    
+    func makeEditChapterViewController(chapter: Chapter) -> EditChapterViewController {
+        return self.container.resolve(EditChapterViewController.self, argument: chapter)!
     }
 }
 
