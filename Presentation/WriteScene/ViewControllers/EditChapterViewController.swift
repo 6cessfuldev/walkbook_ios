@@ -121,12 +121,23 @@ class EditChapterViewController: UIViewController {
     }
     
     private func setupBindings() {
+        titleTextField.text = viewModel.title.value
+        descriptionTextView.text = viewModel.description.value
+        
         titleTextField.rx.text.orEmpty
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
-        
+
         descriptionTextView.rx.text.orEmpty
             .bind(to: viewModel.description)
+            .disposed(by: disposeBag)
+
+        viewModel.title
+            .bind(to: titleTextField.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.description
+            .bind(to: descriptionTextView.rx.text)
             .disposed(by: disposeBag)
         
         viewModel.selectedImage

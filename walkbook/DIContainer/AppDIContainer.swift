@@ -106,6 +106,7 @@ class AppDIContainer {
         
         container.register(EditChapterViewModel.self) { (r, chapter: Chapter) in
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            print(chapter)
             return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)
         
