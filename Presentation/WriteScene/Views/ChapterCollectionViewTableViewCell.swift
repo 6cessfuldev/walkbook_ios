@@ -120,7 +120,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         
         updateAddButtonVisibility(isHidden: level == 0)
         collectionView.reloadData()
-        collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
         updateButtonVisibility()
     }
     
@@ -172,9 +172,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         addButtonWidthConstraint?.constant = isHidden ? 0 : 40
         collectionViewTrailingConstraint?.constant = isHidden ? 0 : -40
 
-        UIView.animate(withDuration: 0.3) {
-            self.contentView.layoutIfNeeded()
-        }
+        self.contentView.layoutIfNeeded()
     }
     
     private func showPreviousItem() {
