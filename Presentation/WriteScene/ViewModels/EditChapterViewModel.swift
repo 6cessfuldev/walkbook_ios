@@ -113,7 +113,8 @@ class EditChapterViewModel {
         print("Updated chapter: \(currentChapter)")
     }
     
-    func addOtherStep(title: String) {
-        print("Step's title: \(title)")
+    func addOtherStep(step: Step) {
+        let currentChapter = chapter.value
+        currentChapter.steps.append(step)
     }
 }
