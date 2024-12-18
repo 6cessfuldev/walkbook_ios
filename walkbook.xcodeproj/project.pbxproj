@@ -58,7 +58,7 @@
 		9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */; };
 		9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355612D0AA5C400785888 /* UserProfileMapper.swift */; };
 		9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */; };
-		9D5355662D0AFDA900785888 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355652D0AFDA900785888 /* Chapter.swift */; };
+		9D5355662D0AFDA900785888 /* NestedChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355652D0AFDA900785888 /* NestedChapter.swift */; };
 		9D5355682D0B060D00785888 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355672D0B060D00785888 /* Condition.swift */; };
 		9D53556A2D0B07E200785888 /* GeoPointMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355692D0B07E200785888 /* GeoPointMapper.swift */; };
 		9D53556C2D0B0C0300785888 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53556B2D0B0C0300785888 /* Step.swift */; };
@@ -77,6 +77,12 @@
 		9D53558C2D119CB900785888 /* AddAudioStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53558B2D119CB900785888 /* AddAudioStepViewController.swift */; };
 		9D53558E2D119D3C00785888 /* AddVideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53558D2D119D3C00785888 /* AddVideoStepViewController.swift */; };
 		9D5355902D119DFD00785888 /* AddQuestionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53558F2D119DFD00785888 /* AddQuestionStepViewController.swift */; };
+		9D5355972D12A08A00785888 /* ChapterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355962D12A08A00785888 /* ChapterUseCase.swift */; };
+		9D5355992D12A18900785888 /* ChapterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355982D12A18900785888 /* ChapterRepository.swift */; };
+		9D53559B2D12A25F00785888 /* ChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53559A2D12A25F00785888 /* ChapterModel.swift */; };
+		9D53559F2D12F7C400785888 /* ChapterTreeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53559E2D12F7C400785888 /* ChapterTreeBuilder.swift */; };
+		9D5355A12D13029100785888 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A02D13029100785888 /* Chapter.swift */; };
+		9D5355A62D1315B800785888 /* ChapterTreeBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -203,7 +209,7 @@
 		9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileREmoteDataSource.swift; sourceTree = "<group>"; };
 		9D5355612D0AA5C400785888 /* UserProfileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMapper.swift; sourceTree = "<group>"; };
 		9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
-		9D5355652D0AFDA900785888 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		9D5355652D0AFDA900785888 /* NestedChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedChapter.swift; sourceTree = "<group>"; };
 		9D5355672D0B060D00785888 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		9D5355692D0B07E200785888 /* GeoPointMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoPointMapper.swift; sourceTree = "<group>"; };
 		9D53556B2D0B0C0300785888 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
@@ -222,6 +228,12 @@
 		9D53558B2D119CB900785888 /* AddAudioStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAudioStepViewController.swift; sourceTree = "<group>"; };
 		9D53558D2D119D3C00785888 /* AddVideoStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVideoStepViewController.swift; sourceTree = "<group>"; };
 		9D53558F2D119DFD00785888 /* AddQuestionStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionStepViewController.swift; sourceTree = "<group>"; };
+		9D5355962D12A08A00785888 /* ChapterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterUseCase.swift; sourceTree = "<group>"; };
+		9D5355982D12A18900785888 /* ChapterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterRepository.swift; sourceTree = "<group>"; };
+		9D53559A2D12A25F00785888 /* ChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterModel.swift; sourceTree = "<group>"; };
+		9D53559E2D12F7C400785888 /* ChapterTreeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTreeBuilder.swift; sourceTree = "<group>"; };
+		9D5355A02D13029100785888 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTreeBuilderTests.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +444,7 @@
 				9D0D47612D00B80F0040BA81 /* StoryMapper.swift */,
 				9D5355612D0AA5C400785888 /* UserProfileMapper.swift */,
 				9D5355692D0B07E200785888 /* GeoPointMapper.swift */,
+				9D53559E2D12F7C400785888 /* ChapterTreeBuilder.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -558,6 +571,7 @@
 		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355952D12A07100785888 /* Chapter */,
 				9D5355552D0A9EA600785888 /* User */,
 				9D37600D2D03367D0032957F /* Image */,
 				9D0D47512D009F9E0040BA81 /* Story */,
@@ -572,7 +586,8 @@
 			children = (
 				9D0D474E2D009C3D0040BA81 /* Story.swift */,
 				9D5355532D0A9E3300785888 /* UserProfile.swift */,
-				9D5355652D0AFDA900785888 /* Chapter.swift */,
+				9D5355652D0AFDA900785888 /* NestedChapter.swift */,
+				9D5355A02D13029100785888 /* Chapter.swift */,
 				9D5355672D0B060D00785888 /* Condition.swift */,
 				9D53556B2D0B0C0300785888 /* Step.swift */,
 				9D53556F2D0B26D000785888 /* ChapterUserState.swift */,
@@ -620,6 +635,7 @@
 			children = (
 				9D0D475C2D00AE660040BA81 /* StoryModel.swift */,
 				9D53555A2D0AA07600785888 /* UserProfileModel.swift */,
+				9D53559A2D12A25F00785888 /* ChapterModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -740,6 +756,22 @@
 				9D53558F2D119DFD00785888 /* AddQuestionStepViewController.swift */,
 			);
 			path = AddStep;
+			sourceTree = "<group>";
+		};
+		9D5355952D12A07100785888 /* Chapter */ = {
+			isa = PBXGroup;
+			children = (
+				9D5355962D12A08A00785888 /* ChapterUseCase.swift */,
+			);
+			path = Chapter;
+			sourceTree = "<group>";
+		};
+		9D5355A22D13153700785888 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
@@ -941,6 +973,7 @@
 				9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */,
 				9D3760102D033E5C0032957F /* ImageRepository.swift */,
 				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
+				9D5355982D12A18900785888 /* ChapterRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -998,6 +1031,7 @@
 		9DE4986D2C536A52004F1A20 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355A22D13153700785888 /* Mapper */,
 				9DE4986E2C536A81004F1A20 /* Repositories */,
 			);
 			path = Data;
@@ -1365,6 +1399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5355A62D1315B800785888 /* ChapterTreeBuilderTests.swift in Sources */,
 				9DE4989F2C560A40004F1A20 /* MockKakaoSignInUseCase.swift in Sources */,
 				9DE4989D2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift in Sources */,
 				9DCBE4F62C5691B700BDB378 /* MockNaverSignInUseCase.swift in Sources */,
@@ -1389,6 +1424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D53559B2D12A25F00785888 /* ChapterModel.swift in Sources */,
 				9D0D47572D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift in Sources */,
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D9DBC312C4BEB8C00127B06 /* AppleSignInButton.swift in Sources */,
@@ -1410,6 +1446,7 @@
 				9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */,
 				9D9DBC262C442C3400127B06 /* KakaoSignInButton.swift in Sources */,
 				9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */,
+				9D5355992D12A18900785888 /* ChapterRepository.swift in Sources */,
 				9D0D476D2D0134B20040BA81 /* WriteNewStoryViewModel.swift in Sources */,
 				9D0D476A2D00C0DB0040BA81 /* WriteNewFlowCoordinator.swift in Sources */,
 				9D5355682D0B060D00785888 /* Condition.swift in Sources */,
@@ -1423,12 +1460,14 @@
 				9D9DBC212C44170900127B06 /* GoogleSignInButton.swift in Sources */,
 				9D20C5852C424F64008AB5EE /* AppDIContainer.swift in Sources */,
 				9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */,
+				9D53559F2D12F7C400785888 /* ChapterTreeBuilder.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
 				9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */,
 				9D53558C2D119CB900785888 /* AddAudioStepViewController.swift in Sources */,
+				9D5355A12D13029100785888 /* Chapter.swift in Sources */,
 				9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
-				9D5355662D0AFDA900785888 /* Chapter.swift in Sources */,
+				9D5355662D0AFDA900785888 /* NestedChapter.swift in Sources */,
 				9D5355902D119DFD00785888 /* AddQuestionStepViewController.swift in Sources */,
 				9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
@@ -1479,6 +1518,7 @@
 				9D53557F2D0E9D5400785888 /* EditChapterViewController.swift in Sources */,
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
+				9D5355972D12A08A00785888 /* ChapterUseCase.swift in Sources */,
 				9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */,
 				9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */,
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,

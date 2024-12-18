@@ -3,7 +3,7 @@ import RxSwift
 
 class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private var chapters: [Chapter] = []
+    private var chapters: [NestedChapter] = []
     private var currentIndex: Int = 0
     private var level: Int = 0
     
@@ -113,7 +113,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         
     }
     
-    func configure(with chapters: [Chapter], currentIndex: Int = 0, level: Int) {
+    func configure(with chapters: [NestedChapter], currentIndex: Int = 0, level: Int) {
         self.chapters = chapters
         self.currentIndex = currentIndex
         self.level = level

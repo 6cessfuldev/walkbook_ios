@@ -1,25 +1,27 @@
-import CoreLocation
+import FirebaseFirestore
 
-class Chapter {
-    let id: String?
+struct ChapterModel: Codable {
+    var id: String?
     var storyId: String?
     var title: String
     var imageUrl: String?
     var description: String?
-    var location: CLLocationCoordinate2D?
+    var location: GeoPoint?
     var radius: Double?
     var steps: [String]
     var childChapters: [String]
-    
-    init(id: String? = nil,
-         storyId: String? = nil,
-         title: String,
-         imageUrl: String? = nil,
-         description: String? = nil,
-         location: CLLocationCoordinate2D? = nil,
-         radius: Double? = nil,
-         steps: [String] = [],
-         childChapters: [String] = []) {
+
+    init(
+        id: String? = nil,
+        storyId: String? = nil,
+        title: String,
+        imageUrl: String? = nil,
+        description: String? = nil,
+        location: GeoPoint? = nil,
+        radius: Double? = nil,
+        steps: [String] = [],
+        childChapters: [String] = []
+    ) {
         self.id = id
         self.storyId = storyId
         self.title = title

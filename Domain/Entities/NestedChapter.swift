@@ -1,6 +1,6 @@
 import CoreLocation
 
-class Chapter {
+class NestedChapter {
     let id: String?
     var storyId: String?
     var title: String
@@ -9,7 +9,7 @@ class Chapter {
     var location: CLLocationCoordinate2D?
     var radius: Double?
     var steps: [String]
-    var childChapters: [String]
+    var childChapters: [NestedChapter]
     
     init(id: String? = nil,
          storyId: String? = nil,
@@ -19,7 +19,7 @@ class Chapter {
          location: CLLocationCoordinate2D? = nil,
          radius: Double? = nil,
          steps: [String] = [],
-         childChapters: [String] = []) {
+         childChapters: [NestedChapter] = []) {
         self.id = id
         self.storyId = storyId
         self.title = title

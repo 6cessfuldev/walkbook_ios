@@ -4,24 +4,24 @@ import RxCocoa
 class EditChapterListViewModel {
     private let disposeBag = DisposeBag()
 
-    let chapterLevelsRelay = BehaviorRelay<[[Chapter]]>(value: [])
+    let chapterLevelsRelay = BehaviorRelay<[[NestedChapter]]>(value: [])
     let selectedChapterLevelsRelay = BehaviorRelay<[Int]>(value: [])
 
-    private let rootChapter: Chapter = Chapter(title: "")
+    private let rootChapter: NestedChapter = NestedChapter(title: "")
     
     init() {
         prepareChapterLevels()
     }
     
-    func getSelectedChapter(level: Int) -> Chapter {
+    func getSelectedChapter(level: Int) -> NestedChapter {
         return chapterLevelsRelay.value[level][selectedChapterLevelsRelay.value[level]]
     }
 
     private func prepareChapterLevels() {
-        var chapterLevels: [[Chapter]] = []
+        var chapterLevels: [[NestedChapter]] = []
         var selectedChapterLevels: [Int] = []
         
-        func buildLevels(from chapter: Chapter, level: Int) {
+        func buildLevels(from chapter: NestedChapter, level: Int) {
             if chapterLevels.count <= level {
                 chapterLevels.append([])
                 selectedChapterLevels.append(0)
@@ -31,14 +31,14 @@ class EditChapterListViewModel {
                 chapterLevels[level].append(chapter)
             }
 
-            if !chapter.childChapter.isEmpty {
+            if !chapter.childChapters.isEmpty {
                 if chapterLevels.count <= level + 1 {
                     chapterLevels.append([])
                 }
 
-                chapterLevels[level + 1].append(contentsOf: chapter.childChapter)
+                chapterLevels[level + 1].append(contentsOf: chapter.childChapters)
 
-                let selectedChild = chapter.childChapter[selectedChapterLevels[level]]
+                let selectedChild = chapter.childChapters[selectedChapterLevels[level]]
                 buildLevels(from: selectedChild, level: level + 1)
             }
         }
@@ -75,13 +75,13 @@ class EditChapterListViewModel {
 
             let selectedChapter = chapterLevels[level][selectedChapterLevels[level]]
 
-            guard !selectedChapter.childChapter.isEmpty else { return }
+            guard !selectedChapter.childChapters.isEmpty else { return }
 
             if chapterLevels.count <= level + 1 {
                 chapterLevels.append([])
             }
 
-            chapterLevels[level + 1].append(contentsOf: selectedChapter.childChapter)
+            chapterLevels[level + 1].append(contentsOf: selectedChapter.childChapters)
 
             buildLevels(level: level + 1)
         }
@@ -97,8 +97,8 @@ class EditChapterListViewModel {
 
         guard level > 0, level < chapterLevels.count + 1 else { return }
         
-        let newChapter = Chapter(id: nil, title: title, steps: [], childChapter: [])
-        chapterLevels[level - 1][selectedChapterLevels[level - 1]].childChapter.append(newChapter)
+        let newChapter = NestedChapter(id: nil, title: title, steps: [], childChapters: [])
+        chapterLevels[level - 1][selectedChapterLevels[level - 1]].childChapters.append(newChapter)
         
         if(level == chapterLevels.count) {
             chapterLevels.append([])

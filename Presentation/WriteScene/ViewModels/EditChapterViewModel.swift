@@ -24,13 +24,7 @@ class EditChapterViewModel {
         let initialChapter = chapter ?? Chapter(
             title: "챕터 제목",
             steps: [
-                Step(id: nil, type: StepType.text("hi")),
-                Step(id: nil, type: StepType.text("1")),
-                Step(id: nil, type: StepType.text("hi2")),
-                Step(id: nil, type: StepType.text("hi3")),
-                Step(id: nil, type: StepType.text("hi4")),
-                Step(id: nil, type: StepType.text("hi5")),
-                Step(id: nil, type: StepType.text("hi6"))
+                "1","2","3","4"
             ]
         )
         
@@ -115,6 +109,13 @@ class EditChapterViewModel {
     
     func addOtherStep(step: Step) {
         let currentChapter = chapter.value
-        currentChapter.steps.append(step)
+        let stepId = createStep(step: step)
+        currentChapter.steps.append(stepId)
+    }
+    
+    // TODO: Step 데이터 생성 API 호출 후 생성된 step Id 반환
+    func createStep(step: Step) -> String {
+        print("create Step")
+        return "1"
     }
 }

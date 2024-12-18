@@ -261,7 +261,7 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
         return self.container.resolve(EditChapterListViewController.self)!
     }
     
-    func makeEditChapterViewController(chapter: Chapter) -> EditChapterViewController {
+    func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController {
         return self.container.resolve(EditChapterViewController.self, argument: chapter)!
     }
 }
