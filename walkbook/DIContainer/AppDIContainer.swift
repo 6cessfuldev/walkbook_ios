@@ -143,10 +143,8 @@ class AppDIContainer {
         
         container.register(UserProfileUseCaseProtocol.self) { r in
             let userProfilerepository = r.resolve(UserProfileRepository.self)!
-            let localStorageRepository = r.resolve(LocalStorageRepository.self)!
             return DefaultUserProfileUseCase(
-                userProfileRepository: userProfilerepository,
-                localStorageRepository: localStorageRepository
+                userProfileRepository: userProfilerepository
             )
         }
         
