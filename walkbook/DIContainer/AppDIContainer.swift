@@ -142,8 +142,12 @@ class AppDIContainer {
         }
         
         container.register(UserProfileUseCaseProtocol.self) { r in
-            let repository = r.resolve(UserProfileRepository.self)!
-            return DefaultUserProfileUseCase(repository: repository)
+            let userProfilerepository = r.resolve(UserProfileRepository.self)!
+            let localStorageRepository = r.resolve(LocalStorageRepository.self)!
+            return DefaultUserProfileUseCase(
+                userProfileRepository: userProfilerepository,
+                localStorageRepository: localStorageRepository
+            )
         }
         
         // Register Repositories
@@ -181,6 +185,11 @@ class AppDIContainer {
             return DefaultUserProfileRepositoryImpl(userProfileDataSource: userProfileDataSource)
         }
         
+        container.register(LocalStorageRepository.self) { r in
+            let localDataSource = r.resolve(LocalDataSource.self)!
+            return DefaultLocalStorageRepositoryImpl(localDataSource: localDataSource)
+        }
+        
         // Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
@@ -196,6 +205,10 @@ class AppDIContainer {
         
         container.register(UserProfileRemoteDataSource.self) { _ in
             FirestoreUserProfileRemoteDataSourceImpl()
+        }
+        
+        container.register(LocalDataSource.self) { _ in
+            UserDefaultsLocalDataSourceImpl()
         }
     }
 }

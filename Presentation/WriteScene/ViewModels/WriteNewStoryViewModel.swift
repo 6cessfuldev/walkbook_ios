@@ -15,6 +15,10 @@ class WriteNewStoryViewModel {
     let isSubmitting: Driver<Bool>
     let submissionResult: Driver<Result<Void, Error>>
     
+    private let _isSubmitting = BehaviorRelay<Bool>(value: false)
+    private let _submissionResult = PublishRelay<Result<Void, Error>>()
+
+    
     private let storyUseCase: StoryUseCaseProtocol
     private let imageUseCase: ImageUseCaseProtocol
     private let disposeBag = DisposeBag()
@@ -23,19 +27,26 @@ class WriteNewStoryViewModel {
         self.storyUseCase = storyUseCase
         self.imageUseCase = imageUseCase
         
-        let _isSubmitting = BehaviorRelay<Bool>(value: false)
-        let _submissionResult = PublishRelay<Result<Void, Error>>()
-        
         self.isSubmitting = _isSubmitting.asDriver()
         self.submissionResult = _submissionResult.asDriver(onErrorJustReturn: .failure(NSError(domain: "UnknownError", code: -1, userInfo: nil)))
-        
+
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        bindSubmission()
+        bindImageSelection()
+    }
+    
+    private func bindSubmission() {
         submitTapped
-            .filter { 
-                !_isSubmitting.value }
+            .filter {
+                !self._isSubmitting.value
+            }
             .withLatestFrom(Observable.combineLatest(title, imageUrl, description))
             .filter { !$0.0.isEmpty && !$0.2.isEmpty }
             .do(onNext: { _ in
-                _isSubmitting.accept(true)
+                self._isSubmitting.accept(true)
             })
             .flatMapLatest { [weak self] title, imageUrl, description -> Observable<Result<Void, Error>> in
                 guard let self = self else {
@@ -45,22 +56,28 @@ class WriteNewStoryViewModel {
                 print("submitting story \(story)")
                 return self.createStoryObservable(story)
                     .catch { error in
-                        _isSubmitting.accept(false)
+                        self._isSubmitting.accept(false)
                         return Observable.just(.failure(error))
-                }
+                    }
             }
-            .do(onNext: { _ in _isSubmitting.accept(false) })
+            .do(onNext: { _ in
+                self._isSubmitting.accept(false)
+            })
             .bind(to: _submissionResult)
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindImageSelection() {
         selectedImage
             .compactMap { $0 }
             .distinctUntilChanged()
             .do(onNext: { _ in
-                _isSubmitting.accept(true)
+                self._isSubmitting.accept(true)
             })
             .flatMapLatest { [weak self] image -> Observable<String?> in
-                guard let self = self, let data = image.toData() else { return Observable.just(nil) }
+                guard let self = self, let data = image.toData() else {
+                    return Observable.just(nil)
+                }
                 return Observable.create { observer in
                     self.imageUseCase.uploadImage(data) { result in
                         switch result {
@@ -76,20 +93,13 @@ class WriteNewStoryViewModel {
                     return Disposables.create()
                 }
                 .do(onDispose: {
-                    _isSubmitting.accept(false)
+                    self._isSubmitting.accept(false)
                 })
             }
-            
             .subscribe(onNext: { [weak self] url in
                 if let url = url {
-                    self?.imageUrl.accept(url) // imageUrl 업데이트
+                    self?.imageUrl.accept(url) // Update imageUrl
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        _isSubmitting
-            .subscribe(onNext: { isSubmitting in
-                print("isSubmitting: \(isSubmitting)")
             })
             .disposed(by: disposeBag)
     }

@@ -55,7 +55,7 @@
 		9D5355592D0A9FC300785888 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355582D0A9FC300785888 /* UserProfileRepository.swift */; };
 		9D53555B2D0AA07600785888 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555A2D0AA07600785888 /* UserProfileModel.swift */; };
 		9D53555D2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */; };
-		9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */; };
+		9D5355602D0AA3C700785888 /* UserProfileRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53555F2D0AA3C700785888 /* UserProfileRemoteDataSource.swift */; };
 		9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355612D0AA5C400785888 /* UserProfileMapper.swift */; };
 		9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */; };
 		9D5355662D0AFDA900785888 /* NestedChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355652D0AFDA900785888 /* NestedChapter.swift */; };
@@ -84,6 +84,9 @@
 		9D5355A12D13029100785888 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A02D13029100785888 /* Chapter.swift */; };
 		9D5355A62D1315B800785888 /* ChapterTreeBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */; };
 		9D5355AA2D13197700785888 /* MockUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A92D13197700785888 /* MockUserProfileViewModel.swift */; };
+		9D5355B02D14020300785888 /* LocalStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */; };
+		9D5355B32D1403AD00785888 /* DefaultLocalStorageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */; };
+		9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B42D14069300785888 /* LocalDataSource.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -207,7 +210,7 @@
 		9D5355582D0A9FC300785888 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		9D53555A2D0AA07600785888 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 		9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepositoryImpl.swift; sourceTree = "<group>"; };
-		9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileREmoteDataSource.swift; sourceTree = "<group>"; };
+		9D53555F2D0AA3C700785888 /* UserProfileRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRemoteDataSource.swift; sourceTree = "<group>"; };
 		9D5355612D0AA5C400785888 /* UserProfileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileMapper.swift; sourceTree = "<group>"; };
 		9D5355632D0AB1A200785888 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		9D5355652D0AFDA900785888 /* NestedChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedChapter.swift; sourceTree = "<group>"; };
@@ -236,6 +239,9 @@
 		9D5355A02D13029100785888 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTreeBuilderTests.swift; sourceTree = "<group>"; };
 		9D5355A92D13197700785888 /* MockUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserProfileViewModel.swift; sourceTree = "<group>"; };
+		9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageRepository.swift; sourceTree = "<group>"; };
+		9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocalStorageRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D5355B42D14069300785888 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -617,6 +623,7 @@
 		9D20C57F2C420798008AB5EE /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355B42D14069300785888 /* LocalDataSource.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -627,7 +634,7 @@
 				9D0D47582D00AAAC0040BA81 /* SocialSignIn */,
 				9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */,
 				9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */,
-				9D53555F2D0AA3C700785888 /* UserProfileREmoteDataSource.swift */,
+				9D53555F2D0AA3C700785888 /* UserProfileRemoteDataSource.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -649,6 +656,7 @@
 				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
 				9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */,
 				9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */,
+				9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -992,6 +1000,7 @@
 				9D3760102D033E5C0032957F /* ImageRepository.swift */,
 				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
 				9D5355982D12A18900785888 /* ChapterRepository.swift */,
+				9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1451,7 +1460,7 @@
 				9D53558A2D119C6100785888 /* AddImageStepViewController.swift in Sources */,
 				9D5355792D0D7DBC00785888 /* AddChapterTableViewCell.swift in Sources */,
 				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
-				9D5355602D0AA3C700785888 /* UserProfileREmoteDataSource.swift in Sources */,
+				9D5355602D0AA3C700785888 /* UserProfileRemoteDataSource.swift in Sources */,
 				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9D53556A2D0B07E200785888 /* GeoPointMapper.swift in Sources */,
@@ -1473,6 +1482,7 @@
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
 				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
+				9D5355B32D1403AD00785888 /* DefaultLocalStorageRepositoryImpl.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
 				9D53556C2D0B0C0300785888 /* Step.swift in Sources */,
 				9D5355572D0A9EB700785888 /* UserProfileUseCase.swift in Sources */,
@@ -1487,6 +1497,7 @@
 				9D5355A12D13029100785888 /* Chapter.swift in Sources */,
 				9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
+				9D5355B02D14020300785888 /* LocalStorageRepository.swift in Sources */,
 				9D5355662D0AFDA900785888 /* NestedChapter.swift in Sources */,
 				9D5355902D119DFD00785888 /* AddQuestionStepViewController.swift in Sources */,
 				9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */,
@@ -1543,6 +1554,7 @@
 				9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */,
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
+				9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */,
 				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,
 				9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */,
 				9D0D47552D00A6FA0040BA81 /* StoryRepository.swift in Sources */,
