@@ -54,13 +54,21 @@ class WriteNewStoryViewModel {
                 guard let self = self else {
                     return Observable.just(.failure(NSError(domain: "ViewModelError", code: -1, userInfo: nil)))
                 }
-                let story = Story(id: nil, title: title, author: "", imageUrl: imageUrl, description: description, rootChapterId: nil)
-                print("submitting story \(story)")
-                return self.createStoryObservable(story)
-                    .catch { error in
-                        self._isSubmitting.accept(false)
-                        return Observable.just(.failure(error))
-                    }
+                
+                let sessionUserIdResult = self.userProfileUseCase.getUserIDFromSession()
+                switch sessionUserIdResult {
+                case .success(let userID):
+                    let story = Story(id: nil, title: title, author: userID, imageUrl: imageUrl, description: description, rootChapterId: nil)
+                    return self.createStoryObservable(story)
+                        .catch { error in
+                            self._isSubmitting.accept(false)
+                            return Observable.just(.failure(error))
+                        }
+                    
+                case .failure(let error):
+                    print("Failed to get user ID from Session: \(error.localizedDescription)")
+                    return Observable.just(.failure(error))
+                }
             }
             .do(onNext: { _ in
                 self._isSubmitting.accept(false)
