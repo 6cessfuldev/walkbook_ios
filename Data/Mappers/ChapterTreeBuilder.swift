@@ -19,19 +19,17 @@ class ChapterTreeBuilder {
                 chapterLookup[id] = nestedChapter
             }
         }
-        
-        var rootChapter: NestedChapter?
 
         for flatChapter in flatChapters {
             guard let currentNode = flatChapter.id.flatMap({ chapterLookup[$0] }) else { continue }
             
             let childNodes = flatChapter.childChapters.compactMap { chapterLookup[$0] }
             currentNode.childChapters.append(contentsOf: childNodes)
-
-            if flatChapter.storyId == nil || flatChapters.allSatisfy({ !$0.childChapters.contains(flatChapter.id ?? "") }) {
-                rootChapter = currentNode
-            }
         }
+        
+        let rootChapter = flatChapters.first { flatChapter in
+            flatChapters.allSatisfy { flatChapter.id != nil && !$0.childChapters.contains(flatChapter.id!) }
+        }.flatMap { return $0.id == nil ? nil : chapterLookup[$0.id!] }
 
         return rootChapter
     }

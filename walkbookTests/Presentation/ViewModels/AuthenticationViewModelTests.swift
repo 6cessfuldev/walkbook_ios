@@ -11,6 +11,7 @@ class AuthenticationViewModelTests: XCTestCase {
     var mockKakaoSignInUseCase: MockKakaoSignInUseCase!
     var mockNaverSignInUseCase: MockNaverSignInUseCase!
     var mockAppleSignInUseCase: MockAppleSignInUseCase!
+    var mockUserProfileViewmodel: MockUserProfileViewModel!
     
     var disposeBag: DisposeBag!
     
@@ -21,7 +22,7 @@ class AuthenticationViewModelTests: XCTestCase {
         mockNaverSignInUseCase = MockNaverSignInUseCase()
         mockAppleSignInUseCase = MockAppleSignInUseCase()
         viewModel = AuthenticationViewModel(
-            googleSignInUseCase: mockGoogleSignInUseCase, 
+            userProfileViewModel: MockUserProfileViewModel(), googleSignInUseCase: mockGoogleSignInUseCase,
             kakaoSignInUseCase: mockKakaoSignInUseCase,
             naverSignInUseCase: mockNaverSignInUseCase,
             appleSignInUseCase: mockAppleSignInUseCase)
@@ -77,9 +78,9 @@ class AuthenticationViewModelTests: XCTestCase {
     func test_GoogleSignIn_성공_시_email_값_전달받음() {
         let expectation = self.expectation(description: "email 값 전달받음")
         
-        viewModel.userEmail
-            .subscribe(onNext: { email in
-                XCTAssertEqual(email, self.mockGoogleSignInUseCase.mockEmail)
+        viewModel.userProfile
+            .subscribe(onNext: { userProfile in
+                XCTAssertEqual(userProfile?.name, self.mockGoogleSignInUseCase.mockEmail)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -113,9 +114,9 @@ class AuthenticationViewModelTests: XCTestCase {
     func test_KakaoSignIn_성공_시_email_값_전달받음() {
         let expectation = self.expectation(description: "email 값 전달받음")
         
-        viewModel.userEmail
-            .subscribe(onNext: { email in
-                XCTAssertEqual(email, self.mockKakaoSignInUseCase.mockEmail)
+        viewModel.userProfile
+            .subscribe(onNext: { userProfile in
+                XCTAssertEqual(userProfile?.name, self.mockKakaoSignInUseCase.mockEmail)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -149,9 +150,9 @@ class AuthenticationViewModelTests: XCTestCase {
     func test_NaverSignIn_성공_시_email_값_전달받음() {
         let expectation = self.expectation(description: "email 값 전달받음")
         
-        viewModel.userEmail
-            .subscribe(onNext: { email in
-                XCTAssertEqual(email, self.mockNaverSignInUseCase.mockEmail)
+        viewModel.userProfile
+            .subscribe(onNext: { userProfile in
+                XCTAssertEqual(userProfile?.name, self.mockNaverSignInUseCase.mockEmail)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
@@ -185,9 +186,9 @@ class AuthenticationViewModelTests: XCTestCase {
     func test_AppleSignIn_성공_시_email_값_전달받음() {
         let expectation = self.expectation(description: "email 값 전달받음")
         
-        viewModel.userEmail
-            .subscribe(onNext: { email in
-                XCTAssertEqual(email, self.mockAppleSignInUseCase.mockEmail)
+        viewModel.userProfile
+            .subscribe(onNext: { userProfile in
+                XCTAssertEqual(userProfile?.name, self.mockAppleSignInUseCase.mockEmail)
                 expectation.fulfill()
             })
             .disposed(by: disposeBag)
