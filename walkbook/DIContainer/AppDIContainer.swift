@@ -14,8 +14,8 @@ class AppDIContainer {
 
     init() {
         container = Container()
-
-        // Register ViewControllers
+        
+        //MARK: - Register ViewControllers
         container.register(AuthenticationViewController.self) { r in
             let viewModel = r.resolve(AuthenticationViewModel.self)!
             return AuthenticationViewController(viewModel: viewModel)
@@ -69,7 +69,7 @@ class AppDIContainer {
         }
 
         
-        // Register ViewModel
+        //MARK: - Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
             let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
@@ -106,7 +106,6 @@ class AppDIContainer {
         
         container.register(EditChapterViewModel.self) { (r, chapter: Chapter) in
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
-            print(chapter)
             return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)
         
@@ -150,7 +149,7 @@ class AppDIContainer {
             )
         }
         
-        // Register Repositories
+        //MARK: - Register Repositories
         container.register(AuthenticationRepository.self) { r in
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
             let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
@@ -190,7 +189,7 @@ class AppDIContainer {
             return DefaultLocalStorageRepositoryImpl(localDataSource: localDataSource)
         }
         
-        // Register Data Sources
+        //MARK: - Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
         container.register(KakaoSignRemoteDataSource.self) { _ in KakaoSignRemoteDataSourceImpl() }
