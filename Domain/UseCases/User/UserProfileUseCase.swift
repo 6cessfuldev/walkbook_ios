@@ -2,18 +2,25 @@ import Foundation
 
 protocol UserProfileUseCaseProtocol {
     func getUserProfileFromNetwork(byId id: String, completion: @escaping (Result<UserProfile, Error>) -> Void)
+    func getUserProfileFromSession() -> Result<UserProfile, Error>
     func updateUserProfile(_ userProfile: UserProfile, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class DefaultUserProfileUseCase: UserProfileUseCaseProtocol {
     private let userProfileRepository: UserProfileRepository
+    private let sessionRepository: SessionRepository
     
-    init(userProfileRepository: UserProfileRepository) {
+    init(userProfileRepository: UserProfileRepository, sessionRepository: SessionRepository) {
         self.userProfileRepository = userProfileRepository
+        self.sessionRepository = sessionRepository
     }
 
     func getUserProfileFromNetwork(byId id: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        userProfileRepository.getUserProfile(byId: id, completion: completion)
+        self.userProfileRepository.getUserProfile(byId: id, completion: completion)
+    }
+    
+    func getUserProfileFromSession() -> Result<UserProfile, Error> {
+        self.sessionRepository.getUserProfile()
     }
 
     func updateUserProfile(_ userProfile: UserProfile, completion: @escaping (Result<Void, Error>) -> Void) {

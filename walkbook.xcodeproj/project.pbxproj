@@ -84,9 +84,9 @@
 		9D5355A12D13029100785888 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A02D13029100785888 /* Chapter.swift */; };
 		9D5355A62D1315B800785888 /* ChapterTreeBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */; };
 		9D5355AA2D13197700785888 /* MockUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355A92D13197700785888 /* MockUserProfileViewModel.swift */; };
-		9D5355B02D14020300785888 /* LocalStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */; };
-		9D5355B32D1403AD00785888 /* DefaultLocalStorageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */; };
+		9D5355B32D1403AD00785888 /* DefaultSessionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */; };
 		9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B42D14069300785888 /* LocalDataSource.swift */; };
+		9D5355B92D14411A00785888 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B72D1440F800785888 /* SessionRepository.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -239,9 +239,9 @@
 		9D5355A02D13029100785888 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		9D5355A52D1315B800785888 /* ChapterTreeBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTreeBuilderTests.swift; sourceTree = "<group>"; };
 		9D5355A92D13197700785888 /* MockUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserProfileViewModel.swift; sourceTree = "<group>"; };
-		9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageRepository.swift; sourceTree = "<group>"; };
-		9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocalStorageRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSessionRepositoryImpl.swift; sourceTree = "<group>"; };
 		9D5355B42D14069300785888 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
+		9D5355B72D1440F800785888 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -656,7 +656,7 @@
 				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
 				9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */,
 				9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */,
-				9D5355B12D1403A300785888 /* DefaultLocalStorageRepositoryImpl.swift */,
+				9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1000,7 +1000,7 @@
 				9D3760102D033E5C0032957F /* ImageRepository.swift */,
 				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
 				9D5355982D12A18900785888 /* ChapterRepository.swift */,
-				9D5355AE2D14018F00785888 /* LocalStorageRepository.swift */,
+				9D5355B72D1440F800785888 /* SessionRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1482,7 +1482,7 @@
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
 				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
-				9D5355B32D1403AD00785888 /* DefaultLocalStorageRepositoryImpl.swift in Sources */,
+				9D5355B32D1403AD00785888 /* DefaultSessionRepositoryImpl.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
 				9D53556C2D0B0C0300785888 /* Step.swift in Sources */,
 				9D5355572D0A9EB700785888 /* UserProfileUseCase.swift in Sources */,
@@ -1497,9 +1497,9 @@
 				9D5355A12D13029100785888 /* Chapter.swift in Sources */,
 				9D5355702D0B26D000785888 /* ChapterUserState.swift in Sources */,
 				9D0085B12C62703B00EE241B /* ExploreViewController.swift in Sources */,
-				9D5355B02D14020300785888 /* LocalStorageRepository.swift in Sources */,
 				9D5355662D0AFDA900785888 /* NestedChapter.swift in Sources */,
 				9D5355902D119DFD00785888 /* AddQuestionStepViewController.swift in Sources */,
+				9D5355B92D14411A00785888 /* SessionRepository.swift in Sources */,
 				9D0D473C2CFB1A420040BA81 /* ThumbnailCardCell.swift in Sources */,
 				9D20C5872C425270008AB5EE /* AppFlowCoordinator.swift in Sources */,
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,

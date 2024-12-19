@@ -1,10 +1,3 @@
-//
-//  AppDIContainer.swift
-//  walkbook
-//
-//  Created by 육성민 on 7/13/24.
-//
-
 import Foundation
 import Swinject
 
@@ -110,7 +103,7 @@ class AppDIContainer {
             return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)
         
-        // Register UseCases
+        //MARK: - Register UseCases
         container.register(GoogleSignInUseCaseProtocol.self) { r in
             let repository = r.resolve(AuthenticationRepository.self)!
             return GoogleSignInUseCase(repository: repository)
@@ -143,8 +136,11 @@ class AppDIContainer {
         
         container.register(UserProfileUseCaseProtocol.self) { r in
             let userProfilerepository = r.resolve(UserProfileRepository.self)!
+            let sessionRepository = r.resolve(SessionRepository.self)!
             return DefaultUserProfileUseCase(
-                userProfileRepository: userProfilerepository
+                userProfileRepository: userProfilerepository,
+                sessionRepository: sessionRepository
+                
             )
         }
         
@@ -183,9 +179,9 @@ class AppDIContainer {
             return DefaultUserProfileRepositoryImpl(userProfileDataSource: userProfileDataSource)
         }
         
-        container.register(LocalStorageRepository.self) { r in
+        container.register(SessionRepository.self) { r in
             let localDataSource = r.resolve(LocalDataSource.self)!
-            return DefaultLocalStorageRepositoryImpl(localDataSource: localDataSource)
+            return DefaultSessionRepositoryImpl(localDataSource: localDataSource)
         }
         
         //MARK: - Register Data Sources
