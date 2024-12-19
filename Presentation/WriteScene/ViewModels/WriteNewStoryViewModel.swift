@@ -21,11 +21,13 @@ class WriteNewStoryViewModel {
     
     private let storyUseCase: StoryUseCaseProtocol
     private let imageUseCase: ImageUseCaseProtocol
+    private let userProfileUseCase: UserProfileUseCaseProtocol
     private let disposeBag = DisposeBag()
     
-    init(storyUseCase: StoryUseCaseProtocol, imageUseCase: ImageUseCaseProtocol) {
+    init(storyUseCase: StoryUseCaseProtocol, imageUseCase: ImageUseCaseProtocol, userProfileUseCase: UserProfileUseCaseProtocol) {
         self.storyUseCase = storyUseCase
         self.imageUseCase = imageUseCase
+        self.userProfileUseCase = userProfileUseCase
         
         self.isSubmitting = _isSubmitting.asDriver()
         self.submissionResult = _submissionResult.asDriver(onErrorJustReturn: .failure(NSError(domain: "UnknownError", code: -1, userInfo: nil)))
