@@ -9,6 +9,7 @@ class AuthenticationViewControllerTests: XCTestCase {
     var viewController: AuthenticationViewController!
     var mockViewModel: AuthenticationViewModel!
     var mockuserProfileViewModel: UserProfileViewModel!
+    var mockSignInUseCase: MockSignInUseCase!
     var coordinator: MockAuthenticationFlowCoordinator!
     var scheduler: TestScheduler!
     var disposeBag: DisposeBag!
@@ -19,10 +20,7 @@ class AuthenticationViewControllerTests: XCTestCase {
         disposeBag = DisposeBag()
         mockViewModel = AuthenticationViewModel(
             userProfileViewModel: mockuserProfileViewModel,
-            googleSignInUseCase: MockGoogleSignInUseCase(),
-            kakaoSignInUseCase: MockKakaoSignInUseCase(),
-            naverSignInUseCase: MockNaverSignInUseCase(),
-            appleSignInUseCase: MockAppleSignInUseCase()
+            signInUseCase: MockSignInUseCase()
         )
         coordinator = MockAuthenticationFlowCoordinator(navigationController: UINavigationController(), dependencies: AppDIContainer())
         viewController = AuthenticationViewController(viewModel: mockViewModel)

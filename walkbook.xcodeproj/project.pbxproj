@@ -88,6 +88,7 @@
 		9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B42D14069300785888 /* LocalDataSource.swift */; };
 		9D5355B92D14411A00785888 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B72D1440F800785888 /* SessionRepository.swift */; };
 		9D5355BC2D15113600785888 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355BA2D15112C00785888 /* SignInUseCase.swift */; };
+		9D5355BE2D15136C00785888 /* MockSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355BD2D15136C00785888 /* MockSignInUseCase.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -110,7 +111,6 @@
 		9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F83742CC7D536003E3A2C /* Carousell.swift */; };
 		9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */; };
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
-		9DCBE4F62C5691B700BDB378 /* MockNaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */; };
 		9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */; };
 		9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */; };
 		9DCBE5022C590CFF00BDB378 /* AuthenticationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */; };
@@ -122,9 +122,6 @@
 		9DE498682C527A4A004F1A20 /* NonceUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498672C527A4A004F1A20 /* NonceUtilsTests.swift */; };
 		9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498722C537145004F1A20 /* AuthenticationViewModel.swift */; };
 		9DE498772C53C5B5004F1A20 /* AuthenticationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498762C53C5B5004F1A20 /* AuthenticationViewModelTests.swift */; };
-		9DE4987B2C53C695004F1A20 /* MockAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */; };
-		9DE4989D2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989C2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift */; };
-		9DE4989F2C560A40004F1A20 /* MockKakaoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989E2C560A40004F1A20 /* MockKakaoSignInUseCase.swift */; };
 		9DE498A22C5612AA004F1A20 /* AppleSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */; };
 		9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A42C561338004F1A20 /* GoogleSignRemoteDataSource.swift */; };
 		9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A62C561498004F1A20 /* KakaoSignRemoteDataSource.swift */; };
@@ -240,6 +237,7 @@
 		9D5355B42D14069300785888 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		9D5355B72D1440F800785888 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
 		9D5355BA2D15112C00785888 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		9D5355BD2D15136C00785888 /* MockSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSignInUseCase.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 		9D9F83742CC7D536003E3A2C /* Carousell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousell.swift; sourceTree = "<group>"; };
 		9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
-		9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNaverSignInUseCase.swift; sourceTree = "<group>"; };
 		9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewControllerTests.swift; sourceTree = "<group>"; };
@@ -275,12 +272,9 @@
 		9DE498672C527A4A004F1A20 /* NonceUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonceUtilsTests.swift; sourceTree = "<group>"; };
 		9DE498722C537145004F1A20 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		9DE498762C53C5B5004F1A20 /* AuthenticationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModelTests.swift; sourceTree = "<group>"; };
-		9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE4988E2C551114004F1A20 /* CustomReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomReleaseConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498982C5514D6004F1A20 /* CustomDebugConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomDebugConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498992C551C08004F1A20 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		9DE4989C2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGoogleSignInUseCase.swift; sourceTree = "<group>"; };
-		9DE4989E2C560A40004F1A20 /* MockKakaoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKakaoSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DE498A42C561338004F1A20 /* GoogleSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DE498A62C561498004F1A20 /* KakaoSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -979,6 +973,7 @@
 		9DE498562C5139F4004F1A20 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355BD2D15136C00785888 /* MockSignInUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1099,10 +1094,6 @@
 		9DE498792C53C682004F1A20 /* UserCases */ = {
 			isa = PBXGroup;
 			children = (
-				9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */,
-				9DE4989C2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift */,
-				9DE4989E2C560A40004F1A20 /* MockKakaoSignInUseCase.swift */,
-				9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */,
 			);
 			path = UserCases;
 			sourceTree = "<group>";
@@ -1419,12 +1410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D5355AA2D13197700785888 /* MockUserProfileViewModel.swift in Sources */,
+				9D5355BE2D15136C00785888 /* MockSignInUseCase.swift in Sources */,
 				9D5355A62D1315B800785888 /* ChapterTreeBuilderTests.swift in Sources */,
-				9DE4989F2C560A40004F1A20 /* MockKakaoSignInUseCase.swift in Sources */,
-				9DE4989D2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift in Sources */,
-				9DCBE4F62C5691B700BDB378 /* MockNaverSignInUseCase.swift in Sources */,
 				9DE498772C53C5B5004F1A20 /* AuthenticationViewModelTests.swift in Sources */,
-				9DE4987B2C53C695004F1A20 /* MockAppleSignInUseCase.swift in Sources */,
 				9DE498682C527A4A004F1A20 /* NonceUtilsTests.swift in Sources */,
 				9DCBE5022C590CFF00BDB378 /* AuthenticationViewControllerTests.swift in Sources */,
 			);
