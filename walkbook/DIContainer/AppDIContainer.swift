@@ -56,7 +56,7 @@ class AppDIContainer {
             return EditChapterListViewController(viewModel: editChapterListViewModel)
         }
         
-        container.register(EditChapterViewController.self) { (resolver, chapter: Chapter) in
+        container.register(EditChapterViewController.self) { (resolver, chapter: NestedChapter) in
             let viewModel = resolver.resolve(EditChapterViewModel.self, argument: chapter)!
             return EditChapterViewController(viewModel: viewModel)
         }
@@ -92,7 +92,7 @@ class AppDIContainer {
             return EditChapterListViewModel()
         }.inObjectScope(.transient)
         
-        container.register(EditChapterViewModel.self) { (r, chapter: Chapter) in
+        container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
             return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)

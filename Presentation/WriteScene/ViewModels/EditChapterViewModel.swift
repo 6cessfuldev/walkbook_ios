@@ -4,7 +4,7 @@ import RxCocoa
 class EditChapterViewModel {
     
     // MARK: - Properties
-    let chapter: BehaviorRelay<Chapter>
+    let chapter: BehaviorRelay<NestedChapter>
     let title: BehaviorRelay<String>
     let description: BehaviorRelay<String>
     let selectedImage = BehaviorRelay<UIImage?>(value: nil)
@@ -19,9 +19,9 @@ class EditChapterViewModel {
     
     // MARK: - Initializer
     
-    init(chapter: Chapter?, imageUseCase: ImageUseCaseProtocol) {
+    init(chapter: NestedChapter?, imageUseCase: ImageUseCaseProtocol) {
         
-        let initialChapter = chapter ?? Chapter(
+        let initialChapter = chapter ?? NestedChapter(
             title: "챕터 제목",
             steps: [
                 "1","2","3","4"
