@@ -99,8 +99,9 @@ class AppDIContainer {
         
         //MARK: - Register UseCases
         container.register(SignInUseCaseProtocol.self) { r in
-            let repository = r.resolve(AuthenticationRepository.self)!
-            return SignInUseCase(repository: repository)
+            let authRepository = r.resolve(AuthenticationRepository.self)!
+            let sessionRepository = r.resolve(SessionRepository.self)!
+            return SignInUseCase(authRepository: authRepository, sessionRepository: sessionRepository)
         }
         
         container.register(StoryUseCaseProtocol.self) { r in

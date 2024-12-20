@@ -46,10 +46,15 @@ class DefaultSessionRepositoryImpl: SessionRepository {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(UserProfileMapper.toModel(userProfile))
                 self.localDataSource.saveData(data, forKey: LocalDataKeys.userProfile)
-                completion(.success(()))
+                
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
             } catch {
                 print("Failed to encode UserProfile: \(error)")
-                completion(.failure(error))
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             }
         }
     }

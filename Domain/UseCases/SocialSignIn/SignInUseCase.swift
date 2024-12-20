@@ -16,25 +16,48 @@ protocol SignInUseCaseProtocol {
 
 class SignInUseCase: SignInUseCaseProtocol {
     
-    private let repository: AuthenticationRepository
+    private let authRepository: AuthenticationRepository
+    private let sessionRepository: SessionRepository
     
-    init(repository: AuthenticationRepository) {
-        self.repository = repository
+    init(authRepository: AuthenticationRepository, sessionRepository: SessionRepository) {
+        self.authRepository = authRepository
+        self.sessionRepository = sessionRepository
     }
     
     func execute(provider: AuthProvider, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        signInNetwork(provider: provider) { result in
+            switch result {
+            case .success(let userProfile):
+                self.saveSession(profile: userProfile) { sessionResult in
+                    if case .failure(let error) = sessionResult {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(userProfile))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func signInNetwork(provider: AuthProvider, completion: @escaping (Result<UserProfile, Error>) -> Void) {
         switch provider {
         case .google(let presenting):
-            repository.signInWithGoogle(presenting: presenting, completion: completion)
+            authRepository.signInWithGoogle(presenting: presenting, completion: completion)
             
         case .apple(let nonce):
-            repository.signInWithApple(nonce: nonce, completion: completion)
+            authRepository.signInWithApple(nonce: nonce, completion: completion)
             
         case .kakao:
-            repository.signInWithKakao(completion: completion)
+            authRepository.signInWithKakao(completion: completion)
             
         case .naver:
-            repository.signInWithNaver(completion: completion)
+            authRepository.signInWithNaver(completion: completion)
         }
+    }
+    
+    func saveSession(profile: UserProfile, completion: @escaping (Result<Void, Error>) -> Void) {
+        sessionRepository.saveUserProfile(profile, completion: completion)
     }
 }
