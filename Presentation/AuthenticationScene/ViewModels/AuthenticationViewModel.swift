@@ -12,10 +12,7 @@ enum AuthenticationState {
 
 class AuthenticationViewModel {
     private let userProfileViewModel: UserProfileViewModel
-    private let googleSignInUseCase: GoogleSignInUseCaseProtocol
-    private let kakaoSignInUseCase: KakaoSignInUseCaseProtocol
-    private let naverSignInUseCase: NaverSignInUseCaseProtocol
-    private let appleSignInUseCase: AppleSignInUseCaseProtocol
+    private let signInUseCase: SignInUseCaseProtocol
     
     // Inputs
     let signInTapped = PublishSubject<Void>()
@@ -35,16 +32,11 @@ class AuthenticationViewModel {
     
     init(
         userProfileViewModel: UserProfileViewModel,
-        googleSignInUseCase: GoogleSignInUseCaseProtocol,
-        kakaoSignInUseCase: KakaoSignInUseCaseProtocol,
-        naverSignInUseCase: NaverSignInUseCaseProtocol,
-        appleSignInUseCase: AppleSignInUseCaseProtocol)
+        signInUseCase: SignInUseCaseProtocol
+    )
     {
         self.userProfileViewModel = userProfileViewModel
-        self.googleSignInUseCase = googleSignInUseCase
-        self.kakaoSignInUseCase = kakaoSignInUseCase
-        self.naverSignInUseCase = naverSignInUseCase
-        self.appleSignInUseCase = appleSignInUseCase
+        self.signInUseCase = signInUseCase
         setupBindings()
     }
     
@@ -90,7 +82,7 @@ class AuthenticationViewModel {
     private func startSignInWithAppleFlow() {
         let nonce = NonceUtils.randomNonceString()
         currentNonce = nonce
-        appleSignInUseCase.execute(nonce: nonce) { [weak self] result in
+        signInUseCase.execute(provider: .apple(nonce: nonce)) { [weak self] result in
             switch result {
             case .success(let userProfile):
                 self?.userProfileViewModel.signIn(user: userProfile)
@@ -102,7 +94,7 @@ class AuthenticationViewModel {
     }
     
     private func signInWithKakaoFlow() {
-        kakaoSignInUseCase.execute { [weak self] result in
+        signInUseCase.execute(provider: .kakao) { [weak self] result in
             switch result {
             case .success(let userProfile):
                 self?.userProfileViewModel.signIn(user: userProfile)
@@ -114,7 +106,7 @@ class AuthenticationViewModel {
     }
     
     private func signInWithGoogleFlow(presenting viewController: UIViewController) {
-        googleSignInUseCase.execute(presenting: viewController) { [weak self] result in
+        signInUseCase.execute(provider: .google(presenting: viewController)) { [weak self] result in
             switch result {
             case .success(let userProfile):
                 self?.userProfileViewModel.signIn(user: userProfile)
@@ -126,7 +118,7 @@ class AuthenticationViewModel {
     }
     
     private func signInWithNaverFlow() {
-        naverSignInUseCase.execute { [weak self] result in
+        signInUseCase.execute(provider: .naver) { [weak self] result in
             switch result {
             case .success(let userProfile):
                 self?.userProfileViewModel.signIn(user: userProfile)

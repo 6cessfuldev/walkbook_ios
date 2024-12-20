@@ -87,6 +87,7 @@
 		9D5355B32D1403AD00785888 /* DefaultSessionRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */; };
 		9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B42D14069300785888 /* LocalDataSource.swift */; };
 		9D5355B92D14411A00785888 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355B72D1440F800785888 /* SessionRepository.swift */; };
+		9D5355BC2D15113600785888 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355BA2D15112C00785888 /* SignInUseCase.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -109,12 +110,10 @@
 		9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9F83742CC7D536003E3A2C /* Carousell.swift */; };
 		9DCBE4F02C566DFC00BDB378 /* NaverSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */; };
 		9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */; };
-		9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */; };
 		9DCBE4F62C5691B700BDB378 /* MockNaverSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */; };
 		9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */; };
 		9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */; };
 		9DCBE5022C590CFF00BDB378 /* AuthenticationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */; };
-		9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */; };
 		9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */; };
 		9DE4985B2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */; };
 		9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4985D2C5145A6004F1A20 /* UseCase.swift */; };
@@ -124,8 +123,6 @@
 		9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498722C537145004F1A20 /* AuthenticationViewModel.swift */; };
 		9DE498772C53C5B5004F1A20 /* AuthenticationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498762C53C5B5004F1A20 /* AuthenticationViewModelTests.swift */; };
 		9DE4987B2C53C695004F1A20 /* MockAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */; };
-		9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */; };
-		9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */; };
 		9DE4989D2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989C2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift */; };
 		9DE4989F2C560A40004F1A20 /* MockKakaoSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4989E2C560A40004F1A20 /* MockKakaoSignInUseCase.swift */; };
 		9DE498A22C5612AA004F1A20 /* AppleSignRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */; };
@@ -242,6 +239,7 @@
 		9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSessionRepositoryImpl.swift; sourceTree = "<group>"; };
 		9D5355B42D14069300785888 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		9D5355B72D1440F800785888 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
+		9D5355BA2D15112C00785888 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -264,13 +262,11 @@
 		9D9F83742CC7D536003E3A2C /* Carousell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousell.swift; sourceTree = "<group>"; };
 		9DCBE4EF2C566DFC00BDB378 /* NaverSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignRemoteDataSource.swift; sourceTree = "<group>"; };
 		9DCBE4F12C56711600BDB378 /* UIApplication+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+topViewController.swift"; sourceTree = "<group>"; };
-		9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSignInUseCase.swift; sourceTree = "<group>"; };
 		9DCBE4F52C5691B700BDB378 /* MockNaverSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNaverSignInUseCase.swift; sourceTree = "<group>"; };
 		9DCBE4FC2C58E92000BDB378 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9DCBE4FE2C58EA8F00BDB378 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		9DCBE5012C590CFF00BDB378 /* AuthenticationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewControllerTests.swift; sourceTree = "<group>"; };
 		9DE498502C4FEF91004F1A20 /* walkbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = walkbook.entitlements; sourceTree = "<group>"; };
-		9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticationRepositoryImpl.swift; sourceTree = "<group>"; };
 		9DE4985D2C5145A6004F1A20 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
@@ -280,11 +276,9 @@
 		9DE498722C537145004F1A20 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		9DE498762C53C5B5004F1A20 /* AuthenticationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModelTests.swift; sourceTree = "<group>"; };
 		9DE4987A2C53C695004F1A20 /* MockAppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppleSignInUseCase.swift; sourceTree = "<group>"; };
-		9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE4988E2C551114004F1A20 /* CustomReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomReleaseConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498982C5514D6004F1A20 /* CustomDebugConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CustomDebugConfig.xcconfig; sourceTree = "<group>"; };
 		9DE498992C551C08004F1A20 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE4989C2C5609E5004F1A20 /* MockGoogleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGoogleSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE4989E2C560A40004F1A20 /* MockKakaoSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKakaoSignInUseCase.swift; sourceTree = "<group>"; };
 		9DE498A02C560EFD004F1A20 /* AppleSignRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -418,10 +412,7 @@
 		9D0D47502D009F650040BA81 /* SocialSignIn */ = {
 			isa = PBXGroup;
 			children = (
-				9DE498512C513875004F1A20 /* AppleSignInUseCase.swift */,
-				9DE4988C2C54C7E4004F1A20 /* GoogleSignInUseCase.swift */,
-				9DE4989A2C55231D004F1A20 /* KakaoSignInUseCase.swift */,
-				9DCBE4F32C56762F00BDB378 /* NaverSignInUseCase.swift */,
+				9D5355BA2D15112C00785888 /* SignInUseCase.swift */,
 			);
 			path = SocialSignIn;
 			sourceTree = "<group>";
@@ -1524,13 +1515,13 @@
 				9D53557B2D0D993700785888 /* AddChapterViewController.swift in Sources */,
 				9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */,
 				9D5355542D0A9E3300785888 /* UserProfile.swift in Sources */,
+				9D5355BC2D15113600785888 /* SignInUseCase.swift in Sources */,
 				9D5355722D0B286E00785888 /* StepUserState.swift in Sources */,
 				9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */,
 				9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */,
 				9DCBE4FF2C58EA8F00BDB378 /* MainFlowCoordinator.swift in Sources */,
 				9D53557D2D0E979500785888 /* EditChapterListViewModel.swift in Sources */,
 				9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */,
-				9DCBE4F42C56762F00BDB378 /* NaverSignInUseCase.swift in Sources */,
 				9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */,
 				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
 				9D53556E2D0B23F100785888 /* EditChapterListViewController.swift in Sources */,
@@ -1550,15 +1541,12 @@
 				9D9DBC1C2C44121E00127B06 /* SignUpView.swift in Sources */,
 				9D35C5B92C3ECB0B004586C2 /* SceneDelegate.swift in Sources */,
 				9D5355972D12A08A00785888 /* ChapterUseCase.swift in Sources */,
-				9DE4989B2C55231D004F1A20 /* KakaoSignInUseCase.swift in Sources */,
 				9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */,
 				9D9DBC2D2C4434F300127B06 /* UIColor+hex.swift in Sources */,
 				9DE498592C513EED004F1A20 /* AuthenticationRepository.swift in Sources */,
 				9D5355B62D14072B00785888 /* LocalDataSource.swift in Sources */,
-				9DE4988D2C54C7E4004F1A20 /* GoogleSignInUseCase.swift in Sources */,
 				9D5355622D0AA5C400785888 /* UserProfileMapper.swift in Sources */,
 				9D0D47552D00A6FA0040BA81 /* StoryRepository.swift in Sources */,
-				9DE498522C513875004F1A20 /* AppleSignInUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

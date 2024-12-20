@@ -65,16 +65,10 @@ class AppDIContainer {
         //MARK: - Register ViewModel
         container.register(AuthenticationViewModel.self) { r in
             let userProfileViewModel = r.resolve(UserProfileViewModel.self)!
-            let googleSignInUseCase = r.resolve(GoogleSignInUseCaseProtocol.self)!
-            let kakaoSignInUsecase = r.resolve(KakaoSignInUseCaseProtocol.self)!
-            let naverSignInUsecase = r.resolve(NaverSignInUseCaseProtocol.self)!
-            let appleSignInUseCase = r.resolve(AppleSignInUseCaseProtocol.self)!
+            let signInUseCase = r.resolve(SignInUseCaseProtocol.self)!
             return AuthenticationViewModel(
                 userProfileViewModel: userProfileViewModel,
-                googleSignInUseCase: googleSignInUseCase,
-                kakaoSignInUseCase: kakaoSignInUsecase,
-                naverSignInUseCase: naverSignInUsecase,
-                appleSignInUseCase: appleSignInUseCase
+                signInUseCase: signInUseCase
             )
         }.inObjectScope(.container)
         
@@ -104,24 +98,9 @@ class AppDIContainer {
         }.inObjectScope(.transient)
         
         //MARK: - Register UseCases
-        container.register(GoogleSignInUseCaseProtocol.self) { r in
+        container.register(SignInUseCaseProtocol.self) { r in
             let repository = r.resolve(AuthenticationRepository.self)!
-            return GoogleSignInUseCase(repository: repository)
-        }
-        
-        container.register(KakaoSignInUseCaseProtocol.self) { r in
-            let repository = r.resolve(AuthenticationRepository.self)!
-            return KakaoSignInUseCase(repository: repository)
-        }
-        
-        container.register(NaverSignInUseCaseProtocol.self) { r in
-            let repository = r.resolve(AuthenticationRepository.self)!
-            return NaverSignInUseCase(repository: repository)
-        }
-        
-        container.register(AppleSignInUseCaseProtocol.self) { r in
-            let repository = r.resolve(AuthenticationRepository.self)!
-            return AppleSignInUseCase(repository: repository)
+            return SignInUseCase(repository: repository)
         }
         
         container.register(StoryUseCaseProtocol.self) { r in
@@ -146,6 +125,7 @@ class AppDIContainer {
         
         //MARK: - Register Repositories
         container.register(AuthenticationRepository.self) { r in
+            let sessionRepository = r.resolve(SessionRepository.self)!
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
             let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
             let naverDataSource = r.resolve(NaverSignRemoteDataSource.self)!
