@@ -44,18 +44,8 @@ class GoogleSignRemoteDataSourceImpl: GoogleSignRemoteDataSource {
                 
                 if let user = Auth.auth().currentUser {
                     let uid = user.uid
-                    let email = user.email
-                    let displayName = user.displayName
-                    let photoURL = user.photoURL
-                    let emailVerified = user.isEmailVerified
                     
-                    // Print user info
-                    print("User ID: \(uid)")
-                    print("User Email: \(String(describing: email))")
-                    print("Display Name: \(String(describing: displayName))")
-                    print("Photo URL: \(String(describing: photoURL))")
-                    print("Email Verified: \(emailVerified)")
-                    self.completion?(.success(email ?? ""))
+                    self.completion?(.success(uid))
                 }
             }
         }

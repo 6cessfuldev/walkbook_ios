@@ -63,8 +63,8 @@ extension AppleSignRemoteDataSourceImpl: ASAuthorizationControllerDelegate, ASAu
                 }
                 
                 if let user = Auth.auth().currentUser {
-                    let email = user.email ?? ""
-                    self.completion?(.success(email))
+                    let uid = user.uid
+                    self.completion?(.success(uid))
                 }
             }
         }
