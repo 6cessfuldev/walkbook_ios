@@ -32,7 +32,7 @@ class DefaultStoryRepositoryImpl: StoryRepository {
     }
     
     func fetchStoriesByAuthorId(id: String, completion: @escaping (Result<[Story], Error>) -> Void) {
-        storyRemoteDataSource.fetchAll { result in
+        storyRemoteDataSource.fetchByAuthorId(by: id) { result in
             switch result {
             case .success(let models):
                 let entities = models.map { StoryMapper.toEntity($0) }

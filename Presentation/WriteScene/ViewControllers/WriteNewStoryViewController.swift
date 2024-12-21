@@ -8,8 +8,6 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
     weak var coordinator: MainFlowCoordinator!
     
     private let disposeBag = DisposeBag()
-    
-    private var isItemSelected = false
         
     private let actionImageView = UIImageView()
     private let plusIconImageView = UIImageView()
@@ -51,7 +49,6 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         bindViewModel()
         
         titleTextField.delegate = self
-        descriptionTextView.delegate = self
         descriptionTextView.autocorrectionType = .no
         descriptionTextView.spellCheckingType = .no
     }
@@ -133,11 +130,30 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func bindViewModel() {
+        viewModel.title
+            .asDriver()
+            .distinctUntilChanged()
+            .drive(titleTextField.rx.text)
+            .disposed(by: disposeBag)
+        
         titleTextField.rx.text.orEmpty
+            .distinctUntilChanged()
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
         
         descriptionTextView.rx.text.orEmpty
+            .map { !$0.isEmpty }
+            .bind(to: placeholderLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.description
+            .asDriver()
+            .distinctUntilChanged()
+            .drive(descriptionTextView.rx.text)
+            .disposed(by: disposeBag)
+        
+        descriptionTextView.rx.text.orEmpty
+            .distinctUntilChanged()
             .bind(to: viewModel.description)
             .disposed(by: disposeBag)
         
@@ -159,31 +175,27 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
             .filter { $0 != nil }
             .drive(onNext: { [weak self] image in
                 self?.actionImageView.image = image
-                if(self?.isItemSelected == false) {
-                    self?.isItemSelected = true
-                    self?.plusIconImageView.isHidden = true
-                }
             })
             .disposed(by: disposeBag)
         
         viewModel.isSubmitting
-                .drive(onNext: { [weak self] isSubmitting in
-                    guard let self = self else { return }
-                    if isSubmitting {
-                        self.loadingIndicator.startAnimating()
-                        self.plusIconImageView.isHidden = true
-                    } else {
-                        self.loadingIndicator.stopAnimating()
-                        self.plusIconImageView.isHidden = false
-                    }
-                })
-                .disposed(by: disposeBag)
+            .drive(onNext: { [weak self] isSubmitting in
+                guard let self = self else { return }
+                if isSubmitting {
+                    self.loadingIndicator.startAnimating()
+                    self.plusIconImageView.isHidden = true
+                } else {
+                    self.loadingIndicator.stopAnimating()
+                    self.plusIconImageView.isHidden = false
+                }
+            })
+            .disposed(by: disposeBag)
         
         viewModel.submissionResult
             .drive(onNext: { [weak self] result in
                 switch result {
-                case .success(let story):
-                    self?.coordinator.showEditChapterListVC(story: story)
+                case .success():
+                    self?.coordinator.showMyStoryVC()
                 case .failure(let error):
                     print("fail: \(error)")
                 }
@@ -203,13 +215,8 @@ extension WriteNewStoryViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             viewModel.selectedImage.accept(image)
+            viewModel.uploadImage()
         }
         picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension WriteNewStoryViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }

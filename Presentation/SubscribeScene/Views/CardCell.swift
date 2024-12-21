@@ -23,7 +23,7 @@ class CardCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(image: UIImage?, title: String) {
-        cardView.configure(image: image, title: title)
+    func configure(imageUrl: String?, title: String) {
+        cardView.configure(imageUrl: imageUrl, title: title)
     }
 }

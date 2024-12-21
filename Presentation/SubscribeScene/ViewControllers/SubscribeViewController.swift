@@ -17,7 +17,7 @@ class SubscribeViewController: UIViewController {
     
     let card: CardView = {
         let card = CardView()
-        card.configure(image: UIImage(named: "sample1")!, title: "컨텐츠 제목")
+        card.configure(imageUrl: "", title: "컨텐츠 제목")
         card.translatesAutoresizingMaskIntoConstraints = false
         return card
     }()
@@ -55,7 +55,7 @@ class SubscribeViewController: UIViewController {
         Observable.just(cardData)
             .bind(to: tableView.rx.items(cellIdentifier: CardCell.identifier, cellType: CardCell.self)) { _, item, cell in
                 
-                cell.configure(image: UIImage(named: item.imageName), title: item.title)
+                cell.configure(imageUrl: item.imageName, title: item.title)
             }
             .disposed(by: disposeBag)
         

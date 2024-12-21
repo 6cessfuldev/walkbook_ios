@@ -24,7 +24,7 @@ class MyStoryViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupTableView()
-        bindCollectionView()
+        bindTableView()
     }
     
     private func setupUI() {
@@ -48,12 +48,12 @@ class MyStoryViewController: UIViewController {
         ])
     }
     
-    private func bindCollectionView() {
+    private func bindTableView() {
         
         viewModel.storyData
             .bind(to: tableView.rx.items(cellIdentifier: CardCell.identifier, cellType: CardCell.self)) { _, item, cell in
                 
-                cell.configure(image: UIImage(named: item.imageUrl), title: item.title)
+                cell.configure(imageUrl: item.imageUrl, title: item.title)
             }
             .disposed(by: disposeBag)
         
@@ -66,7 +66,7 @@ class MyStoryViewController: UIViewController {
             let storyCount = stories.count
             print("Number of stories: \(storyCount)")
             
-            self.coordinator.showContentMain()
+            self.coordinator.showEditStoryVC(story: stories[indexPath.row])
         })
         .disposed(by: disposeBag)
         

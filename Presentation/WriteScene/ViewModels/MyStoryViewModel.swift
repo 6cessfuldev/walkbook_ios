@@ -14,11 +14,11 @@ class MyStoryViewModel {
         
         self.storyData = storyDataSubject.asObservable()
         
-        fetchStories()
+        fetchMyStories()
     }
     
-    private func fetchStories() {
-        storyUseCase.fetchStories { [weak self] result in
+    private func fetchMyStories() {
+        storyUseCase.fetchMyStories { [weak self] result in
             guard let self = self else { return }
             
             switch result {

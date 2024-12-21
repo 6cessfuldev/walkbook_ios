@@ -44,7 +44,12 @@ class AppDIContainer {
         container.register(WriteNewStoryViewController.self) { r in
             let writeNewStoryViewModel = r.resolve(WriteNewStoryViewModel.self)!
             return WriteNewStoryViewController(viewModel: writeNewStoryViewModel)
-        }
+        }.inObjectScope(.transient)
+        
+        container.register(WriteNewStoryViewController.self) { (r, story: Story) in
+            let writeNewStoryViewModel = r.resolve(WriteNewStoryViewModel.self, argument: story)!
+            return WriteNewStoryViewController(viewModel: writeNewStoryViewModel)
+        }.inObjectScope(.transient)
         
         container.register(MyStoryViewController.self) { r in
             let myStoryViewModel = r.resolve(MyStoryViewModel.self)!
@@ -79,6 +84,13 @@ class AppDIContainer {
             return WriteNewStoryViewModel(storyUseCase: storyUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
+        container.register(WriteNewStoryViewModel.self) { (r, story: Story) in
+            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
+            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
+            return WriteNewStoryViewModel(story: story, storyUseCase: storyUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
+        }.inObjectScope(.transient)
+        
         container.register(MyStoryViewModel.self) { r in
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
             return MyStoryViewModel(storyUseCase: storyUseCase)
@@ -105,8 +117,9 @@ class AppDIContainer {
         }
         
         container.register(StoryUseCaseProtocol.self) { r in
-            let repository = r.resolve(StoryRepository.self)!
-            return DefaultStoryUseCase(repository: repository)
+            let storyRepository = r.resolve(StoryRepository.self)!
+            let sessionRepository = r.resolve(SessionRepository.self)!
+            return DefaultStoryUseCase(storyRepository: storyRepository, sessionRepository: sessionRepository)
         }
         
         container.register(ImageUseCaseProtocol.self) { r in
@@ -239,6 +252,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     
     func makeWriteNewStoryViewController() -> WriteNewStoryViewController {
         return self.container.resolve(WriteNewStoryViewController.self)!
+    }
+    
+    func makeEditStoryViewController(story: Story) -> WriteNewStoryViewController {
+        return self.container.resolve(WriteNewStoryViewController.self, argument: story)!
     }
     
     func makeMyStoryViewController() -> MyStoryViewController {

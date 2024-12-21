@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 class CardView: UIView {
     private let imageView: UIImageView = {
@@ -17,6 +18,8 @@ class CardView: UIView {
         label.numberOfLines = 0
         return label
     }()
+    
+    private let disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,8 +60,19 @@ class CardView: UIView {
         ])
     }
     
-    func configure(image: UIImage?, title: String) {
-        imageView.image = image
+    func configure(imageUrl: String?, title: String) {
         titleLabel.text = title
+        
+        guard let imageUrl = imageUrl else {
+            imageView.image = nil
+            return
+        }
+        
+        imageView.setImage(from: imageUrl)
+            .subscribe(onNext: { [weak self] image in
+                guard let image = image else { return }
+                self?.imageView.image = image
+            })
+            .disposed(by: disposeBag)
     }
 }
