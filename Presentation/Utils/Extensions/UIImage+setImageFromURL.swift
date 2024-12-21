@@ -4,7 +4,7 @@ import RxCocoa
 extension UIImageView {
     func setImage(from url: String) -> Observable<UIImage?> {
         return Observable.create { observer in
-            guard let imageUrl = URL(string: url) else {
+            guard let imageUrl = URL(string: url), imageUrl.scheme == "http" || imageUrl.scheme == "https" else {
                 observer.onNext(nil)
                 observer.onCompleted()
                 return Disposables.create()
