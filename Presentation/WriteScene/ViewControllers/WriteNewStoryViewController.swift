@@ -182,8 +182,8 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         viewModel.submissionResult
             .drive(onNext: { [weak self] result in
                 switch result {
-                case .success:
-                    self?.coordinator.showEditChapterListVC()
+                case .success(let story):
+                    self?.coordinator.showEditChapterListVC(story: story)
                 case .failure(let error):
                     print("fail: \(error)")
                 }

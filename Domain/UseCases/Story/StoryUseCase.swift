@@ -1,7 +1,7 @@
 import Foundation
 
 protocol StoryUseCaseProtocol {
-    func createStory(_ story: Story, completion: @escaping (Result<Void, Error>) -> Void)
+    func createStory(_ story: Story, completion: @escaping (Result<Story, Error>) -> Void)
     func fetchStories(completion: @escaping (Result<[Story], Error>) -> Void)
     func fetchMyStories(by authorId: String, completion: @escaping (Result<[Story], Error>) -> Void)
     func updateStory(_ story: Story, completion: @escaping (Result<Void, Error>) -> Void)
@@ -16,7 +16,7 @@ class DefaultStoryUseCase: StoryUseCaseProtocol {
         self.repository = repository
     }
 
-    func createStory(_ story: Story, completion: @escaping (Result<Void, Error>) -> Void) {
+    func createStory(_ story: Story, completion: @escaping (Result<Story, Error>) -> Void) {
         repository.addStory(story, completion: completion)
     }
 

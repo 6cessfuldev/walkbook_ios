@@ -6,10 +6,13 @@ class EditChapterListViewModel {
 
     let chapterLevelsRelay = BehaviorRelay<[[NestedChapter]]>(value: [])
     let selectedChapterLevelsRelay = BehaviorRelay<[Int]>(value: [])
-
+    
+    private let story: Story
     private let rootChapter: NestedChapter = NestedChapter(title: "")
     
-    init() {
+    init(story: Story) {
+        self.story = story
+        print("story : \(story)")
         prepareChapterLevels()
     }
     

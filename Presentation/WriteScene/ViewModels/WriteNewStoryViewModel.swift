@@ -13,10 +13,10 @@ class WriteNewStoryViewModel {
     
     // Outputs
     let isSubmitting: Driver<Bool>
-    let submissionResult: Driver<Result<Void, Error>>
+    let submissionResult: Driver<Result<Story, Error>>
     
     private let _isSubmitting = BehaviorRelay<Bool>(value: false)
-    private let _submissionResult = PublishRelay<Result<Void, Error>>()
+    private let _submissionResult = PublishRelay<Result<Story, Error>>()
 
     
     private let storyUseCase: StoryUseCaseProtocol
@@ -50,7 +50,7 @@ class WriteNewStoryViewModel {
             .do(onNext: { _ in
                 self._isSubmitting.accept(true)
             })
-            .flatMapLatest { [weak self] title, imageUrl, description -> Observable<Result<Void, Error>> in
+            .flatMapLatest { [weak self] title, imageUrl, description -> Observable<Result<Story, Error>> in
                 guard let self = self else {
                     return Observable.just(.failure(NSError(domain: "ViewModelError", code: -1, userInfo: nil)))
                 }
@@ -114,7 +114,7 @@ class WriteNewStoryViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func createStoryObservable(_ story: Story) -> Observable<Result<Void, Error>> {
+    private func createStoryObservable(_ story: Story) -> Observable<Result<Story, Error>> {
         return Observable.create { [weak self] observer in
             self?.storyUseCase.createStory(story) { result in
                 observer.onNext(result)

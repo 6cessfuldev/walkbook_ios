@@ -1,7 +1,7 @@
 import FirebaseFirestore
 
 protocol StoryRemoteDataSource {
-    func add(story: StoryModel, completion: @escaping (Result<Void, Error>) -> Void)
+    func add(story: StoryModel, completion: @escaping (Result<StoryModel, Error>) -> Void)
     func fetchAll(completion: @escaping (Result<[StoryModel], Error>) -> Void)
     func fetchByAuthorId(by id: String, completion: @escaping (Result<[StoryModel], Error>) -> Void)
     func update(story: StoryModel, with id: String, completion: @escaping (Result<Void, Error>) -> Void)
@@ -15,14 +15,22 @@ enum FirestoreCollections {
 class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
     private let db = Firestore.firestore()
     
-    func add(story: StoryModel, completion: @escaping (Result<Void, Error>) -> Void) {
+    func add(story: StoryModel, completion: @escaping (Result<StoryModel, Error>) -> Void) {
         do {
             let data = try story.toDictionary()
-            db.collection("stories").addDocument(data: data) { error in
+            
+            let documentRef = db.collection("stories").document()
+            var updatedData = data
+            updatedData["id"] = documentRef.documentID
+            
+            documentRef.setData(updatedData) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    completion(.success(()))
+                    var createdStory = story
+                    createdStory.id = documentRef.documentID
+                    
+                    completion(.success(createdStory))
                 }
             }
         } catch {

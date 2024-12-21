@@ -8,7 +8,7 @@ protocol MainFlowCoordinatorDependencies {
     func makeContentMainViewController() -> ContentMainViewController
     func makeWriteNewStoryViewController() -> WriteNewStoryViewController
     func makeMyStoryViewController() -> MyStoryViewController
-    func makeEditChapterListViewController() -> EditChapterListViewController
+    func makeEditChapterListViewController(story: Story) -> EditChapterListViewController
     func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController
 }
 
@@ -117,8 +117,8 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         self.navigationController.pushViewController(writeNewStoryVC, animated: true)
     }
     
-    func showEditChapterListVC() {
-        let editChapterListVC = dependencies.makeEditChapterListViewController()
+    func showEditChapterListVC(story: Story) {
+        let editChapterListVC = dependencies.makeEditChapterListViewController(story: story)
         editChapterListVC.coordinator = self
         self.navigationController.pushViewController(editChapterListVC, animated: true)
     }

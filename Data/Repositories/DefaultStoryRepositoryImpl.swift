@@ -6,11 +6,16 @@ class DefaultStoryRepositoryImpl: StoryRepository {
         self.storyRemoteDataSource = storyRemoteDataSource
     }
     
-    func addStory(_ story: Story, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addStory(_ story: Story, completion: @escaping (Result<Story, Error>) -> Void) {
         let model = StoryMapper.toModel(story)
         
         storyRemoteDataSource.add(story: model) { result in
-            completion(result)
+            switch result {
+            case .success(let model):
+                completion(.success(StoryMapper.toEntity(model)))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
