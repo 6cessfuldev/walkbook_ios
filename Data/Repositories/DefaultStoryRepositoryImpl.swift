@@ -26,6 +26,18 @@ class DefaultStoryRepositoryImpl: StoryRepository {
         }
     }
     
+    func fetchStoriesByAuthorId(id: String, completion: @escaping (Result<[Story], Error>) -> Void) {
+        storyRemoteDataSource.fetchAll { result in
+            switch result {
+            case .success(let models):
+                let entities = models.map { StoryMapper.toEntity($0) }
+                completion(.success(entities))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func updateStory(_ story: Story, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let id = story.id else {
             completion(.failure(BadRequestError.missingID))

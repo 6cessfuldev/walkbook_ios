@@ -3,7 +3,7 @@ class StoryMapper {
         return Story(
             id: model.id,
             title: model.title,
-            author: model.author,
+            authorId: model.authorId,
             imageUrl: model.imageUrl,
             description: model.description, rootChapterId: model.rootChapterId
         )
@@ -13,7 +13,7 @@ class StoryMapper {
         return StoryModel(
             id: entity.id,
             title: entity.title,
-            author: entity.author,
+            authorId: entity.authorId,
             imageUrl: entity.imageUrl,
             description: entity.description,
             rootChapterId: entity.rootChapterId

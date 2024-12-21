@@ -58,7 +58,7 @@ class WriteNewStoryViewModel {
                 let sessionUserIdResult = self.userProfileUseCase.getUserIDFromSession()
                 switch sessionUserIdResult {
                 case .success(let userID):
-                    let story = Story(id: nil, title: title, author: userID, imageUrl: imageUrl, description: description, rootChapterId: nil)
+                    let story = Story(id: nil, title: title, authorId: userID, imageUrl: imageUrl, description: description, rootChapterId: nil)
                     return self.createStoryObservable(story)
                         .catch { error in
                             self._isSubmitting.accept(false)

@@ -3,6 +3,7 @@ import FirebaseFirestore
 protocol StoryRemoteDataSource {
     func add(story: StoryModel, completion: @escaping (Result<Void, Error>) -> Void)
     func fetchAll(completion: @escaping (Result<[StoryModel], Error>) -> Void)
+    func fetchByAuthorId(by id: String, completion: @escaping (Result<[StoryModel], Error>) -> Void)
     func update(story: StoryModel, with id: String, completion: @escaping (Result<Void, Error>) -> Void)
     func delete(by id: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
@@ -42,6 +43,28 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
                 completion(.success(entities))
             }
         }
+    }
+    
+    func fetchByAuthorId(by id: String, completion: @escaping (Result<[StoryModel], Error>) -> Void) {
+        db.collection("stories")
+            .whereField("authorId", isEqualTo: id)
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    completion(.success([]))
+                    return
+                }
+                
+                let stories: [StoryModel] = documents.compactMap { document in
+                    try? document.data(as: StoryModel.self)
+                }
+                
+                completion(.success(stories))
+            }
     }
 
     func update(story: StoryModel, with id: String, completion: @escaping (Result<Void, Error>) -> Void) {
