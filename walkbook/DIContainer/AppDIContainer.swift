@@ -56,8 +56,8 @@ class AppDIContainer {
             return MyStoryViewController(viewModel: myStoryViewModel)
         }
         
-        container.register(EditChapterListViewController.self) { (r, story: Story) in
-            let editChapterListViewModel = r.resolve(EditChapterListViewModel.self, argument: story)!
+        container.register(EditChapterListViewController.self) { (r, storyId: String) in
+            let editChapterListViewModel = r.resolve(EditChapterListViewModel.self, argument: storyId)!
             return EditChapterListViewController(viewModel: editChapterListViewModel)
         }
         
@@ -100,8 +100,8 @@ class AppDIContainer {
             return UserProfileViewModel()
         }.inObjectScope(.container)
         
-        container.register(EditChapterListViewModel.self) { (r, story: Story) in
-            return EditChapterListViewModel(story: story)
+        container.register(EditChapterListViewModel.self) { (r, storyId: String) in
+            return EditChapterListViewModel(storyId: storyId)
         }.inObjectScope(.transient)
         
         container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
@@ -262,8 +262,8 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
         return self.container.resolve(MyStoryViewController.self)!
     }
     
-    func makeEditChapterListViewController(story: Story) -> EditChapterListViewController {
-        return self.container.resolve(EditChapterListViewController.self, argument: story)!
+    func makeEditChapterListViewController(storyId: String) -> EditChapterListViewController {
+        return self.container.resolve(EditChapterListViewController.self, argument: storyId)!
     }
     
     func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController {

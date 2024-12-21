@@ -13,15 +13,14 @@ class WriteNewStoryViewModel {
     
     // MARK: - Outputs
     let isSubmitting: Driver<Bool>
-    let submissionResult: Driver<Result<Void, Error>>
+    let alertMessage = PublishRelay<String>()
     
     private let _isSubmitting = BehaviorRelay<Bool>(value: false)
-    private let _submissionResult = PublishRelay<Result<Void, Error>>()
     
     private let disposeBag = DisposeBag()
     
     // MARK: - Dependencies
-    private var initialStory: Story?
+    private var story: Story?
     private let storyUseCase: StoryUseCaseProtocol
     private let imageUseCase: ImageUseCaseProtocol
     private let userProfileUseCase: UserProfileUseCaseProtocol
@@ -36,18 +35,21 @@ class WriteNewStoryViewModel {
         self.storyUseCase = storyUseCase
         self.imageUseCase = imageUseCase
         self.userProfileUseCase = userProfileUseCase
-        self.initialStory = story
+        self.story = story
         
         self.isSubmitting = _isSubmitting.asDriver()
-        self.submissionResult = _submissionResult.asDriver(onErrorJustReturn: .failure(NSError(domain: "UnknownError", code: -1, userInfo: nil)))
         
         setupInitialStory()
         setupBindings()
     }
     
+    func getStoryId() -> String? {
+        return self.story?.id
+    }
+    
     // MARK: - 초기값 설정
     private func setupInitialStory() {
-        if let story = initialStory {
+        if let story = story {
             title.accept(story.title)
             imageUrl.accept(story.imageUrl)
             description.accept(story.description)
@@ -65,48 +67,69 @@ class WriteNewStoryViewModel {
         submitTapped
             .filter { !self._isSubmitting.value }
             .withLatestFrom(Observable.combineLatest(title, imageUrl, description))
-            .filter { !$0.0.isEmpty && !$0.2.isEmpty }
             .do(onNext: { _ in self._isSubmitting.accept(true) })
             .flatMapLatest { [weak self] title, imageUrl, description -> Observable<Result<Void, Error>> in
                 guard let self = self else {
                     return Observable.just(.failure(NSError(domain: "ViewModelError", code: -1, userInfo: nil)))
                 }
-                guard let userId = self.getAuthorId() else {
-                    return Observable.just(.failure(NSError(domain: "SessionError", code: -1, userInfo: nil)))
+                
+                if title.isEmpty {
+                    self.alertMessage.accept("제목을 입력해주세요.")
+                    self._isSubmitting.accept(false)
+                    return Observable.empty()
                 }
-                if(self.initialStory == nil) {
-                    let story = Story(
-                        id: nil,
-                        title: title,
-                        authorId: userId,
-                        imageUrl: imageUrl,
-                        description: description,
-                        rootChapterId: nil
-                    )
-                    return self.createStoryObservable(story)
-                        .catch { error in
-                            self._isSubmitting.accept(false)
-                            return Observable.just(.failure(error))
-                        }
-                } else {
-                    let updatedStory = Story(
-                        id: initialStory?.id,
-                        title: title,
-                        authorId: userId,
-                        imageUrl: imageUrl,
-                        description: description,
-                        rootChapterId: initialStory?.id
-                    )
-                    return self.updateStoryObservable(updatedStory)
-                        .catch { error in
-                            self._isSubmitting.accept(false)
-                            return Observable.just(.failure(error))
-                        }
+                
+                if description.isEmpty {
+                    self.alertMessage.accept("설명을 입력해주세요.")
+                    self._isSubmitting.accept(false)
+                    return Observable.empty()
                 }
+                
+                return self.performSubmission(
+                    title: title,
+                    imageUrl: imageUrl,
+                    description: description
+                )
             }
             .do(onNext: { _ in self._isSubmitting.accept(false) })
-            .bind(to: _submissionResult)
+            .subscribe(onNext: { [weak self] result in
+                switch result {
+                case .success:
+                    self?.alertMessage.accept("저장되었습니다.")
+                case .failure(let error):
+                    self?.alertMessage.accept("오류: \(error.localizedDescription)")
+                }
+            })
             .disposed(by: disposeBag)
+    }
+    
+    private func performSubmission(
+        title: String,
+        imageUrl: String,
+        description: String
+    ) -> Observable<Result<Void, Error>> {
+        guard let userId = self.getAuthorId() else {
+            return Observable.just(.failure(NSError(domain: "SessionError", code: -1, userInfo: nil)))
+        }
+        
+        let story = Story(
+            id: self.story?.id,
+            title: title,
+            authorId: userId,
+            imageUrl: imageUrl,
+            description: description,
+            rootChapterId: self.story?.id
+        )
+        
+        let observable: Observable<Result<Void, Error>>
+        
+        if self.story == nil {
+            observable = self.createStoryObservable(story)
+        } else {
+            observable = self.updateStoryObservable(story)
+        }
+        
+        return observable
     }
     
     func uploadImage() {
@@ -132,7 +155,7 @@ class WriteNewStoryViewModel {
         imageUrl
             .filter { !$0.isEmpty }
             .distinctUntilChanged()
-            .take(initialStory != nil && !initialStory!.imageUrl.isEmpty ? 1 : 0)
+            .take(story != nil && !story!.imageUrl.isEmpty ? 1 : 0)
             .do(onNext: { _ in self._isSubmitting.accept(true) })
             .flatMapLatest { [weak self] url -> Observable<UIImage?> in
                 guard let self = self else {
@@ -149,7 +172,8 @@ class WriteNewStoryViewModel {
         return Observable.create { [weak self] observer in
             self?.storyUseCase.createStory(story) { result in
                 switch result {
-                case .success(_):
+                case .success(let story):
+                    self?.story = story
                     observer.onNext(.success(()))
                 case .failure(let error):
                     observer.onNext(.failure(error))

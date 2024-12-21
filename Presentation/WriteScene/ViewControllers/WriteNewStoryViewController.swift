@@ -24,7 +24,14 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
+    private let loadingOverlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let submitButton = UIBarButtonItem(
         image: UIImage(systemName: "paperplane.fill"),
@@ -32,7 +39,10 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         target: nil,
         action: nil
     )
+    
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
+    
+    private let editChaptersButton = EditChaptersButton()
     
     init(viewModel: WriteNewStoryViewModel) {
         self.viewModel = viewModel
@@ -51,6 +61,14 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         titleTextField.delegate = self
         descriptionTextView.autocorrectionType = .no
         descriptionTextView.spellCheckingType = .no
+        
+        editChaptersButton.onTap = { [weak self] in
+            guard let storyId = self?.viewModel.getStoryId() else {
+                self?.showNeedtoSaveAlert()
+                return
+            }
+            self?.coordinator.showEditChapterListVC(storyId: storyId)
+        }
     }
     
     private func setupUI() {
@@ -92,7 +110,9 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(separatorLine)
         view.addSubview(descriptionTextView)
         descriptionTextView.addSubview(placeholderLabel)
-        view.addSubview(loadingIndicator)
+        view.addSubview(editChaptersButton)
+        view.addSubview(loadingOverlay)
+        loadingOverlay.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
             actionImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -104,9 +124,6 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
             plusIconImageView.centerYAnchor.constraint(equalTo: actionImageView.centerYAnchor),
             plusIconImageView.widthAnchor.constraint(equalToConstant: 50),
             plusIconImageView.heightAnchor.constraint(equalToConstant: 50),
-            
-            loadingIndicator.centerYAnchor.constraint(equalTo: plusIconImageView.centerYAnchor),
-            loadingIndicator.centerXAnchor.constraint(equalTo: plusIconImageView.centerXAnchor),
             
             titleTextField.topAnchor.constraint(equalTo: actionImageView.bottomAnchor),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -125,7 +142,20 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
             
             placeholderLabel.topAnchor.constraint(equalTo: descriptionTextView.topAnchor, constant: 8),
             placeholderLabel.leadingAnchor.constraint(equalTo: descriptionTextView.leadingAnchor, constant: 8),
-            placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: descriptionTextView.trailingAnchor, constant: -8)
+            placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: descriptionTextView.trailingAnchor, constant: -8),
+            
+            editChaptersButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 16),
+            editChaptersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            editChaptersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            editChaptersButton.heightAnchor.constraint(equalToConstant: 80),
+            
+            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
         ])
     }
     
@@ -182,23 +212,22 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
             .drive(onNext: { [weak self] isSubmitting in
                 guard let self = self else { return }
                 if isSubmitting {
+                    self.loadingOverlay.isHidden = false
                     self.loadingIndicator.startAnimating()
                     self.plusIconImageView.isHidden = true
                 } else {
+                    self.loadingOverlay.isHidden = true
                     self.loadingIndicator.stopAnimating()
                     self.plusIconImageView.isHidden = false
                 }
             })
             .disposed(by: disposeBag)
         
-        viewModel.submissionResult
-            .drive(onNext: { [weak self] result in
-                switch result {
-                case .success():
-                    self?.coordinator.replaceWithMyStoryVC()
-                case .failure(let error):
-                    print("fail: \(error)")
-                }
+        viewModel.alertMessage
+            .subscribe(onNext: { [weak self] message in
+                let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -208,6 +237,20 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    private func showNeedtoSaveAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: "스토리 먼저 저장해주세요.",
+            preferredStyle: .alert
+        )
+        
+        self.present(alert, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            alert.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
