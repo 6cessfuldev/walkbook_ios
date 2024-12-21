@@ -141,6 +141,23 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         myStoryVC.coordinator = self
         self.navigationController.pushViewController(myStoryVC, animated: true)
     }
+    
+    func replaceWithMyStoryVC() {
+        let myStoryVC = dependencies.makeMyStoryViewController()
+        myStoryVC.coordinator = self
+        
+        replaceTopViewController(with: myStoryVC, animated: true)
+    }
+    
+    private func replaceTopViewController(with viewController: UIViewController, animated: Bool) {
+        var viewControllers = self.navigationController.viewControllers
+        if !viewControllers.isEmpty {
+            viewControllers.removeLast()
+        }
+        viewControllers.append(viewController)
+        
+        self.navigationController.setViewControllers(viewControllers, animated: animated)
+    }
 }
 
 extension MainFlowCoordinator: ExploreFlowCoordinatorDelegate {

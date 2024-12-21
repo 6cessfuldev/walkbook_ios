@@ -195,7 +195,7 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .success():
-                    self?.coordinator.showMyStoryVC()
+                    self?.coordinator.replaceWithMyStoryVC()
                 case .failure(let error):
                     print("fail: \(error)")
                 }
