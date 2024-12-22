@@ -4,8 +4,9 @@ import RxCocoa
 class EditChapterListViewModel {
     private let disposeBag = DisposeBag()
 
-    let chapterLevelsRelay = BehaviorRelay<[[NestedChapter]]>(value: [])
-    let selectedChapterLevelsRelay = BehaviorRelay<[Int]>(value: [])
+    let chapterStateRelay = BehaviorRelay<(chapterLevels: [[NestedChapter]], selectedChapterLevels: [Int])>(
+        value: (chapterLevels: [], selectedChapterLevels: [])
+    )
     let isLoading = BehaviorRelay<Bool>(value: false)
     let errorMessage = PublishRelay<String>()
     
@@ -18,6 +19,13 @@ class EditChapterListViewModel {
         self.storyId = storyId
         self.chapterUseCase = chapterUseCase
         fetchRootChapter()
+    }
+    
+    private func updateChapterState(
+        chapterLevels: [[NestedChapter]],
+        selectedChapterLevels: [Int]
+    ) {
+        chapterStateRelay.accept((chapterLevels, selectedChapterLevels))
     }
     
     private func fetchRootChapter() {
@@ -37,8 +45,30 @@ class EditChapterListViewModel {
         }
     }
     
-    func getSelectedChapter(level: Int) -> NestedChapter {
-        return chapterLevelsRelay.value[level][selectedChapterLevelsRelay.value[level]]
+    func getSelectedChapter(level: Int) -> NestedChapter? {
+        let currentState = chapterStateRelay.value
+        let chapterLevels = currentState.chapterLevels
+        let selectedChapterLevels = currentState.selectedChapterLevels
+        
+        guard level < chapterLevels.count else {
+            print("Error: Level \(level) is out of range for chapterLevels.")
+            return nil
+        }
+        
+        let chaptersAtLevel = chapterLevels[level]
+        
+        guard level < selectedChapterLevels.count else {
+            print("Error: No selected index for level \(level).")
+            return nil
+        }
+        
+        let selectedIndex = selectedChapterLevels[level]
+        guard selectedIndex < chaptersAtLevel.count else {
+            print("Error: Selected index \(selectedIndex) is out of range for level \(level).")
+            return nil
+        }
+        
+        return chaptersAtLevel[selectedIndex]
     }
 
     private func prepareChapterLevels() {
@@ -73,13 +103,14 @@ class EditChapterListViewModel {
         buildLevels(from: rootChapter, level: 0)
         selectedChapterLevels.append(0)
         
-        chapterLevelsRelay.accept(chapterLevels)
-        selectedChapterLevelsRelay.accept(selectedChapterLevels)
+        updateChapterState(chapterLevels: chapterLevels, selectedChapterLevels: selectedChapterLevels)
     }
 
     func updateChapterLevels(from level: Int, selectedIndex index: Int) {
-        var chapterLevels = chapterLevelsRelay.value
-        var selectedChapterLevels = selectedChapterLevelsRelay.value
+        var chapterLevels = chapterStateRelay.value.chapterLevels
+        var selectedChapterLevels = chapterStateRelay.value.selectedChapterLevels
+        
+        print("chapterLevels[0]: \(chapterLevels[0])")
 
         guard level < chapterLevels.count, level < selectedChapterLevels.count else { return }
 
@@ -114,13 +145,12 @@ class EditChapterListViewModel {
         }
 
         buildLevels(level: level)
-        chapterLevelsRelay.accept(chapterLevels)
-        selectedChapterLevelsRelay.accept(selectedChapterLevels)
+        updateChapterState(chapterLevels: chapterLevels, selectedChapterLevels: selectedChapterLevels)
     }
 
     func addOtherChapter(level: Int, title: String) {
-        var chapterLevels = chapterLevelsRelay.value
-        var selectedChapterLevels = selectedChapterLevelsRelay.value
+        var chapterLevels = chapterStateRelay.value.chapterLevels
+        var selectedChapterLevels = chapterStateRelay.value.selectedChapterLevels
 
         guard level >= 0, level < chapterLevels.count + 1 else { return }
         
@@ -157,8 +187,7 @@ class EditChapterListViewModel {
                     }
                     chapterLevels[level].append(newNestedChapter)
                     
-                    self.chapterLevelsRelay.accept(chapterLevels)
-                    self.selectedChapterLevelsRelay.accept(selectedChapterLevels)
+                    self.updateChapterState(chapterLevels: chapterLevels, selectedChapterLevels: selectedChapterLevels)
                 
                 case .failure(let error):
                     print("error: \(error)")

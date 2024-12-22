@@ -39,7 +39,7 @@ class EditChapterListViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        viewModel.chapterLevelsRelay
+        viewModel.chapterStateRelay
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
@@ -50,7 +50,7 @@ class EditChapterListViewController: UIViewController {
 
 extension EditChapterListViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.chapterLevelsRelay.value.count + 1
+        return viewModel.chapterStateRelay.value.chapterLevels.count + 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,7 +58,7 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if viewModel.chapterLevelsRelay.value.count <= indexPath.section {
+        if viewModel.chapterStateRelay.value.chapterLevels.count <= indexPath.section {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddChapterTableViewCell", for: indexPath) as? AddChapterTableViewCell else {
                 return UITableViewCell()
             }
@@ -69,8 +69,8 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
             return UITableViewCell()
         }
 
-        let chapters = viewModel.chapterLevelsRelay.value[indexPath.section]
-        let selectedChapterIndex = viewModel.selectedChapterLevelsRelay.value[indexPath.section]
+        let chapters = viewModel.chapterStateRelay.value.chapterLevels[indexPath.section]
+        let selectedChapterIndex = viewModel.chapterStateRelay.value.selectedChapterLevels[indexPath.section]
         cell.configure(with: chapters, currentIndex: selectedChapterIndex, level: indexPath.section)
 
         cell.displayedChapter
@@ -88,7 +88,10 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
         cell.selectButtonAction
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let selectedChapter = self.viewModel.getSelectedChapter(level: indexPath.section)
+                guard let selectedChapter = self.viewModel.getSelectedChapter(level: indexPath.section) else {
+                    print("getSelectedChapter error")
+                    return
+                }
                 self.coordinator.showEditChapterVC(chapter: selectedChapter)
             })
             .disposed(by: cell.disposeBag)
@@ -97,7 +100,7 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if viewModel.chapterLevelsRelay.value.count <= indexPath.section {
+        if viewModel.chapterStateRelay.value.chapterLevels.count == indexPath.section {
             addChapter(at: indexPath.section)
         }
     }
@@ -114,6 +117,6 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return viewModel.chapterLevelsRelay.value.count <= indexPath.section ? 50 : 80
+        return viewModel.chapterStateRelay.value.chapterLevels.count <= indexPath.section ? 50 : 80
     }
 }
