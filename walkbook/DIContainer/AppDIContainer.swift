@@ -101,7 +101,8 @@ class AppDIContainer {
         }.inObjectScope(.container)
         
         container.register(EditChapterListViewModel.self) { (r, storyId: String) in
-            return EditChapterListViewModel(storyId: storyId)
+            let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
+            return EditChapterListViewModel(storyId: storyId, chapterUseCase: chapterUseCase)
         }.inObjectScope(.transient)
         
         container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
@@ -133,8 +134,12 @@ class AppDIContainer {
             return DefaultUserProfileUseCase(
                 userProfileRepository: userProfilerepository,
                 sessionRepository: sessionRepository
-                
             )
+        }
+        
+        container.register(ChapterUseCaseProtocol.self) { r in
+            let chapterRepository = r.resolve(ChapterRepository.self)!
+            return DefaultChapterUseCase(chapterRepository: chapterRepository)
         }
         
         //MARK: - Register Repositories
@@ -178,6 +183,12 @@ class AppDIContainer {
             return DefaultSessionRepositoryImpl(localDataSource: localDataSource)
         }
         
+        container.register(ChapterRepository.self) { r in
+            let chapterRemoteDataSource = r.resolve(ChapterRemoteDataSource.self)!
+            let storyRemoteDataSource = r.resolve(StoryRemoteDataSource.self)!
+            return DefaultChapterRepositoryImpl(chapterRemoteDataSource: chapterRemoteDataSource, storyRemoteDataSource: storyRemoteDataSource)
+        }
+        
         //MARK: - Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
@@ -197,6 +208,10 @@ class AppDIContainer {
         
         container.register(LocalDataSource.self) { _ in
             UserDefaultsLocalDataSourceImpl()
+        }
+        
+        container.register(ChapterRemoteDataSource.self) { _ in 
+            FirestoreChapterRemoteDataSourceImpl()
         }
     }
 }

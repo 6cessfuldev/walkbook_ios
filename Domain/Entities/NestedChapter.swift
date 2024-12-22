@@ -30,4 +30,18 @@ class NestedChapter {
         self.steps = steps
         self.childChapters = childChapters
     }
+    
+    static func fromChapter(_ chapter: Chapter) -> NestedChapter {
+        return NestedChapter(
+            id: chapter.id,
+            storyId: chapter.storyId,
+            title: chapter.title,
+            imageUrl: chapter.imageUrl,
+            description: chapter.description,
+            location: chapter.location,
+            radius: chapter.radius,
+            steps: chapter.steps,
+            childChapters: []
+        )
+    }
 }

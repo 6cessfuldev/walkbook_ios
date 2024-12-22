@@ -5,11 +5,8 @@ protocol StoryRemoteDataSource {
     func fetchAll(completion: @escaping (Result<[StoryModel], Error>) -> Void)
     func fetchByAuthorId(by id: String, completion: @escaping (Result<[StoryModel], Error>) -> Void)
     func update(story: StoryModel, with id: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func updateRootChapter(storyId: String, chapterId: String, completion: @escaping (Result<Void, Error>) -> Void)
     func delete(by id: String, completion: @escaping (Result<Void, Error>) -> Void)
-}
-
-enum FirestoreCollections {
-    static let stories = "stories"
 }
 
 class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
@@ -88,6 +85,18 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
             }
         } catch {
             completion(.failure(error))
+        }
+    }
+    
+    func updateRootChapter(storyId: String, chapterId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentRef = db.collection(FirestoreCollections.stories).document(storyId)
+        
+        documentRef.updateData(["rootChapter": chapterId]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
         }
     }
 

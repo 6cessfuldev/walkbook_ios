@@ -6,13 +6,35 @@ class EditChapterListViewModel {
 
     let chapterLevelsRelay = BehaviorRelay<[[NestedChapter]]>(value: [])
     let selectedChapterLevelsRelay = BehaviorRelay<[Int]>(value: [])
+    let isLoading = BehaviorRelay<Bool>(value: false)
+    let errorMessage = PublishRelay<String>()
     
     private let storyId: String
-    private let rootChapter: NestedChapter = NestedChapter(title: "")
+    private var rootChapter: NestedChapter = NestedChapter(title: "")
     
-    init(storyId: String) {
+    private let chapterUseCase: ChapterUseCaseProtocol
+    
+    init(storyId: String, chapterUseCase: ChapterUseCaseProtocol) {
         self.storyId = storyId
-        prepareChapterLevels()
+        self.chapterUseCase = chapterUseCase
+        fetchRootChapter()
+    }
+    
+    private func fetchRootChapter() {
+        isLoading.accept(true)
+        
+        chapterUseCase.fetchChapterInStory(by: storyId) { [weak self] result in
+            guard let self = self else { return }
+            
+            self.isLoading.accept(false)
+            switch result {
+            case .success(let chapter):
+                self.rootChapter = chapter
+                self.prepareChapterLevels()
+            case .failure(let error):
+                self.errorMessage.accept("Failed to load root chapter: \(error.localizedDescription)")
+            }
+        }
     }
     
     func getSelectedChapter(level: Int) -> NestedChapter {
@@ -26,6 +48,9 @@ class EditChapterListViewModel {
         func buildLevels(from chapter: NestedChapter, level: Int) {
             if chapterLevels.count <= level {
                 chapterLevels.append([])
+            }
+            
+            if selectedChapterLevels.count <= level {
                 selectedChapterLevels.append(0)
             }
 
@@ -97,18 +122,51 @@ class EditChapterListViewModel {
         var chapterLevels = chapterLevelsRelay.value
         var selectedChapterLevels = selectedChapterLevelsRelay.value
 
-        guard level > 0, level < chapterLevels.count + 1 else { return }
+        guard level >= 0, level < chapterLevels.count + 1 else { return }
         
-        let newChapter = NestedChapter(id: nil, title: title, steps: [], childChapters: [])
-        chapterLevels[level - 1][selectedChapterLevels[level - 1]].childChapters.append(newChapter)
+        let newChapter = Chapter(id: nil, storyId: self.storyId, title: title, steps: [], childChapters: [])
         
-        if(level == chapterLevels.count) {
-            chapterLevels.append([])
-            selectedChapterLevels.append(0)
+        if(level == 0) {
+            chapterUseCase.createRootChapter(newChapter, storyId: storyId) { r in
+                switch r {
+                case .success(let chapter):
+                    self.rootChapter = NestedChapter.fromChapter(chapter)
+                    self.prepareChapterLevels()
+                case .failure(let error):
+                    print("error: \(error)")
+                    self.errorMessage.accept("Chapter 저장에 실패했습니다.")
+                }
+            }
+        } else {
+            guard let parentChapterId = chapterLevels[level - 1][selectedChapterLevels[level - 1]].id else {
+                print("error: 부모 챕터의 ID를 찾을 수 없습니다.")
+                self.errorMessage.accept("부모 챕터의 ID를 찾을 수 없습니다.")
+                return
+            }
+            
+            chapterUseCase.createChildChapter(newChapter, to: parentChapterId) { result in
+                switch result {
+                case .success(let chapter):
+                    let newNestedChapter = NestedChapter.fromChapter(chapter)
+                    
+                    chapterLevels[level - 1][selectedChapterLevels[level - 1]].childChapters.append(newNestedChapter)
+                    
+                    if(level == chapterLevels.count) {
+                        chapterLevels.append([])
+                        selectedChapterLevels.append(0)
+                    }
+                    chapterLevels[level].append(newNestedChapter)
+                    
+                    self.chapterLevelsRelay.accept(chapterLevels)
+                    self.selectedChapterLevelsRelay.accept(selectedChapterLevels)
+                
+                case .failure(let error):
+                    print("error: \(error)")
+                    self.errorMessage.accept("Chapter 저장에 실패했습니다.")
+                }
+            }
         }
-        chapterLevels[level].append(newChapter)
-
-        chapterLevelsRelay.accept(chapterLevels)
-        selectedChapterLevelsRelay.accept(selectedChapterLevels)
+        
+        
     }
 }

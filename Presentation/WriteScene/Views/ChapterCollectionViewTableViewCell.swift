@@ -215,7 +215,7 @@ class ChapterCollectionViewTableViewCell: UITableViewCell, UICollectionViewDataS
         // 배열 범위를 초과하지 않도록 확인
         guard indexPath.item < chapters.count else {
             print("Error: Index \(indexPath.item) is out of range for chapters array of size \(chapters.count)")
-            print("Chapter : \(chapters)")
+            print("chapters.count : \(chapters.count) indexPath : \(indexPath.item) ")
             return cell
         }
         

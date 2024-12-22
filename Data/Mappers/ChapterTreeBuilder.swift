@@ -1,5 +1,5 @@
 class ChapterTreeBuilder {
-    func buildTree(flatChapters: [ChapterModel]) -> NestedChapter? {
+    static func buildTree(flatChapters: [ChapterModel]) -> NestedChapter? {
         
         var chapterLookup: [String: NestedChapter] = [:]
         
