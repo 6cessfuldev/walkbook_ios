@@ -17,7 +17,7 @@ class EditChapterViewModel {
     private let disposeBag = DisposeBag()
     
     // MARK: - Dependencies
-    private var chapter: Chapter?
+    private var chapter: Chapter
     private let chapterUseCase: ChapterUseCaseProtocol
     private let imageUseCase: ImageUseCaseProtocol
     private let userProfileUseCase: UserProfileUseCaseProtocol
@@ -37,11 +37,9 @@ class EditChapterViewModel {
     
     // MARK: - 초기값 설정
     private func setupInitialChapter() {
-        if let chapter = chapter {
-            title.accept(chapter.title)
-            imageUrl.accept(chapter.imageUrl)
-            description.accept(chapter.description)
-        }
+        title.accept(chapter.title)
+        imageUrl.accept(chapter.imageUrl)
+        description.accept(chapter.description)
     }
     
     // MARK: - Bindings
@@ -67,6 +65,10 @@ class EditChapterViewModel {
                 self.isSubmitting.accept(false)
             }
         }
+    }
+    
+    func getChapterId() -> String? {
+        chapter.id
     }
     
     // MARK: - Input Handlers
@@ -127,9 +129,6 @@ class EditChapterViewModel {
         guard let userId = self.getAuthorId() else {
             return Observable.just(.failure(NSError(domain: "SessionError", code: -1, userInfo: nil)))
         }
-        guard let chapter = chapter else {
-            return Observable.just(.failure(NSError(domain: "Not Found Initial Chapter Error", code: -1, userInfo: nil)))
-        }
         
         var needUpdatedChapter = chapter
         needUpdatedChapter.title = title
@@ -158,7 +157,7 @@ class EditChapterViewModel {
             .compactMap { $0 }
             .filter { !$0.isEmpty }
             .distinctUntilChanged()
-            .take(chapter != nil && (chapter!.imageUrl != nil) && !chapter!.imageUrl!.isEmpty ? 1 : 0)
+            .take(chapter.imageUrl != nil && !chapter.imageUrl!.isEmpty ? 1 : 0)
             .do(onNext: { _ in self.isSubmitting.accept(true) })
             .flatMapLatest { [weak self] url -> Observable<UIImage?> in
                 guard let self = self else {

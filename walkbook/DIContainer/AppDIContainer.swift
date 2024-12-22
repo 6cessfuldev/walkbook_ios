@@ -65,6 +65,11 @@ class AppDIContainer {
             let viewModel = resolver.resolve(EditChapterViewModel.self, argument: chapter)!
             return EditChapterViewController(viewModel: viewModel)
         }
+        
+        container.register(EditStepListViewController.self) { (r, chapterId: String) in
+            let viewModel = r.resolve(EditStepListViewModel.self, argument: chapterId)!
+            return EditStepListViewController(viewModel: viewModel)
+        }
 
         
         //MARK: - Register ViewModel
@@ -112,6 +117,12 @@ class AppDIContainer {
             return EditChapterViewModel(chapter: chapter, chapterUseCase: chapterUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
+        container.register(EditStepListViewModel.self) { (r, chapterId: String) in
+            let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
+            let stepUseCase = r.resolve(StepUseCaseProtocol.self)!
+            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase)
+        }.inObjectScope(.transient)
+        
         //MARK: - Register UseCases
         container.register(SignInUseCaseProtocol.self) { r in
             let authRepository = r.resolve(AuthenticationRepository.self)!
@@ -144,9 +155,13 @@ class AppDIContainer {
             return DefaultChapterUseCase(chapterRepository: chapterRepository)
         }
         
+        container.register(StepUseCaseProtocol.self) { r in
+            let stepRepository = r.resolve(StepRepository.self)!
+            return DefaultStepUseCase(stepRepository: stepRepository)
+        }
+        
         //MARK: - Register Repositories
         container.register(AuthenticationRepository.self) { r in
-            let sessionRepository = r.resolve(SessionRepository.self)!
             let googleDataSource = r.resolve(GoogleSignRemoteDataSource.self)!
             let kakaoDataSource = r.resolve(KakaoSignRemoteDataSource.self)!
             let naverDataSource = r.resolve(NaverSignRemoteDataSource.self)!
@@ -191,6 +206,11 @@ class AppDIContainer {
             return DefaultChapterRepositoryImpl(chapterRemoteDataSource: chapterRemoteDataSource, storyRemoteDataSource: storyRemoteDataSource)
         }
         
+        container.register(StepRepository.self) { r in
+            let stepRemoteDataSource = r.resolve(StepRemoteDataSource.self)!
+            return DefaultStepRepositoryImpl(stepRemoteDataSource: stepRemoteDataSource)
+        }
+        
         //MARK: - Register Data Sources
         container.register(AppleSignRemoteDataSource.self) { _ in AppleSignRemoteDataSourceImpl() }
         container.register(GoogleSignRemoteDataSource.self) { _ in GoogleSignRemoteDataSourceImpl() }
@@ -214,6 +234,10 @@ class AppDIContainer {
         
         container.register(ChapterRemoteDataSource.self) { _ in 
             FirestoreChapterRemoteDataSourceImpl()
+        }
+        
+        container.register(StepRemoteDataSource.self) { _ in
+            FirestoreStepRemoteDataSourceImpl()
         }
     }
 }
@@ -286,12 +310,10 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
     func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController {
         return self.container.resolve(EditChapterViewController.self, argument: chapter)!
     }
-}
-
-//MARK: - ChildCoordinator's dependencies
-
-extension AppDIContainer {
     
+    func makeEditStepListViewController(chapterId: String) -> EditStepListViewController {
+        return self.container.resolve(EditStepListViewController.self, argument: chapterId)!
+    }
 }
 
 //MARK: - ExploreFlowCoordinatorDependencies

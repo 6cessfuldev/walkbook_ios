@@ -3,4 +3,5 @@ enum FirestoreCollections {
     static let chapters = "chapters"
     static let users = "users"
     static let comments = "comments"
+    static let steps = "steps"
 }

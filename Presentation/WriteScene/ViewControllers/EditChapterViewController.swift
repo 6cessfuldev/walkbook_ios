@@ -67,7 +67,11 @@ class EditChapterViewController: UIViewController, UITextFieldDelegate {
         navigationItem.title = "챕터 내용"
         
         editStepsButton.onTap = { [weak self] in
-            
+            guard let chapterId = self?.viewModel.getChapterId() else {
+                print("initial chapter doesn't have id")
+                return
+            }
+            self?.coordinator.showEditStepListVC(chapterId: chapterId)
         }
     }
     
@@ -239,58 +243,6 @@ class EditChapterViewController: UIViewController, UITextFieldDelegate {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
     }
-    
-//    private func addStep() {
-//        let stepAddAlertController = UIAlertController(title: "추가할 단계의 유형을 선택해주세요", message: nil, preferredStyle: .actionSheet)
-//
-//        stepAddAlertController.addAction(UIAlertAction(title: "텍스트", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
-//            let addStepVC = AddAudioStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "영상", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "이동 미션", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "퀴즈", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step in
-//                self?.viewModel.addOtherStep(step: step)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//            
-//        }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//        
-//        present(stepAddAlertController, animated: true)
-//
-//    }
 //    
 //    private func getStep(by: String) -> Step {
 //        return Step(id: nil, type: .text("Test"))

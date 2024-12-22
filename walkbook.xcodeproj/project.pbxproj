@@ -96,6 +96,16 @@
 		9D5355CA2D16F60A00785888 /* FirestoreCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355C92D16F60A00785888 /* FirestoreCollections.swift */; };
 		9D5355CC2D16FC9800785888 /* ChapterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355CB2D16FC9800785888 /* ChapterMapper.swift */; };
 		9D5355D02D17FC7000785888 /* EditStepsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355CF2D17FC7000785888 /* EditStepsButton.swift */; };
+		9D5355D22D1828ED00785888 /* EditStepListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355D12D1828ED00785888 /* EditStepListViewController.swift */; };
+		9D5355D42D1829A400785888 /* EditStepListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355D32D1829A400785888 /* EditStepListViewModel.swift */; };
+		9D5355D72D182B4D00785888 /* AddStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355D62D182B4D00785888 /* AddStepTableViewCell.swift */; };
+		9D5355D92D182B9800785888 /* StepListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355D82D182B9800785888 /* StepListTableViewCell.swift */; };
+		9D5355DC2D182FE400785888 /* StepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355DB2D182FE400785888 /* StepUseCase.swift */; };
+		9D5355DE2D18312100785888 /* StepRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355DD2D18312100785888 /* StepRepository.swift */; };
+		9D5355E02D18314200785888 /* DefaultStepRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355DF2D18314200785888 /* DefaultStepRepositoryImpl.swift */; };
+		9D5355E22D1831C000785888 /* StepRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */; };
+		9D5355E42D1832CF00785888 /* StepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E32D1832CF00785888 /* StepModel.swift */; };
+		9D5355E62D1832F300785888 /* StepMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E52D1832F300785888 /* StepMapper.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -252,6 +262,16 @@
 		9D5355C92D16F60A00785888 /* FirestoreCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCollections.swift; sourceTree = "<group>"; };
 		9D5355CB2D16FC9800785888 /* ChapterMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterMapper.swift; sourceTree = "<group>"; };
 		9D5355CF2D17FC7000785888 /* EditStepsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepsButton.swift; sourceTree = "<group>"; };
+		9D5355D12D1828ED00785888 /* EditStepListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepListViewController.swift; sourceTree = "<group>"; };
+		9D5355D32D1829A400785888 /* EditStepListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepListViewModel.swift; sourceTree = "<group>"; };
+		9D5355D62D182B4D00785888 /* AddStepTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStepTableViewCell.swift; sourceTree = "<group>"; };
+		9D5355D82D182B9800785888 /* StepListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepListTableViewCell.swift; sourceTree = "<group>"; };
+		9D5355DB2D182FE400785888 /* StepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepUseCase.swift; sourceTree = "<group>"; };
+		9D5355DD2D18312100785888 /* StepRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRepository.swift; sourceTree = "<group>"; };
+		9D5355DF2D18314200785888 /* DefaultStepRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStepRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRemoteDataSource.swift; sourceTree = "<group>"; };
+		9D5355E32D1832CF00785888 /* StepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepModel.swift; sourceTree = "<group>"; };
+		9D5355E52D1832F300785888 /* StepMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepMapper.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -453,6 +473,7 @@
 				9D5355692D0B07E200785888 /* GeoPointMapper.swift */,
 				9D53559E2D12F7C400785888 /* ChapterTreeBuilder.swift */,
 				9D5355CB2D16FC9800785888 /* ChapterMapper.swift */,
+				9D5355E52D1832F300785888 /* StepMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -480,6 +501,7 @@
 				9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */,
 				9D53557C2D0E979500785888 /* EditChapterListViewModel.swift */,
 				9D5355802D0EA2FF00785888 /* EditChapterViewModel.swift */,
+				9D5355D32D1829A400785888 /* EditStepListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -579,6 +601,7 @@
 		9D20C57B2C4206A7008AB5EE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9D5355DA2D182FD700785888 /* Step */,
 				9D5355952D12A07100785888 /* Chapter */,
 				9D5355552D0A9EA600785888 /* User */,
 				9D37600D2D03367D0032957F /* Image */,
@@ -636,6 +659,7 @@
 				9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */,
 				9D53555F2D0AA3C700785888 /* UserProfileRemoteDataSource.swift */,
 				9D5355C72D16F34400785888 /* ChapterRemoteDataSource.swift */,
+				9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */,
 				9D5355C92D16F60A00785888 /* FirestoreCollections.swift */,
 			);
 			path = Network;
@@ -647,6 +671,7 @@
 				9D0D475C2D00AE660040BA81 /* StoryModel.swift */,
 				9D53555A2D0AA07600785888 /* UserProfileModel.swift */,
 				9D53559A2D12A25F00785888 /* ChapterModel.swift */,
+				9D5355E32D1832CF00785888 /* StepModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -660,6 +685,7 @@
 				9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */,
 				9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */,
 				9D5355C52D16F2E200785888 /* DefaultChapterRepositoryImpl.swift */,
+				9D5355DF2D18314200785888 /* DefaultStepRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -756,6 +782,8 @@
 				9D5355782D0D7DBC00785888 /* AddChapterTableViewCell.swift */,
 				9D5355C32D16E14500785888 /* EditChaptersButton.swift */,
 				9D5355CF2D17FC7000785888 /* EditStepsButton.swift */,
+				9D5355D62D182B4D00785888 /* AddStepTableViewCell.swift */,
+				9D5355D82D182B9800785888 /* StepListTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -805,6 +833,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		9D5355DA2D182FD700785888 /* Step */ = {
+			isa = PBXGroup;
+			children = (
+				9D5355DB2D182FE400785888 /* StepUseCase.swift */,
+			);
+			path = Step;
+			sourceTree = "<group>";
+		};
 		9D7EB4242C7E1C9A0060B56B /* WriteScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +862,7 @@
 				9D53556D2D0B23F100785888 /* EditChapterListViewController.swift */,
 				9D53557A2D0D993700785888 /* AddChapterViewController.swift */,
 				9D53557E2D0E9D5400785888 /* EditChapterViewController.swift */,
+				9D5355D12D1828ED00785888 /* EditStepListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1008,6 +1045,7 @@
 				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
 				9D5355982D12A18900785888 /* ChapterRepository.swift */,
 				9D5355B72D1440F800785888 /* SessionRepository.swift */,
+				9D5355DD2D18312100785888 /* StepRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1453,7 +1491,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5355D42D1829A400785888 /* EditStepListViewModel.swift in Sources */,
 				9D53559B2D12A25F00785888 /* ChapterModel.swift in Sources */,
+				9D5355DC2D182FE400785888 /* StepUseCase.swift in Sources */,
 				9D0D47572D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift in Sources */,
 				9D20C58E2C42698E008AB5EE /* AuthenticationViewController.swift in Sources */,
 				9D5355CA2D16F60A00785888 /* FirestoreCollections.swift in Sources */,
@@ -1470,6 +1510,7 @@
 				9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */,
 				9D53558E2D119D3C00785888 /* AddVideoStepViewController.swift in Sources */,
 				9D3760132D0345400032957F /* UIImage+toData.swift in Sources */,
+				9D5355DE2D18312100785888 /* StepRepository.swift in Sources */,
 				9DE498A92C561D08004F1A20 /* FirebaseAuthRemoteDataSource.swift in Sources */,
 				9D5355592D0A9FC300785888 /* UserProfileRepository.swift in Sources */,
 				9D0D47652D00BCA90040BA81 /* Failures.swift in Sources */,
@@ -1484,6 +1525,7 @@
 				9D0085B42C62712300EE241B /* ExploreFlowCoordinator.swift in Sources */,
 				9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */,
 				9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */,
+				9D5355E42D1832CF00785888 /* StepModel.swift in Sources */,
 				9D5355B32D1403AD00785888 /* DefaultSessionRepositoryImpl.swift in Sources */,
 				9DE498732C537145004F1A20 /* AuthenticationViewModel.swift in Sources */,
 				9D53556C2D0B0C0300785888 /* Step.swift in Sources */,
@@ -1507,6 +1549,7 @@
 				9DE4985E2C5145A6004F1A20 /* UseCase.swift in Sources */,
 				9D5355C82D16F34400785888 /* ChapterRemoteDataSource.swift in Sources */,
 				9D04A9282CF695460046AB88 /* CardView.swift in Sources */,
+				9D5355D22D1828ED00785888 /* EditStepListViewController.swift in Sources */,
 				9D53555B2D0AA07600785888 /* UserProfileModel.swift in Sources */,
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
 				9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */,
@@ -1517,12 +1560,15 @@
 				9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */,
 				9D53555D2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift in Sources */,
 				9D9DBC292C442CE600127B06 /* UIImage+Resize.swift in Sources */,
+				9D5355E22D1831C000785888 /* StepRemoteDataSource.swift in Sources */,
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */,
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
 				9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */,
 				9D5355812D0EA2FF00785888 /* EditChapterViewModel.swift in Sources */,
 				9D5355882D119C5000785888 /* AddTextStepViewController.swift in Sources */,
+				9D5355E62D1832F300785888 /* StepMapper.swift in Sources */,
+				9D5355D92D182B9800785888 /* StepListTableViewCell.swift in Sources */,
 				9DCBE4F22C56711600BDB378 /* UIApplication+topViewController.swift in Sources */,
 				9D5355CC2D16FC9800785888 /* ChapterMapper.swift in Sources */,
 				9D53557B2D0D993700785888 /* AddChapterViewController.swift in Sources */,
@@ -1536,6 +1582,7 @@
 				9D53557D2D0E979500785888 /* EditChapterListViewModel.swift in Sources */,
 				9D9F83752CC7D536003E3A2C /* Carousell.swift in Sources */,
 				9D04A9322CFA45500046AB88 /* ProfileCardView.swift in Sources */,
+				9D5355D72D182B4D00785888 /* AddStepTableViewCell.swift in Sources */,
 				9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */,
 				9D53556E2D0B23F100785888 /* EditChapterListViewController.swift in Sources */,
 				9DE498612C51485C004F1A20 /* Cancellable.swift in Sources */,
@@ -1548,6 +1595,7 @@
 				9D9DBC1A2C440C0D00127B06 /* SignInView.swift in Sources */,
 				9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */,
 				9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */,
+				9D5355E02D18314200785888 /* DefaultStepRepositoryImpl.swift in Sources */,
 				9D5355C62D16F2E200785888 /* DefaultChapterRepositoryImpl.swift in Sources */,
 				9D5355C22D16ABF400785888 /* UIImage+setImageFromURL.swift in Sources */,
 				9D0D47452CFB3DA30040BA81 /* ProfileFlowCoordinator.swift in Sources */,

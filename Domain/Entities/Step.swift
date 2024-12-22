@@ -5,7 +5,7 @@ enum StepType {
     case music(String)
     case video(String)
     case image(String)
-    case mission(location: CLLocationCoordinate2D, radius: Double)
+    case mission(location: CLLocationCoordinate2D?, radius: Double)
     case question(correctAnswer: String, options: [String]?)
     
     var stringValue: String {
