@@ -71,7 +71,7 @@ class EditChapterViewController: UIViewController {
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .background
-        navigationItem.title = "챕터 내용 수정"
+        navigationItem.title = "챕터 내용"
         
         view.addSubview(titleTextField)
         view.addSubview(imageView)

@@ -62,6 +62,8 @@ class WriteNewStoryViewController: UIViewController, UITextFieldDelegate {
         descriptionTextView.autocorrectionType = .no
         descriptionTextView.spellCheckingType = .no
         
+        navigationItem.title = "이야기"
+        
         editChaptersButton.onTap = { [weak self] in
             guard let storyId = self?.viewModel.getStoryId() else {
                 self?.showNeedtoSaveAlert()

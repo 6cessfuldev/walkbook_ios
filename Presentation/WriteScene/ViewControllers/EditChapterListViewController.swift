@@ -24,6 +24,8 @@ class EditChapterListViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
+        
+        navigationItem.title = "챕터 목록"
     }
 
     private func setupUI() {

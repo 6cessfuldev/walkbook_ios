@@ -22,6 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navController = UINavigationController()
         navController.navigationBar.isHidden = true
+        navController.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+        ]
+        
         appCoordinator = AppFlowCoordinator(navigationController: navController, appDIContainer: container)
         appCoordinator?.start()
         
