@@ -117,7 +117,7 @@ class FirestoreChapterRemoteDataSourceImpl: ChapterRemoteDataSource {
         do {
             let db = Firestore.firestore()
             let data = try chapter.toDictionary()
-            db.collection(FirestoreCollections.chapters).document(id).setData(data) { error in
+            db.collection(FirestoreCollections.chapters).document(id).setData(data, merge: true) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {

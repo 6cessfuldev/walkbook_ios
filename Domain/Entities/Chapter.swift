@@ -30,4 +30,18 @@ class Chapter {
         self.steps = steps
         self.childChapters = childChapters
     }
+    
+    static func fromNestedChapter(_ nestedChapter: NestedChapter) -> Chapter {
+        return Chapter(
+            id: nestedChapter.id,
+            storyId: nestedChapter.storyId,
+            title: nestedChapter.title,
+            imageUrl: nestedChapter.imageUrl,
+            description: nestedChapter.description,
+            location: nestedChapter.location,
+            radius: nestedChapter.radius,
+            steps: nestedChapter.steps,
+            childChapters: nestedChapter.childChapters.compactMap { $0.id }
+        )
+    }
 }

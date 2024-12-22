@@ -2,55 +2,48 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class EditChapterViewController: UIViewController {
+class EditChapterViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     private let viewModel: EditChapterViewModel
     weak var coordinator: MainFlowCoordinator!
     
     private let disposeBag = DisposeBag()
+        
+    private let actionImageView = UIImageView()
+    private let plusIconImageView = UIImageView()
     
+    private let titleTextField = PaddedTextField()
+    private let separatorLine = UIView()
+    private let descriptionTextView = UITextView()
     
-    private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter Chapter Title"
-        textField.borderStyle = .roundedRect
-        return textField
+    private let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Description"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = .lightGray
-        return imageView
+    private let loadingOverlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private let selectImageButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Select Image", for: .normal)
-        return button
-    }()
+    private let submitButton = UIBarButtonItem(
+        image: UIImage(systemName: "paperplane.fill"),
+        style: .done,
+        target: nil,
+        action: nil
+    )
     
-    private let descriptionTextView: UITextView = {
-        let textView = UITextView()
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 8
-        textView.font = UIFont.systemFont(ofSize: 14)
-        return textView
-    }()
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
-    private let tableView = UITableView()
-    private let addStepButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add Step", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        return button
-    }()
+    private let editStepsButton = EditStepsButton()
     
     // MARK: - Lifecycle
     init(viewModel: EditChapterViewModel) {
@@ -66,101 +59,177 @@ class EditChapterViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupBindings()
+        
+        titleTextField.delegate = self
+        descriptionTextView.autocorrectionType = .no
+        descriptionTextView.spellCheckingType = .no
+        
+        navigationItem.title = "챕터 내용"
+        
+        editStepsButton.onTap = { [weak self] in
+            
+        }
     }
     
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .background
-        navigationItem.title = "챕터 내용"
         
+        navigationItem.rightBarButtonItem = submitButton
+        
+        actionImageView.contentMode = .scaleAspectFit
+        actionImageView.isUserInteractionEnabled = true
+        actionImageView.backgroundColor = .backgroundSecondary
+        actionImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        plusIconImageView.image = UIImage(systemName: "plus.circle")
+        plusIconImageView.contentMode = .scaleAspectFit
+        plusIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [titleTextField, descriptionTextView].forEach {
+            $0.backgroundColor = .white
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        titleTextField.placeholder = "Title"
+        
+        descriptionTextView.font = UIFont.systemFont(ofSize: 16)
+        descriptionTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        descriptionTextView.textContainer.lineFragmentPadding = 0
+        
+        separatorLine.backgroundColor = .lightGray
+        separatorLine.translatesAutoresizingMaskIntoConstraints = false
+        
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicator.color = .white
+        loadingIndicator.hidesWhenStopped = true
+        
+        view.addSubview(actionImageView)
+        actionImageView.addSubview(plusIconImageView)
+        actionImageView.addSubview(loadingIndicator)
         view.addSubview(titleTextField)
-        view.addSubview(imageView)
-        view.addSubview(selectImageButton)
+        view.addSubview(separatorLine)
         view.addSubview(descriptionTextView)
-        view.addSubview(tableView)
-        view.addSubview(addStepButton)
-        
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        selectImageButton.translatesAutoresizingMaskIntoConstraints = false
-        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        addStepButton.translatesAutoresizingMaskIntoConstraints = false
+        descriptionTextView.addSubview(placeholderLabel)
+        view.addSubview(editStepsButton)
+        view.addSubview(loadingOverlay)
+        loadingOverlay.addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            actionImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            actionImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            actionImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            actionImageView.heightAnchor.constraint(equalToConstant: 300),
             
-            imageView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 16),
-            imageView.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
+            plusIconImageView.centerXAnchor.constraint(equalTo: actionImageView.centerXAnchor),
+            plusIconImageView.centerYAnchor.constraint(equalTo: actionImageView.centerYAnchor),
+            plusIconImageView.widthAnchor.constraint(equalToConstant: 50),
+            plusIconImageView.heightAnchor.constraint(equalToConstant: 50),
             
-            selectImageButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            selectImageButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            titleTextField.topAnchor.constraint(equalTo: actionImageView.bottomAnchor),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            titleTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            descriptionTextView.topAnchor.constraint(equalTo: selectImageButton.bottomAnchor, constant: 16),
-            descriptionTextView.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            descriptionTextView.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
-            descriptionTextView.heightAnchor.constraint(equalToConstant: 100),
+            separatorLine.topAnchor.constraint(equalTo: titleTextField.bottomAnchor),
+            separatorLine.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
+            separatorLine.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: 1),
             
-            tableView.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 16),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: addStepButton.topAnchor, constant: -16),
+            descriptionTextView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            descriptionTextView.heightAnchor.constraint(equalToConstant: 200),
             
-            addStepButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            addStepButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addStepButton.widthAnchor.constraint(equalToConstant: 120),
-            addStepButton.heightAnchor.constraint(equalToConstant: 44)
+            placeholderLabel.topAnchor.constraint(equalTo: descriptionTextView.topAnchor, constant: 8),
+            placeholderLabel.leadingAnchor.constraint(equalTo: descriptionTextView.leadingAnchor, constant: 8),
+            placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: descriptionTextView.trailingAnchor, constant: -8),
+            
+            editStepsButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 16),
+            editStepsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            editStepsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            editStepsButton.heightAnchor.constraint(equalToConstant: 80),
+            
+            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
         ])
-        
-        tableView.register(StepTableViewCell.self, forCellReuseIdentifier: "StepCell")
-        tableView.dataSource = self
     }
     
     private func setupBindings() {
-        titleTextField.text = viewModel.title.value
-        descriptionTextView.text = viewModel.description.value
+        viewModel.title
+            .asDriver()
+            .distinctUntilChanged()
+            .drive(titleTextField.rx.text)
+            .disposed(by: disposeBag)
         
         titleTextField.rx.text.orEmpty
+            .distinctUntilChanged()
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
-
+        
         descriptionTextView.rx.text.orEmpty
+            .map { !$0.isEmpty }
+            .bind(to: placeholderLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.description
+            .asDriver()
+            .distinctUntilChanged()
+            .drive(descriptionTextView.rx.text)
+            .disposed(by: disposeBag)
+        
+        descriptionTextView.rx.text.orEmpty
+            .distinctUntilChanged()
             .bind(to: viewModel.description)
             .disposed(by: disposeBag)
-
-        viewModel.title
-            .bind(to: titleTextField.rx.text)
+        
+        submitButton.rx.tap
+            .bind(to: viewModel.submitTapped)
             .disposed(by: disposeBag)
-
-        viewModel.description
-            .bind(to: descriptionTextView.rx.text)
+        
+        let tapGesture = UITapGestureRecognizer()
+        actionImageView.addGestureRecognizer(tapGesture)
+        
+        tapGesture.rx.event
+            .bind { [weak self] _ in
+                self?.presentImagePicker()
+            }
             .disposed(by: disposeBag)
         
         viewModel.selectedImage
             .asDriver(onErrorJustReturn: nil)
             .filter { $0 != nil }
             .drive(onNext: { [weak self] image in
-                self?.imageView.image = image
+                self?.actionImageView.image = image
             })
             .disposed(by: disposeBag)
         
-        addStepButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.addStep()
+        viewModel.isSubmitting.asDriver()
+            .drive(onNext: { [weak self] isSubmitting in
+                guard let self = self else { return }
+                if isSubmitting {
+                    self.loadingOverlay.isHidden = false
+                    self.loadingIndicator.startAnimating()
+                    self.plusIconImageView.isHidden = true
+                } else {
+                    self.loadingOverlay.isHidden = true
+                    self.loadingIndicator.stopAnimating()
+                    self.plusIconImageView.isHidden = false
+                }
             })
             .disposed(by: disposeBag)
         
-        let tapGesture = UITapGestureRecognizer()
-        imageView.addGestureRecognizer(tapGesture)
-        
-        tapGesture.rx.event
-            .bind { [weak self] _ in
-                self?.presentImagePicker()
-            }
+        viewModel.alertMessage
+            .subscribe(onNext: { [weak self] message in
+                let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -171,129 +240,69 @@ class EditChapterViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    private func addStep() {
-        let stepAddAlertController = UIAlertController(title: "추가할 단계의 유형을 선택해주세요", message: nil, preferredStyle: .actionSheet)
-
-        stepAddAlertController.addAction(UIAlertAction(title: "텍스트", style: .default, handler: { _ in
-            let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
-            let addStepVC = AddAudioStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
-            let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "영상", style: .default, handler: { _ in
-            let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "이동 미션", style: .default, handler: { _ in
-            let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "퀴즈", style: .default, handler: { _ in
-            let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
-            }
-            self.navigationController?.pushViewController(addStepVC, animated: true)
-            
-        }))
-        stepAddAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        present(stepAddAlertController, animated: true)
-
-    }
-    
-    private func getStep(by: String) -> Step {
-        return Step(id: nil, type: .text("Test"))
-    }
-}
-
-// MARK: - TableView DataSource
-extension EditChapterViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.chapter.value.steps.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "StepCell", for: indexPath) as? StepTableViewCell else {
-            return UITableViewCell()
-        }
-        let stepId = viewModel.chapter.value.steps[indexPath.row]
-        let step = getStep(by: stepId)
-        cell.configure(with: step)
-        return cell
-    }
+//    private func addStep() {
+//        let stepAddAlertController = UIAlertController(title: "추가할 단계의 유형을 선택해주세요", message: nil, preferredStyle: .actionSheet)
+//
+//        stepAddAlertController.addAction(UIAlertAction(title: "텍스트", style: .default, handler: { _ in
+//            let addStepVC = AddTextStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
+//            let addStepVC = AddAudioStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
+//            let addStepVC = AddTextStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "영상", style: .default, handler: { _ in
+//            let addStepVC = AddTextStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "이동 미션", style: .default, handler: { _ in
+//            let addStepVC = AddTextStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "퀴즈", style: .default, handler: { _ in
+//            let addStepVC = AddTextStepViewController()
+//            addStepVC.onSave = { [weak self] step in
+//                self?.viewModel.addOtherStep(step: step)
+//            }
+//            self.navigationController?.pushViewController(addStepVC, animated: true)
+//            
+//        }))
+//        stepAddAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//        
+//        present(stepAddAlertController, animated: true)
+//
+//    }
+//    
+//    private func getStep(by: String) -> Step {
+//        return Step(id: nil, type: .text("Test"))
+//    }
 }
 
 extension EditChapterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             viewModel.selectedImage.accept(image)
+            viewModel.uploadImage()
         }
         picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-// MARK: - Custom Step Cell
-class StepTableViewCell: UITableViewCell {
-    private let titleLabel = UILabel()
-    private let editButton = UIButton(type: .system)
-    private let deleteButton = UIButton(type: .system)
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupUI() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(editButton)
-        contentView.addSubview(deleteButton)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        editButton.setTitle("Edit", for: .normal)
-        deleteButton.setTitle("Delete", for: .normal)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            editButton.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -8),
-            editButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
-    }
-    
-    func configure(with step: Step) {
-        titleLabel.text = step.type.stringValue
     }
 }

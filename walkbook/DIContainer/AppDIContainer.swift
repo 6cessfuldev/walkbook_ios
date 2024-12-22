@@ -106,8 +106,10 @@ class AppDIContainer {
         }.inObjectScope(.transient)
         
         container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
+            let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
             let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
-            return EditChapterViewModel(chapter: chapter, imageUseCase: imageUseCase)
+            let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
+            return EditChapterViewModel(chapter: chapter, chapterUseCase: chapterUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
         //MARK: - Register UseCases
