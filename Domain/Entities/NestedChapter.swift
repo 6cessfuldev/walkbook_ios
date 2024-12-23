@@ -10,6 +10,8 @@ class NestedChapter {
     var radius: Double?
     var steps: [String]
     var childChapters: [NestedChapter]
+    let createdAt: Date?
+    let updatedAt: Date?
     
     init(id: String? = nil,
          storyId: String? = nil,
@@ -19,7 +21,9 @@ class NestedChapter {
          location: CLLocationCoordinate2D? = nil,
          radius: Double? = nil,
          steps: [String] = [],
-         childChapters: [NestedChapter] = []) {
+         childChapters: [NestedChapter] = [],
+         createdAt: Date? = nil,
+         updatedAt: Date? = nil) {
         self.id = id
         self.storyId = storyId
         self.title = title
@@ -29,6 +33,8 @@ class NestedChapter {
         self.radius = radius
         self.steps = steps
         self.childChapters = childChapters
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
     
     static func fromChapter(_ chapter: Chapter) -> NestedChapter {
@@ -41,7 +47,9 @@ class NestedChapter {
             location: chapter.location,
             radius: chapter.radius,
             steps: chapter.steps,
-            childChapters: []
+            childChapters: [],
+            createdAt: chapter.createdAt,
+            updatedAt: chapter.updatedAt
         )
     }
 }

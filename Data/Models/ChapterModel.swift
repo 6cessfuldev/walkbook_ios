@@ -1,15 +1,17 @@
 import FirebaseFirestore
 
 struct ChapterModel: Codable {
-    var id: String?
-    var storyId: String?
-    var title: String
-    var imageUrl: String?
-    var description: String?
-    var location: GeoPoint?
-    var radius: Double?
-    var steps: [String]
-    var childChapters: [String]
+    let id: String?
+    let storyId: String?
+    let title: String
+    let imageUrl: String?
+    let description: String?
+    let location: GeoPoint?
+    let radius: Double?
+    let steps: [String]
+    let childChapters: [String]
+    let createdAt: Timestamp?
+    let updatedAt: Timestamp?
 
     init(
         id: String? = nil,
@@ -20,7 +22,9 @@ struct ChapterModel: Codable {
         location: GeoPoint? = nil,
         radius: Double? = nil,
         steps: [String] = [],
-        childChapters: [String] = []
+        childChapters: [String] = [],
+        createdAt: Timestamp? = nil,
+        updatedAt: Timestamp? = nil
     ) {
         self.id = id
         self.storyId = storyId
@@ -31,6 +35,8 @@ struct ChapterModel: Codable {
         self.radius = radius
         self.steps = steps
         self.childChapters = childChapters
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
     
     func copy(
@@ -42,7 +48,10 @@ struct ChapterModel: Codable {
         location: GeoPoint? = nil,
         radius: Double? = nil,
         steps: [String]? = nil,
-        childChapters: [String]? = nil
+        childChapters: [String]? = nil,
+        createdAt: Timestamp? = nil,
+        updatedAt: Timestamp? = nil
+        
     ) -> ChapterModel {
         return ChapterModel(
             id: id ?? self.id,
@@ -53,7 +62,9 @@ struct ChapterModel: Codable {
             location: location ?? self.location,
             radius: radius ?? self.radius,
             steps: steps ?? self.steps,
-            childChapters: childChapters ?? self.childChapters
+            childChapters: childChapters ?? self.childChapters,
+            createdAt: createdAt ?? self.createdAt,
+            updatedAt: updatedAt ?? self.updatedAt
         )
     }
 }

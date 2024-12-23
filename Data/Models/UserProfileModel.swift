@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseFirestoreInternal
 
 struct UserProfileModel: Codable {
     let id: String
@@ -6,15 +7,19 @@ struct UserProfileModel: Codable {
     let name: String?
     let nickname: String?
     let imageUrl: String?
-    var lastLoginDate: Date?
+    let lastLoginDate: Date?
+    let createdAt: Timestamp?
+    let updatedAt: Timestamp?
 
-    init(id: String, provider: String, name: String? = nil, nickname: String? = nil, imageUrl: String? = nil, lastLoginDate: Date? = nil) {
+    init(id: String, provider: String, name: String? = nil, nickname: String? = nil, imageUrl: String? = nil, lastLoginDate: Date? = nil, createdAt: Timestamp? = nil, updatedAt: Timestamp? = nil) {
         self.id = id
         self.provider = provider
         self.name = name
         self.nickname = nickname
         self.imageUrl = imageUrl
         self.lastLoginDate = lastLoginDate
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
     
     func copy(
@@ -23,7 +28,9 @@ struct UserProfileModel: Codable {
         name: String? = nil,
         nickname: String? = nil,
         imageUrl: String? = nil,
-        lastLoginDate: Date? = nil
+        lastLoginDate: Date? = nil,
+        createAt: Timestamp? = nil,
+        updatedAt: Timestamp? = nil
     ) -> UserProfileModel {
         return UserProfileModel(
             id: id ?? self.id,
@@ -31,7 +38,9 @@ struct UserProfileModel: Codable {
             name: name ?? self.name,
             nickname: nickname ?? self.nickname,
             imageUrl: imageUrl ?? self.imageUrl,
-            lastLoginDate: lastLoginDate ?? self.lastLoginDate
+            lastLoginDate: lastLoginDate ?? self.lastLoginDate,
+            createdAt: createdAt ?? self.createdAt,
+            updatedAt: updatedAt ?? self.updatedAt
         )
     }
 }

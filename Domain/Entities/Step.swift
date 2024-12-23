@@ -22,4 +22,14 @@ struct Step {
     let id: String?
     var type: StepType
     let location:CLLocationCoordinate2D?
+    let createdAt: Date?
+    let updatedAt: Date?
+    
+    init(id: String?, type: StepType, location: CLLocationCoordinate2D?, createdAt: Date? = nil, updatedAt: Date? = nil) {
+        self.id = id
+        self.type = type
+        self.location = location
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
 }

@@ -23,8 +23,7 @@ class FirestoreChapterRemoteDataSourceImpl: ChapterRemoteDataSource {
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    var createdChapter = chapter
-                    createdChapter.id = documentRef.documentID
+                    let createdChapter = chapter.copy(id: documentRef.documentID)
                     
                     completion(.success(createdChapter))
                 }
@@ -35,8 +34,6 @@ class FirestoreChapterRemoteDataSourceImpl: ChapterRemoteDataSource {
     }
     
     func addChildChapter( _ child: ChapterModel, to parentChapterId: String, completion: @escaping (Result<ChapterModel, Error>) -> Void ) {
-        var createdChildChapter = child
-        
         db.runTransaction({ (transaction, errorPointer) -> Any? in
             let parentRef = self.db.collection(FirestoreCollections.chapters).document(parentChapterId)
             let childRef = self.db.collection(FirestoreCollections.chapters).document()
@@ -58,8 +55,7 @@ class FirestoreChapterRemoteDataSourceImpl: ChapterRemoteDataSource {
                 return nil
             }
             
-            createdChildChapter.id = childRef.documentID
-            createdChildChapter.storyId = parentData["storyId"] as? String
+            let createdChildChapter = child.copy(id: childRef.documentID, storyId: parentData["storyId"] as? String)
             
             do {
                 let childData = try createdChildChapter.toDictionary()

@@ -14,7 +14,9 @@ struct ChapterMapper {
             location: chapter.location != nil ? GeoPoint(latitude: chapter.location!.latitude, longitude: chapter.location!.longitude) : nil,
             radius: chapter.radius,
             steps: chapter.steps,
-            childChapters: chapter.childChapters
+            childChapters: chapter.childChapters,
+            createdAt: chapter.createdAt != nil ? Timestamp(date: chapter.createdAt!) : nil,
+            updatedAt: chapter.updatedAt != nil ? Timestamp(date: chapter.updatedAt!) : nil
         )
     }
     
@@ -28,7 +30,9 @@ struct ChapterMapper {
             location: model.location != nil ? CLLocationCoordinate2D(latitude: model.location!.latitude, longitude: model.location!.longitude) : nil,
             radius: model.radius,
             steps: model.steps,
-            childChapters: model.childChapters
+            childChapters: model.childChapters,
+            createdAt: model.createdAt?.dateValue(),
+            updatedAt: model.updatedAt?.dateValue()
         )
     }
 }

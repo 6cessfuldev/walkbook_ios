@@ -13,7 +13,9 @@ class ChapterTreeBuilder {
                 location: flatChapter.location?.toCoordinate(),
                 radius: flatChapter.radius,
                 steps: flatChapter.steps,
-                childChapters: []
+                childChapters: [],
+                createdAt: flatChapter.createdAt?.dateValue(),
+                updatedAt: flatChapter.updatedAt?.dateValue()
             )
             if let id = flatChapter.id {
                 chapterLookup[id] = nestedChapter

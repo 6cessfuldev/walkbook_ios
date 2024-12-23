@@ -129,12 +129,12 @@ class FirebaseAuthenticationRepositoryImpl: NSObject, AuthenticationRepository {
     private func handleUserProfile(for uid: String, provider: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
         userProfileRemoteDataSource.getUserProfile(byId: uid) { [weak self] result in
             switch result {
-            case .success(var userProfileModel):
-                userProfileModel.lastLoginDate = Date()
-                self?.userProfileRemoteDataSource.updateUserProfile(userProfileModel) { updateResult in
+            case .success(let userProfileModel):
+                let currentUserProfileModel = userProfileModel.copy(lastLoginDate: Date())
+                self?.userProfileRemoteDataSource.updateUserProfile(currentUserProfileModel) { updateResult in
                     switch updateResult {
                     case .success:
-                        completion(.success(UserProfileMapper.toEntity(userProfileModel)))
+                        completion(.success(UserProfileMapper.toEntity(currentUserProfileModel)))
                     case .failure(let error):
                         completion(.failure(error))
                     }

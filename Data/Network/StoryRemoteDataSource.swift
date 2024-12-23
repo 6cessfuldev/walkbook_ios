@@ -24,8 +24,7 @@ class FirestoreStoryRemoteDataSourceImpl: StoryRemoteDataSource {
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    var createdStory = story
-                    createdStory.id = documentRef.documentID
+                    let createdStory = story.copy(id: documentRef.documentID)
                     
                     completion(.success(createdStory))
                 }
