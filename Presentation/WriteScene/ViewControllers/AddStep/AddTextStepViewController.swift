@@ -18,7 +18,6 @@ class AddTextStepViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        
         let saveBarButton = UIBarButtonItem(
             image: UIImage(systemName: "checkmark.circle"),
             style: .plain,

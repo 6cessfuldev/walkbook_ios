@@ -120,7 +120,8 @@ class AppDIContainer {
         container.register(EditStepListViewModel.self) { (r, chapterId: String) in
             let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
             let stepUseCase = r.resolve(StepUseCaseProtocol.self)!
-            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase)
+            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase, imageUseCase: imageUseCase)
         }.inObjectScope(.transient)
         
         //MARK: - Register UseCases

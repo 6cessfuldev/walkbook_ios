@@ -25,7 +25,7 @@ struct Step {
     let createdAt: Date?
     let updatedAt: Date?
     
-    init(id: String?, type: StepType, location: CLLocationCoordinate2D?, createdAt: Date? = nil, updatedAt: Date? = nil) {
+    init(id: String? = nil, type: StepType, location: CLLocationCoordinate2D?, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
         self.type = type
         self.location = location
