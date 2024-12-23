@@ -105,6 +105,7 @@
 		9D5355E22D1831C000785888 /* StepRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */; };
 		9D5355E42D1832CF00785888 /* StepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E32D1832CF00785888 /* StepModel.swift */; };
 		9D5355E62D1832F300785888 /* StepMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E52D1832F300785888 /* StepMapper.swift */; };
+		9D5355E82D199A7800785888 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355E72D199A7800785888 /* LocationPickerView.swift */; };
 		9D7EB4272C7E1CCA0060B56B /* WriteBottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */; };
 		9D7EB42B2C7E1E310060B56B /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */; };
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
@@ -270,6 +271,7 @@
 		9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRemoteDataSource.swift; sourceTree = "<group>"; };
 		9D5355E32D1832CF00785888 /* StepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepModel.swift; sourceTree = "<group>"; };
 		9D5355E52D1832F300785888 /* StepMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepMapper.swift; sourceTree = "<group>"; };
+		9D5355E72D199A7800785888 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
 		9D7EB4262C7E1CCA0060B56B /* WriteBottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteBottomMenuViewController.swift; sourceTree = "<group>"; };
 		9D7EB42A2C7E1E310060B56B /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 				9D5355CF2D17FC7000785888 /* EditStepsButton.swift */,
 				9D5355D62D182B4D00785888 /* AddStepTableViewCell.swift */,
 				9D5355D82D182B9800785888 /* StepListTableViewCell.swift */,
+				9D5355E72D199A7800785888 /* LocationPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1549,6 +1552,7 @@
 				9D5355D22D1828ED00785888 /* EditStepListViewController.swift in Sources */,
 				9D53555B2D0AA07600785888 /* UserProfileModel.swift in Sources */,
 				9DE498642C52790D004F1A20 /* NonceUtils.swift in Sources */,
+				9D5355E82D199A7800785888 /* LocationPickerView.swift in Sources */,
 				9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */,
 				9D0D47672D00C02B0040BA81 /* WriteNewStoryViewController.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
