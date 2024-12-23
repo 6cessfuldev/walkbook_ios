@@ -44,7 +44,6 @@ class AddVideoStepViewController: UIViewController {
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .white
-        title = "영상 추가하기"
         
         videoPreviewView.translatesAutoresizingMaskIntoConstraints = false
         playerLayer.videoGravity = .resizeAspectFill
@@ -81,7 +80,7 @@ class AddVideoStepViewController: UIViewController {
                     self?.showAlert("Please select a video first.")
                     return
                 }
-                self.onSave?(Step(id: nil, type: .video(videoURL.absoluteString)))
+                self.onSave?(Step(id: nil, type: .video(videoURL.absoluteString), location: nil))
                 self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)

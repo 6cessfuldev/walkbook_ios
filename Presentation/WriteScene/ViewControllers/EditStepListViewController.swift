@@ -54,43 +54,43 @@ class EditStepListViewController: UIViewController {
 
         stepAddAlertController.addAction(UIAlertAction(title: "텍스트", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
-            let addStepVC = AddAudioStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            let addStepVC = AddTextStepViewController()
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "영상", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "이동 미션", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "퀴즈", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
-            addStepVC.onSave = { [weak self] step in
-                self?.viewModel.addOtherStep(step: step)
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
             

@@ -6,17 +6,15 @@ class StepMapper {
     static func toEntity(_ model: StepModel) -> Step {
         switch model.type {
         case "text":
-            return Step(id: model.id, type: .text(model.content ?? ""))
+            return Step(id: model.id, type: .text(model.content ?? ""), location: model.location?.toCoordinate())
         case "music":
-            return Step(id: model.id, type: .music(model.content ?? ""))
+            return Step(id: model.id, type: .music(model.content ?? ""), location: model.location?.toCoordinate())
         case "video":
-            return Step(id: model.id, type: .video(model.content ?? ""))
+            return Step(id: model.id, type: .video(model.content ?? ""), location: model.location?.toCoordinate())
         case "image":
-            return Step(id: model.id, type: .image(model.content ?? ""))
-        case "mission":
-            return Step(id: model.id, type: .mission(location: model.location?.toCoordinate(), radius: model.radius ?? 0.0))
+            return Step(id: model.id, type: .image(model.content ?? ""), location: model.location?.toCoordinate())
         case "question":
-            return Step(id: model.id, type: .question(correctAnswer: model.correctAnswer ?? "", options: model.options))
+            return Step(id: model.id, type: .question(correctAnswer: model.correctAnswer ?? "", options: model.options), location: model.location?.toCoordinate())
         default:
             fatalError("Unsupported Step type: \(model.type)")
         }
@@ -29,7 +27,7 @@ class StepMapper {
                 id: step.id,
                 type: "text",
                 content: content,
-                location: nil,
+                location: step.location?.toGeoPoint(),
                 radius: nil,
                 correctAnswer: nil,
                 options: nil
@@ -39,7 +37,7 @@ class StepMapper {
                 id: step.id,
                 type: "music",
                 content: url,
-                location: nil,
+                location: step.location?.toGeoPoint(),
                 radius: nil,
                 correctAnswer: nil,
                 options: nil
@@ -49,7 +47,7 @@ class StepMapper {
                 id: step.id,
                 type: "video",
                 content: url,
-                location: nil,
+                location: step.location?.toGeoPoint(),
                 radius: nil,
                 correctAnswer: nil,
                 options: nil
@@ -59,18 +57,8 @@ class StepMapper {
                 id: step.id,
                 type: "image",
                 content: url,
-                location: nil,
+                location: step.location?.toGeoPoint(),
                 radius: nil,
-                correctAnswer: nil,
-                options: nil
-            )
-        case .mission(let location, let radius):
-            return StepModel(
-                id: step.id,
-                type: "mission",
-                content: nil,
-                location: location?.toGeoPoint(),
-                radius: radius,
                 correctAnswer: nil,
                 options: nil
             )
@@ -79,7 +67,7 @@ class StepMapper {
                 id: step.id,
                 type: "question",
                 content: nil,
-                location: nil,
+                location: step.location?.toGeoPoint(),
                 radius: nil,
                 correctAnswer: correctAnswer,
                 options: options

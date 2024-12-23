@@ -71,7 +71,6 @@
 		9D53557D2D0E979500785888 /* EditChapterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53557C2D0E979500785888 /* EditChapterListViewModel.swift */; };
 		9D53557F2D0E9D5400785888 /* EditChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53557E2D0E9D5400785888 /* EditChapterViewController.swift */; };
 		9D5355812D0EA2FF00785888 /* EditChapterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355802D0EA2FF00785888 /* EditChapterViewModel.swift */; };
-		9D5355862D119C3300785888 /* AddMapStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355852D119C3300785888 /* AddMapStepViewController.swift */; };
 		9D5355882D119C5000785888 /* AddTextStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355872D119C5000785888 /* AddTextStepViewController.swift */; };
 		9D53558A2D119C6100785888 /* AddImageStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355892D119C6100785888 /* AddImageStepViewController.swift */; };
 		9D53558C2D119CB900785888 /* AddAudioStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D53558B2D119CB900785888 /* AddAudioStepViewController.swift */; };
@@ -237,7 +236,6 @@
 		9D53557C2D0E979500785888 /* EditChapterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChapterListViewModel.swift; sourceTree = "<group>"; };
 		9D53557E2D0E9D5400785888 /* EditChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChapterViewController.swift; sourceTree = "<group>"; };
 		9D5355802D0EA2FF00785888 /* EditChapterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChapterViewModel.swift; sourceTree = "<group>"; };
-		9D5355852D119C3300785888 /* AddMapStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapStepViewController.swift; sourceTree = "<group>"; };
 		9D5355872D119C5000785888 /* AddTextStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextStepViewController.swift; sourceTree = "<group>"; };
 		9D5355892D119C6100785888 /* AddImageStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageStepViewController.swift; sourceTree = "<group>"; };
 		9D53558B2D119CB900785888 /* AddAudioStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAudioStepViewController.swift; sourceTree = "<group>"; };
@@ -791,7 +789,6 @@
 		9D5355842D119C1C00785888 /* AddStep */ = {
 			isa = PBXGroup;
 			children = (
-				9D5355852D119C3300785888 /* AddMapStepViewController.swift */,
 				9D5355872D119C5000785888 /* AddTextStepViewController.swift */,
 				9D5355892D119C6100785888 /* AddImageStepViewController.swift */,
 				9D53558B2D119CB900785888 /* AddAudioStepViewController.swift */,
@@ -1555,7 +1552,6 @@
 				9D0D474A2CFC46FE0040BA81 /* SubscribeFlowCoordinator.swift in Sources */,
 				9D0D47672D00C02B0040BA81 /* WriteNewStoryViewController.swift in Sources */,
 				9D9F836E2CC7D34E003E3A2C /* UIImage+ColorInit.swift in Sources */,
-				9D5355862D119C3300785888 /* AddMapStepViewController.swift in Sources */,
 				9D0D47532D009FF80040BA81 /* StoryUseCase.swift in Sources */,
 				9D5355642D0AB1A200785888 /* UserProfileViewModel.swift in Sources */,
 				9D53555D2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift in Sources */,

@@ -17,7 +17,6 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
     
     private func setupUI() {
         view.backgroundColor = .white
-        title = "이미지 추가"
         
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .lightGray
@@ -58,7 +57,7 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
             .subscribe(onNext: { [weak self] in
                 guard let self = self, let image = self.imageView.image else { return }
                 //Todo: 서버에 이미지 저장 및 url 가져오기
-                self.onSave?(Step(id: nil, type: .image("")))
+                self.onSave?(Step(id: nil, type: .image(""), location: nil))
                 self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)

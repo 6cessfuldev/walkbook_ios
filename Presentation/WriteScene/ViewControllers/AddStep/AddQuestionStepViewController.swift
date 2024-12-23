@@ -1,6 +1,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import CoreLocation
 
 class AddQuestionStepViewController: UIViewController {
     
@@ -38,12 +39,32 @@ class AddQuestionStepViewController: UIViewController {
         return textView
     }()
     
+    private let locationSwitch: UISwitch = {
+        let locationSwitch = UISwitch()
+        return locationSwitch
+    }()
+    
+    private let locationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Include Location"
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
+    private let selectLocationButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Select Location on Map", for: .normal)
+        button.isEnabled = false
+        return button
+    }()
+    
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
         return button
     }()
     
+    private var selectedLocation: CLLocationCoordinate2D?
     private var optionsPlaceholder = "Optional: Enter options separated by commas"
     
     // MARK: - Lifecycle
@@ -56,16 +77,23 @@ class AddQuestionStepViewController: UIViewController {
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .white
-        title = "질문과 정답 추가하기"
+        
+        let locationStack = UIStackView(arrangedSubviews: [locationLabel, locationSwitch])
+        locationStack.axis = .horizontal
+        locationStack.spacing = 8
         
         view.addSubview(questionTextField)
         view.addSubview(answerTextField)
         view.addSubview(optionsTextView)
+        view.addSubview(locationStack)
+        view.addSubview(selectLocationButton)
         view.addSubview(saveButton)
         
         questionTextField.translatesAutoresizingMaskIntoConstraints = false
         answerTextField.translatesAutoresizingMaskIntoConstraints = false
         optionsTextView.translatesAutoresizingMaskIntoConstraints = false
+        locationStack.translatesAutoresizingMaskIntoConstraints = false
+       selectLocationButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -130,7 +158,7 @@ class AddQuestionStepViewController: UIViewController {
             options = optionsTextView.text.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
         }
         
-        onSave?(Step(id: nil, type: .question(correctAnswer: answer, options: options)))
+        onSave?(Step(id: nil, type: .question(correctAnswer: answer, options: options), location: nil))
         dismiss(animated: true, completion: nil)
     }
     

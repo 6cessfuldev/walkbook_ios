@@ -5,7 +5,6 @@ enum StepType {
     case music(String)
     case video(String)
     case image(String)
-    case mission(location: CLLocationCoordinate2D?, radius: Double)
     case question(correctAnswer: String, options: [String]?)
     
     var stringValue: String {
@@ -14,7 +13,6 @@ enum StepType {
         case .music: return "music"
         case .video: return "video"
         case .image: return "image"
-        case .mission: return "mission"
         case .question: return "question"
         }
     }
@@ -23,4 +21,5 @@ enum StepType {
 struct Step {
     let id: String?
     var type: StepType
+    let location:CLLocationCoordinate2D?
 }

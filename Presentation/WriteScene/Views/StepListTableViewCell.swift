@@ -101,15 +101,6 @@ class StepListTableViewCell: UITableViewCell {
             titleLabel.text = "이미지 타입"
             subtitleLabel.text = url
             
-        case .mission(let location, let radius):
-            iconImageView.image = UIImage(systemName: "location.circle")
-            titleLabel.text = "위치 타입"
-            guard let location = location else {
-                subtitleLabel.text = "위치 미지정"
-                return
-            }
-            subtitleLabel.text = "위도: \(location.latitude), 경도: \(location.longitude), 반경: \(radius)m"
-            
         case .question(let correctAnswer, _):
             iconImageView.image = UIImage(systemName: "questionmark.circle")
             titleLabel.text = "퀴즈 타입"

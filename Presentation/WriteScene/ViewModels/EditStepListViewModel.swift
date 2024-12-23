@@ -18,16 +18,17 @@ class EditStepListViewModel {
         fetchInitialSteps()
     }
     
-    func addOtherStep(step: Step) {
+    func addOtherStep(step: Step, completion: @escaping (Result<Void, Error>) -> Void) {
         stepUseCase.createStep(step, to: chapterId) { r in
             switch r {
             case .success(let step):
                 var currentSteps = self.stepsRelay.value
                 currentSteps.append(step)
                 self.stepsRelay.accept(currentSteps)
+                completion(.success(()))
             case .failure(let error):
                 print("addOtherStep : 스탭 추가 실패, Error : \(error)")
-                // Todo: alertController 호출
+                completion(.failure(error))
             }
         }
     }

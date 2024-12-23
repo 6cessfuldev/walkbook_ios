@@ -16,7 +16,6 @@ class AddAudioStepViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        title = "음성 추가"
         
         textField.placeholder = "음원 URL을 입력해주세요"
         textField.borderStyle = .roundedRect
@@ -42,7 +41,7 @@ class AddAudioStepViewController: UIViewController {
         saveButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self, let text = self.textField.text, !text.isEmpty else { return }
-                self.onSave?(Step(id: nil, type: .text(text)))
+                self.onSave?(Step(id: nil, type: .text(text), location: nil))
                 self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
