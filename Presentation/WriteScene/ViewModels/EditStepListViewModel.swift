@@ -64,6 +64,10 @@ class EditStepListViewModel {
         }
     }
     
+    func addAudioTypeStep(audioURL: URL, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+    }
+    
     private func fetchInitialSteps() {
         stepUseCase.fetchSteps(by: chapterId) { [weak self] result in
             guard let self = self else { return }

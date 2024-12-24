@@ -24,7 +24,6 @@ class FirestoreChapterRemoteDataSourceImpl: ChapterRemoteDataSource {
                     completion(.failure(error))
                 } else {
                     let createdChapter = chapter.copy(id: documentRef.documentID)
-                    
                     completion(.success(createdChapter))
                 }
             }

@@ -59,13 +59,13 @@ class EditStepListViewController: UIViewController {
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
-//        stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
-//            let addStepVC = AddTextStepViewController()
-//            addStepVC.onSave = { [weak self] step, completion in
-//                self?.viewModel.addOtherStep(step: step, completion: completion)
-//            }
-//            self.navigationController?.pushViewController(addStepVC, animated: true)
-//        }))
+        stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
+            let addStepVC = AddAudioStepViewController()
+            addStepVC.onSave = { [weak self] audioURL, location, completion in
+                self?.viewModel.addAudioTypeStep(audioURL: audioURL, location: location, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+        }))
         stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
             let addStepVC = AddImageStepViewController()
             addStepVC.onSave = { [weak self] image, location, completion in

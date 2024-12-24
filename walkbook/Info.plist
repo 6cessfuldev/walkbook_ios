@@ -6,6 +6,8 @@
     <string>We need your location to show your current position on the map.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>We need your location to show your current position on the map.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need your permission to record.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
