@@ -86,7 +86,7 @@ class StepListTableViewCell: UITableViewCell {
             titleLabel.text = "텍스트 타입"
             subtitleLabel.text = content
             
-        case .music(let url):
+        case .audio(let url):
             iconImageView.image = UIImage(systemName: "music.note")
             titleLabel.text = "오디오 타입"
             subtitleLabel.text = url

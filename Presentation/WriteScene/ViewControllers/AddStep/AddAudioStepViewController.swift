@@ -29,6 +29,8 @@ class AddAudioStepViewController: UIViewController {
         return progress
     }()
     
+    private let locationPickerView = LocationPickerView()
+    
     private let bottomView = UIView()
     private let outerBorderView = UIView()
     private let recordButton = UIButton(type: .system)
@@ -39,6 +41,39 @@ class AddAudioStepViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupBindings()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        let saveBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "checkmark.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(saveButtonTapped)
+        )
+        
+        navigationItem.rightBarButtonItem = saveBarButton
+    }
+    
+    @objc private func saveButtonTapped() {
+        guard let audioFileURL = audioFileURL else {
+            showAlert(message: "오디오를 입력해주세요")
+            return
+        }
+        let location = locationPickerView.selectedLocation
+        onSave?(audioFileURL, location) { r in
+            switch r {
+            case .success(()):
+                DispatchQueue.main.async {
+                    self.handleSubmitSuccess()
+                }
+            case .failure(let error):
+                print("AddAudioStepViewController : \(error)")
+                DispatchQueue.main.async {
+                    self.showAlert(message: "통신 오류")
+                }
+            }
+        }
     }
     
     private func setupUI() {
@@ -59,6 +94,8 @@ class AddAudioStepViewController: UIViewController {
         timeLabel.textAlignment = .center
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        locationPickerView.translatesAutoresizingMaskIntoConstraints = false
+        
         bottomView.backgroundColor = UIColor.systemGray6
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -73,7 +110,6 @@ class AddAudioStepViewController: UIViewController {
         recordButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         recordButton.layer.cornerRadius = 30
         recordButton.clipsToBounds = true
-        recordButton.addTarget(self, action: #selector(tapRecording), for: .touchUpInside)
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(audioItemView)
@@ -82,12 +118,15 @@ class AddAudioStepViewController: UIViewController {
         audioItemView.addSubview(timeLabel)
         audioItemView.addSubview(progressView)
         
+        view.addSubview(locationPickerView)
+        
         view.addSubview(bottomView)
         bottomView.addSubview(outerBorderView)
         outerBorderView.addSubview(recordButton)
         
         NSLayoutConstraint.activate([
-            audioItemView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+            // Todo: hidden이 아니라 초기값에는 사이즈가 없다가 레코드 결과물이 있을 경우에 사이즈가 생겨야 함
+            audioItemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             audioItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             audioItemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             audioItemView.heightAnchor.constraint(equalToConstant: 100),
@@ -105,6 +144,11 @@ class AddAudioStepViewController: UIViewController {
             progressView.trailingAnchor.constraint(equalTo: audioItemView.trailingAnchor, constant: -16),
             progressView.bottomAnchor.constraint(equalTo: audioItemView.bottomAnchor, constant: -16),
             progressView.heightAnchor.constraint(equalToConstant: 4),
+            
+            locationPickerView.topAnchor.constraint(equalTo: audioItemView.bottomAnchor, constant: 16),
+            locationPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            locationPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            locationPickerView.heightAnchor.constraint(equalToConstant: 400),
             
             bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -170,7 +214,7 @@ class AddAudioStepViewController: UIViewController {
         audioItemView.isHidden = true
     }
     
-    @objc private func tapRecording() {
+    private func tapRecording() {
         
         if !isRecording {
             if(audioFileURL != nil) {
@@ -257,6 +301,21 @@ class AddAudioStepViewController: UIViewController {
         alertController.addAction(noAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "오류", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func handleSubmitSuccess() {
+        let alert = UIAlertController(title: "알림", message: "저장 완료", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

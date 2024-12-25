@@ -65,6 +65,27 @@ class EditStepListViewModel {
     }
     
     func addAudioTypeStep(audioURL: URL, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
+        mediaUseCase.uploadAudio(audioURL) { r in
+            switch r {
+            case .success(let url):
+                let step = Step(type: .audio(url), location: location)
+                self.stepUseCase.createStep(step, to: self.chapterId) { stepRes in
+                    switch stepRes {
+                    case .success(let step):
+                        var currentSteps = self.stepsRelay.value
+                        currentSteps.append(step)
+                        self.stepsRelay.accept(currentSteps)
+                        completion(.success(()))
+                    case .failure(let error):
+                        print("addOtherStep : 스탭 추가 실패, Error : \(error)")
+                        completion(.failure(error))
+                    }
+                }
+            case .failure(let error):
+                print("오디오 업로드 실패 \(error)")
+                completion(.failure(error))
+            }
+        }
     }
     
     private func fetchInitialSteps() {
