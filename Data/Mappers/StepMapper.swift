@@ -13,10 +13,10 @@ class StepMapper {
                 location: model.location?.toCoordinate(),
                 createdAt: model.createdAt?.dateValue(),
                 updatedAt: model.updatedAt?.dateValue())
-        case "music":
+        case "audio":
             return Step(
                 id: model.id,
-                type: .music(model.content ?? ""),
+                type: .audio(model.content ?? ""),
                 location: model.location?.toCoordinate(),
                 createdAt: model.createdAt?.dateValue(),
                 updatedAt: model.updatedAt?.dateValue())
@@ -61,10 +61,10 @@ class StepMapper {
                 createdAt: step.createdAt != nil ? Timestamp(date: step.createdAt!) : nil,
                 updatedAt: step.updatedAt != nil ? Timestamp(date: step.updatedAt!) : nil
             )
-        case .music(let url):
+        case .audio(let url):
             return StepModel(
                 id: step.id,
-                type: "music",
+                type: "audio",
                 content: url,
                 location: step.location?.toGeoPoint(),
                 radius: nil,
