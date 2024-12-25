@@ -22,18 +22,18 @@ class WriteNewStoryViewModel {
     // MARK: - Dependencies
     private var story: Story?
     private let storyUseCase: StoryUseCaseProtocol
-    private let imageUseCase: ImageUseCaseProtocol
+    private let mediaUseCase: MediaUseCaseProtocol
     private let userProfileUseCase: UserProfileUseCaseProtocol
     
     // MARK: - Initializer
     init(
         story: Story? = nil,
         storyUseCase: StoryUseCaseProtocol,
-        imageUseCase: ImageUseCaseProtocol,
+        mediaUseCase: MediaUseCaseProtocol,
         userProfileUseCase: UserProfileUseCaseProtocol
     ) {
         self.storyUseCase = storyUseCase
-        self.imageUseCase = imageUseCase
+        self.mediaUseCase = mediaUseCase
         self.userProfileUseCase = userProfileUseCase
         self.story = story
         
@@ -137,7 +137,7 @@ class WriteNewStoryViewModel {
         
         _isSubmitting.accept(true)
         
-        imageUseCase.uploadImage(data) { [weak self] result in
+        mediaUseCase.uploadImage(data) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {

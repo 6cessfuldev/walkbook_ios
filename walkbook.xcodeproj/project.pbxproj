@@ -42,11 +42,11 @@
 		9D35C5C32C3ECB17004586C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5C12C3ECB17004586C2 /* LaunchScreen.storyboard */; };
 		9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 9D35C5CE2C3FCE62004586C2 /* .gitignore */; };
 		9D37600C2D0328020032957F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D37600B2D0328020032957F /* GoogleService-Info.plist */; };
-		9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37600E2D0338360032957F /* ImageUseCase.swift */; };
-		9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760102D033E5C0032957F /* ImageRepository.swift */; };
+		9D37600F2D0338360032957F /* MediaUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37600E2D0338360032957F /* MediaUseCase.swift */; };
+		9D3760112D033E5C0032957F /* MediaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760102D033E5C0032957F /* MediaRepository.swift */; };
 		9D3760132D0345400032957F /* UIImage+toData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760122D0345400032957F /* UIImage+toData.swift */; };
-		9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */; };
-		9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */; };
+		9D3760162D0346280032957F /* DefaultMediaRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760152D0346280032957F /* DefaultMediaRepositoryImpl.swift */; };
+		9D3760182D0346FE0032957F /* MediaRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760172D0346FE0032957F /* MediaRemoteDataSource.swift */; };
 		9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3760192D05C2310032957F /* MyStoryViewController.swift */; };
 		9D37601C2D05CB0D0032957F /* MyStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */; };
 		9D5355522D0A021900785888 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5355512D0A021900785888 /* PaddedTextField.swift */; };
@@ -209,11 +209,11 @@
 		9D35C5C42C3ECB17004586C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D35C5CE2C3FCE62004586C2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		9D37600B2D0328020032957F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9D37600E2D0338360032957F /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
-		9D3760102D033E5C0032957F /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		9D37600E2D0338360032957F /* MediaUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUseCase.swift; sourceTree = "<group>"; };
+		9D3760102D033E5C0032957F /* MediaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRepository.swift; sourceTree = "<group>"; };
 		9D3760122D0345400032957F /* UIImage+toData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+toData.swift"; sourceTree = "<group>"; };
-		9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageRepositoryImpl.swift; sourceTree = "<group>"; };
-		9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRemoteDataSource.swift; sourceTree = "<group>"; };
+		9D3760152D0346280032957F /* DefaultMediaRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMediaRepositoryImpl.swift; sourceTree = "<group>"; };
+		9D3760172D0346FE0032957F /* MediaRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemoteDataSource.swift; sourceTree = "<group>"; };
 		9D3760192D05C2310032957F /* MyStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewController.swift; sourceTree = "<group>"; };
 		9D37601B2D05CB0D0032957F /* MyStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryViewModel.swift; sourceTree = "<group>"; };
 		9D5355512D0A021900785888 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
@@ -606,7 +606,7 @@
 				9D5355DA2D182FD700785888 /* Step */,
 				9D5355952D12A07100785888 /* Chapter */,
 				9D5355552D0A9EA600785888 /* User */,
-				9D37600D2D03367D0032957F /* Image */,
+				9D37600D2D03367D0032957F /* media */,
 				9D0D47512D009F9E0040BA81 /* Story */,
 				9D0D47502D009F650040BA81 /* SocialSignIn */,
 				9DE4985C2C514562004F1A20 /* Protocol */,
@@ -658,7 +658,7 @@
 			children = (
 				9D0D47582D00AAAC0040BA81 /* SocialSignIn */,
 				9D0D475A2D00AC1C0040BA81 /* StoryRemoteDataSource.swift */,
-				9D3760172D0346FE0032957F /* ImageRemoteDataSource.swift */,
+				9D3760172D0346FE0032957F /* MediaRemoteDataSource.swift */,
 				9D53555F2D0AA3C700785888 /* UserProfileRemoteDataSource.swift */,
 				9D5355C72D16F34400785888 /* ChapterRemoteDataSource.swift */,
 				9D5355E12D1831C000785888 /* StepRemoteDataSource.swift */,
@@ -683,7 +683,7 @@
 			children = (
 				9DE4985A2C513FAD004F1A20 /* FirebaseAuthenticationRepositoryImpl.swift */,
 				9D0D47562D00A7310040BA81 /* DefaultStoryRepositoryImpl.swift */,
-				9D3760152D0346280032957F /* DefaultImageRepositoryImpl.swift */,
+				9D3760152D0346280032957F /* DefaultMediaRepositoryImpl.swift */,
 				9D53555C2D0AA1C400785888 /* DefaultUserProfileRepositoryImpl.swift */,
 				9D5355B12D1403A300785888 /* DefaultSessionRepositoryImpl.swift */,
 				9D5355C52D16F2E200785888 /* DefaultChapterRepositoryImpl.swift */,
@@ -761,12 +761,12 @@
 			path = walkbook;
 			sourceTree = "<group>";
 		};
-		9D37600D2D03367D0032957F /* Image */ = {
+		9D37600D2D03367D0032957F /* media */ = {
 			isa = PBXGroup;
 			children = (
-				9D37600E2D0338360032957F /* ImageUseCase.swift */,
+				9D37600E2D0338360032957F /* MediaUseCase.swift */,
 			);
-			path = Image;
+			path = media;
 			sourceTree = "<group>";
 		};
 		9D5355552D0A9EA600785888 /* User */ = {
@@ -1043,7 +1043,7 @@
 			children = (
 				9DE498582C513EED004F1A20 /* AuthenticationRepository.swift */,
 				9D0D47542D00A6FA0040BA81 /* StoryRepository.swift */,
-				9D3760102D033E5C0032957F /* ImageRepository.swift */,
+				9D3760102D033E5C0032957F /* MediaRepository.swift */,
 				9D5355582D0A9FC300785888 /* UserProfileRepository.swift */,
 				9D5355982D12A18900785888 /* ChapterRepository.swift */,
 				9D5355B72D1440F800785888 /* SessionRepository.swift */,
@@ -1505,12 +1505,12 @@
 				9D5355792D0D7DBC00785888 /* AddChapterTableViewCell.swift in Sources */,
 				9D0D475D2D00AE660040BA81 /* StoryModel.swift in Sources */,
 				9D5355602D0AA3C700785888 /* UserProfileRemoteDataSource.swift in Sources */,
-				9D3760182D0346FE0032957F /* ImageRemoteDataSource.swift in Sources */,
+				9D3760182D0346FE0032957F /* MediaRemoteDataSource.swift in Sources */,
 				9D0D474F2D009C3D0040BA81 /* Story.swift in Sources */,
 				9D53556A2D0B07E200785888 /* GeoPointMapper.swift in Sources */,
 				9DE498A52C561338004F1A20 /* GoogleSignRemoteDataSource.swift in Sources */,
 				9D0D475B2D00AC1C0040BA81 /* StoryRemoteDataSource.swift in Sources */,
-				9D3760112D033E5C0032957F /* ImageRepository.swift in Sources */,
+				9D3760112D033E5C0032957F /* MediaRepository.swift in Sources */,
 				9D53558E2D119D3C00785888 /* AddVideoStepViewController.swift in Sources */,
 				9D3760132D0345400032957F /* UIImage+toData.swift in Sources */,
 				9D5355DE2D18312100785888 /* StepRepository.swift in Sources */,
@@ -1539,7 +1539,7 @@
 				9D37601A2D05C2310032957F /* MyStoryViewController.swift in Sources */,
 				9D53559F2D12F7C400785888 /* ChapterTreeBuilder.swift in Sources */,
 				9D20C5912C426BC1008AB5EE /* AuthenticationFlowCoordinator.swift in Sources */,
-				9D37600F2D0338360032957F /* ImageUseCase.swift in Sources */,
+				9D37600F2D0338360032957F /* MediaUseCase.swift in Sources */,
 				9D53558C2D119CB900785888 /* AddAudioStepViewController.swift in Sources */,
 				9D5355EA2D1AB60000785888 /* AudioRecorderManager.swift in Sources */,
 				9D5355A12D13029100785888 /* Chapter.swift in Sources */,
@@ -1568,7 +1568,7 @@
 				9D04A92B2CF697230046AB88 /* CardCell.swift in Sources */,
 				9D0D47622D00B80F0040BA81 /* StoryMapper.swift in Sources */,
 				9D04A92D2CF9BD720046AB88 /* UIViewController+configureNavigationBar.swift in Sources */,
-				9D3760162D0346280032957F /* DefaultImageRepositoryImpl.swift in Sources */,
+				9D3760162D0346280032957F /* DefaultMediaRepositoryImpl.swift in Sources */,
 				9D5355812D0EA2FF00785888 /* EditChapterViewModel.swift in Sources */,
 				9D5355882D119C5000785888 /* AddTextStepViewController.swift in Sources */,
 				9D5355E62D1832F300785888 /* StepMapper.swift in Sources */,

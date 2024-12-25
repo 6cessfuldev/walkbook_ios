@@ -84,16 +84,16 @@ class AppDIContainer {
         
         container.register(WriteNewStoryViewModel.self) { r in
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
-            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
             let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
-            return WriteNewStoryViewModel(storyUseCase: storyUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
+            return WriteNewStoryViewModel(storyUseCase: storyUseCase, mediaUseCase: mediaUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
         container.register(WriteNewStoryViewModel.self) { (r, story: Story) in
             let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
-            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
             let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
-            return WriteNewStoryViewModel(story: story, storyUseCase: storyUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
+            return WriteNewStoryViewModel(story: story, storyUseCase: storyUseCase, mediaUseCase: mediaUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
         container.register(MyStoryViewModel.self) { r in
@@ -112,16 +112,16 @@ class AppDIContainer {
         
         container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
             let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
-            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
+            let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
             let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
-            return EditChapterViewModel(chapter: chapter, chapterUseCase: chapterUseCase, imageUseCase: imageUseCase, userProfileUseCase: userProfileUseCase)
+            return EditChapterViewModel(chapter: chapter, chapterUseCase: chapterUseCase, mediaUseCase: mediaUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
         container.register(EditStepListViewModel.self) { (r, chapterId: String) in
             let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
             let stepUseCase = r.resolve(StepUseCaseProtocol.self)!
-            let imageUseCase = r.resolve(ImageUseCaseProtocol.self)!
-            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase, imageUseCase: imageUseCase)
+            let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
+            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase, mediaUseCase: mediaUseCase)
         }.inObjectScope(.transient)
         
         //MARK: - Register UseCases
@@ -137,9 +137,9 @@ class AppDIContainer {
             return DefaultStoryUseCase(storyRepository: storyRepository, sessionRepository: sessionRepository)
         }
         
-        container.register(ImageUseCaseProtocol.self) { r in
-            let repository = r.resolve(ImageRepository.self)!
-            return DefaultImageUseCase(repository: repository)
+        container.register(MediaUseCaseProtocol.self) { r in
+            let repository = r.resolve(MediaRepository.self)!
+            return DefaultMediaUseCase(repository: repository)
         }
         
         container.register(UserProfileUseCaseProtocol.self) { r in
@@ -186,9 +186,9 @@ class AppDIContainer {
             return DefaultStoryRepositoryImpl(storyRemoteDataSource: storyRemoteDataSource)
         }
         
-        container.register(ImageRepository.self) { r in
-            let imgRemoteDataSource = r.resolve(ImageRemoteDataSource.self)!
-            return DefaultStorageImageRepositoryImpl(imageRemoteDataSource: imgRemoteDataSource)
+        container.register(MediaRepository.self) { r in
+            let imgRemoteDataSource = r.resolve(MediaRemoteDataSource.self)!
+            return DefaultStorageMediaRepositoryImpl(mediaRemoteDataSource: imgRemoteDataSource)
         }
         
         container.register(UserProfileRepository.self) { r in
@@ -221,8 +221,8 @@ class AppDIContainer {
 
         container.register(StoryRemoteDataSource.self) { _ in FirestoreStoryRemoteDataSourceImpl()}
         
-        container.register(ImageRemoteDataSource.self) { _ in
-            FirebaseStorageImageRemoteDataSourceImpl()
+        container.register(MediaRemoteDataSource.self) { _ in
+            FirebaseStorageMediaRemoteDataSourceImpl()
         }
         
         container.register(UserProfileRemoteDataSource.self) { _ in

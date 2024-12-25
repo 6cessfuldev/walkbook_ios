@@ -10,13 +10,13 @@ class EditStepListViewModel {
     private let chapterId: String
     private let chapterUseCase: ChapterUseCaseProtocol
     private let stepUseCase: StepUseCaseProtocol
-    private let imageUseCase: ImageUseCaseProtocol
+    private let mediaUseCase: MediaUseCaseProtocol
     
-    init(chapterId: String, chapterUseCase: ChapterUseCaseProtocol, stepUseCase: StepUseCaseProtocol, imageUseCase: ImageUseCaseProtocol) {
+    init(chapterId: String, chapterUseCase: ChapterUseCaseProtocol, stepUseCase: StepUseCaseProtocol, mediaUseCase: MediaUseCaseProtocol) {
         self.chapterId = chapterId
         self.chapterUseCase = chapterUseCase
         self.stepUseCase = stepUseCase
-        self.imageUseCase = imageUseCase
+        self.mediaUseCase = mediaUseCase
         
         fetchInitialSteps()
     }
@@ -41,7 +41,7 @@ class EditStepListViewModel {
             print("변환된 데이터 없음 ")
             return
         }
-        imageUseCase.uploadImage(imgData) { r in
+        mediaUseCase.uploadImage(imgData) { r in
             switch r {
             case .success(let url):
                 let step = Step(type: .image(url), location: location)
@@ -65,7 +65,6 @@ class EditStepListViewModel {
     }
     
     func addAudioTypeStep(audioURL: URL, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
-        
     }
     
     private func fetchInitialSteps() {

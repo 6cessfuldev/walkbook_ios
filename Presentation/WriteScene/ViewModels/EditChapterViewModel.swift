@@ -19,16 +19,16 @@ class EditChapterViewModel {
     // MARK: - Dependencies
     private var chapter: Chapter
     private let chapterUseCase: ChapterUseCaseProtocol
-    private let imageUseCase: ImageUseCaseProtocol
+    private let mediaUseCase: MediaUseCaseProtocol
     private let userProfileUseCase: UserProfileUseCaseProtocol
     
     // MARK: - Initializer
     
-    init(chapter: NestedChapter, chapterUseCase: ChapterUseCaseProtocol, imageUseCase: ImageUseCaseProtocol, userProfileUseCase: UserProfileUseCaseProtocol) {
+    init(chapter: NestedChapter, chapterUseCase: ChapterUseCaseProtocol, mediaUseCase: MediaUseCaseProtocol, userProfileUseCase: UserProfileUseCaseProtocol) {
         
         self.chapter = Chapter.fromNestedChapter(chapter)
         self.chapterUseCase = chapterUseCase
-        self.imageUseCase = imageUseCase
+        self.mediaUseCase = mediaUseCase
         self.userProfileUseCase = userProfileUseCase
         
         setupInitialChapter()
@@ -53,7 +53,7 @@ class EditChapterViewModel {
         
         isSubmitting.accept(true)
         
-        imageUseCase.uploadImage(data) { [weak self] result in
+        mediaUseCase.uploadImage(data) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
