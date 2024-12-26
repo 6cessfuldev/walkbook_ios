@@ -16,7 +16,17 @@ class AddAudioStepViewController: UIViewController {
     private var audioPlayer: AVAudioPlayer?
     private var timer: Timer?
     
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let audioItemView = UIView()
+    private var audioItemViewHeightConstraint: NSLayoutConstraint!
+    
     private let playButton = UIButton(type: .system)
     private let deleteButton = UIButton(type: .system)
     private let timeLabel = UILabel()
@@ -79,22 +89,18 @@ class AddAudioStepViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         
-        audioItemView.backgroundColor = UIColor.systemGray5
-        audioItemView.layer.cornerRadius = 8
-        audioItemView.translatesAutoresizingMaskIntoConstraints = false
-        audioItemView.isHidden = true
+        stackView.addArrangedSubview(audioItemView)
+        stackView.addArrangedSubview(locationPickerView)
+        view.addSubview(stackView)
         
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomView)
+        bottomView.addSubview(outerBorderView)
+        outerBorderView.addSubview(recordButton)
         
-        deleteButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        timeLabel.text = "00:00"
-        timeLabel.textAlignment = .center
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        setupAudioItemView()
         
         locationPickerView.translatesAutoresizingMaskIntoConstraints = false
+        locationPickerView.heightAnchor.constraint(equalToConstant: 400).isActive = true
         
         bottomView.backgroundColor = UIColor.systemGray6
         bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -112,43 +118,10 @@ class AddAudioStepViewController: UIViewController {
         recordButton.clipsToBounds = true
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(audioItemView)
-        audioItemView.addSubview(playButton)
-        audioItemView.addSubview(deleteButton)
-        audioItemView.addSubview(timeLabel)
-        audioItemView.addSubview(progressView)
-        
-        view.addSubview(locationPickerView)
-        
-        view.addSubview(bottomView)
-        bottomView.addSubview(outerBorderView)
-        outerBorderView.addSubview(recordButton)
-        
         NSLayoutConstraint.activate([
-            // Todo: hidden이 아니라 초기값에는 사이즈가 없다가 레코드 결과물이 있을 경우에 사이즈가 생겨야 함
-            audioItemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            audioItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            audioItemView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            audioItemView.heightAnchor.constraint(equalToConstant: 100),
-            
-            playButton.leadingAnchor.constraint(equalTo: audioItemView.leadingAnchor, constant: 16),
-            playButton.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
-            
-            deleteButton.trailingAnchor.constraint(equalTo: audioItemView.trailingAnchor, constant: -16),
-            deleteButton.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
-            
-            timeLabel.centerXAnchor.constraint(equalTo: audioItemView.centerXAnchor),
-            timeLabel.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
-            
-            progressView.leadingAnchor.constraint(equalTo: audioItemView.leadingAnchor, constant: 16),
-            progressView.trailingAnchor.constraint(equalTo: audioItemView.trailingAnchor, constant: -16),
-            progressView.bottomAnchor.constraint(equalTo: audioItemView.bottomAnchor, constant: -16),
-            progressView.heightAnchor.constraint(equalToConstant: 4),
-            
-            locationPickerView.topAnchor.constraint(equalTo: audioItemView.bottomAnchor, constant: 16),
-            locationPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            locationPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            locationPickerView.heightAnchor.constraint(equalToConstant: 400),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -164,6 +137,48 @@ class AddAudioStepViewController: UIViewController {
             recordButton.centerYAnchor.constraint(equalTo: outerBorderView.centerYAnchor),
             recordButton.widthAnchor.constraint(equalToConstant: 60),
             recordButton.heightAnchor.constraint(equalToConstant: 60)
+        ])
+    }
+    
+    private func setupAudioItemView() {
+        audioItemView.backgroundColor = UIColor.systemGray5
+        audioItemView.layer.cornerRadius = 8
+        audioItemView.translatesAutoresizingMaskIntoConstraints = false
+        audioItemViewHeightConstraint = audioItemView.heightAnchor.constraint(equalToConstant: 0)
+        audioItemViewHeightConstraint.isActive = true
+        audioItemView.isHidden = true
+        
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        deleteButton.setImage(UIImage(systemName: "trash.fill"), for: .normal)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        timeLabel.text = "00:00"
+        timeLabel.textAlignment = .center
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        audioItemView.addSubview(playButton)
+        audioItemView.addSubview(deleteButton)
+        audioItemView.addSubview(timeLabel)
+        audioItemView.addSubview(progressView)
+        
+        NSLayoutConstraint.activate([
+            playButton.leadingAnchor.constraint(equalTo: audioItemView.leadingAnchor, constant: 16),
+            playButton.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
+            
+            deleteButton.trailingAnchor.constraint(equalTo: audioItemView.trailingAnchor, constant: -16),
+            deleteButton.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
+            
+            timeLabel.centerXAnchor.constraint(equalTo: audioItemView.centerXAnchor),
+            timeLabel.topAnchor.constraint(equalTo: audioItemView.topAnchor, constant: 16),
+            
+            progressView.leadingAnchor.constraint(equalTo: audioItemView.leadingAnchor, constant: 16),
+            progressView.trailingAnchor.constraint(equalTo: audioItemView.trailingAnchor, constant: -16),
+            progressView.bottomAnchor.constraint(equalTo: audioItemView.bottomAnchor, constant: -16),
+            progressView.heightAnchor.constraint(equalToConstant: 4)
         ])
     }
     
@@ -212,6 +227,11 @@ class AddAudioStepViewController: UIViewController {
         try? FileManager.default.removeItem(at: url)
         audioFileURL = nil
         audioItemView.isHidden = true
+        audioItemViewHeightConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     private func tapRecording() {
@@ -230,6 +250,11 @@ class AddAudioStepViewController: UIViewController {
             audioFileURL = recorderManager.stopRecording()
             isRecording = false
             audioItemView.isHidden = false
+            audioItemViewHeightConstraint.constant = 100
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.stackView.layoutIfNeeded()
         }
     }
     
