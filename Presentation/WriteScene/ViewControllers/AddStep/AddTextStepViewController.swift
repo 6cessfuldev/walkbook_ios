@@ -5,14 +5,18 @@ import GoogleMaps
 
 class AddTextStepViewController: UIViewController {
     private let disposeBag = DisposeBag()
-    private let textView = UITextView()
     
+    private let initText: String?
+    private let initLocation: CLLocationCoordinate2D?
+    
+    private let textView = UITextView()
     private let locationPickerView = LocationPickerView()
     
     var onSave: ((_ step: Step, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
-    init(text: String? = nil) {
-        textView.text = text
+    init(text: String? = nil, location: CLLocationCoordinate2D? = nil) {
+        initText = text
+        initLocation = location
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,6 +28,17 @@ class AddTextStepViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
+        setupInitialData()
+    }
+    
+    private func setupInitialData() {
+        textView.text = initText
+        
+        if(initLocation != nil) {
+            locationPickerView.locationSwitch.setOn(true, animated: false)
+            locationPickerView.locationSwitch.sendActions(for: .valueChanged)
+            locationPickerView.mapView.animate(toLocation: initLocation!)
+        }
     }
     
     private func setupNavigationBar() {
@@ -45,6 +60,7 @@ class AddTextStepViewController: UIViewController {
         textView.layer.cornerRadius = 8
         textView.font = .systemFont(ofSize: 16)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        
         locationPickerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(textView)

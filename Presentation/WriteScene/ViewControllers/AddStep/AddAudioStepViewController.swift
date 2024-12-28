@@ -6,9 +6,18 @@ import CoreLocation
 class AddAudioStepViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
-    private let recorderManager = AudioRecorderManager()
     private var audioFileURL: URL?
-    private var isRecording = false
+    private var initLocation: CLLocationCoordinate2D?
+    
+    private let recorderManager = AudioRecorderManager()
+    private var isAudioChanged = false
+    private var isRecording = false {
+        didSet {
+            if(isRecording) {
+                isAudioChanged = true
+            }
+        }
+    }
     private var isPaused: Bool = false
     private var isPlaying: Bool = false
     private var pausedTime: CMTime?
@@ -48,8 +57,9 @@ class AddAudioStepViewController: UIViewController {
     
     var onSave: ((_ audioFileURL: URL, _ location: CLLocationCoordinate2D?, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
-    init(audioFileURL: URL? = nil) {
+    init(audioFileURL: URL? = nil, location: CLLocationCoordinate2D? = nil) {
         self.audioFileURL = audioFileURL
+        self.initLocation = location
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -62,6 +72,7 @@ class AddAudioStepViewController: UIViewController {
         setupUI()
         setupBindings()
         setupNavigationBar()
+        setupInitialData()
         
         NotificationCenter.default.addObserver(
             self,
@@ -85,6 +96,10 @@ class AddAudioStepViewController: UIViewController {
     @objc private func saveButtonTapped() {
         guard let audioFileURL = audioFileURL else {
             showAlert(message: "오디오를 입력해주세요")
+            return
+        }
+        guard isAudioChanged else {
+            showAlert(message: "이미 저장된 음성입니다.")
             return
         }
         let location = locationPickerView.selectedLocation
@@ -224,6 +239,14 @@ class AddAudioStepViewController: UIViewController {
                 self?.tapRecording()
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setupInitialData() {
+        if(initLocation != nil) {
+            locationPickerView.locationSwitch.setOn(true, animated: false)
+            locationPickerView.locationSwitch.sendActions(for: .valueChanged)
+            locationPickerView.mapView.animate(toLocation: initLocation!)
+        }
     }
     
     private func playAudio() {

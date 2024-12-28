@@ -5,7 +5,8 @@ import CoreLocation
 class AddImageStepViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private let disposeBag = DisposeBag()
     
-    private var imageURL: String?
+    private var imageURL: URL?
+    private var initLocation: CLLocationCoordinate2D?
     private var isImageChanged = false
     
     private let imageView = UIImageView()
@@ -14,8 +15,9 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
     
     var onSave: ((_ image: UIImage, _ location: CLLocationCoordinate2D?, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
-    init(imageURL: String? = nil) {
+    init(imageURL: URL? = nil, location: CLLocationCoordinate2D? = nil) {
         self.imageURL = imageURL
+        self.initLocation = location
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,20 +27,10 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let imageURL = imageURL {
-            imageView.setImage(from: imageURL)
-                .subscribe(onNext: { [weak self] image in
-                    guard let self = self else { return }
-                    if image == nil {
-                        print("이미지 로드 실패")
-                    }
-                })
-                .disposed(by: disposeBag)
-        }
-    
         setupUI()
         setupBindings()
         setupNavigationBar()
+        setupInitialData()
     }
     
     private func setupNavigationBar() {
@@ -82,6 +74,25 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
             locationPickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             locationPickerView.heightAnchor.constraint(equalToConstant: 400)
         ])
+    }
+    
+    private func setupInitialData() {
+        if let imageURL = imageURL?.absoluteString {
+            imageView.setImage(from: imageURL)
+                .subscribe(onNext: { [weak self] image in
+                    guard let self = self else { return }
+                    if image == nil {
+                        print("이미지 로드 실패")
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        if(initLocation != nil) {
+            locationPickerView.locationSwitch.setOn(true, animated: false)
+            locationPickerView.locationSwitch.sendActions(for: .valueChanged)
+            locationPickerView.mapView.animate(toLocation: initLocation!)
+        }
     }
     
     private func setupBindings() {

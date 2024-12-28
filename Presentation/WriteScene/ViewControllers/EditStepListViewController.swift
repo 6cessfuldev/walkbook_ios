@@ -104,16 +104,17 @@ class EditStepListViewController: UIViewController {
         let steps = viewModel.stepsRelay.value
         guard steps.count > index else { return }
         let step = viewModel.stepsRelay.value[index]
-        
+        let location = step.location
         switch step.type {
         case .text(let text):
-            let addStepVC = AddTextStepViewController(text: text)
+            let addStepVC = AddTextStepViewController(text: text, location: location)
             addStepVC.onSave = { [weak self] step, completion in
                 self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .image(let url):
-            let addStepVC = AddImageStepViewController(imageURL: url)
+            guard let url = URL(string: url) else { return }
+            let addStepVC = AddImageStepViewController(imageURL: url, location: location)
             addStepVC.onSave = { [weak self] image, location, completion in
                 self?.viewModel.addImageTypeStep(image: image, location: location, completion: completion)
             }
@@ -121,20 +122,20 @@ class EditStepListViewController: UIViewController {
             
         case .audio(let url):
             guard let url = URL(string: url) else { return }
-            let addStepVC = AddAudioStepViewController(audioFileURL: url)
+            let addStepVC = AddAudioStepViewController(audioFileURL: url, location: location)
             addStepVC.onSave = { [weak self] audioURL, location, completion in
                 self?.viewModel.addAudioTypeStep(audioURL: audioURL, location: location, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .video(let url):
-            // Todo - :
+            // Todo - : edit viewcontroller init
             let addStepVC = AddTextStepViewController()
             addStepVC.onSave = { [weak self] step, completion in
                 self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .question(correctAnswer: let correctAnswer, options: let options):
-            // Todo - :
+            // Todo - : edit viewcontroller init
             let addStepVC = AddTextStepViewController()
             addStepVC.onSave = { [weak self] step, completion in
                 self?.viewModel.addOtherStep(step: step, completion: completion)
