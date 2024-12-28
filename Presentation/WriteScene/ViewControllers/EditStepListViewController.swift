@@ -101,7 +101,46 @@ class EditStepListViewController: UIViewController {
     }
     
     private func tapStepItem(index: Int) {
-        //Todo: 스탭 수정 페이지로 이동
+        let steps = viewModel.stepsRelay.value
+        guard steps.count > index else { return }
+        let step = viewModel.stepsRelay.value[index]
+        
+        switch step.type {
+        case .text(_):
+            let addStepVC = AddTextStepViewController()
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+        case .image(let url):
+            let addStepVC = AddImageStepViewController()
+            addStepVC.onSave = { [weak self] image, location, completion in
+                self?.viewModel.addImageTypeStep(image: image, location: location, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+            
+        case .audio(let url):
+            guard let url = URL(string: url) else { return }
+            let addStepVC = AddAudioStepViewController(audioFileURL: url)
+            addStepVC.onSave = { [weak self] audioURL, location, completion in
+                self?.viewModel.addAudioTypeStep(audioURL: audioURL, location: location, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+        case .video(let url):
+            // Todo - :
+            let addStepVC = AddTextStepViewController()
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+        case .question(correctAnswer: let correctAnswer, options: let options):
+            // Todo - :
+            let addStepVC = AddTextStepViewController()
+            addStepVC.onSave = { [weak self] step, completion in
+                self?.viewModel.addOtherStep(step: step, completion: completion)
+            }
+            self.navigationController?.pushViewController(addStepVC, animated: true)
+        }
     }
 }
 

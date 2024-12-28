@@ -1,5 +1,5 @@
 import UIKit
-import AVFAudio
+import AVFoundation
 import RxSwift
 import CoreLocation
 
@@ -11,10 +11,11 @@ class AddAudioStepViewController: UIViewController {
     private var isRecording = false
     private var isPaused: Bool = false
     private var isPlaying: Bool = false
-    private var pausedTime: TimeInterval?
+    private var pausedTime: CMTime?
     
-    private var audioPlayer: AVAudioPlayer?
-    private var timer: Timer?
+    private var audioPlayer: AVPlayer?
+    private var audioPlayerItem: AVPlayerItem?
+    private var timeObserverToken: Any?
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -47,11 +48,27 @@ class AddAudioStepViewController: UIViewController {
     
     var onSave: ((_ audioFileURL: URL, _ location: CLLocationCoordinate2D?, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
+    init(audioFileURL: URL? = nil) {
+        self.audioFileURL = audioFileURL
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
         setupNavigationBar()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(audioDidFinishPlaying),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: nil
+        )
     }
     
     private func setupNavigationBar() {
@@ -144,9 +161,16 @@ class AddAudioStepViewController: UIViewController {
         audioItemView.backgroundColor = UIColor.systemGray5
         audioItemView.layer.cornerRadius = 8
         audioItemView.translatesAutoresizingMaskIntoConstraints = false
-        audioItemViewHeightConstraint = audioItemView.heightAnchor.constraint(equalToConstant: 0)
-        audioItemViewHeightConstraint.isActive = true
-        audioItemView.isHidden = true
+        
+        if(audioFileURL == nil) {
+            audioItemViewHeightConstraint = audioItemView.heightAnchor.constraint(equalToConstant: 0)
+            audioItemViewHeightConstraint.isActive = true
+            audioItemView.isHidden = true
+        } else {
+            audioItemViewHeightConstraint = audioItemView.heightAnchor.constraint(equalToConstant: 100)
+            audioItemViewHeightConstraint.isActive = true
+            audioItemView.isHidden = false
+        }
         
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         playButton.translatesAutoresizingMaskIntoConstraints = false
@@ -203,22 +227,43 @@ class AddAudioStepViewController: UIViewController {
     }
     
     private func playAudio() {
-        guard let url = audioFileURL else { return }
-        do {
-            if(audioPlayer?.url != url) {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-                audioPlayer?.delegate = self
-            }
-            
-            if(isPaused) {
-                resumeAudio()
-            } else if(isPlaying) {
-                pauseAudio()
-            } else {
-                startAudio()
-            }
-        } catch {
-            print("Failed to play audio: \(error.localizedDescription)")
+        guard let url = audioFileURL else {
+            print("Audio URL is nil.")
+            return
+        }
+        
+        if url.isFileURL {
+            playLocalAudio(url: url)
+        } else {
+            playRemoteAudio(url: url)
+        }
+    }
+    
+    private func playLocalAudio(url: URL) {
+        if audioPlayerItem?.asset != AVURLAsset(url: url) {
+            audioPlayerItem = AVPlayerItem(url: url)
+            audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+        }
+        
+        if isPaused {
+            resumeAudio()
+        } else if isPlaying {
+            pauseAudio()
+        } else {
+            startAudio()
+        }
+    }
+    
+    private func playRemoteAudio(url: URL) {
+        audioPlayerItem = AVPlayerItem(url: url)
+        audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+        
+        if isPaused {
+            resumeAudio()
+        } else if isPlaying {
+            pauseAudio()
+        } else {
+            startAudio()
         }
     }
     
@@ -229,6 +274,7 @@ class AddAudioStepViewController: UIViewController {
         audioItemView.isHidden = true
         audioItemViewHeightConstraint.constant = 0
         resetPlayerStatus()
+        removeTimeObserver()
         
         UIView.animate(withDuration: 0.3) {
             self.stackView.layoutIfNeeded()
@@ -240,7 +286,7 @@ class AddAudioStepViewController: UIViewController {
         timeLabel.text = "00:00"
         isPaused = false
         isPlaying = false
-        pausedTime = 0
+        pausedTime = CMTime.zero
     }
     
     private func tapRecording() {
@@ -271,43 +317,60 @@ class AddAudioStepViewController: UIViewController {
         guard let player = audioPlayer else { return }
         playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
         player.play()
-        progressView.progress = 0.0
-        timer?.invalidate()
         isPlaying = true
+        isPaused = false
+        progressView.progress = 0.0
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            guard let self = self, !self.isPaused else { return }
-            self.progressView.progress = Float(player.currentTime / player.duration)
-            self.timeLabel.text = String(format: "%02d:%02d", Int(player.currentTime) / 60, Int(player.currentTime) % 60)
+        let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            guard let self = self else { return }
+            
+            let currentTime = CMTimeGetSeconds(time)
+            let duration = CMTimeGetSeconds(player.currentItem?.duration ?? CMTime.zero)
+            
+            guard duration.isFinite && duration > 0 else { return }
+            
+            self.progressView.progress = Float(currentTime / duration)
+            self.timeLabel.text = String(format: "%02d:%02d", Int(currentTime) / 60, Int(currentTime) % 60)
         }
     }
     
     private func pauseAudio() {
-        guard let player = audioPlayer, timer != nil else { return }
-        
+        guard let player = audioPlayer else { return }
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         player.pause()
-        timer?.invalidate()
-        timer = nil
         isPaused = true
         isPlaying = false
-        self.pausedTime = player.currentTime
+        pausedTime = player.currentTime()
+        
+        removeTimeObserver()
     }
     
     private func resumeAudio() {
         guard let player = audioPlayer, let pausedTime = pausedTime else { return }
-        
         playButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-        player.currentTime = pausedTime
+        player.seek(to: pausedTime)
         player.play()
         isPaused = false
         isPlaying = true
         self.pausedTime = nil
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
-            guard let self = self, !self.isPaused else { return }
-            self.progressView.progress = Float(player.currentTime / player.duration)
-            self.timeLabel.text = String(format: "%02d:%02d", Int(player.currentTime) / 60, Int(player.currentTime) % 60)
+        let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            guard let self = self else { return }
+            let currentTime = CMTimeGetSeconds(time)
+            let duration = CMTimeGetSeconds(player.currentItem?.duration ?? CMTime.zero)
+            guard duration.isFinite && duration > 0 else { return }
+            
+            self.progressView.progress = Float(currentTime / duration)
+            self.timeLabel.text = String(format: "%02d:%02d", Int(currentTime) / 60, Int(currentTime) % 60)
+        }
+    }
+    
+    private func removeTimeObserver() {
+        if let token = timeObserverToken {
+            audioPlayer?.removeTimeObserver(token)
+            timeObserverToken = nil
         }
     }
     
@@ -351,13 +414,12 @@ class AddAudioStepViewController: UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
-}
-
-extension AddAudioStepViewController: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        timer?.invalidate()
+    
+    @objc private func audioDidFinishPlaying(notification: Notification) {
+        removeTimeObserver()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         progressView.progress = 0.0
         isPlaying = false
+        isPaused = false
     }
 }
