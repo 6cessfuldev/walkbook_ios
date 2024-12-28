@@ -106,14 +106,14 @@ class EditStepListViewController: UIViewController {
         let step = viewModel.stepsRelay.value[index]
         
         switch step.type {
-        case .text(_):
-            let addStepVC = AddTextStepViewController()
+        case .text(let text):
+            let addStepVC = AddTextStepViewController(text: text)
             addStepVC.onSave = { [weak self] step, completion in
                 self?.viewModel.addOtherStep(step: step, completion: completion)
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .image(let url):
-            let addStepVC = AddImageStepViewController()
+            let addStepVC = AddImageStepViewController(imageURL: url)
             addStepVC.onSave = { [weak self] image, location, completion in
                 self?.viewModel.addImageTypeStep(image: image, location: location, completion: completion)
             }

@@ -4,14 +4,38 @@ import CoreLocation
 
 class AddImageStepViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private let disposeBag = DisposeBag()
+    
+    private var imageURL: String?
+    private var isImageChanged = false
+    
     private let imageView = UIImageView()
     private let selectImageButton = UIButton(type: .system)
     private let locationPickerView = LocationPickerView()
     
     var onSave: ((_ image: UIImage, _ location: CLLocationCoordinate2D?, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
+    init(imageURL: String? = nil) {
+        self.imageURL = imageURL
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let imageURL = imageURL {
+            imageView.setImage(from: imageURL)
+                .subscribe(onNext: { [weak self] image in
+                    guard let self = self else { return }
+                    if image == nil {
+                        print("이미지 로드 실패")
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
+    
         setupUI()
         setupBindings()
         setupNavigationBar()
@@ -69,6 +93,10 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @objc private func saveButtonTapped() {
+        guard isImageChanged else {
+            showAlert(message: "이미지가 변경되지 않았습니다.")
+            return
+        }
         guard let image = imageView.image else {
             showAlert(message: "이미지를 입력해주세요")
             return
@@ -114,6 +142,7 @@ class AddImageStepViewController: UIViewController, UIImagePickerControllerDeleg
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
+            isImageChanged = true
             imageView.image = image
         }
         picker.dismiss(animated: true, completion: nil)
