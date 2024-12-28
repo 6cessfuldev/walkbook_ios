@@ -228,10 +228,19 @@ class AddAudioStepViewController: UIViewController {
         audioFileURL = nil
         audioItemView.isHidden = true
         audioItemViewHeightConstraint.constant = 0
+        resetPlayerStatus()
         
         UIView.animate(withDuration: 0.3) {
             self.stackView.layoutIfNeeded()
         }
+    }
+    
+    private func resetPlayerStatus() {
+        progressView.progress = 0
+        timeLabel.text = "00:00"
+        isPaused = false
+        isPlaying = false
+        pausedTime = 0
     }
     
     private func tapRecording() {
@@ -310,7 +319,7 @@ class AddAudioStepViewController: UIViewController {
         )
         
         let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
-            self?.audioItemView.isHidden = true
+            self?.deleteAudio()
             self?.recorderManager.requestPermission { [weak self] granted in
                 guard granted else { return }
                 self?.recorderManager.startRecording()
