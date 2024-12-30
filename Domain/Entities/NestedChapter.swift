@@ -10,6 +10,7 @@ class NestedChapter {
     var radius: Double?
     var steps: [String]
     var childChapters: [NestedChapter]
+    var duration: Int?
     let createdAt: Date?
     let updatedAt: Date?
     
@@ -22,6 +23,7 @@ class NestedChapter {
          radius: Double? = nil,
          steps: [String] = [],
          childChapters: [NestedChapter] = [],
+         duration: Int? = nil,
          createdAt: Date? = nil,
          updatedAt: Date? = nil) {
         self.id = id
@@ -33,6 +35,7 @@ class NestedChapter {
         self.radius = radius
         self.steps = steps
         self.childChapters = childChapters
+        self.duration = duration
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
@@ -48,6 +51,7 @@ class NestedChapter {
             radius: chapter.radius,
             steps: chapter.steps,
             childChapters: [],
+            duration: chapter.duration,
             createdAt: chapter.createdAt,
             updatedAt: chapter.updatedAt
         )

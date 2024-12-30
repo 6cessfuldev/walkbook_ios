@@ -10,6 +10,7 @@ class Chapter {
     var radius: Double?
     var steps: [String]
     var childChapters: [String]
+    var duration: Int?
     let createdAt: Date?
     let updatedAt: Date?
     
@@ -22,6 +23,7 @@ class Chapter {
          radius: Double? = nil,
          steps: [String] = [],
          childChapters: [String] = [],
+         duration: Int? = nil,
          createdAt: Date? = nil,
          updatedAt: Date? = nil) {
         self.id = id
@@ -33,6 +35,7 @@ class Chapter {
         self.radius = radius
         self.steps = steps
         self.childChapters = childChapters
+        self.duration = duration
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
@@ -48,6 +51,7 @@ class Chapter {
             radius: nestedChapter.radius,
             steps: nestedChapter.steps,
             childChapters: nestedChapter.childChapters.compactMap { $0.id },
+            duration: nestedChapter.duration,
             createdAt: nestedChapter.createdAt,
             updatedAt: nestedChapter.updatedAt
         )

@@ -10,6 +10,7 @@ struct ChapterModel: Codable {
     let radius: Double?
     let steps: [String]
     let childChapters: [String]
+    let duration: Int?
     let createdAt: Timestamp?
     let updatedAt: Timestamp?
 
@@ -23,6 +24,7 @@ struct ChapterModel: Codable {
         radius: Double? = nil,
         steps: [String] = [],
         childChapters: [String] = [],
+        duration: Int? = nil,
         createdAt: Timestamp? = nil,
         updatedAt: Timestamp? = nil
     ) {
@@ -35,6 +37,7 @@ struct ChapterModel: Codable {
         self.radius = radius
         self.steps = steps
         self.childChapters = childChapters
+        self.duration = duration
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
@@ -49,6 +52,7 @@ struct ChapterModel: Codable {
         radius: Double? = nil,
         steps: [String]? = nil,
         childChapters: [String]? = nil,
+        duration: Int? = nil,
         createdAt: Timestamp? = nil,
         updatedAt: Timestamp? = nil
         
@@ -63,6 +67,7 @@ struct ChapterModel: Codable {
             radius: radius ?? self.radius,
             steps: steps ?? self.steps,
             childChapters: childChapters ?? self.childChapters,
+            duration: duration ?? self.duration,
             createdAt: createdAt ?? self.createdAt,
             updatedAt: updatedAt ?? self.updatedAt
         )

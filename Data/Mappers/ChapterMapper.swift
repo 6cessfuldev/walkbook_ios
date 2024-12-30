@@ -15,6 +15,7 @@ struct ChapterMapper {
             radius: chapter.radius,
             steps: chapter.steps,
             childChapters: chapter.childChapters,
+            duration: chapter.duration,
             createdAt: chapter.createdAt != nil ? Timestamp(date: chapter.createdAt!) : nil,
             updatedAt: chapter.updatedAt != nil ? Timestamp(date: chapter.updatedAt!) : nil
         )
@@ -31,6 +32,7 @@ struct ChapterMapper {
             radius: model.radius,
             steps: model.steps,
             childChapters: model.childChapters,
+            duration: model.duration,
             createdAt: model.createdAt?.dateValue(),
             updatedAt: model.updatedAt?.dateValue()
         )
