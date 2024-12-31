@@ -7,8 +7,8 @@ class DefaultStepRepositoryImpl: StepRepository {
         self.stepRemoteDataSource = stepRemoteDataSource
     }
     
-    func createStep(_ step: Step, to chapterId: String, completion: @escaping (Result<Step, Error>) -> Void) {
-        stepRemoteDataSource.add(StepMapper.toDataModel(step), to: chapterId) { r in
+    func createStep(_ step: Step, to chapterId: String, storyId: String, completion: @escaping (Result<Step, Error>) -> Void) {
+        stepRemoteDataSource.add(step: StepMapper.toDataModel(step), chapterId: chapterId, storyId: storyId) { r in
             switch r {
             case .success(let model):
                 completion(.success(StepMapper.toEntity(model)))
@@ -30,8 +30,8 @@ class DefaultStepRepositoryImpl: StepRepository {
         }
     }
     
-    func updateStep(_ step: Step, completion: @escaping (Result<Void, Error>) -> Void) {
-        stepRemoteDataSource.update(StepMapper.toDataModel(step), completion: completion)
+    func updateStep(_ step: Step, to chapterId: String, storyId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        stepRemoteDataSource.update(step:StepMapper.toDataModel(step), chapterId: chapterId, storyId: storyId, completion: completion)
     }
     
     
