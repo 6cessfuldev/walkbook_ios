@@ -94,7 +94,7 @@ extension EditChapterListViewController: UITableViewDataSource, UITableViewDeleg
                     print("getSelectedChapter error")
                     return
                 }
-                self.coordinator.showEditChapterVC(chapter: selectedChapter)
+                self.coordinator.showEditChapterVC(chapter: selectedChapter, rootChapter: self.viewModel.rootChapter)
             })
             .disposed(by: cell.disposeBag)
 

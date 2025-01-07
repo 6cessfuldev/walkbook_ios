@@ -18,15 +18,17 @@ class EditChapterViewModel {
     
     // MARK: - Dependencies
     private var chapter: Chapter
+    private(set) var rootChapter: NestedChapter
     private let chapterUseCase: ChapterUseCaseProtocol
     private let mediaUseCase: MediaUseCaseProtocol
     private let userProfileUseCase: UserProfileUseCaseProtocol
     
     // MARK: - Initializer
     
-    init(chapter: NestedChapter, chapterUseCase: ChapterUseCaseProtocol, mediaUseCase: MediaUseCaseProtocol, userProfileUseCase: UserProfileUseCaseProtocol) {
+    init(chapter: NestedChapter, rootChapter: NestedChapter, chapterUseCase: ChapterUseCaseProtocol, mediaUseCase: MediaUseCaseProtocol, userProfileUseCase: UserProfileUseCaseProtocol) {
         
         self.chapter = Chapter.fromNestedChapter(chapter)
+        self.rootChapter = rootChapter
         self.chapterUseCase = chapterUseCase
         self.mediaUseCase = mediaUseCase
         self.userProfileUseCase = userProfileUseCase

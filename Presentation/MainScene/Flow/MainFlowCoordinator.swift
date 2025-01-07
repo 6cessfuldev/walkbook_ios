@@ -10,8 +10,8 @@ protocol MainFlowCoordinatorDependencies {
     func makeEditStoryViewController(story: Story) -> WriteNewStoryViewController
     func makeMyStoryViewController() -> MyStoryViewController
     func makeEditChapterListViewController(storyId: String) -> EditChapterListViewController
-    func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController
-    func makeEditStepListViewController(chapterId: String) -> EditStepListViewController
+    func makeEditChapterViewController(chapter: NestedChapter, rootChapter: NestedChapter) -> EditChapterViewController
+    func makeEditStepListViewController(chapterId: String, rootChapter: NestedChapter) -> EditStepListViewController
 }
 
 protocol MainFlowCoordinatorDelegate: AnyObject {
@@ -131,8 +131,8 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         self.navigationController.pushViewController(editChapterListVC, animated: true)
     }
     
-    func showEditChapterVC(chapter: NestedChapter) {
-        let editChapterVC = dependencies.makeEditChapterViewController(chapter: chapter)
+    func showEditChapterVC(chapter: NestedChapter, rootChapter: NestedChapter) {
+        let editChapterVC = dependencies.makeEditChapterViewController(chapter: chapter, rootChapter: rootChapter)
         editChapterVC.coordinator = self
         self.navigationController.pushViewController(editChapterVC, animated: true)
     }
@@ -160,8 +160,8 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
         self.navigationController.setViewControllers(viewControllers, animated: animated)
     }
     
-    func showEditStepListVC(chapterId: String) {
-        let editStepListVC = dependencies.makeEditStepListViewController(chapterId: chapterId)
+    func showEditStepListVC(chapterId: String, rootChapter: NestedChapter) {
+        let editStepListVC = dependencies.makeEditStepListViewController(chapterId: chapterId, rootChapter: rootChapter)
         editStepListVC.coordinator = self
         self.navigationController.pushViewController(editStepListVC, animated: true)
     }

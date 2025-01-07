@@ -71,7 +71,11 @@ class EditChapterViewController: UIViewController, UITextFieldDelegate {
                 print("initial chapter doesn't have id")
                 return
             }
-            self?.coordinator.showEditStepListVC(chapterId: chapterId)
+            guard let rootChapter = self?.viewModel.rootChapter else {
+                print("doesn't have root Chapter")
+                return
+            }
+            self?.coordinator.showEditStepListVC(chapterId: chapterId, rootChapter: rootChapter)
         }
     }
     

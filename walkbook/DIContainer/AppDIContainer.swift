@@ -61,13 +61,13 @@ class AppDIContainer {
             return EditChapterListViewController(viewModel: editChapterListViewModel)
         }
         
-        container.register(EditChapterViewController.self) { (resolver, chapter: NestedChapter) in
-            let viewModel = resolver.resolve(EditChapterViewModel.self, argument: chapter)!
+        container.register(EditChapterViewController.self) { (resolver, chapter: NestedChapter, rootChapter: NestedChapter) in
+            let viewModel = resolver.resolve(EditChapterViewModel.self, arguments: chapter, rootChapter)!
             return EditChapterViewController(viewModel: viewModel)
         }
         
-        container.register(EditStepListViewController.self) { (r, chapterId: String) in
-            let viewModel = r.resolve(EditStepListViewModel.self, argument: chapterId)!
+        container.register(EditStepListViewController.self) { (r, chapterId: String, rootChapter: NestedChapter) in
+            let viewModel = r.resolve(EditStepListViewModel.self, arguments: chapterId, rootChapter)!
             return EditStepListViewController(viewModel: viewModel)
         }
 
@@ -110,18 +110,19 @@ class AppDIContainer {
             return EditChapterListViewModel(storyId: storyId, chapterUseCase: chapterUseCase)
         }.inObjectScope(.transient)
         
-        container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter) in
+        container.register(EditChapterViewModel.self) { (r, chapter: NestedChapter, rootChapter: NestedChapter) in
             let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
             let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
             let userProfileUseCase = r.resolve(UserProfileUseCaseProtocol.self)!
-            return EditChapterViewModel(chapter: chapter, chapterUseCase: chapterUseCase, mediaUseCase: mediaUseCase, userProfileUseCase: userProfileUseCase)
+            return EditChapterViewModel(chapter: chapter, rootChapter: rootChapter, chapterUseCase: chapterUseCase, mediaUseCase: mediaUseCase, userProfileUseCase: userProfileUseCase)
         }.inObjectScope(.transient)
         
-        container.register(EditStepListViewModel.self) { (r, chapterId: String) in
+        container.register(EditStepListViewModel.self) { (r, chapterId: String, rootChapter: NestedChapter) in
+            let storyUseCase = r.resolve(StoryUseCaseProtocol.self)!
             let chapterUseCase = r.resolve(ChapterUseCaseProtocol.self)!
             let stepUseCase = r.resolve(StepUseCaseProtocol.self)!
             let mediaUseCase = r.resolve(MediaUseCaseProtocol.self)!
-            return EditStepListViewModel(chapterId: chapterId, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase, mediaUseCase: mediaUseCase)
+            return EditStepListViewModel(chapterId: chapterId, rootChapter: rootChapter, storyUseCase: storyUseCase, chapterUseCase: chapterUseCase, stepUseCase: stepUseCase, mediaUseCase: mediaUseCase)
         }.inObjectScope(.transient)
         
         //MARK: - Register UseCases
@@ -237,8 +238,9 @@ class AppDIContainer {
             FirestoreChapterRemoteDataSourceImpl()
         }
         
-        container.register(StepRemoteDataSource.self) { _ in
-            FirestoreStepRemoteDataSourceImpl()
+        container.register(StepRemoteDataSource.self) { r in
+            let chapterRemoteDataSource = r.resolve(ChapterRemoteDataSource.self)!
+            return FirestoreStepRemoteDataSourceImpl(chapterRemoteDataSource: chapterRemoteDataSource)
         }
     }
 }
@@ -308,12 +310,12 @@ extension AppDIContainer: MainFlowCoordinatorDependencies {
         return self.container.resolve(EditChapterListViewController.self, argument: storyId)!
     }
     
-    func makeEditChapterViewController(chapter: NestedChapter) -> EditChapterViewController {
-        return self.container.resolve(EditChapterViewController.self, argument: chapter)!
+    func makeEditChapterViewController(chapter: NestedChapter, rootChapter: NestedChapter) -> EditChapterViewController {
+        return self.container.resolve(EditChapterViewController.self, arguments: chapter, rootChapter)!
     }
     
-    func makeEditStepListViewController(chapterId: String) -> EditStepListViewController {
-        return self.container.resolve(EditStepListViewController.self, argument: chapterId)!
+    func makeEditStepListViewController(chapterId: String, rootChapter: NestedChapter) -> EditStepListViewController {
+        return self.container.resolve(EditStepListViewController.self, arguments: chapterId, rootChapter)!
     }
 }
 

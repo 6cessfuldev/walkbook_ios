@@ -11,7 +11,7 @@ class EditChapterListViewModel {
     let errorMessage = PublishRelay<String>()
     
     private let storyId: String
-    private var rootChapter: NestedChapter = NestedChapter(title: "")
+    private(set) var rootChapter: NestedChapter = NestedChapter(title: "")
     
     private let chapterUseCase: ChapterUseCaseProtocol
     
