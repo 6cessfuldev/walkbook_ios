@@ -84,6 +84,15 @@ class EditStepListViewModel {
         }
     }
     
+    func updateStep(stepId: String, step: Step, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let storyId = rootChapter.storyId else {
+            completion(.failure(NSError(domain: "Not Found story ID", code: -1, userInfo: nil)))
+            return
+        }
+        self.stepUseCase.updateStep(step, chapterId: self.chapterId, storyId: storyId, completion: completion)
+    }
+    
+    
     private func saveStep(
         step: Step,
         completion: @escaping (Result<Void, Error>) -> Void
