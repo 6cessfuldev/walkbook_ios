@@ -63,12 +63,18 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
                 self.chapterRemoteDataSource.fetchByStoryId(by: storyId) { r in
                     switch r {
                     case .success(let chapters):
-                        self.updateChapterAndStoryInTransaction(step: step, chapterId: chapterId, storyId: storyId, chapters: chapters)
+                        self.updateDurationInTransaction(step: step, chapterId: chapterId, storyId: storyId, chapters: chapters) { rs in
+                            switch rs {
+                            case .success(_):
+                                completion(.success(createdStep))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
                     case .failure(let error):
                         print("fetchChapterByStoryId failed: \(error.localizedDescription)")
                     }
                 }
-                completion(.success(createdStep))
             } else {
                 completion(.failure(NSError(
                     domain: "FirestoreTransactionError",
@@ -137,11 +143,10 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
                 if let error = error {
                     completion(.failure(error))
                 } else {
-                    completion(.success(()))
                     self.chapterRemoteDataSource.fetchByStoryId(by: storyId) { r in
                         switch r {
                         case .success(let chapters):
-                            self.updateChapterAndStoryInTransaction(step: step, chapterId: chapterId, storyId: storyId, chapters: chapters)
+                            self.updateDurationInTransaction(step: step, chapterId: chapterId, storyId: storyId, chapters: chapters, completion: completion)
                         case .failure(let error):
                             completion(.failure(error))
                         }
@@ -151,21 +156,15 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
         } catch {
             completion(.failure(error))
         }
-        
-        
     }
     
-    private func updateChapterAndStoryInTransaction(
+    private func updateDurationInTransaction(
         step: StepModel,
         chapterId: String,
         storyId: String,
-        chapters: [ChapterModel]
+        chapters: [ChapterModel],
+        completion: @escaping (Result<Void, Error>) -> Void
     ) {
-        guard let stepId = step.id else {
-            print("updateChapterAndStoryInTransaction : Not found step id")
-            return
-        }
-        
         db.runTransaction({ (transaction, errorPointer) -> Any? in
             let chapterRef = self.db.collection(FirestoreCollections.chapters).document(chapterId)
             let storyRef = self.db.collection(FirestoreCollections.stories).document(storyId)
@@ -180,7 +179,7 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
             }
             
             guard var chapterData = chapterSnapshot.data(),
-                  var stepIds = chapterData["steps"] as? [String] else {
+                  let stepIds = chapterData["steps"] as? [String] else {
                 errorPointer?.pointee = NSError(domain: "TransactionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Chapter data missing or invalid"])
                 return nil
             }
@@ -194,7 +193,6 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
             let totalChapterDistance = self.calculateTotalDistance(for: steps)
             let totalChapterDuration = self.convertDistanceToDuration(distance: totalChapterDistance)
             chapterData["duration"] = totalChapterDuration
-            transaction.updateData(chapterData, forDocument: chapterRef)
 
             let updatedChapters = self.updateChaptersDurationById(chapterId: chapterId, duration: totalChapterDuration, chapters: chapters)
             
@@ -223,14 +221,19 @@ class FirestoreStepRemoteDataSourceImpl: StepRemoteDataSource {
             }
             
             storyData["duration"] = totalStoryDuration
+            
+            //업데이트 실행
+            transaction.updateData(chapterData, forDocument: chapterRef)
             transaction.updateData(storyData, forDocument: storyRef)
             
             return nil
         }) { (result, error) in
             if let error = error {
                 print("Transaction failed: \(error.localizedDescription)")
+                completion(.failure(error))
             } else {
                 print("Transaction successfully committed!")
+                completion(.success(()))
             }
         }
     }
