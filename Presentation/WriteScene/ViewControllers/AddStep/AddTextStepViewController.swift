@@ -12,7 +12,7 @@ class AddTextStepViewController: UIViewController {
     private let textView = UITextView()
     private let locationPickerView = LocationPickerView()
     
-    var onSave: ((_ step: Step, _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
+    var onSave: ((_ text: String, _ location: CLLocationCoordinate2D?,  _ completion: @escaping (Result<Void, Error>) -> Void) -> Void)?
     
     init(text: String? = nil, location: CLLocationCoordinate2D? = nil) {
         initText = text
@@ -85,7 +85,7 @@ class AddTextStepViewController: UIViewController {
             return
         }
         let location = locationPickerView.selectedLocation
-        onSave?(Step(id: nil, type: .text(textView.text), location: location)) { r in
+        onSave?(textView.text, location) { r in
             switch r {
             case .success(()):
                 DispatchQueue.main.async {

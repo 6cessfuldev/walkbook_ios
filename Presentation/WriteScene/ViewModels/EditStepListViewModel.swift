@@ -26,24 +26,13 @@ class EditStepListViewModel {
         fetchInitialSteps()
     }
     
-    func addOtherStep(step: Step, completion: @escaping (Result<Void, Error>) -> Void) {
+    func addTextTypeStep(text: String, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let storyId = rootChapter.storyId else {
             completion(.failure(NSError(domain: "Not Found story ID", code: -1, userInfo: nil)))
             return
         }
-        
-        stepUseCase.createStep(step, chapterId: chapterId, storyId: storyId) { r in
-            switch r {
-            case .success(let step):
-                var currentSteps = self.stepsRelay.value
-                currentSteps.append(step)
-                self.stepsRelay.accept(currentSteps)
-                completion(.success(()))
-            case .failure(let error):
-                print("addOtherStep : 스탭 추가 실패, Error : \(error)")
-                completion(.failure(error))
-            }
-        }
+        let step = Step(type: .text(text), location: location)
+        self.saveStep(step: step, completion: completion)
     }
     
     func addImageTypeStep(image: UIImage, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -84,14 +73,62 @@ class EditStepListViewModel {
         }
     }
     
-    func updateStep(stepId: String, step: Step, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateTextTypeStep(stepId: String, text: String, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let storyId = rootChapter.storyId else {
             completion(.failure(NSError(domain: "Not Found story ID", code: -1, userInfo: nil)))
             return
         }
+        let step = Step(id: stepId, type: .text(text), location: location)
         self.stepUseCase.updateStep(step, chapterId: self.chapterId, storyId: storyId, completion: completion)
     }
     
+    func updateImageTypeStep(stepId: String, image: UIImage, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let storyId = rootChapter.storyId else {
+            completion(.failure(NSError(domain: "Not Found story ID", code: -1, userInfo: nil)))
+            return
+        }
+        
+        guard let imgData = image.toData() else {
+            print("이미지 데이터 변환 실패")
+            completion(.failure(NSError(domain: "ImageError", code: 0, userInfo: [NSLocalizedDescriptionKey: "이미지 데이터 변환 실패"])))
+            return
+        }
+        
+        mediaUseCase.uploadImage(imgData) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let url):
+                let step = Step(id: stepId, type: .image(url), location: location)
+                self.stepUseCase.updateStep(step, chapterId: self.chapterId, storyId: storyId, completion: completion)
+                
+            case .failure(let error):
+                print("이미지 업로드 실패: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func updateAudioTypeStep(stepId: String, audioURL: URL, location: CLLocationCoordinate2D?, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let storyId = rootChapter.storyId else {
+            completion(.failure(NSError(domain: "Not Found story ID", code: -1, userInfo: nil)))
+            return
+        }
+        
+        mediaUseCase.uploadAudio(audioURL) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let url):
+                let step = Step(id: stepId, type: .audio(url), location: location)
+                self.stepUseCase.updateStep(step, chapterId: self.chapterId, storyId: storyId, completion: completion)
+                
+            case .failure(let error):
+                print("오디오 업로드 실패: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
     
     private func saveStep(
         step: Step,
