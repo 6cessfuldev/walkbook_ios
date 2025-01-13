@@ -55,21 +55,42 @@ class EditStepListViewController: UIViewController {
         stepAddAlertController.addAction(UIAlertAction(title: "텍스트", style: .default, handler: { _ in
             let addStepVC = AddTextStepViewController()
             addStepVC.onSave = { [weak self] text, location, completion in
-                self?.viewModel.addTextTypeStep(text: text, location: location, completion: completion)
+                self?.viewModel.addTextTypeStep(text: text, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "오디오", style: .default, handler: { _ in
             let addStepVC = AddAudioStepViewController()
             addStepVC.onSave = { [weak self] audioURL, location, completion in
-                self?.viewModel.addAudioTypeStep(audioURL: audioURL, location: location, completion: completion)
+                self?.viewModel.addAudioTypeStep(audioURL: audioURL, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
         stepAddAlertController.addAction(UIAlertAction(title: "이미지", style: .default, handler: { _ in
             let addStepVC = AddImageStepViewController()
             addStepVC.onSave = { [weak self] image, location, completion in
-                self?.viewModel.addImageTypeStep(image: image, location: location, completion: completion)
+                self?.viewModel.addImageTypeStep(image: image, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         }))
@@ -88,14 +109,28 @@ class EditStepListViewController: UIViewController {
         case .text(let text):
             let addStepVC = AddTextStepViewController(text: text, location: location)
             addStepVC.onSave = { [weak self] text, location, completion in
-                self?.viewModel.updateTextTypeStep(stepId: stepId, text: text, location: location, completion: completion)
+                self?.viewModel.updateTextTypeStep(stepId: stepId, text: text, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .image(let url):
             guard let url = URL(string: url) else { return }
             let addStepVC = AddImageStepViewController(imageURL: url, location: location)
             addStepVC.onSave = { [weak self] image, location, completion in
-                self?.viewModel.updateImageTypeStep(stepId: stepId, image: image, location: location, completion: completion)
+                self?.viewModel.updateImageTypeStep(stepId: stepId, image: image, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
             
@@ -103,7 +138,14 @@ class EditStepListViewController: UIViewController {
             guard let url = URL(string: url) else { return }
             let addStepVC = AddAudioStepViewController(audioFileURL: url, location: location)
             addStepVC.onSave = { [weak self] audioURL, location, completion in
-                self?.viewModel.updateAudioTypeStep(stepId: stepId, audioURL: audioURL, location: location, completion: completion)
+                self?.viewModel.updateAudioTypeStep(stepId: stepId, audioURL: audioURL, location: location) { r in
+                    switch r {
+                    case .success(_):
+                        self?.viewModel.fetchInitialSteps()
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
             }
             self.navigationController?.pushViewController(addStepVC, animated: true)
         case .video(_):

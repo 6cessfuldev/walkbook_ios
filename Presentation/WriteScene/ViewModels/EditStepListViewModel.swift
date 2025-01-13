@@ -155,7 +155,7 @@ class EditStepListViewModel {
         }
     }
     
-    private func fetchInitialSteps() {
+    func fetchInitialSteps() {
         stepUseCase.fetchSteps(by: chapterId) { [weak self] result in
             guard let self = self else { return }
             switch result {
