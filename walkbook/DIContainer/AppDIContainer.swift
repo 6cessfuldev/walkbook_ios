@@ -27,6 +27,11 @@ class AppDIContainer {
             return ContentMainViewController()
         }
         
+        container.register(MainMapViewController.self) { r in
+            let mainMapViewModel = r.resolve(MainMapViewModel.self)!
+            return MainMapViewController(viewModel: mainMapViewModel)
+        }
+        
         container.register(ExploreViewController.self) { r in
             let authenticationViewModel = r.resolve(AuthenticationViewModel.self)!
             return ExploreViewController(viewModel: authenticationViewModel)
@@ -80,6 +85,10 @@ class AppDIContainer {
                 userProfileViewModel: userProfileViewModel,
                 signInUseCase: signInUseCase
             )
+        }.inObjectScope(.container)
+        
+        container.register(MainMapViewModel.self) { r in
+            return MainMapViewModel()
         }.inObjectScope(.container)
         
         container.register(WriteNewStoryViewModel.self) { r in
@@ -276,6 +285,10 @@ extension AppDIContainer {
 extension AppDIContainer: MainFlowCoordinatorDependencies {
     func makeMainViewController() -> MainViewController {
         return container.resolve(MainViewController.self)!
+    }
+    
+    func makeMainMapViewController() -> MainMapViewController {
+        return self.container.resolve(MainMapViewController.self)!
     }
     
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator {

@@ -2,6 +2,7 @@ import UIKit
 
 protocol MainFlowCoordinatorDependencies {
     func makeMainViewController() -> MainViewController
+    func makeMainMapViewController() -> MainMapViewController
     func makeExploreFlowCoordinator(navigationController: UINavigationController) -> ExploreFlowCoordinator
     func makeSubscribeFlowCoordinator(navigationController: UINavigationController) -> SubscribeFlowCoordinator
     func makeProfileFlowCoordinator(navigationController: UINavigationController) -> ProfileFlowCoordinator
@@ -33,7 +34,8 @@ class MainFlowCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
     
     func start() {
         let firstNav = UINavigationController()
-        firstNav.viewControllers = [MainMapViewController()]
+        //TODO: MainMap의 CoordinatorFlow 필요?
+        firstNav.viewControllers = [self.dependencies.makeMainMapViewController()]
         firstNav.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "map.fill"), tag: 0)
         
         // SecondTab

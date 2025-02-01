@@ -112,6 +112,7 @@
 		9D7EB42F2C7E1EF30060B56B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */; };
 		9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */; };
 		9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */; };
+		9D9A4BD62D4E0D9E0001702E /* MainMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A4BD52D4E0D9E0001702E /* MainMapViewModel.swift */; };
 		9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */; };
 		9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */; };
 		9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */; };
@@ -279,6 +280,7 @@
 		9D7EB42E2C7E1EF30060B56B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInfoViewController.swift; sourceTree = "<group>"; };
 		9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMainViewController.swift; sourceTree = "<group>"; };
+		9D9A4BD52D4E0D9E0001702E /* MainMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewModel.swift; sourceTree = "<group>"; };
 		9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLoginView.swift; sourceTree = "<group>"; };
 		9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVCUITest.swift; sourceTree = "<group>"; };
 		9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneUITest.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 		9D0085A92C626EA600EE241B /* MainMapScene */ = {
 			isa = PBXGroup;
 			children = (
+				9D9A4BD42D4E0D6C0001702E /* ViewModels */,
 				9D0085AA2C626EB700EE241B /* ViewController */,
 			);
 			path = MainMapScene;
@@ -921,6 +924,14 @@
 				9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D9A4BD42D4E0D6C0001702E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9D9A4BD52D4E0D9E0001702E /* MainMapViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		9D9DBC1D2C44168000127B06 /* SocialLoginButton */ = {
@@ -1600,6 +1611,7 @@
 				9DE498A72C561498004F1A20 /* KakaoSignRemoteDataSource.swift in Sources */,
 				9DCBE4FD2C58E92000BDB378 /* MainViewController.swift in Sources */,
 				9D5355E02D18314200785888 /* DefaultStepRepositoryImpl.swift in Sources */,
+				9D9A4BD62D4E0D9E0001702E /* MainMapViewModel.swift in Sources */,
 				9D5355C62D16F2E200785888 /* DefaultChapterRepositoryImpl.swift in Sources */,
 				9D5355C22D16ABF400785888 /* UIImage+setImageFromURL.swift in Sources */,
 				9D0D47452CFB3DA30040BA81 /* ProfileFlowCoordinator.swift in Sources */,
