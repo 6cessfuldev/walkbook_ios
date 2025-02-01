@@ -93,7 +93,7 @@ class AddTextStepViewController: UIViewController {
                 }
             case .failure(let error):
                 print("AddTextStepViewController : \(error)")
-                ㅁ.main.async {
+                DispatchQueue.main.async {
                     self.showAlert(message: "통신 오류")
                 }
             }
