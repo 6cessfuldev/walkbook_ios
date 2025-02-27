@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need your location to show your current position on the map.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>We need your location to show your current position on the map.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>We need your permission to record.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show your current position on the map.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to show your current position on the map.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need your permission to record.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -71,6 +71,7 @@
 	<string>$(NAVER_SERIVCE_APP_URL_SCHEME)</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>YeonSung-Regular.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

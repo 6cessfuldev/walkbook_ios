@@ -12,7 +12,15 @@ extension UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = "Walkbook"
-        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+        
+        guard let customFont = UIFont(name: "YeonSung-Regular", size: 24) else { return }
+        
+        titleLabel.font = customFont
         titleLabel.textColor = UIColor.white
         
         let stackView = UIStackView(arrangedSubviews: [iconImageView, titleLabel])

@@ -113,6 +113,7 @@
 		9D7EB4332C7E93A70060B56B /* ContentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */; };
 		9D7EB4352C7EEE510060B56B /* ContentMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */; };
 		9D9A4BD62D4E0D9E0001702E /* MainMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A4BD52D4E0D9E0001702E /* MainMapViewModel.swift */; };
+		9D9A4BD82D70AE8B0001702E /* YeonSung-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D9A4BD72D70AB7F0001702E /* YeonSung-Regular.ttf */; };
 		9D9DBC142C42D0B400127B06 /* ChooseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */; };
 		9D9DBC162C42D48100127B06 /* AuthenticationVCUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */; };
 		9D9DBC182C4367CB00127B06 /* LaunchSceneUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */; };
@@ -281,6 +282,7 @@
 		9D7EB4322C7E93A70060B56B /* ContentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentInfoViewController.swift; sourceTree = "<group>"; };
 		9D7EB4342C7EEE510060B56B /* ContentMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMainViewController.swift; sourceTree = "<group>"; };
 		9D9A4BD52D4E0D9E0001702E /* MainMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewModel.swift; sourceTree = "<group>"; };
+		9D9A4BD72D70AB7F0001702E /* YeonSung-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YeonSung-Regular.ttf"; sourceTree = "<group>"; };
 		9D9DBC132C42D0B400127B06 /* ChooseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLoginView.swift; sourceTree = "<group>"; };
 		9D9DBC152C42D48100127B06 /* AuthenticationVCUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVCUITest.swift; sourceTree = "<group>"; };
 		9D9DBC172C4367CB00127B06 /* LaunchSceneUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneUITest.swift; sourceTree = "<group>"; };
@@ -948,6 +950,7 @@
 		9D9DBC222C4422F000127B06 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				9D9A4BD72D70AB7F0001702E /* YeonSung-Regular.ttf */,
 				9D9DBC232C44232600127B06 /* Roboto-Medium.ttf */,
 			);
 			path = Font;
@@ -1333,6 +1336,7 @@
 				9D37600C2D0328020032957F /* GoogleService-Info.plist in Resources */,
 				9D9DBC242C44232600127B06 /* Roboto-Medium.ttf in Resources */,
 				9D35C5C32C3ECB17004586C2 /* LaunchScreen.storyboard in Resources */,
+				9D9A4BD82D70AE8B0001702E /* YeonSung-Regular.ttf in Resources */,
 				9D35C5CF2C3FCE62004586C2 /* .gitignore in Resources */,
 				9D35C5C02C3ECB17004586C2 /* Assets.xcassets in Resources */,
 			);
